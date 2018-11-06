@@ -26,8 +26,5 @@ NotificacionEN ReadOID (int id
 
 
 System.Collections.Generic.IList<NotificacionEN> ReadAll (int first, int size);
-
-
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN> DameMisNotificaciones (int p_oid_usuario);
 }
 }

@@ -247,7 +247,6 @@
 			
 			
 			
-			
 	<Compile Include="EN\MultitecUA\NotificacionUsuarioEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionUsuarioCAD.cs" />

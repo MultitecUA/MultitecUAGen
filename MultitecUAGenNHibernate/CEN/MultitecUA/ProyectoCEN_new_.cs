@@ -19,7 +19,7 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class ProyectoCEN
 {
-public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum p_estado, int p_usuarioCreador, System.Collections.Generic.IList<string> p_foto)
+public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum p_estado, int p_usuarioCreador, System.Collections.Generic.IList<string> p_fotos)
 {
         /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_new__customized) START*/
 
@@ -41,7 +41,7 @@ public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.
                 proyectoEN.UsuarioCreador.Id = p_usuarioCreador;
         }
 
-        proyectoEN.Foto = p_foto;
+        proyectoEN.Fotos = p_fotos;
 
         //Call to ProyectoCAD
 

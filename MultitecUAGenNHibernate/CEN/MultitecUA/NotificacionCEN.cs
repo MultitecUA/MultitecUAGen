@@ -61,9 +61,5 @@ public System.Collections.Generic.IList<NotificacionEN> ReadAll (int first, int 
         list = _INotificacionCAD.ReadAll (first, size);
         return list;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN> DameMisNotificaciones (int p_oid_usuario)
-{
-        return _INotificacionCAD.DameMisNotificaciones (p_oid_usuario);
-}
 }
 }

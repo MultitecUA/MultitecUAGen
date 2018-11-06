@@ -100,7 +100,7 @@ public void ModifyDefault (ProyectoEN proyecto)
                 proyectoEN.Estado = proyecto.Estado;
 
 
-                proyectoEN.Foto = proyecto.Foto;
+                proyectoEN.Fotos = proyecto.Fotos;
 
 
 
@@ -175,7 +175,7 @@ public void Modify (ProyectoEN proyecto)
                 proyectoEN.Descripcion = proyecto.Descripcion;
 
 
-                proyectoEN.Foto = proyecto.Foto;
+                proyectoEN.Fotos = proyecto.Fotos;
 
                 session.Update (proyectoEN);
                 SessionCommit ();

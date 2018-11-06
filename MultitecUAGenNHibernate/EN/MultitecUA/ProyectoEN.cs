@@ -34,9 +34,9 @@ private MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum estado;
 
 
 /**
- *	Atributo foto
+ *	Atributo fotos
  */
-private System.Collections.Generic.IList<string> foto;
+private System.Collections.Generic.IList<string> fotos;
 
 
 
@@ -123,8 +123,8 @@ public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum 
 
 
 
-public virtual System.Collections.Generic.IList<string> Foto {
-        get { return foto; } set { foto = value;  }
+public virtual System.Collections.Generic.IList<string> Fotos {
+        get { return fotos; } set { fotos = value;  }
 }
 
 
@@ -192,20 +192,20 @@ public ProyectoEN()
 
 
 
-public ProyectoEN(int id, string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum estado, System.Collections.Generic.IList<string> foto, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioCreador, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosParticipantes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosModeradores, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> eventosAsociados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasProyectos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasBuscadas, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudRecibida, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionProyectoEN> notificacionGenerada
+public ProyectoEN(int id, string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum estado, System.Collections.Generic.IList<string> fotos, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioCreador, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosParticipantes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosModeradores, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> eventosAsociados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasProyectos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasBuscadas, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudRecibida, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionProyectoEN> notificacionGenerada
                   )
 {
-        this.init (Id, nombre, descripcion, estado, foto, usuarioCreador, usuariosParticipantes, usuariosModeradores, eventosAsociados, categoriasProyectos, categoriasBuscadas, solicitudRecibida, notificacionGenerada);
+        this.init (Id, nombre, descripcion, estado, fotos, usuarioCreador, usuariosParticipantes, usuariosModeradores, eventosAsociados, categoriasProyectos, categoriasBuscadas, solicitudRecibida, notificacionGenerada);
 }
 
 
 public ProyectoEN(ProyectoEN proyecto)
 {
-        this.init (Id, proyecto.Nombre, proyecto.Descripcion, proyecto.Estado, proyecto.Foto, proyecto.UsuarioCreador, proyecto.UsuariosParticipantes, proyecto.UsuariosModeradores, proyecto.EventosAsociados, proyecto.CategoriasProyectos, proyecto.CategoriasBuscadas, proyecto.SolicitudRecibida, proyecto.NotificacionGenerada);
+        this.init (Id, proyecto.Nombre, proyecto.Descripcion, proyecto.Estado, proyecto.Fotos, proyecto.UsuarioCreador, proyecto.UsuariosParticipantes, proyecto.UsuariosModeradores, proyecto.EventosAsociados, proyecto.CategoriasProyectos, proyecto.CategoriasBuscadas, proyecto.SolicitudRecibida, proyecto.NotificacionGenerada);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum estado, System.Collections.Generic.IList<string> foto, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioCreador, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosParticipantes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosModeradores, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> eventosAsociados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasProyectos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasBuscadas, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudRecibida, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionProyectoEN> notificacionGenerada)
+                   , string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum estado, System.Collections.Generic.IList<string> fotos, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioCreador, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosParticipantes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> usuariosModeradores, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> eventosAsociados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasProyectos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasBuscadas, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudRecibida, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionProyectoEN> notificacionGenerada)
 {
         this.Id = id;
 
@@ -216,7 +216,7 @@ private void init (int id
 
         this.Estado = estado;
 
-        this.Foto = foto;
+        this.Fotos = fotos;
 
         this.UsuarioCreador = usuarioCreador;
 

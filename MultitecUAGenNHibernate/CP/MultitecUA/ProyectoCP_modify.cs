@@ -21,7 +21,7 @@ namespace MultitecUAGenNHibernate.CP.MultitecUA
 {
 public partial class ProyectoCP : BasicCP
 {
-public void Modify (int p_Proyecto_OID, string p_nombre, string p_descripcion, System.Collections.Generic.IList<string> p_foto)
+public void Modify (int p_Proyecto_OID, string p_nombre, string p_descripcion, System.Collections.Generic.IList<string> p_fotos)
 {
         /*PROTECTED REGION ID(MultitecUAGenNHibernate.CP.MultitecUA_Proyecto_modify) ENABLED START*/
 

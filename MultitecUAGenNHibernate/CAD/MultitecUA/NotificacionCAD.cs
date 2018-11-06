@@ -229,36 +229,5 @@ public System.Collections.Generic.IList<NotificacionEN> ReadAll (int first, int 
 
         return result;
 }
-
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN> DameMisNotificaciones (int p_oid_usuario)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM NotificacionEN self where select (en) FROM NotificacionEN en join en.NotificacionesGeneradas noti join noti.UsuarioNotificado usu where usu.Id = :p_oid_usuario";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("NotificacionENdameMisNotificacionesHQL");
-                query.SetParameter ("p_oid_usuario", p_oid_usuario);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
 }
 }
