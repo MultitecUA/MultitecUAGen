@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				
+<joined-subclass name="NotificacionMensajeEN" extends="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN" table="NotificacionMensaje"> 
+	<key>
+    	
+				<column name="idNotificacion"/>
+		
+    	
+   	</key>
+
+			
+					
+			
+			
+		  			
+						<many-to-one name="MensajeGenerador" class="MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN" >	
+								<column name="FK_idMensaje_idMensaje_0"/> 
+						</many-to-one>
+											 					
+					
+		
+ 	  
+		 </joined-subclass>
+		  
+		  <query name="NotificacionMensajeENReadAllHQL">from NotificacionMensajeEN</query>
+		</hibernate-mapping>
+	

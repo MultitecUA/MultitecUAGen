@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="RecuerdoEN" table="Recuerdo"> 
+				  	
+						<id name="Id" column="idRecuerdo" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Titulo" type="string"> 
+						<column name="titulo"  not-null="true"/>
+					</property>
+					<property name="Cuerpo" type="string"> 
+						<column name="cuerpo"  not-null="true"/>
+					</property>
+					<bag name="Fotos" table="fotos"> 
+						<key>
+						</key>
+						<element column="Fotos" type="string"/> 
+    				</bag>
+			
+			
+			
+			
+			
+			
+		  			
+						<many-to-one name="EventoRecordado" class="MultitecUAGenNHibernate.EN.MultitecUA.EventoEN" >	
+								<column name="FK_idEvento_idEvento"/> 
+						</many-to-one>
+											 					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="RecuerdoENReadAllHQL">from RecuerdoEN</query>
+		  <query name="RecuerdoENdameRecuerdosHQL"><![CDATA[FROM RecuerdoEN en where en.EventoRecordado = :p_OID]]></query>
+		</hibernate-mapping>
+	

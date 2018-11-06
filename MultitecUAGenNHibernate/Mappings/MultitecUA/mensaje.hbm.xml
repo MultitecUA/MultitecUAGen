@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="MensajeEN" table="Mensaje"> 
+				  	
+						<id name="Id" column="idMensaje" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Titulo" type="string"> 
+						<column name="titulo"  not-null="true"/>
+					</property>
+					<property name="Cuerpo" type="string"> 
+						<column name="cuerpo"  not-null="true"/>
+					</property>
+					<bag name="ArchivosAdjuntos" table="archivosAdjuntos"> 
+						<key>
+						</key>
+						<element column="ArchivosAdjuntos" type="string"/> 
+    				</bag>
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="Fecha" type="timestamp"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+		  			
+						<many-to-one name="UsuarioAutor" class="MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN" >	
+								<column name="FK_id_idUsuario"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="UsuarioReceptor" class="MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN" >	
+								<column name="FK_id_idUsuario_0"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+			
+		  			
+						<bag name="NotificacionGenerada" >
+							<key>
+							
+								
+								<column name="FK_idMensaje_idMensaje_0"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN"/>
+					    </bag>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="MensajeENReadAllHQL">from MensajeEN</query>
+		  <query name="MensajeENdameMisMensajesRecibidosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMisMensajesEnviadosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
+		</hibernate-mapping>
+	

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="NotificacionUsuarioEN" table="NotificacionUsuario"> 
+				  	
+						<id name="Id" column="idNotificacionUsuario" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+			
+			
+			
+		  			
+						<many-to-one name="UsuarioNotificado" class="MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN" >	
+								<column name="FK_id_idUsuario"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="NotificacionGenerada" class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN" >	
+								<column name="FK_idNotificacion_idNotificacionGenerada"/> 
+						</many-to-one>
+											 					
+			
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="NotificacionUsuarioENReadAllHQL">from NotificacionUsuarioEN</query>
+		  <query name="NotificacionUsuarioENdameMisNotificacionesHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario]]></query>
+		  <query name="NotificacionUsuarioENdameMisNotificacionesNuevasHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario and en.Estado = 2]]></query>
+		</hibernate-mapping>
+	

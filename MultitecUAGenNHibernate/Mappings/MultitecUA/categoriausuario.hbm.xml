@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="CategoriaUsuarioEN" table="CategoriaUsuario"> 
+				  	
+						<id name="Id" column="idCategoriaUsuario" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<bag name="UsuariosCategorizados" table="[usuario_categoriaUsuario]" inverse="true" >
+							<key>
+								
+									<column name="FK_idCategoriaUsuario_idCategoriaUsuario"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN">
+									<column name="FK_id_idUsuariosCategorizados"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="ProyectosSolicitantes" table="[proyecto_categoriaUsuario]" inverse="true" >
+							<key>
+								
+									<column name="FK_idCategoriaUsuario_idCategoriasBuscadas"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN">
+									<column name="FK_idProyecto_idProyectosSolicitantes"/> 
+      						</many-to-many>
+    					</bag>
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="CategoriaUsuarioENReadAllHQL">from CategoriaUsuarioEN</query>
+		</hibernate-mapping>
+	

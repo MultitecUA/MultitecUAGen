@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="CategoriaProyectoEN" table="CategoriaProyecto"> 
+				  	
+						<id name="Id" column="idCategoriaProyecto" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<bag name="ProyectosCateogrizados" table="[proyecto_categoriaProyecto]" inverse="true" >
+							<key>
+								
+									<column name="FK_idCategoriaProyecto_idCategoriaProyecto"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN">
+									<column name="FK_idProyecto_idProyecto"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="EventosCategorizados" table="[evento_categoriaProyecto]" inverse="true" >
+							<key>
+								
+									<column name="FK_idCategoriaProyecto_idCategoriaProyecto"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.EventoEN">
+									<column name="FK_idEvento_idEvento"/> 
+      						</many-to-many>
+    					</bag>
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="CategoriaProyectoENReadAllHQL">from CategoriaProyectoEN</query>
+		</hibernate-mapping>
+	

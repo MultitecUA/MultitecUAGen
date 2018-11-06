@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="SolicitudEN" table="Solicitud"> 
+				  	
+						<id name="Id" column="idSolicitud" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Fecha" type="timestamp"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<many-to-one name="UsuarioSolicitante" class="MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN" >	
+								<column name="FK_id_idUsuario"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="ProyectoSolicitado" class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN" >	
+								<column name="FK_idProyecto_idProyecto"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<bag name="NotificacionGenerada" >
+							<key>
+							
+								
+								<column name="FK_idSolicitud_idSolicitud"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionSolicitudEN"/>
+					    </bag>
+					
+			
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="SolicitudENReadAllHQL">from SolicitudEN</query>
+		  <query name="SolicitudENdameSolicitudesPendientesHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = 1]]></query>
+		  <query name="SolicitudENdameMisSolicitudesHQL"><![CDATA[FROM SolicitudEN en where en.UsuarioSolicitante.Id = :p_OID]]></query>
+		  <query name="SolicitudENdameSolicitudesRechazadasHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = 3]]></query>
+		</hibernate-mapping>
+	

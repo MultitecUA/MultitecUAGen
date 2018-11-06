@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="MultitecUAGenNHibernate"
+		                   namespace="MultitecUAGenNHibernate.EN.MultitecUA">
+		    
+		    
+			
+				<class name="UsuarioEN" table="Usuario"> 
+				  	
+						<id name="Id" column="id" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="Password" type="string"> 
+						<column name="password"  not-null="true"/>
+					</property>
+					<property name="Foto" type="string"> 
+						<column name="foto" />
+					</property>
+					<property name="Email" type="string"> 
+						<column name="email"  unique="true" not-null="true"/>
+					</property>
+					<property name="FechaAlta" type="timestamp"> 
+						<column name="fechaAlta"  not-null="true"/>
+					</property>
+					<property name="Nick" type="string"> 
+						<column name="nick"  unique="true" not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+		  			
+						<bag name="ProyectosCreados" cascade="delete">
+							<key>
+							
+								
+								<column name="FK_id_idUsuario"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="ProyectosPertenecientes" table="[usuario_proyecto_2]"  >
+							<key>
+								
+									<column name="FK_id_idUsuario"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN">
+									<column name="FK_idProyecto_idProyecto"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="ProyectosModerados" table="[usuario_proyecto_3]"  >
+							<key>
+								
+									<column name="FK_id_idUsuario"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN">
+									<column name="FK_idProyecto_idProyecto"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="MensajesEnviados" >
+							<key>
+							
+								
+								<column name="FK_id_idUsuario"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="MensajesRecibidos" >
+							<key>
+							
+								
+								<column name="FK_id_idUsuario_0"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="DestinatariosNotificados" >
+							<key>
+							
+								
+								<column name="FK_id_idUsuario"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN"/>
+					    </bag>
+					
+			
+			
+			
+			
+		  			
+						<bag name="CategoriasUsuarios" table="[usuario_categoriaUsuario]"  >
+							<key>
+								
+									<column name="FK_id_idUsuariosCategorizados"/> 
+							</key>
+      						<many-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN">
+									<column name="FK_idCategoriaUsuario_idCategoriaUsuario"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="SolicitudCreada" >
+							<key>
+							
+								
+								<column name="FK_id_idUsuario"/>
+					      	</key>
+							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN"/>
+					    </bag>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="UsuarioENReadAllHQL">from UsuarioEN</query>
+		  <query name="UsuarioENdameUsuariosCandidatosHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro join en.CategoriasUsuarios cat where cat.Id = :p_OIDCategoria and pro.Id != :p_OIDProyecto]]></query>
+		  <query name="UsuarioENdameModeradoresProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosModerados pro where pro.Id = :p_ID]]></query>
+		  <query name="UsuarioENdameParticipantesProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro where pro.Id = :p_ID]]></query>
+		</hibernate-mapping>
+	
