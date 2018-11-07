@@ -22,7 +22,7 @@ public static void Create (string databaseArg, string userArg, string passArg)
         String pass = passArg;
 
         // Conex DB
-        SqlConnection cnn = new SqlConnection (@"Server=(local)\sqlexpress; database=master; integrated security=yes");
+        SqlConnection cnn = new SqlConnection (@"Server=(local)\SQLEXPRESS; database=master; integrated security=yes");
 
         // Order T-SQL create user
         String createUser = @"IF NOT EXISTS(SELECT name FROM master.dbo.syslogins WHERE name = '" + user + @"')
@@ -79,13 +79,33 @@ public static void InitializeData ()
         try
         {
                 // Insert the initilizations of entities using the CEN classes
+                AdministradorCEN administradorCEN = new AdministradorCEN ();
+                int OIDAdministrador = administradorCEN.New_ ("Victor", "12345", "nedyar@hotmail.es", "Nedyar", null);
+
                 UsuarioCEN usuarioCEN = new UsuarioCEN ();
-                int OID1 = usuarioCEN.New_ ("Victor", "12345", null, "nedyar@hotmail.es", "Nedyar");
+                int OIDUsuario = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
 
-                int OID2 = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
 
-                MensajeCP mensajeCP = new MensajeCP ();
-                mensajeCP.New_ ("Esto es un mensaje", "Mi primerito mensaje", OID1, OID2, null);
+                List<int> OIDsCategorias = new List<int>();
+                int OIDCategoria = categoriaUsuarioCEN.New_("Programador");
+                OIDsCategorias.Add(OIDCategoria);
+                OIDCategoria = categoriaUsuarioCEN.New_("Diseñador");
+                OIDsCategorias.Add(OIDCategoria);
+                OIDCategoria = categoriaUsuarioCEN.New_("Puto Amo");
+                OIDsCategorias.Add(OIDCategoria);
+
+                UsuarioCAD usuarioCAD = new UsuarioCAD();
+                usuarioCAD.AgregaCategorias(OIDAdministrador, OIDsCategorias);
+
+                OIDsCategorias.RemoveAt(2);
+                usuarioCAD.EliminaCategorias(OIDAdministrador, OIDsCategorias);
+
+                //System.Console.WriteLine(usuarioCEN.DameUsuariosPorCategoria(OIDCategoria));
+
+                /*MensajeCP mensajeCP = new MensajeCP ();
+                 * mensajeCP.New_ ("Esto es un mensaje", "Mi primerito mensaje", OID1, OID2, null);
+                 */
 
                 System.Console.WriteLine ("Todo ha ido bien");
 

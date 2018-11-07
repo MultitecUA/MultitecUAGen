@@ -39,6 +39,8 @@ public int New_ (string p_nombre, String p_password, string p_foto, string p_ema
 
         usuarioEN.Nick = p_nick;
 
+        usuarioEN.FechaAlta = DateTime.Now;
+
         //Call to UsuarioCAD
 
         oid = _IUsuarioCAD.New_ (usuarioEN);
