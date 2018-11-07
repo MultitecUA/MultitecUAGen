@@ -27,30 +27,30 @@ private string descripcion;
 
 
 /**
- *	Atributo foto
+ *	Atributo fotos
  */
-private System.Collections.Generic.IList<string> foto;
+private System.Collections.Generic.IList<string> fotos;
 
 
 
 /**
- *	Atributo fecha_inicio
+ *	Atributo fechaInicio
  */
-private Nullable<DateTime> fecha_inicio;
+private Nullable<DateTime> fechaInicio;
 
 
 
 /**
- *	Atributo fecha_fin
+ *	Atributo fechaFin
  */
-private Nullable<DateTime> fecha_fin;
+private Nullable<DateTime> fechaFin;
 
 
 
 /**
- *	Atributo fecha_inscripcion
+ *	Atributo fechaInicioInscripcion
  */
-private Nullable<DateTime> fecha_inscripcion;
+private Nullable<DateTime> fechaInicioInscripcion;
 
 
 
@@ -82,6 +82,13 @@ private System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.N
 
 
 
+/**
+ *	Atributo fechaTopeInscripcion
+ */
+private Nullable<DateTime> fechaTopeInscripcion;
+
+
+
 
 
 
@@ -103,26 +110,26 @@ public virtual string Descripcion {
 
 
 
-public virtual System.Collections.Generic.IList<string> Foto {
-        get { return foto; } set { foto = value;  }
+public virtual System.Collections.Generic.IList<string> Fotos {
+        get { return fotos; } set { fotos = value;  }
 }
 
 
 
-public virtual Nullable<DateTime> Fecha_inicio {
-        get { return fecha_inicio; } set { fecha_inicio = value;  }
+public virtual Nullable<DateTime> FechaInicio {
+        get { return fechaInicio; } set { fechaInicio = value;  }
 }
 
 
 
-public virtual Nullable<DateTime> Fecha_fin {
-        get { return fecha_fin; } set { fecha_fin = value;  }
+public virtual Nullable<DateTime> FechaFin {
+        get { return fechaFin; } set { fechaFin = value;  }
 }
 
 
 
-public virtual Nullable<DateTime> Fecha_inscripcion {
-        get { return fecha_inscripcion; } set { fecha_inscripcion = value;  }
+public virtual Nullable<DateTime> FechaInicioInscripcion {
+        get { return fechaInicioInscripcion; } set { fechaInicioInscripcion = value;  }
 }
 
 
@@ -151,6 +158,12 @@ public virtual System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.Multi
 
 
 
+public virtual Nullable<DateTime> FechaTopeInscripcion {
+        get { return fechaTopeInscripcion; } set { fechaTopeInscripcion = value;  }
+}
+
+
+
 
 
 public EventoEN()
@@ -163,20 +176,20 @@ public EventoEN()
 
 
 
-public EventoEN(int id, string nombre, string descripcion, System.Collections.Generic.IList<string> foto, Nullable<DateTime> fecha_inicio, Nullable<DateTime> fecha_fin, Nullable<DateTime> fecha_inscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada
+public EventoEN(int id, string nombre, string descripcion, System.Collections.Generic.IList<string> fotos, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion
                 )
 {
-        this.init (Id, nombre, descripcion, foto, fecha_inicio, fecha_fin, fecha_inscripcion, proyectosPresentados, recuerdosEvento, categoriasEventos, notificacionGenerada);
+        this.init (Id, nombre, descripcion, fotos, fechaInicio, fechaFin, fechaInicioInscripcion, proyectosPresentados, recuerdosEvento, categoriasEventos, notificacionGenerada, fechaTopeInscripcion);
 }
 
 
 public EventoEN(EventoEN evento)
 {
-        this.init (Id, evento.Nombre, evento.Descripcion, evento.Foto, evento.Fecha_inicio, evento.Fecha_fin, evento.Fecha_inscripcion, evento.ProyectosPresentados, evento.RecuerdosEvento, evento.CategoriasEventos, evento.NotificacionGenerada);
+        this.init (Id, evento.Nombre, evento.Descripcion, evento.Fotos, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.ProyectosPresentados, evento.RecuerdosEvento, evento.CategoriasEventos, evento.NotificacionGenerada, evento.FechaTopeInscripcion);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, System.Collections.Generic.IList<string> foto, Nullable<DateTime> fecha_inicio, Nullable<DateTime> fecha_fin, Nullable<DateTime> fecha_inscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada)
+                   , string nombre, string descripcion, System.Collections.Generic.IList<string> fotos, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion)
 {
         this.Id = id;
 
@@ -185,13 +198,13 @@ private void init (int id
 
         this.Descripcion = descripcion;
 
-        this.Foto = foto;
+        this.Fotos = fotos;
 
-        this.Fecha_inicio = fecha_inicio;
+        this.FechaInicio = fechaInicio;
 
-        this.Fecha_fin = fecha_fin;
+        this.FechaFin = fechaFin;
 
-        this.Fecha_inscripcion = fecha_inscripcion;
+        this.FechaInicioInscripcion = fechaInicioInscripcion;
 
         this.ProyectosPresentados = proyectosPresentados;
 
@@ -200,6 +213,8 @@ private void init (int id
         this.CategoriasEventos = categoriasEventos;
 
         this.NotificacionGenerada = notificacionGenerada;
+
+        this.FechaTopeInscripcion = fechaTopeInscripcion;
 }
 
 public override bool Equals (object obj)

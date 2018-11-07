@@ -45,7 +45,7 @@ public void Modify (int p_Proyecto_OID, string p_nombre, string p_descripcion, S
                 proyectoEN.Id = p_Proyecto_OID;
                 proyectoEN.Nombre = p_nombre;
                 proyectoEN.Descripcion = p_descripcion;
-                proyectoEN.Foto = p_foto;
+                proyectoEN.Fotos = p_fotos;
                 //Call to ProyectoCAD
 
                 proyectoCAD.Modify (proyectoEN);

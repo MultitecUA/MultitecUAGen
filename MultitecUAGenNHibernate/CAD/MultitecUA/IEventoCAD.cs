@@ -39,5 +39,14 @@ EventoEN ReadOID (int id
 
 
 System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPosterioresA (Nullable<DateTime> p_fecha);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAnterioresA (Nullable<DateTime> p_fecha);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAbiertos (Nullable<DateTime> p_fecha);
 }
 }

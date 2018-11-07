@@ -21,7 +21,7 @@ namespace MultitecUAGenNHibernate.CP.MultitecUA
 {
 public partial class EventoCP : BasicCP
 {
-public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN New_ (string p_nombre, string p_descripcion, Nullable<DateTime> p_fecha_inicio, Nullable<DateTime> p_fecha_fin, Nullable<DateTime> p_fecha_inscripcion, System.Collections.Generic.IList<string> p_foto)
+public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN New_ (string p_nombre, string p_descripcion, Nullable<DateTime> p_fechaInicio, Nullable<DateTime> p_fechaFin, Nullable<DateTime> p_fechaInicioInscripcion, Nullable<DateTime> p_fechaTopeInscripcion, System.Collections.Generic.IList<string> p_fotos)
 {
         /*PROTECTED REGION ID(MultitecUAGenNHibernate.CP.MultitecUA_Evento_new_) ENABLED START*/
 
@@ -48,13 +48,15 @@ public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN New_ (string p_nombre, str
 
                 eventoEN.Descripcion = p_descripcion;
 
-                eventoEN.Fecha_inicio = p_fecha_inicio;
+                eventoEN.FechaInicio = p_fechaInicio;
 
-                eventoEN.Fecha_fin = p_fecha_fin;
+                eventoEN.FechaFin = p_fechaFin;
 
-                eventoEN.Fecha_inscripcion = p_fecha_inscripcion;
+                eventoEN.FechaInicioInscripcion = p_fechaInicioInscripcion;
 
-                eventoEN.Foto = p_foto;
+                eventoEN.FechaTopeInscripcion = p_fechaTopeInscripcion;
+
+                eventoEN.Fotos = p_fotos;
 
                 //Call to EventoCAD
 

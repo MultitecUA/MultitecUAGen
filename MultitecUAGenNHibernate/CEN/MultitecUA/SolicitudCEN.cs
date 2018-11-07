@@ -39,9 +39,9 @@ public ISolicitudCAD get_ISolicitudCAD ()
         return this._ISolicitudCAD;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientes (int p_OIDProyecto)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorEstado (int p_OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum ? p_estado)
 {
-        return _ISolicitudCAD.DameSolicitudesPendientes (p_OIDProyecto);
+        return _ISolicitudCAD.DameSolicitudesPorEstado (p_OIDProyecto, p_estado);
 }
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameMisSolicitudes (int p_OID)
 {
@@ -63,9 +63,9 @@ public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int siz
         list = _ISolicitudCAD.ReadAll (first, size);
         return list;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesRechazadas (int p_OIDProyecto)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameMisSolicidudesPorProyecto (int p_proyecto, int p_usuario)
 {
-        return _ISolicitudCAD.DameSolicitudesRechazadas (p_OIDProyecto);
+        return _ISolicitudCAD.DameMisSolicidudesPorProyecto (p_proyecto, p_usuario);
 }
 }
 }

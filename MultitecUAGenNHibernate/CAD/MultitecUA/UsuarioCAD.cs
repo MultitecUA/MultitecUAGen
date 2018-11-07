@@ -451,5 +451,36 @@ public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
 
         return result;
 }
+
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM UsuarioEN self where FROM UsuarioEN en join en.CategoriasUsuarios cat where cat = :p_categoria";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosPorCategoriaHQL");
+                query.SetParameter ("p_categoria", p_categoria);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

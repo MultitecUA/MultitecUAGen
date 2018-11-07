@@ -21,7 +21,7 @@ namespace MultitecUAGenNHibernate.CP.MultitecUA
 {
 public partial class EventoCP : BasicCP
 {
-public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nullable<DateTime> p_fecha_inicio, Nullable<DateTime> p_fecha_fin, Nullable<DateTime> p_fecha_inscripcion, System.Collections.Generic.IList<string> p_foto)
+public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nullable<DateTime> p_fechaInicio, Nullable<DateTime> p_fechaFin, Nullable<DateTime> p_fechaInicioInscripcion, Nullable<DateTime> p_fechaTopeInscripcion, System.Collections.Generic.IList<string> p_fotos)
 {
         /*PROTECTED REGION ID(MultitecUAGenNHibernate.CP.MultitecUA_Evento_modify) ENABLED START*/
 
@@ -45,10 +45,11 @@ public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nul
                 eventoEN.Id = p_Evento_OID;
                 eventoEN.Nombre = p_nombre;
                 eventoEN.Descripcion = p_descripcion;
-                eventoEN.Fecha_inicio = p_fecha_inicio;
-                eventoEN.Fecha_fin = p_fecha_fin;
-                eventoEN.Fecha_inscripcion = p_fecha_inscripcion;
-                eventoEN.Foto = p_foto;
+                eventoEN.FechaInicio = p_fechaInicio;
+                eventoEN.FechaFin = p_fechaFin;
+                eventoEN.FechaInicioInscripcion = p_fechaInicioInscripcion;
+                eventoEN.FechaTopeInscripcion = p_fechaTopeInscripcion;
+                eventoEN.Fotos = p_fotos;
                 //Call to EventoCAD
 
                 eventoCAD.Modify (eventoEN);

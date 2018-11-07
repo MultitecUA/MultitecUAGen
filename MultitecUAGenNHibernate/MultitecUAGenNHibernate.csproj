@@ -1,415 +1,288 @@
-<?xml version="1.0" encoding="utf-8"?>
-		<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-		  <PropertyGroup>
-		    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		    <ProductVersion>8.0.30703</ProductVersion>
-		    <SchemaVersion>2.0</SchemaVersion>
-		    <ProjectGuid>{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}</ProjectGuid>
-		    <OutputType>Library</OutputType>
-		    <AppDesignerFolder>Properties</AppDesignerFolder>
-		    <RootNamespace>MultitecUAGenNHibernate</RootNamespace>
-		    <AssemblyName>MultitecUAGenNHibernate</AssemblyName>
-		    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-		    <FileAlignment>512</FileAlignment>
-		    <PublishUrl>publish\</PublishUrl>
-		    <Install>true</Install>
-		    <InstallFrom>Disk</InstallFrom>
-		    <UpdateEnabled>false</UpdateEnabled>
-		    <UpdateMode>Foreground</UpdateMode>
-		    <UpdateInterval>7</UpdateInterval>
-		    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-		    <UpdatePeriodically>false</UpdatePeriodically>
-		    <UpdateRequired>false</UpdateRequired>
-		    <MapFileExtensions>true</MapFileExtensions>
-		    <ApplicationRevision>0</ApplicationRevision>
-		    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-		    <IsWebBootstrapper>false</IsWebBootstrapper>
-		    <UseApplicationTrust>false</UseApplicationTrust>
-		    <BootstrapperEnabled>true</BootstrapperEnabled>
-		  </PropertyGroup>
-		  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		    <DebugSymbols>true</DebugSymbols>
-		    <DebugType>full</DebugType>
-		    <Optimize>false</Optimize>
-		    <OutputPath>bin\Debug\</OutputPath>
-		    <DefineConstants>DEBUG;TRACE</DefineConstants>
-		    <ErrorReport>prompt</ErrorReport>
-		    <WarningLevel>4</WarningLevel>
-		  </PropertyGroup>
-		  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		    <DebugType>pdbonly</DebugType>
-		    <Optimize>true</Optimize>
-		    <OutputPath>bin\Release\</OutputPath>
-		    <DefineConstants>TRACE</DefineConstants>
-		    <ErrorReport>prompt</ErrorReport>
-		    <WarningLevel>4</WarningLevel>
-		  </PropertyGroup>
-		<ItemGroup>
-		    <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\Castle.DynamicProxy2.dll</HintPath>
-		    </Reference>
-		    <Reference Include="LinFu.DynamicProxy, Version=1.0.3.14911, Culture=neutral, PublicKeyToken=62a6874124340d6e, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\LinFu.DynamicProxy.dll</HintPath>
-		    </Reference>
-		    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.dll</HintPath>
-		    </Reference>
-		    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.Castle.dll</HintPath>
-		    </Reference>
-		    <Reference Include="NHibernate.ByteCode.LinFu, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.LinFu.dll</HintPath>
-		    </Reference>
-		    <Reference Include="Newtonsoft.Json, Version=4.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\Newtonsoft.Json.dll</HintPath>
-		    </Reference>
-		     <Reference Include="jose-jwt, Version=4.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-		      <SpecificVersion>False</SpecificVersion>
-		      <HintPath>..\MultitecUAGenNHibernate\AppLib\jose-jwt.dll</HintPath>
-		    </Reference>
-		    <Reference Include="System" />
-		    <Reference Include="System.Core">
-		      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-		    </Reference>
-		    
-		    <Reference Include="System.Transactions" />
-		    <Reference Include="System.Xml.Linq">
-		      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-		    </Reference>
-		    <Reference Include="System.Data.DataSetExtensions">
-		      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-		    </Reference>
-		    <Reference Include="System.Data" />
-		    <Reference Include="System.Xml" />
-		</ItemGroup>
-		
-		<ItemGroup>
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\Antlr3.Runtime.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\Castle.DynamicProxy2.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\Iesi.Collections.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\LinFu.DynamicProxy.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\log4net.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.Castle.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.LinFu.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\nunit.core.dll" />
-		    <Content Include="..\MultitecUAGenNHibernate\AppLib\nunit.framework.dll" />
-  		    <Content Include="..\MultitecUAGenNHibernate\AppLib\jose-jwt.dll" />
-  		</ItemGroup>
-  		
-		<ItemGroup>
-			<Compile Include="NHibernateHelper.cs" />
-		    <Compile Include="Utils\Util.cs" />
-		    <Compile Include="Exceptions\ModelException.cs"/>
-		    <Compile Include="Exceptions\DataLayerException.cs"/>
-		    
-	<Compile Include="CAD\BasicCAD.cs"/>
-	<Compile Include="CP\BasicCP.cs"/>
-	<Compile Include="EN\MultitecUA\UsuarioEN.cs" />
-	<Compile Include="CEN\MultitecUA\UsuarioCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IUsuarioCAD.cs" />
-	<Compile Include="CAD\MultitecUA\UsuarioCAD.cs" />
-	<Compile Include="CP\MultitecUA\UsuarioCP.cs" />
-			<Compile Include="CEN\MultitecUA\UsuarioCEN_New_.cs" />
-			
-			<Compile Include="CEN\MultitecUA\UsuarioCEN_Modify.cs" />
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\AdministradorEN.cs" />
-	<Compile Include="CEN\MultitecUA\AdministradorCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IAdministradorCAD.cs" />
-	<Compile Include="CAD\MultitecUA\AdministradorCAD.cs" />
-	<Compile Include="CP\MultitecUA\AdministradorCP.cs" />
-			<Compile Include="CEN\MultitecUA\AdministradorCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\ProyectoEN.cs" />
-	<Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\ProyectoCAD.cs" />
-	<Compile Include="CP\MultitecUA\ProyectoCP.cs" />
-			<Compile Include="CEN\MultitecUA\ProyectoCEN_New_.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_Modify.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_Destroy.cs" />
-			
-			<Compile Include="CEN\MultitecUA\ProyectoCEN_CambiarEstado.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaModeradores.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaEvento.cs" />
-			
-			
-			
-			
-			
-			
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaParticipante.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaModeradores.cs" />
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaEvento.cs" />
-			
-			
-			
-			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaParticipante.cs" />
-			
-			
-			
-	<Compile Include="EN\MultitecUA\EventoEN.cs" />
-	<Compile Include="CEN\MultitecUA\EventoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IEventoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\EventoCAD.cs" />
-	<Compile Include="CP\MultitecUA\EventoCP.cs" />
-			<Compile Include="CP\MultitecUA\EventoCP_New_.cs" />
-			
-			<Compile Include="CP\MultitecUA\EventoCP_Modify.cs" />
-			
-			<Compile Include="CP\MultitecUA\EventoCP_Destroy.cs" />
-			
-			
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\RecuerdoEN.cs" />
-	<Compile Include="CEN\MultitecUA\RecuerdoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IRecuerdoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\RecuerdoCAD.cs" />
-	<Compile Include="CP\MultitecUA\RecuerdoCP.cs" />
-			<Compile Include="CEN\MultitecUA\RecuerdoCEN_New_.cs" />
-			
-			<Compile Include="CEN\MultitecUA\RecuerdoCEN_Modify.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\ServicioEN.cs" />
-	<Compile Include="CEN\MultitecUA\ServicioCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IServicioCAD.cs" />
-	<Compile Include="CAD\MultitecUA\ServicioCAD.cs" />
-	<Compile Include="CP\MultitecUA\ServicioCP.cs" />
-			<Compile Include="CEN\MultitecUA\ServicioCEN_New_.cs" />
-			
-			<Compile Include="CEN\MultitecUA\ServicioCEN_Modify.cs" />
-			
-			
-			<Compile Include="CEN\MultitecUA\ServicioCEN_CambiarDisponibilidad.cs" />
-			
-			
-			
-	<Compile Include="EN\MultitecUA\MensajeEN.cs" />
-	<Compile Include="CEN\MultitecUA\MensajeCEN.cs" />
-	<Compile Include="CAD\MultitecUA\IMensajeCAD.cs" />
-	<Compile Include="CAD\MultitecUA\MensajeCAD.cs" />
-	<Compile Include="CP\MultitecUA\MensajeCP.cs" />
-			<Compile Include="CP\MultitecUA\MensajeCP_New_.cs" />
-			
-			
-			
-			
-			<Compile Include="CEN\MultitecUA\MensajeCEN_LeerMensaje.cs" />
-			
-			
-			
-			<Compile Include="CEN\MultitecUA\MensajeCEN_EliminaAutor.cs" />
-			
-			<Compile Include="CEN\MultitecUA\MensajeCEN_EliminaReceptor.cs" />
-			
-	<Compile Include="EN\MultitecUA\NotificacionEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\NotificacionUsuarioEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionUsuarioCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionUsuarioCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionUsuarioCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_New_.cs" />
-			
-			
-			<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_LeerNotificacion.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\CategoriaProyectoEN.cs" />
-	<Compile Include="CEN\MultitecUA\CategoriaProyectoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\ICategoriaProyectoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\CategoriaProyectoCAD.cs" />
-	<Compile Include="CP\MultitecUA\CategoriaProyectoCP.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\CategoriaUsuarioEN.cs" />
-	<Compile Include="CEN\MultitecUA\CategoriaUsuarioCEN.cs" />
-	<Compile Include="CAD\MultitecUA\ICategoriaUsuarioCAD.cs" />
-	<Compile Include="CAD\MultitecUA\CategoriaUsuarioCAD.cs" />
-	<Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
-			
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\SolicitudEN.cs" />
-	<Compile Include="CEN\MultitecUA\SolicitudCEN.cs" />
-	<Compile Include="CAD\MultitecUA\ISolicitudCAD.cs" />
-	<Compile Include="CAD\MultitecUA\SolicitudCAD.cs" />
-	<Compile Include="CP\MultitecUA\SolicitudCP.cs" />
-			<Compile Include="CP\MultitecUA\SolicitudCP_New_.cs" />
-			
-			
-			
-			<Compile Include="CEN\MultitecUA\SolicitudCEN_Aceptar.cs" />
-			
-			<Compile Include="CEN\MultitecUA\SolicitudCEN_Rechazar.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionProyectoCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionProyectoCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\NotificacionMensajeEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionMensajeCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionMensajeCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionMensajeCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionMensajeCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionMensajeCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\NotificacionEventoEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionEventoCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionEventoCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionEventoCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionEventoCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionEventoCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="EN\MultitecUA\NotificacionSolicitudEN.cs" />
-	<Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN.cs" />
-	<Compile Include="CAD\MultitecUA\INotificacionSolicitudCAD.cs" />
-	<Compile Include="CAD\MultitecUA\NotificacionSolicitudCAD.cs" />
-	<Compile Include="CP\MultitecUA\NotificacionSolicitudCP.cs" />
-			<Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN_New_.cs" />
-			
-			
-			
-			
-	<Compile Include="Enumerated\MultitecUA\EstadoProyectoEnum.cs" />
-	<Compile Include="Enumerated\MultitecUA\EstadoLecturaEnum.cs" />
-	<Compile Include="Enumerated\MultitecUA\EstadoServicioEnum.cs" />
-	<Compile Include="Enumerated\MultitecUA\EstadoSolicitudEnum.cs" />
-	
-	
-
-		    
-	
-
-		    <Compile Include="Properties\AssemblyInfo.cs" />
-		    <Compile Include="Properties\Settings.Designer.cs">
-		      <AutoGen>True</AutoGen>
-		      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-		      <DependentUpon>Settings.settings</DependentUpon>
-		    </Compile>
-		  </ItemGroup>
-		  <ItemGroup>
-		  
-	<EmbeddedResource Include="Mappings\MultitecUA\usuario.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\administrador.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\proyecto.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\evento.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\recuerdo.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\servicio.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\mensaje.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacion.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacionusuario.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\categoriaproyecto.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\categoriausuario.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\solicitud.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacionproyecto.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacionmensaje.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacionevento.hbm.xml" />
-	<EmbeddedResource Include="Mappings\MultitecUA\notificacionsolicitud.hbm.xml" />
-	
-	
-
-		  </ItemGroup>
-		  <ItemGroup>
-		    <Content Include="hibernate.cfg.xml">
-		      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		    </Content>
-		  </ItemGroup>
-		  <ItemGroup>
-		    <None Include="app.config" />
-		    <None Include="Properties\Settings.settings">
-		      <Generator>SettingsSingleFileGenerator</Generator>
-		      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-		    </None>
-		        <None Include="Resources\xsd\nhibernate-configuration.xsd">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MultitecUAGenNHibernate</RootNamespace>
+    <AssemblyName>MultitecUAGenNHibernate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.DynamicProxy, Version=1.0.3.14911, Culture=neutral, PublicKeyToken=62a6874124340d6e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt, Version=4.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MultitecUAGenNHibernate\AppLib\jose-jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\Antlr3.Runtime.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\Castle.DynamicProxy2.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\Iesi.Collections.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\LinFu.DynamicProxy.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\log4net.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.Castle.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.ByteCode.LinFu.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\NHibernate.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\nunit.core.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\nunit.framework.dll" />
+    <Content Include="..\MultitecUAGenNHibernate\AppLib\jose-jwt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NHibernateHelper.cs" />
+    <Compile Include="Utils\Util.cs" />
+    <Compile Include="Exceptions\ModelException.cs" />
+    <Compile Include="Exceptions\DataLayerException.cs" />
+    <Compile Include="CAD\BasicCAD.cs" />
+    <Compile Include="CP\BasicCP.cs" />
+    <Compile Include="EN\MultitecUA\UsuarioEN.cs" />
+    <Compile Include="CEN\MultitecUA\UsuarioCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IUsuarioCAD.cs" />
+    <Compile Include="CAD\MultitecUA\UsuarioCAD.cs" />
+    <Compile Include="CP\MultitecUA\UsuarioCP.cs" />
+    <Compile Include="CEN\MultitecUA\UsuarioCEN_New_.cs" />
+    <Compile Include="CEN\MultitecUA\UsuarioCEN_Modify.cs" />
+    <Compile Include="EN\MultitecUA\AdministradorEN.cs" />
+    <Compile Include="CEN\MultitecUA\AdministradorCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IAdministradorCAD.cs" />
+    <Compile Include="CAD\MultitecUA\AdministradorCAD.cs" />
+    <Compile Include="CP\MultitecUA\AdministradorCP.cs" />
+    <Compile Include="CEN\MultitecUA\AdministradorCEN_New_.cs" />
+    <Compile Include="EN\MultitecUA\ProyectoEN.cs" />
+    <Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\ProyectoCAD.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP.cs" />
+    <Compile Include="CEN\MultitecUA\ProyectoCEN_New_.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_Modify.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_Destroy.cs" />
+    <Compile Include="CEN\MultitecUA\ProyectoCEN_CambiarEstado.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_AgregaModeradores.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_AgregaEvento.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_AgregaParticipante.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_EliminaModeradores.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_EliminaEvento.cs" />
+    <Compile Include="CP\MultitecUA\ProyectoCP_EliminaParticipante.cs" />
+    <Compile Include="EN\MultitecUA\EventoEN.cs" />
+    <Compile Include="CEN\MultitecUA\EventoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IEventoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\EventoCAD.cs" />
+    <Compile Include="CP\MultitecUA\EventoCP.cs" />
+    <Compile Include="CP\MultitecUA\EventoCP_New_.cs" />
+    <Compile Include="CP\MultitecUA\EventoCP_Modify.cs" />
+    <Compile Include="CP\MultitecUA\EventoCP_Destroy.cs" />
+    <Compile Include="EN\MultitecUA\RecuerdoEN.cs" />
+    <Compile Include="CEN\MultitecUA\RecuerdoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IRecuerdoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\RecuerdoCAD.cs" />
+    <Compile Include="CP\MultitecUA\RecuerdoCP.cs" />
+    <Compile Include="CEN\MultitecUA\RecuerdoCEN_New_.cs" />
+    <Compile Include="CEN\MultitecUA\RecuerdoCEN_Modify.cs" />
+    <Compile Include="EN\MultitecUA\ServicioEN.cs" />
+    <Compile Include="CEN\MultitecUA\ServicioCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IServicioCAD.cs" />
+    <Compile Include="CAD\MultitecUA\ServicioCAD.cs" />
+    <Compile Include="CP\MultitecUA\ServicioCP.cs" />
+    <Compile Include="CEN\MultitecUA\ServicioCEN_New_.cs" />
+    <Compile Include="CEN\MultitecUA\ServicioCEN_Modify.cs" />
+    <Compile Include="CEN\MultitecUA\ServicioCEN_CambiarDisponibilidad.cs" />
+    <Compile Include="EN\MultitecUA\MensajeEN.cs" />
+    <Compile Include="CEN\MultitecUA\MensajeCEN.cs" />
+    <Compile Include="CAD\MultitecUA\IMensajeCAD.cs" />
+    <Compile Include="CAD\MultitecUA\MensajeCAD.cs" />
+    <Compile Include="CP\MultitecUA\MensajeCP.cs" />
+    <Compile Include="CP\MultitecUA\MensajeCP_New_.cs" />
+    <Compile Include="CEN\MultitecUA\MensajeCEN_LeerMensaje.cs" />
+    <Compile Include="CEN\MultitecUA\MensajeCEN_EliminaAutor.cs" />
+    <Compile Include="CEN\MultitecUA\MensajeCEN_EliminaReceptor.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionCEN_New_.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionUsuarioEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionUsuarioCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionUsuarioCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionUsuarioCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_New_.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_LeerNotificacion.cs" />
+    <Compile Include="EN\MultitecUA\CategoriaProyectoEN.cs" />
+    <Compile Include="CEN\MultitecUA\CategoriaProyectoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\ICategoriaProyectoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\CategoriaProyectoCAD.cs" />
+    <Compile Include="CP\MultitecUA\CategoriaProyectoCP.cs" />
+    <Compile Include="EN\MultitecUA\CategoriaUsuarioEN.cs" />
+    <Compile Include="CEN\MultitecUA\CategoriaUsuarioCEN.cs" />
+    <Compile Include="CAD\MultitecUA\ICategoriaUsuarioCAD.cs" />
+    <Compile Include="CAD\MultitecUA\CategoriaUsuarioCAD.cs" />
+    <Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
+    <Compile Include="EN\MultitecUA\SolicitudEN.cs" />
+    <Compile Include="CEN\MultitecUA\SolicitudCEN.cs" />
+    <Compile Include="CAD\MultitecUA\ISolicitudCAD.cs" />
+    <Compile Include="CAD\MultitecUA\SolicitudCAD.cs" />
+    <Compile Include="CP\MultitecUA\SolicitudCP.cs" />
+    <Compile Include="CP\MultitecUA\SolicitudCP_New_.cs" />
+    <Compile Include="CEN\MultitecUA\SolicitudCEN_Aceptar.cs" />
+    <Compile Include="CEN\MultitecUA\SolicitudCEN_Rechazar.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionProyectoCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionProyectoCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionProyectoCEN_New_.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionMensajeEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionMensajeCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionMensajeCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionMensajeCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionMensajeCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionMensajeCEN_New_.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionEventoEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionEventoCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionEventoCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionEventoCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionEventoCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionEventoCEN_New_.cs" />
+    <Compile Include="EN\MultitecUA\NotificacionSolicitudEN.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN.cs" />
+    <Compile Include="CAD\MultitecUA\INotificacionSolicitudCAD.cs" />
+    <Compile Include="CAD\MultitecUA\NotificacionSolicitudCAD.cs" />
+    <Compile Include="CP\MultitecUA\NotificacionSolicitudCP.cs" />
+    <Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN_New_.cs" />
+    <Compile Include="Enumerated\MultitecUA\EstadoProyectoEnum.cs" />
+    <Compile Include="Enumerated\MultitecUA\EstadoLecturaEnum.cs" />
+    <Compile Include="Enumerated\MultitecUA\EstadoServicioEnum.cs" />
+    <Compile Include="Enumerated\MultitecUA\EstadoSolicitudEnum.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\MultitecUA\usuario.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\administrador.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\proyecto.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\evento.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\recuerdo.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\servicio.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\mensaje.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacion.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacionusuario.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\categoriaproyecto.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\categoriausuario.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\solicitud.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacionproyecto.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacionmensaje.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacionevento.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MultitecUA\notificacionsolicitud.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\xsd\nhibernate-configuration.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Resources\xsd\nhibernate-mapping.xsd">
       <SubType>Designer</SubType>
     </None>
-		  </ItemGroup>
-	 	
-		
-	
-		<ItemGroup>
-		    <ProjectReference Include="..\APIExterna\APIExterna.csproj">
-		      <Project>{4ade35c8-a0c3-49da-9e1a-11a53ca19214}</Project>
-		      <Name>APIExterna</Name>
-		    </ProjectReference>
-	    </ItemGroup>
-	    
-		  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-		  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\APIExterna\APIExterna.csproj">
+      <Project>{4ade35c8-a0c3-49da-9e1a-11a53ca19214}</Project>
+      <Name>APIExterna</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 		       Other similar extension points exist, see Microsoft.Common.targets.
 		  <Target Name="BeforeBuild">
 		  </Target>
 		  <Target Name="AfterBuild">
 		  </Target>
 		  -->
-		</Project>
+</Project>

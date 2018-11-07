@@ -75,5 +75,17 @@ public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
         list = _IEventoCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPosterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IEventoCAD.DameEventosPosterioresA (p_fecha);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAnterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IEventoCAD.DameEventosAnterioresA (p_fecha);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAbiertos (Nullable<DateTime> p_fecha)
+{
+        return _IEventoCAD.DameEventosAbiertos (p_fecha);
+}
 }
 }

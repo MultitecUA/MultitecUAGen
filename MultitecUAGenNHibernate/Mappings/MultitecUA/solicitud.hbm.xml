@@ -55,8 +55,8 @@
 		 </class>	
 		  
 		  <query name="SolicitudENReadAllHQL">from SolicitudEN</query>
-		  <query name="SolicitudENdameSolicitudesPendientesHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = 1]]></query>
+		  <query name="SolicitudENdameSolicitudesPorEstadoHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = :p_estado]]></query>
 		  <query name="SolicitudENdameMisSolicitudesHQL"><![CDATA[FROM SolicitudEN en where en.UsuarioSolicitante.Id = :p_OID]]></query>
-		  <query name="SolicitudENdameSolicitudesRechazadasHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = 3]]></query>
+		  <query name="SolicitudENdameMisSolicidudesPorProyectoHQL"><![CDATA[FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario]]></query>
 		</hibernate-mapping>
 	

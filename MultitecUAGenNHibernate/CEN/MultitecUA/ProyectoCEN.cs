@@ -95,5 +95,9 @@ public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size
         list = _IProyectoCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado)
+{
+        return _IProyectoCAD.DameProyectosPorEstado (p_estado);
+}
 }
 }

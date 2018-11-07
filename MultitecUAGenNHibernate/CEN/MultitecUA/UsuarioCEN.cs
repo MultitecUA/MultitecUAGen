@@ -96,6 +96,10 @@ public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
         list = _IUsuarioCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria)
+{
+        return _IUsuarioCAD.DameUsuariosPorCategoria (p_categoria);
+}
 
 
 

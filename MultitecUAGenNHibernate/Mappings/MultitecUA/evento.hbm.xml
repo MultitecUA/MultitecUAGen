@@ -18,19 +18,22 @@
 					<property name="Descripcion" type="string"> 
 						<column name="descripcion"  not-null="true"/>
 					</property>
-					<bag name="Foto" table="foto"> 
+					<bag name="Fotos" table="fotos"> 
 						<key>
 						</key>
-						<element column="Foto" type="string"/> 
+						<element column="Fotos" type="string"/> 
     				</bag>
-					<property name="Fecha_inicio" type="timestamp"> 
-						<column name="fecha_inicio"  not-null="true"/>
+					<property name="FechaInicio" type="timestamp"> 
+						<column name="fechaInicio"  not-null="true"/>
 					</property>
-					<property name="Fecha_fin" type="timestamp"> 
-						<column name="fecha_fin"  not-null="true"/>
+					<property name="FechaFin" type="timestamp"> 
+						<column name="fechaFin"  not-null="true"/>
 					</property>
-					<property name="Fecha_inscripcion" type="timestamp"> 
-						<column name="fecha_inscripcion"  not-null="true"/>
+					<property name="FechaInicioInscripcion" type="timestamp"> 
+						<column name="fechaInicioInscripcion" />
+					</property>
+					<property name="FechaTopeInscripcion" type="timestamp"> 
+						<column name="fechaTopeInscripcion" />
 					</property>
 			
 			
@@ -84,6 +87,8 @@
 							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN"/>
 					    </bag>
 					
+			
+					
 					
 					
 					
@@ -101,5 +106,8 @@
 		  <query name="EventoENReadAllHQL">from EventoEN</query>
 		  <query name="EventoENdameEventosAsociadosHQL"><![CDATA[select(en) FROM EventoEN en join en.ProyectosPresentados pro where pro.Id = :p_OID]]></query>
 		  <query name="EventoENdameEventosPorCategoriaHQL"><![CDATA[select (en) FROM EventoEN en join en.CategoriasEventos cat where cat.Id = :p_OID ]]></query>
+		  <query name="EventoENdameEventosPosterioresAHQL"><![CDATA[FROM EventoEN en where en.FechaFin > :p_fecha]]></query>
+		  <query name="EventoENdameEventosAnterioresAHQL"><![CDATA[FROM EventoEN en where en.FechaFin < :p_fecha]]></query>
+		  <query name="EventoENdameEventosAbiertosHQL"><![CDATA[FROM EventoEN en where en.FechaInicioInscripcion < :p_fecha and en.FechaTopeInscripcion > :p_fecha]]></query>
 		</hibernate-mapping>
 	

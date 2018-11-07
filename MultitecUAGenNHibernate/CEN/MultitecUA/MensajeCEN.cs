@@ -45,13 +45,13 @@ public void Destroy (int id
         _IMensajeCAD.Destroy (id);
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesRecibidos (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidos (int p_oid_usuario)
 {
-        return _IMensajeCAD.DameMisMensajesRecibidos (p_oid_usuario);
+        return _IMensajeCAD.DameMensajesRecibidos (p_oid_usuario);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesEnviados (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviados (int p_oid_usuario)
 {
-        return _IMensajeCAD.DameMisMensajesEnviados (p_oid_usuario);
+        return _IMensajeCAD.DameMensajesEnviados (p_oid_usuario);
 }
 public MensajeEN ReadOID (int id
                           )
@@ -68,6 +68,26 @@ public System.Collections.Generic.IList<MensajeEN> ReadAll (int first, int size)
 
         list = _IMensajeCAD.ReadAll (first, size);
         return list;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesNuevos (int p_oid_usuario)
+{
+        return _IMensajeCAD.DameMisMensajesNuevos (p_oid_usuario);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviadosPosterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IMensajeCAD.DameMensajesEnviadosPosterioresA (p_fecha);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviadosAnterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IMensajeCAD.DameMensajesEnviadosAnterioresA (p_fecha);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidosPosterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IMensajeCAD.DameMensajesRecibidosPosterioresA (p_fecha);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidosAnterioresA (Nullable<DateTime> p_fecha)
+{
+        return _IMensajeCAD.DameMensajesRecibidosAnterioresA (p_fecha);
 }
 }
 }

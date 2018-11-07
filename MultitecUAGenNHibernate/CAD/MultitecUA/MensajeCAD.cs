@@ -192,7 +192,7 @@ public void Destroy (int id
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesRecibidos (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidos (int p_oid_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
         try
@@ -200,7 +200,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
                 SessionInitializeTransaction ();
                 //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMisMensajesRecibidosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesRecibidosHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
@@ -222,7 +222,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesEnviados (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviados (int p_oid_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
         try
@@ -230,7 +230,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
                 SessionInitializeTransaction ();
                 //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMisMensajesEnviadosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesEnviadosHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
@@ -293,6 +293,157 @@ public System.Collections.Generic.IList<MensajeEN> ReadAll (int first, int size)
                                  SetFirstResult (first).SetMaxResults (size).List<MensajeEN>();
                 else
                         result = session.CreateCriteria (typeof(MensajeEN)).List<MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMisMensajesNuevos (int p_oid_usuario)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Estado = 2";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMisMensajesNuevosHQL");
+                query.SetParameter ("p_oid_usuario", p_oid_usuario);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviadosPosterioresA (Nullable<DateTime> p_fecha)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario and en.Fecha > :p_fecha";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesEnviadosPosterioresAHQL");
+                query.SetParameter ("p_fecha", p_fecha);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesEnviadosAnterioresA (Nullable<DateTime> p_fecha)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario and en.Fecha < :p_fecha";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesEnviadosAnterioresAHQL");
+                query.SetParameter ("p_fecha", p_fecha);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidosPosterioresA (Nullable<DateTime> p_fecha)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Fecha > :p_fecha";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesRecibidosPosterioresAHQL");
+                query.SetParameter ("p_fecha", p_fecha);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesRecibidosAnterioresA (Nullable<DateTime> p_fecha)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM MensajeEN self where FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Fecha < :p_fecha";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesRecibidosAnterioresAHQL");
+                query.SetParameter ("p_fecha", p_fecha);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();
                 SessionCommit ();
         }
 

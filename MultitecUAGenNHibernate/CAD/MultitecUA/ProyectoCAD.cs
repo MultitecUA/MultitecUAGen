@@ -784,5 +784,36 @@ public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size
 
         return result;
 }
+
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProyectoEN self where FROM ProyectoEN en where en.Estado = :p_estado";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPorEstadoHQL");
+                query.SetParameter ("p_estado", p_estado);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

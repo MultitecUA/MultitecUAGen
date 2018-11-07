@@ -266,5 +266,36 @@ public System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size
 
         return result;
 }
+
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ServicioEN self where FROM ServicioEN en where en.Estado = :p_estado";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ServicioENdameServiciosPorEstadoHQL");
+                query.SetParameter ("p_estado", p_estado);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ServicioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

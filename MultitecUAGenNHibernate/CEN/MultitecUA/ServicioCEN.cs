@@ -61,5 +61,9 @@ public System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size
         list = _IServicioCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado)
+{
+        return _IServicioCAD.DameServiciosPorEstado (p_estado);
+}
 }
 }

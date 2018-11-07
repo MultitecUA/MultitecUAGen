@@ -35,7 +35,7 @@ public MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN New_ (string p_titulo, st
         {
                 SessionInitializeTransaction ();
                 mensajeCAD = new MensajeCAD (session);
-                mensajeCEN = new  MensajeCEN (mensajeCAD);
+                mensajeCEN = new MensajeCEN (mensajeCAD);
 
 
 
@@ -62,11 +62,24 @@ public MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN New_ (string p_titulo, st
 
                 mensajeEN.ArchivosAdjuntos = p_archivosAdjuntos;
 
-                //Call to MensajeCAD
+                mensajeEN.Fecha = DateTime.Now;
 
+                mensajeEN.Estado = Enumerated.MultitecUA.EstadoLecturaEnum.NoLeido;
+
+                //Call to MensajeCAD
                 oid = mensajeCAD.New_ (mensajeEN);
                 result = mensajeCAD.ReadOIDDefault (oid);
 
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
+
+                UsuarioEN autor = usuarioCEN.ReadOID (p_usuarioAutor);
+                UsuarioEN receptor = usuarioCEN.ReadOID (p_usuarioReceptor);
+
+                NotificacionMensajeCEN nMCEN = new NotificacionMensajeCEN ();
+                int oidNotificacion = nMCEN.New_ ("Tienes un mensaje nuevo", autor.Nombre + " te ha enviado un mensaje", oid);
+
+                NotificacionUsuarioCEN nUCEN = new NotificacionUsuarioCEN ();
+                nUCEN.New_ (receptor.Id, oidNotificacion);
 
 
                 SessionCommit ();
