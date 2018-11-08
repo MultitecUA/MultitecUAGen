@@ -22,3 +22,27 @@ C:\Users\nedya\workspace\MultitecUAGen\InitializeDB\bin\Debug\MultitecUAGenNHibe
 C:\Users\nedya\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.csproj.CopyComplete
 C:\Users\nedya\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.exe
 C:\Users\nedya\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.pdb
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\hibernate.cfg.xml
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\InitializeDB.exe.config
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\InitializeDB.exe
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\InitializeDB.pdb
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\Castle.DynamicProxy2.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\Iesi.Collections.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\LinFu.DynamicProxy.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\log4net.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\MultitecUAGenNHibernate.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\NHibernate.ByteCode.Castle.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\NHibernate.ByteCode.LinFu.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\NHibernate.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\nunit.core.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\nunit.framework.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\jose-jwt.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\MultitecUAGenNHibernate.pdb
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\bin\Debug\MultitecUAGenNHibernate.dll.config
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.csprojAssemblyReference.cache
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.csproj.CoreCompileInputs.cache
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.csproj.CopyComplete
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.exe
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\InitializeDB\obj\x86\Debug\InitializeDB.pdb

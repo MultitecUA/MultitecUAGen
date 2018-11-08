@@ -107,6 +107,23 @@ public static void InitializeData ()
                  * mensajeCP.New_ ("Esto es un mensaje", "Mi primerito mensaje", OID1, OID2, null);
                  */
 
+                /*SERVICIOS*/
+
+                ServicioCEN servicioCEN = new ServicioCEN();
+                int OIDServicio = servicioCEN.New_("Hosting","Servicio de alojamiento web",MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible,null);
+
+                servicioCEN.Modify(OIDServicio, "Hosting Ilimitado", "Servicio de alojamiento web sin limites", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+
+
+                /*PROYECTO*/
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                int OIDProyecto = proyectoCEN.New_("APPANIC", "App que te ayuda en la vida", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.Propuesto, OIDUsuario, null);
+
+
+
+
+
+
                 System.Console.WriteLine ("Todo ha ido bien");
 
                 // p.e. CustomerCEN customer = new CustomerCEN();
