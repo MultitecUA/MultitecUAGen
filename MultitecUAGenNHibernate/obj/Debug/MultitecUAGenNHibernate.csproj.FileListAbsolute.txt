@@ -35,3 +35,4 @@ C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csproj.CopyComplete
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.dll
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.pdb
+C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csprojAssemblyReference.cache

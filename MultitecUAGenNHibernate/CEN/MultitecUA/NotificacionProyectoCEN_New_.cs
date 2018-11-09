@@ -33,8 +33,10 @@ public int New_ (string p_titulo, string p_mensaje, int p_proyectoGenerador)
 
         notificacionProyectoEN.Mensaje = p_mensaje;
 
+        notificacionProyectoEN.Fecha = DateTime.Now;
 
-        if (p_proyectoGenerador != -1) {
+
+            if (p_proyectoGenerador != -1) {
                 notificacionProyectoEN.ProyectoGenerador = new MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN ();
                 notificacionProyectoEN.ProyectoGenerador.Id = p_proyectoGenerador;
         }

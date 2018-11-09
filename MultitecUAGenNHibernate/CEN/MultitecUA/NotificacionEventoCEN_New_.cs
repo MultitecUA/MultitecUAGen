@@ -32,6 +32,7 @@ public int New_ (string p_titulo, string p_mensaje, int p_eventoGenerador)
         notificacionEventoEN.Titulo = p_titulo;
 
         notificacionEventoEN.Mensaje = p_mensaje;
+            notificacionEventoEN.Fecha = DateTime.Now;
 
 
         if (p_eventoGenerador != -1) {

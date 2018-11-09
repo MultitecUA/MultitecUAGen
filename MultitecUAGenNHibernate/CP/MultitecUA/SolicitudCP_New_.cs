@@ -56,6 +56,8 @@ public MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN New_ (int p_usuarioSoli
                         solicitudEN.ProyectoSolicitado.Id = p_proyectoSolicitado;
                 }
 
+
+                solicitudEN.Fecha = DateTime.Now;
                 //Call to SolicitudCAD
 
                 oid = solicitudCAD.New_ (solicitudEN);

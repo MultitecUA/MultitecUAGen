@@ -118,9 +118,7 @@ public int New_ (NotificacionMensajeEN notificacionMensaje)
                 if (notificacionMensaje.MensajeGenerador != null) {
                         // Argumento OID y no colección.
                         notificacionMensaje.MensajeGenerador = (MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN), notificacionMensaje.MensajeGenerador.Id);
-
-                        notificacionMensaje.MensajeGenerador.NotificacionGenerada
-                        .Add (notificacionMensaje);
+                        notificacionMensaje.MensajeGenerador.NotificacionGenerada.Add (notificacionMensaje);
                 }
 
                 session.Save (notificacionMensaje);
