@@ -79,15 +79,17 @@ public static void InitializeData ()
         try
         {
                 // Insert the initilizations of entities using the CEN classes
+
+                /*ADMINISTRADORES*/
                 AdministradorCEN administradorCEN = new AdministradorCEN ();
                 int OIDAdministrador = administradorCEN.New_ ("Victor", "12345", "nedyar@hotmail.es", "Nedyar", null);
 
+                /*USUARIOS*/
                 UsuarioCEN usuarioCEN = new UsuarioCEN ();
                 int OIDUsuario = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                usuarioCEN.Modify(OIDAdministrador, "Victor", "54321", "nedyar@hotmail.es", "Nedyar94", null);
 
-                //usuarioCEN.ReadAll(); QUe ostias me pide de argumentos? Preguntar
-
-
+                /*CATEGORIAS DE USUARIOS*/
                 CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
 
                 List<int> OIDsCategorias = new List<int>();
@@ -98,18 +100,24 @@ public static void InitializeData ()
                 OIDCategoria = categoriaUsuarioCEN.New_("Puto Amo");
                 OIDsCategorias.Add(OIDCategoria);
 
+                categoriaUsuarioCEN.Modify(OIDCategoria, "Putisimo Amo");
+
                 UsuarioCAD usuarioCAD = new UsuarioCAD();
                 usuarioCAD.AgregaCategorias(OIDAdministrador, OIDsCategorias);
 
                 OIDsCategorias.RemoveAt(2);
                 usuarioCAD.EliminaCategorias(OIDAdministrador, OIDsCategorias);
 
-                //System.Console.WriteLine(usuarioCEN.DameUsuariosPorCategoria(OIDCategoria));
-                /*
+                //usuarioCAD.DameUsuariosPorCategoria(OIDCategoria);
+
+                /*MENSAJES*/
                 MensajeCP mensajeCP = new MensajeCP ();
                 MensajeEN mensajeEN = new MensajeEN();
                 mensajeEN = mensajeCP.New_ ("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDAdministrador, null);
-                 */
+
+                /*NOTIFICACIONMENSAJE*/
+                NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN();
+                int OIDNoificacionMensaje = notificacionMensajeCEN.New_("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", mensajeEN.Id);
 
                 /*SERVICIOS*/
                 ServicioCEN servicioCEN = new ServicioCEN();
@@ -120,6 +128,9 @@ public static void InitializeData ()
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
                 int OIDProyecto = proyectoCEN.New_("APPANIC", "App que te ayuda en la vida", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.Propuesto, OIDUsuario, null);
                 //PORQUE PROYECTO NO REQUIERE ADMINISTRADOR??
+                ProyectoCP proyectoCP = new ProyectoCP();
+                proyectoCP.Modify(OIDProyecto, "APPPanic", "App que te ayuda en la vida", null);
+                proyectoCEN.CambiarEstado(OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo);
 
                 /*NOTIFICACION*/
                 NotificacionCEN notificacionCEN = new NotificacionCEN();
@@ -133,20 +144,24 @@ public static void InitializeData ()
                 NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
                 int OIDNotificacionUsuario = notificacionUsuarioCEN.New_(OIDUsuario, OIDNotificacion);
 
-
                 /*SOLICITUD*/
                 SolicitudCP solicitudCP = new SolicitudCP();
                 SolicitudEN solicitudEN = new SolicitudEN();
                 solicitudEN = solicitudCP.New_(OIDUsuario, OIDProyecto);
+                SolicitudCEN solicitudCEN = new SolicitudCEN();
+                solicitudCEN.Aceptar(solicitudEN.Id);
+                solicitudCEN.Rechazar(solicitudEN.Id);
 
                 /*NOTIFICACION SOLICITUD*/
                 NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN();
-                int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_("NotificacionProyecto1", "mensaje", solicitudEN.Id);
+                int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_("NotificacionSolicitud1", "mensaje", solicitudEN.Id);
 
                 /*EVENTOS*/
                 EventoCP eventoCP = new EventoCP();
                 EventoEN eventoEN = new EventoEN();              
                 eventoEN = eventoCP.New_("Evento1","El Mas guay",DateTime.Now,DateTime.Now, DateTime.Now, DateTime.Now, null);
+                EventoCEN eventoCEN = new EventoCEN();
+                eventoCP.Modify(eventoEN.Id, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
 
                 /*NOTIFICACION EVENTO*/
                 NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN();
@@ -155,23 +170,34 @@ public static void InitializeData ()
                 /*RECUERDO*/
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
                 int OIDRecuerdo = recuerdoCEN.New_("Recuerdo1", "esto es un recuerdo", eventoEN.Id, null);
+                recuerdoCEN.Modify(OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
 
                 /*CATEGORIA PROYECTO*/
 
                 CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
 
-                List<int> OIDsCategoriasProyecto = new List<int>();
+                List<int> categoriasProyecto = new List<int>();
                 int OIDCategoriaProyecto = categoriaProyectoCEN.New_("Salud");
-                OIDsCategoriasProyecto.Add(OIDCategoriaProyecto);
+                categoriasProyecto.Add(OIDCategoriaProyecto);
                 OIDCategoriaProyecto = categoriaProyectoCEN.New_("Tecnologico");
-                OIDsCategoriasProyecto.Add(OIDCategoriaProyecto);
+                categoriasProyecto.Add(OIDCategoriaProyecto);
                 OIDCategoriaProyecto = categoriaProyectoCEN.New_("Puto Amo2");
-                OIDsCategoriasProyecto.Add(OIDCategoriaProyecto);
-
+                categoriasProyecto.Add(OIDCategoriaProyecto);
 
                 ProyectoCAD proyectoCAD = new ProyectoCAD();
-                proyectoCAD.AgregaCategoriasProyecto(OIDProyecto, OIDsCategoriasProyecto);
-                    
+                proyectoCAD.AgregaCategoriasProyecto(OIDProyecto, categoriasProyecto);
+
+                categoriasProyecto.Remove(0);
+                proyectoCAD.EliminaCategoriasProyecto(OIDProyecto, categoriasProyecto);
+
+                //proyectoCAD.DameProyectosPorCategoria(categoriasProyecto);
+
+
+                if (false)
+                {
+                    administradorCEN.Destroy(OIDAdministrador);
+                }
+
 
 
                 System.Console.WriteLine ("Todo ha ido bien");

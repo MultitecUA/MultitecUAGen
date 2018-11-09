@@ -16,7 +16,6 @@ C:\Users\nedya\workspace\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\log4net
 C:\Users\nedya\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csproj.CopyComplete
 C:\Users\nedya\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.dll
 C:\Users\nedya\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.pdb
-C:\Users\nedya\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csprojAssemblyReference.cache
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\hibernate.cfg.xml
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\MultitecUAGenNHibernate.dll.config
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\MultitecUAGenNHibernate.dll

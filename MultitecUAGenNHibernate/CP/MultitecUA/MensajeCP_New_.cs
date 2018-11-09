@@ -75,11 +75,11 @@ public MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN New_ (string p_titulo, st
                 UsuarioEN autor = usuarioCEN.ReadOID (p_usuarioAutor);
                 UsuarioEN receptor = usuarioCEN.ReadOID (p_usuarioReceptor);
 
-                NotificacionMensajeCEN nMCEN = new NotificacionMensajeCEN ();
-                int oidNotificacion = nMCEN.New_ ("Tienes un mensaje nuevo", autor.Nombre + " te ha enviado un mensaje", oid);
+                //NotificacionMensajeCEN nMCEN = new NotificacionMensajeCEN ();
+                //int oidNotificacion = nMCEN.New_ ("Tienes un mensaje nuevo", autor.Nombre + " te ha enviado un mensaje", oid);
 
-                NotificacionUsuarioCEN nUCEN = new NotificacionUsuarioCEN ();
-                nUCEN.New_ (receptor.Id, oidNotificacion);
+                //NotificacionUsuarioCEN nUCEN = new NotificacionUsuarioCEN ();
+                //nUCEN.New_ (receptor.Id, oidNotificacion);
 
 
                 SessionCommit ();

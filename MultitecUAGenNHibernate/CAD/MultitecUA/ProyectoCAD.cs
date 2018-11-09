@@ -142,6 +142,14 @@ public int New_ (ProyectoEN proyecto)
                         .Add (proyecto);
                 }
 
+                if (proyecto.UsuariosModeradores != null)
+                {
+                    proyecto.UsuariosModeradores[0] = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load(typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), proyecto.UsuarioCreador.Id);
+
+                    proyecto.UsuariosModeradores[0].ProyectosModerados
+                    .Add(proyecto);
+                }
+
                 session.Save (proyecto);
                 SessionCommit ();
         }

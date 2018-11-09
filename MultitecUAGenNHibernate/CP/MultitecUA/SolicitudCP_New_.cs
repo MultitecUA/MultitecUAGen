@@ -58,6 +58,8 @@ public MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN New_ (int p_usuarioSoli
 
 
                 solicitudEN.Fecha = DateTime.Now;
+
+                solicitudEN.Estado = Enumerated.MultitecUA.EstadoSolicitudEnum.Pendiente;
                 //Call to SolicitudCAD
 
                 oid = solicitudCAD.New_ (solicitudEN);
