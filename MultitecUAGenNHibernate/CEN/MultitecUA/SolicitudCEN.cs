@@ -43,29 +43,13 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
 {
         return _ISolicitudCAD.DameSolicitudesPorEstado (p_OIDProyecto, p_estado);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameMisSolicitudes (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorUsuario (int p_OID)
 {
-        return _ISolicitudCAD.DameMisSolicitudes (p_OID);
+        return _ISolicitudCAD.DameSolicitudesPorUsuario (p_OID);
 }
-public SolicitudEN ReadOID (int id
-                            )
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicidudesPorUsuarioYProyecto (int p_proyecto, int p_usuario)
 {
-        SolicitudEN solicitudEN = null;
-
-        solicitudEN = _ISolicitudCAD.ReadOID (id);
-        return solicitudEN;
-}
-
-public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<SolicitudEN> list = null;
-
-        list = _ISolicitudCAD.ReadAll (first, size);
-        return list;
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameMisSolicidudesPorProyecto (int p_proyecto, int p_usuario)
-{
-        return _ISolicitudCAD.DameMisSolicidudesPorProyecto (p_proyecto, p_usuario);
+        return _ISolicitudCAD.DameSolicidudesPorUsuarioYProyecto (p_proyecto, p_usuario);
 }
 }
 }

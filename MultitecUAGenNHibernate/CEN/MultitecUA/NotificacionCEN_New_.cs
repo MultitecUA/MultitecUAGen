@@ -33,8 +33,6 @@ public int New_ (string p_titulo, string p_mensaje)
 
         notificacionEN.Mensaje = p_mensaje;
 
-        notificacionEN.Fecha = DateTime.Now;
-
         //Call to NotificacionCAD
 
         oid = _INotificacionCAD.New_ (notificacionEN);

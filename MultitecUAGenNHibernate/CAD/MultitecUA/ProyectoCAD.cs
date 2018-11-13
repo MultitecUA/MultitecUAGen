@@ -142,14 +142,6 @@ public int New_ (ProyectoEN proyecto)
                         .Add (proyecto);
                 }
 
-                if (proyecto.UsuariosModeradores != null)
-                {
-                    proyecto.UsuariosModeradores[0] = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load(typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), proyecto.UsuarioCreador.Id);
-
-                    proyecto.UsuariosModeradores[0].ProyectosModerados
-                    .Add(proyecto);
-                }
-
                 session.Save (proyecto);
                 SessionCommit ();
         }
@@ -733,66 +725,6 @@ public void EliminaParticipante (int p_Proyecto_OID, System.Collections.Generic.
                 SessionClose ();
         }
 }
-//Sin e: ReadOID
-//Con e: ProyectoEN
-public ProyectoEN ReadOID (int id
-                           )
-{
-        ProyectoEN proyectoEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                proyectoEN = (ProyectoEN)session.Get (typeof(ProyectoEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return proyectoEN;
-}
-
-public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<ProyectoEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(ProyectoEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<ProyectoEN>();
-                else
-                        result = session.CreateCriteria (typeof(ProyectoEN)).List<ProyectoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;

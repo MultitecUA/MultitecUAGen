@@ -57,13 +57,6 @@ void EliminaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Generic.I
 
 void EliminaParticipante (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs);
 
-ProyectoEN ReadOID (int id
-                    );
-
-
-System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size);
-
-
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado);
 }
 }

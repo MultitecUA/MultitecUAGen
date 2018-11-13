@@ -17,13 +17,6 @@ System.Collections.Generic.IList<NotificacionEventoEN> ReadAllDefault (int first
 
 int New_ (NotificacionEventoEN notificacionEvento);
 
-NotificacionEventoEN ReadOID (int id
-                              );
-
-
-System.Collections.Generic.IList<NotificacionEventoEN> ReadAll (int first, int size);
-
-
 void Destroy (int id
               );
 }

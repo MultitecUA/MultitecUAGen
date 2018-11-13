@@ -143,66 +143,6 @@ public int New_ (NotificacionEventoEN notificacionEvento)
         return notificacionEvento.Id;
 }
 
-//Sin e: ReadOID
-//Con e: NotificacionEventoEN
-public NotificacionEventoEN ReadOID (int id
-                                     )
-{
-        NotificacionEventoEN notificacionEventoEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                notificacionEventoEN = (NotificacionEventoEN)session.Get (typeof(NotificacionEventoEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionEventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return notificacionEventoEN;
-}
-
-public System.Collections.Generic.IList<NotificacionEventoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionEventoEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(NotificacionEventoEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionEventoEN>();
-                else
-                        result = session.CreateCriteria (typeof(NotificacionEventoEN)).List<NotificacionEventoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionEventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
 public void Destroy (int id
                      )
 {

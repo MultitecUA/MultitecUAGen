@@ -45,29 +45,13 @@ public void Destroy (int id
         _INotificacionUsuarioCAD.Destroy (id);
 }
 
-public NotificacionUsuarioEN ReadOID (int id
-                                      )
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesPorUsuario (int p_oid_usuario)
 {
-        NotificacionUsuarioEN notificacionUsuarioEN = null;
-
-        notificacionUsuarioEN = _INotificacionUsuarioCAD.ReadOID (id);
-        return notificacionUsuarioEN;
+        return _INotificacionUsuarioCAD.DameNotificacionesPorUsuario (p_oid_usuario);
 }
-
-public System.Collections.Generic.IList<NotificacionUsuarioEN> ReadAll (int first, int size)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesNoLeidasPorUsuario (int p_oid_usuario)
 {
-        System.Collections.Generic.IList<NotificacionUsuarioEN> list = null;
-
-        list = _INotificacionUsuarioCAD.ReadAll (first, size);
-        return list;
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameMisNotificaciones (int p_oid_usuario)
-{
-        return _INotificacionUsuarioCAD.DameMisNotificaciones (p_oid_usuario);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameMisNotificacionesNuevas (int p_oid_usuario)
-{
-        return _INotificacionUsuarioCAD.DameMisNotificacionesNuevas (p_oid_usuario);
+        return _INotificacionUsuarioCAD.DameNotificacionesNoLeidasPorUsuario (p_oid_usuario);
 }
 }
 }

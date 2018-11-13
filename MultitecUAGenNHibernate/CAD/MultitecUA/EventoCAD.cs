@@ -229,7 +229,7 @@ public void Destroy (int id
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAsociados (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorProyecto (int p_OID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
         try
@@ -237,7 +237,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
                 SessionInitializeTransaction ();
                 //String sql = @"FROM EventoEN self where select(en) FROM EventoEN en join en.ProyectosPresentados pro where pro.Id = :p_OID";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosAsociadosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosPorProyectoHQL");
                 query.SetParameter ("p_OID", p_OID);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
@@ -366,66 +366,6 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
                 SessionClose ();
         }
 }
-//Sin e: ReadOID
-//Con e: EventoEN
-public EventoEN ReadOID (int id
-                         )
-{
-        EventoEN eventoEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                eventoEN = (EventoEN)session.Get (typeof(EventoEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return eventoEN;
-}
-
-public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<EventoEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(EventoEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<EventoEN>();
-                else
-                        result = session.CreateCriteria (typeof(EventoEN)).List<EventoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPosterioresA (Nullable<DateTime> p_fecha)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;

@@ -17,13 +17,6 @@ System.Collections.Generic.IList<NotificacionMensajeEN> ReadAllDefault (int firs
 
 int New_ (NotificacionMensajeEN notificacionMensaje);
 
-NotificacionMensajeEN ReadOID (int id
-                               );
-
-
-System.Collections.Generic.IList<NotificacionMensajeEN> ReadAll (int first, int size);
-
-
 void Destroy (int id
               );
 }

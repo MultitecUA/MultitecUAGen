@@ -45,22 +45,6 @@ public void Destroy (int id
         _IServicioCAD.Destroy (id);
 }
 
-public ServicioEN ReadOID (int id
-                           )
-{
-        ServicioEN servicioEN = null;
-
-        servicioEN = _IServicioCAD.ReadOID (id);
-        return servicioEN;
-}
-
-public System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<ServicioEN> list = null;
-
-        list = _IServicioCAD.ReadAll (first, size);
-        return list;
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado)
 {
         return _IServicioCAD.DameServiciosPorEstado (p_estado);

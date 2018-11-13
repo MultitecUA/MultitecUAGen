@@ -179,67 +179,7 @@ public void Destroy (int id
         }
 }
 
-//Sin e: ReadOID
-//Con e: NotificacionUsuarioEN
-public NotificacionUsuarioEN ReadOID (int id
-                                      )
-{
-        NotificacionUsuarioEN notificacionUsuarioEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                notificacionUsuarioEN = (NotificacionUsuarioEN)session.Get (typeof(NotificacionUsuarioEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionUsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return notificacionUsuarioEN;
-}
-
-public System.Collections.Generic.IList<NotificacionUsuarioEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionUsuarioEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(NotificacionUsuarioEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionUsuarioEN>();
-                else
-                        result = session.CreateCriteria (typeof(NotificacionUsuarioEN)).List<NotificacionUsuarioEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionUsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameMisNotificaciones (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesPorUsuario (int p_oid_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> result;
         try
@@ -247,7 +187,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
                 SessionInitializeTransaction ();
                 //String sql = @"FROM NotificacionUsuarioEN self where select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("NotificacionUsuarioENdameMisNotificacionesHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("NotificacionUsuarioENdameNotificacionesPorUsuarioHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN>();
@@ -269,7 +209,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameMisNotificacionesNuevas (int p_oid_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesNoLeidasPorUsuario (int p_oid_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> result;
         try
@@ -277,7 +217,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
                 SessionInitializeTransaction ();
                 //String sql = @"FROM NotificacionUsuarioEN self where select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario and en.Estado = 2";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("NotificacionUsuarioENdameMisNotificacionesNuevasHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("NotificacionUsuarioENdameNotificacionesNoLeidasPorUsuarioHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN>();

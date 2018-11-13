@@ -35,3 +35,21 @@ C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.dll
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.pdb
 C:\Users\Yupipi93\Google Drive\1Temario 1 Multimedia UA\Tercero\1º Cuatrimestre\DSM\workspace\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csprojAssemblyReference.cache
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csproj.CoreCompileInputs.cache
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.pdb
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\hibernate.cfg.xml
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\MultitecUAGenNHibernate.dll.config
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\MultitecUAGenNHibernate.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\MultitecUAGenNHibernate.pdb
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\Castle.DynamicProxy2.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\jose-jwt.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\LinFu.DynamicProxy.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\Newtonsoft.Json.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\NHibernate.ByteCode.Castle.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\NHibernate.ByteCode.LinFu.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\NHibernate.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\Iesi.Collections.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\Antlr3.Runtime.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\bin\Debug\log4net.dll
+C:\Users\EPS\git\MultitecUAGen\MultitecUAGenNHibernate\obj\Debug\MultitecUAGenNHibernate.csproj.CopyComplete

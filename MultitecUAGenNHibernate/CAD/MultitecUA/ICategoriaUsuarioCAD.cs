@@ -22,12 +22,5 @@ void Modify (CategoriaUsuarioEN categoriaUsuario);
 
 void Destroy (int id
               );
-
-
-CategoriaUsuarioEN ReadOID (int id
-                            );
-
-
-System.Collections.Generic.IList<CategoriaUsuarioEN> ReadAll (int first, int size);
 }
 }

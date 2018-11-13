@@ -110,6 +110,13 @@ private System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.S
 
 
 
+/**
+ *	Atributo rol
+ */
+private MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum rol;
+
+
+
 
 
 
@@ -203,6 +210,12 @@ public virtual System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.Multi
 
 
 
+public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum Rol {
+        get { return rol; } set { rol = value;  }
+}
+
+
+
 
 
 public UsuarioEN()
@@ -219,20 +232,20 @@ public UsuarioEN()
 
 
 
-public UsuarioEN(int id, string nombre, String password, string foto, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosCreados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPertenecientes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosModerados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesEnviados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesRecibidos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> destinatariosNotificados, string email, Nullable<DateTime> fechaAlta, string nick, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasUsuarios, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudCreada
+public UsuarioEN(int id, string nombre, String password, string foto, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosCreados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPertenecientes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosModerados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesEnviados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesRecibidos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> destinatariosNotificados, string email, Nullable<DateTime> fechaAlta, string nick, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasUsuarios, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudCreada, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum rol
                  )
 {
-        this.init (Id, nombre, password, foto, proyectosCreados, proyectosPertenecientes, proyectosModerados, mensajesEnviados, mensajesRecibidos, destinatariosNotificados, email, fechaAlta, nick, categoriasUsuarios, solicitudCreada);
+        this.init (Id, nombre, password, foto, proyectosCreados, proyectosPertenecientes, proyectosModerados, mensajesEnviados, mensajesRecibidos, destinatariosNotificados, email, fechaAlta, nick, categoriasUsuarios, solicitudCreada, rol);
 }
 
 
 public UsuarioEN(UsuarioEN usuario)
 {
-        this.init (Id, usuario.Nombre, usuario.Password, usuario.Foto, usuario.ProyectosCreados, usuario.ProyectosPertenecientes, usuario.ProyectosModerados, usuario.MensajesEnviados, usuario.MensajesRecibidos, usuario.DestinatariosNotificados, usuario.Email, usuario.FechaAlta, usuario.Nick, usuario.CategoriasUsuarios, usuario.SolicitudCreada);
+        this.init (Id, usuario.Nombre, usuario.Password, usuario.Foto, usuario.ProyectosCreados, usuario.ProyectosPertenecientes, usuario.ProyectosModerados, usuario.MensajesEnviados, usuario.MensajesRecibidos, usuario.DestinatariosNotificados, usuario.Email, usuario.FechaAlta, usuario.Nick, usuario.CategoriasUsuarios, usuario.SolicitudCreada, usuario.Rol);
 }
 
 private void init (int id
-                   , string nombre, String password, string foto, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosCreados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPertenecientes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosModerados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesEnviados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesRecibidos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> destinatariosNotificados, string email, Nullable<DateTime> fechaAlta, string nick, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasUsuarios, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudCreada)
+                   , string nombre, String password, string foto, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosCreados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPertenecientes, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosModerados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesEnviados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> mensajesRecibidos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> destinatariosNotificados, string email, Nullable<DateTime> fechaAlta, string nick, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN> categoriasUsuarios, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> solicitudCreada, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum rol)
 {
         this.Id = id;
 
@@ -264,6 +277,8 @@ private void init (int id
         this.CategoriasUsuarios = categoriasUsuarios;
 
         this.SolicitudCreada = solicitudCreada;
+
+        this.Rol = rol;
 }
 
 public override bool Equals (object obj)

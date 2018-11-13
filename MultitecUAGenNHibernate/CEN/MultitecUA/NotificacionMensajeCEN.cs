@@ -39,22 +39,6 @@ public INotificacionMensajeCAD get_INotificacionMensajeCAD ()
         return this._INotificacionMensajeCAD;
 }
 
-public NotificacionMensajeEN ReadOID (int id
-                                      )
-{
-        NotificacionMensajeEN notificacionMensajeEN = null;
-
-        notificacionMensajeEN = _INotificacionMensajeCAD.ReadOID (id);
-        return notificacionMensajeEN;
-}
-
-public System.Collections.Generic.IList<NotificacionMensajeEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionMensajeEN> list = null;
-
-        list = _INotificacionMensajeCAD.ReadAll (first, size);
-        return list;
-}
 public void Destroy (int id
                      )
 {

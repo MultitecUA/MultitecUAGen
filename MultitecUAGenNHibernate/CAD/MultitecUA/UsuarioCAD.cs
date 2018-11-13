@@ -116,6 +116,9 @@ public void ModifyDefault (UsuarioEN usuario)
 
 
 
+
+                usuarioEN.Rol = usuario.Rol;
+
                 session.Update (usuarioEN);
                 SessionCommit ();
         }
@@ -392,66 +395,6 @@ public void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.ILi
                 SessionClose ();
         }
 }
-//Sin e: ReadOID
-//Con e: UsuarioEN
-public UsuarioEN ReadOID (int id
-                          )
-{
-        UsuarioEN usuarioEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                usuarioEN = (UsuarioEN)session.Get (typeof(UsuarioEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return usuarioEN;
-}
-
-public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<UsuarioEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(UsuarioEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<UsuarioEN>();
-                else
-                        result = session.CreateCriteria (typeof(UsuarioEN)).List<UsuarioEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;

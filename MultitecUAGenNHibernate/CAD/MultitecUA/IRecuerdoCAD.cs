@@ -25,12 +25,5 @@ void Destroy (int id
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdos (int p_OID);
-
-
-RecuerdoEN ReadOID (int id
-                    );
-
-
-System.Collections.Generic.IList<RecuerdoEN> ReadAll (int first, int size);
 }
 }

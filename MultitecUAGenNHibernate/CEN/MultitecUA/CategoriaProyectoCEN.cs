@@ -72,22 +72,5 @@ public void Destroy (int id
 {
         _ICategoriaProyectoCAD.Destroy (id);
 }
-
-public CategoriaProyectoEN ReadOID (int id
-                                    )
-{
-        CategoriaProyectoEN categoriaProyectoEN = null;
-
-        categoriaProyectoEN = _ICategoriaProyectoCAD.ReadOID (id);
-        return categoriaProyectoEN;
-}
-
-public System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<CategoriaProyectoEN> list = null;
-
-        list = _ICategoriaProyectoCAD.ReadAll (first, size);
-        return list;
-}
 }
 }

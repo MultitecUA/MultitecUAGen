@@ -33,8 +33,6 @@ public int New_ (string p_titulo, string p_mensaje, int p_solicitudGeneradora)
 
         notificacionSolicitudEN.Mensaje = p_mensaje;
 
-        notificacionSolicitudEN.Fecha = DateTime.Now;
-
 
         if (p_solicitudGeneradora != -1) {
                 notificacionSolicitudEN.SolicitudGeneradora = new MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN ();

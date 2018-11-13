@@ -30,6 +30,9 @@
 					<property name="Nick" type="string"> 
 						<column name="nick"  unique="true" not-null="true"/>
 					</property>
+					<property name="Rol" > 
+						<column name="rol"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -125,6 +128,8 @@
 					      	</key>
 							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN"/>
 					    </bag>
+					
+			
 					
 					
 					

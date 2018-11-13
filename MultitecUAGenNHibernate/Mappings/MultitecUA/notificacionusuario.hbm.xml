@@ -38,7 +38,7 @@
 		 </class>	
 		  
 		  <query name="NotificacionUsuarioENReadAllHQL">from NotificacionUsuarioEN</query>
-		  <query name="NotificacionUsuarioENdameMisNotificacionesHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario]]></query>
-		  <query name="NotificacionUsuarioENdameMisNotificacionesNuevasHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario and en.Estado = 2]]></query>
+		  <query name="NotificacionUsuarioENdameNotificacionesPorUsuarioHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario]]></query>
+		  <query name="NotificacionUsuarioENdameNotificacionesNoLeidasPorUsuarioHQL"><![CDATA[select (en) FROM NotificacionUsuarioEN en join en.UsuarioNotificado usu where usu.Id = :p_oid_usuario and en.Estado = 2]]></query>
 		</hibernate-mapping>
 	

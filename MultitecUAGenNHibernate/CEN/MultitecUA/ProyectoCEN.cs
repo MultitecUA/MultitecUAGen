@@ -79,22 +79,6 @@ public void EliminaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Ge
 
         _IProyectoCAD.EliminaCategoriasProyecto (p_Proyecto_OID, p_categoriasProyectos_OIDs);
 }
-public ProyectoEN ReadOID (int id
-                           )
-{
-        ProyectoEN proyectoEN = null;
-
-        proyectoEN = _IProyectoCAD.ReadOID (id);
-        return proyectoEN;
-}
-
-public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<ProyectoEN> list = null;
-
-        list = _IProyectoCAD.ReadAll (first, size);
-        return list;
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado)
 {
         return _IProyectoCAD.DameProyectosPorEstado (p_estado);

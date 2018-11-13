@@ -104,7 +104,7 @@
 		 </class>	
 		  
 		  <query name="EventoENReadAllHQL">from EventoEN</query>
-		  <query name="EventoENdameEventosAsociadosHQL"><![CDATA[select(en) FROM EventoEN en join en.ProyectosPresentados pro where pro.Id = :p_OID]]></query>
+		  <query name="EventoENdameEventosPorProyectoHQL"><![CDATA[select(en) FROM EventoEN en join en.ProyectosPresentados pro where pro.Id = :p_OID]]></query>
 		  <query name="EventoENdameEventosPorCategoriaHQL"><![CDATA[select (en) FROM EventoEN en join en.CategoriasEventos cat where cat.Id = :p_OID ]]></query>
 		  <query name="EventoENdameEventosPosterioresAHQL"><![CDATA[FROM EventoEN en where en.FechaFin > :p_fecha]]></query>
 		  <query name="EventoENdameEventosAnterioresAHQL"><![CDATA[FROM EventoEN en where en.FechaFin < :p_fecha]]></query>

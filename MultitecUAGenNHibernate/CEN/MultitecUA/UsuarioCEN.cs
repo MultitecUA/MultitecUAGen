@@ -80,22 +80,6 @@ public void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.ILi
 
         _IUsuarioCAD.EliminaCategorias (p_Usuario_OID, p_categoriasUsuarios_OIDs);
 }
-public UsuarioEN ReadOID (int id
-                          )
-{
-        UsuarioEN usuarioEN = null;
-
-        usuarioEN = _IUsuarioCAD.ReadOID (id);
-        return usuarioEN;
-}
-
-public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<UsuarioEN> list = null;
-
-        list = _IUsuarioCAD.ReadAll (first, size);
-        return list;
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria)
 {
         return _IUsuarioCAD.DameUsuariosPorCategoria (p_categoria);

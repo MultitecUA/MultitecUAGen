@@ -38,13 +38,6 @@ void AgregaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> 
 
 void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> p_categoriasUsuarios_OIDs);
 
-UsuarioEN ReadOID (int id
-                   );
-
-
-System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size);
-
-
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria);
 }
 }

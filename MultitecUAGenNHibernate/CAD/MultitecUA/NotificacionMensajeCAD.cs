@@ -118,7 +118,9 @@ public int New_ (NotificacionMensajeEN notificacionMensaje)
                 if (notificacionMensaje.MensajeGenerador != null) {
                         // Argumento OID y no colección.
                         notificacionMensaje.MensajeGenerador = (MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN), notificacionMensaje.MensajeGenerador.Id);
-                        notificacionMensaje.MensajeGenerador.NotificacionGenerada.Add (notificacionMensaje);
+
+                        notificacionMensaje.MensajeGenerador.NotificacionGenerada
+                        .Add (notificacionMensaje);
                 }
 
                 session.Save (notificacionMensaje);
@@ -139,66 +141,6 @@ public int New_ (NotificacionMensajeEN notificacionMensaje)
         }
 
         return notificacionMensaje.Id;
-}
-
-//Sin e: ReadOID
-//Con e: NotificacionMensajeEN
-public NotificacionMensajeEN ReadOID (int id
-                                      )
-{
-        NotificacionMensajeEN notificacionMensajeEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                notificacionMensajeEN = (NotificacionMensajeEN)session.Get (typeof(NotificacionMensajeEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionMensajeCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return notificacionMensajeEN;
-}
-
-public System.Collections.Generic.IList<NotificacionMensajeEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionMensajeEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(NotificacionMensajeEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionMensajeEN>();
-                else
-                        result = session.CreateCriteria (typeof(NotificacionMensajeEN)).List<NotificacionMensajeEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionMensajeCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
 }
 
 public void Destroy (int id

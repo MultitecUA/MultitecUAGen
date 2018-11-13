@@ -21,15 +21,16 @@ public partial class ProyectoCEN
 {
 public void CambiarEstado (int p_Proyecto_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum p_estado)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_cambiarEstado) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_cambiarEstado) ENABLED START*/
 
-            ProyectoCAD proyectoCAD = new ProyectoCAD();
-            ProyectoEN proyectoEN = proyectoCAD.ReadOIDDefault(p_Proyecto_OID);
-            proyectoEN.Estado = p_estado;
+        ProyectoCAD proyectoCAD = new ProyectoCAD ();
+        ProyectoEN proyectoEN = proyectoCAD.ReadOIDDefault (p_Proyecto_OID);
 
-            proyectoCAD.Modify(proyectoEN);
+        proyectoEN.Estado = p_estado;
 
-            /*PROTECTED REGION END*/
-        }
+        proyectoCAD.Modify (proyectoEN);
+
+        /*PROTECTED REGION END*/
+}
 }
 }

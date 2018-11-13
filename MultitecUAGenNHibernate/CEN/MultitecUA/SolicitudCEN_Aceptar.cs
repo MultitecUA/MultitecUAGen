@@ -21,13 +21,14 @@ public partial class SolicitudCEN
 {
 public void Aceptar (int p_oid)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Solicitud_aceptar) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Solicitud_aceptar) ENABLED START*/
 
-            SolicitudCAD solicitudCAD = new SolicitudCAD();
-            SolicitudEN solicitudEN = solicitudCAD.ReadOIDDefault(p_oid);
-            solicitudEN.Estado = Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada;
+        SolicitudCAD solicitudCAD = new SolicitudCAD ();
+        SolicitudEN solicitudEN = solicitudCAD.ReadOIDDefault (p_oid);
 
-            solicitudCAD.ModifyDefault(solicitudEN);
+        solicitudEN.Estado = Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada;
+
+        solicitudCAD.ModifyDefault (solicitudEN);
 
         /*PROTECTED REGION END*/
 }
