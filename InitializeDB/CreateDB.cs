@@ -22,7 +22,7 @@ public static void Create (string databaseArg, string userArg, string passArg)
         String pass = passArg;
 
         // Conex DB
-        SqlConnection cnn = new SqlConnection (@"Server=(local); database=master; integrated security=yes");
+        SqlConnection cnn = new SqlConnection (@"Server=(local)\sqlexpress; database=master; integrated security=yes");
 
         // Order T-SQL create user
         String createUser = @"IF NOT EXISTS(SELECT name FROM master.dbo.syslogins WHERE name = '" + user + @"')
@@ -110,10 +110,6 @@ public static void InitializeData ()
                 MensajeCEN mensajeCEN = new MensajeCEN ();
                 int OIDMensaje = mensajeCEN.New_ ("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDUsuario, null);
 
-                /*NOTIFICACIONMENSAJE*/
-                NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
-                int OIDNoificacionMensaje = notificacionMensajeCEN.New_ ("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", OIDMensaje);
-
                 /*SERVICIOS*/
                 ServicioCEN servicioCEN = new ServicioCEN ();
                 int OIDServicio = servicioCEN.New_ ("Hosting", "Servicio de alojamiento web", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
@@ -127,37 +123,42 @@ public static void InitializeData ()
                 proyectoCP.Modify (OIDProyecto, "APPPanic", "App que te ayuda en la vida", null);
                 proyectoCEN.CambiarEstado (OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo);
 
-                /*NOTIFICACION*/
-                NotificacionCEN notificacionCEN = new NotificacionCEN ();
-                int OIDNotificacion = notificacionCEN.New_ ("Notificacion1", "esto es una notificacion");
-
-                /*NOTIFICACION PROYECTO*/
-                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
-                int OIDNotificacionProyecto = notificacionProyectoCEN.New_ ("NotificacionProyecto1", "mensaje", OIDProyecto);
-
-                /*NOTIFICACION USUARIO*/
-                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
-                int OIDNotificacionUsuario = notificacionUsuarioCEN.New_ (OIDUsuario, OIDNotificacion);
-
                 /*SOLICITUD*/
                 SolicitudCEN solicitudCEN = new SolicitudCEN ();
                 int OIDSolicitud = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
+                Console.WriteLine (OIDSolicitud);
                 solicitudCEN.Aceptar (OIDSolicitud);
                 solicitudCEN.Rechazar (OIDSolicitud);
+
+                /*EVENTOS*/
+                EventoCEN eventoCEN = new EventoCEN ();
+                int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                EventoCP eventoCP = new EventoCP ();
+                eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+
+                /*NOTIFICACION*/
+                NotificacionCEN notificacionCEN = new NotificacionCEN ();
+                int OIDNotificacion = notificacionCEN.New_ ("Notificacion1", "esto es una notificacion");
 
                 /*NOTIFICACION SOLICITUD*/
                 NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN ();
                 int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_ ("NotificacionSolicitud1", "mensaje", OIDSolicitud);
 
-                /*EVENTOS*/
-                EventoCEN eventoCEN = new EventoCEN();
-                int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                EventoCP eventoCP = new EventoCP();
-                eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                /*NOTIFICACIONMENSAJE*/
+                NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
+                int OIDNoificacionMensaje = notificacionMensajeCEN.New_ ("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", OIDMensaje);
+
+                /*NOTIFICACION PROYECTO*/
+                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
+                int OIDNotificacionProyecto = notificacionProyectoCEN.New_ ("NotificacionProyecto1", "mensaje", OIDProyecto);
 
                 /*NOTIFICACION EVENTO*/
                 NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
                 int OIDNotificacionEvento = notificacionEventoCEN.New_ ("NotificacionEvento1", "mensaje loco de evento", OIDEvento);
+
+                /*NOTIFICACION USUARIO*/
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                int OIDNotificacionUsuario = notificacionUsuarioCEN.New_ (OIDUsuario, OIDNotificacion);
 
                 /*RECUERDO*/
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN ();
@@ -182,11 +183,8 @@ public static void InitializeData ()
                 categoriasProyecto.Remove (0);
                 proyectoCAD.EliminaCategoriasProyecto (OIDProyecto, categoriasProyecto);
 
-                //proyectoCAD.DameProyectosPorCategoria(categoriasProyecto);
 
-
-
-                System.Console.WriteLine ("Todo ha ido bien");
+                Console.WriteLine ("Todo ha ido bien");
 
                 // p.e. CustomerCEN customer = new CustomerCEN();
                 // customer.New_ (p_user:"user", p_password:"1234");

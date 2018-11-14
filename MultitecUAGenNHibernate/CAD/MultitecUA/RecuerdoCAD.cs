@@ -209,7 +209,7 @@ public void Destroy (int id
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdos (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdosPorProyecto (int p_OID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> result;
         try
@@ -217,7 +217,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Re
                 SessionInitializeTransaction ();
                 //String sql = @"FROM RecuerdoEN self where FROM RecuerdoEN en where en.EventoRecordado = :p_OID";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("RecuerdoENdameRecuerdosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("RecuerdoENdameRecuerdosPorProyectoHQL");
                 query.SetParameter ("p_OID", p_OID);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN>();

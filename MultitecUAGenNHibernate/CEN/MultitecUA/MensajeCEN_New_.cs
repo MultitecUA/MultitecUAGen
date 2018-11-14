@@ -21,7 +21,7 @@ public partial class MensajeCEN
 {
 public int New_ (string p_titulo, string p_cuerpo, int p_usuarioAutor, int p_usuarioReceptor, System.Collections.Generic.IList<string> p_archivosAdjuntos)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_new__customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_new__customized) ENABLED START*/
 
         MensajeEN mensajeEN = null;
 
@@ -46,6 +46,14 @@ public int New_ (string p_titulo, string p_cuerpo, int p_usuarioAutor, int p_usu
         }
 
         mensajeEN.ArchivosAdjuntos = p_archivosAdjuntos;
+
+        mensajeEN.Fecha = DateTime.Now;
+
+        mensajeEN.EstadoLecutra = Enumerated.MultitecUA.EstadoLecturaEnum.NoLeido;
+
+        mensajeEN.BandejaAutor = Enumerated.MultitecUA.BandejaMensajeEnum.Activo;
+
+        mensajeEN.BandejaReceptor = Enumerated.MultitecUA.BandejaMensajeEnum.Activo;
 
         //Call to MensajeCAD
 

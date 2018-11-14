@@ -177,9 +177,7 @@
 			<Compile Include="CP\MultitecUA\EventoCP_Destroy.cs" />
 			
 			
-			
-			
-			
+			<Compile Include="CEN\MultitecUA\EventoCEN_DameEventosFiltrados.cs" />
 			
 			
 			
@@ -219,10 +217,13 @@
 			
 			<Compile Include="CEN\MultitecUA\MensajeCEN_CambiarEstado.cs" />
 			
+			<Compile Include="CEN\MultitecUA\MensajeCEN_DameMensajesPorReceptorFiltrados.cs" />
 			
+			<Compile Include="CEN\MultitecUA\MensajeCEN_DameMensajesPorAutorFiltrados.cs" />
 			
+			<Compile Include="CEN\MultitecUA\MensajeCEN_CambiarBandejaReceptor.cs" />
 			
-			
+			<Compile Include="CEN\MultitecUA\MensajeCEN_CambiarBandejaAutor.cs" />
 			
 	<Compile Include="EN\MultitecUA\NotificacionEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionCEN.cs" />
@@ -274,14 +275,13 @@
 			<Compile Include="CEN\MultitecUA\SolicitudCEN_Rechazar.cs" />
 			
 			
+			
 	<Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
 	<Compile Include="CAD\MultitecUA\NotificacionProyectoCAD.cs" />
 	<Compile Include="CP\MultitecUA\NotificacionProyectoCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN_New_.cs" />
-			
-			
 			
 			
 	<Compile Include="EN\MultitecUA\NotificacionMensajeEN.cs" />
@@ -316,12 +316,14 @@
 			
 			
 			
+			<Compile Include="CEN\MultitecUA\NoticiaCEN_DameNUltimasNoticias.cs" />
 			
 	<Compile Include="Enumerated\MultitecUA\EstadoProyectoEnum.cs" />
 	<Compile Include="Enumerated\MultitecUA\EstadoLecturaEnum.cs" />
 	<Compile Include="Enumerated\MultitecUA\EstadoServicioEnum.cs" />
 	<Compile Include="Enumerated\MultitecUA\EstadoSolicitudEnum.cs" />
 	<Compile Include="Enumerated\MultitecUA\RolUsuarioEnum.cs" />
+	<Compile Include="Enumerated\MultitecUA\BandejaMensajeEnum.cs" />
 	
 	
 

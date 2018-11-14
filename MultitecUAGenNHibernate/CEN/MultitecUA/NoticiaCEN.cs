@@ -81,10 +81,5 @@ public void Destroy (int id
 {
         _INoticiaCAD.Destroy (id);
 }
-
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN> DameNUltimasNoticias (int ? p_n)
-{
-        return _INoticiaCAD.DameNUltimasNoticias (p_n);
-}
 }
 }

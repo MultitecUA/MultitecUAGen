@@ -17,13 +17,6 @@ System.Collections.Generic.IList<NotificacionProyectoEN> ReadAllDefault (int fir
 
 int New_ (NotificacionProyectoEN notificacionProyecto);
 
-NotificacionProyectoEN ReadOID (int id
-                                );
-
-
-System.Collections.Generic.IList<NotificacionProyectoEN> ReadAll (int first, int size);
-
-
 void Destroy (int id
               );
 }

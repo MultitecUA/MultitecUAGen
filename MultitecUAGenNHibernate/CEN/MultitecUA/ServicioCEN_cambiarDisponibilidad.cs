@@ -19,13 +19,19 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class ServicioCEN
 {
-public void CambiarDisponibilidad (int p_oid, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum p_estadoServicio)
+public void CambiarDisponibilidad (int p_Servicio_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum p_estado)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Servicio_cambiarDisponibilidad) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Servicio_cambiarDisponibilidad_customized) START*/
 
-        // Write here your custom code...
+        ServicioEN servicioEN = null;
 
-        throw new NotImplementedException ("Method CambiarDisponibilidad() not yet implemented.");
+        //Initialized ServicioEN
+        servicioEN = new ServicioEN ();
+        servicioEN.Id = p_Servicio_OID;
+        servicioEN.Estado = p_estado;
+        //Call to ServicioCAD
+
+        _IServicioCAD.CambiarDisponibilidad (servicioEN);
 
         /*PROTECTED REGION END*/
 }

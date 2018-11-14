@@ -39,22 +39,6 @@ public INotificacionProyectoCAD get_INotificacionProyectoCAD ()
         return this._INotificacionProyectoCAD;
 }
 
-public NotificacionProyectoEN ReadOID (int id
-                                       )
-{
-        NotificacionProyectoEN notificacionProyectoEN = null;
-
-        notificacionProyectoEN = _INotificacionProyectoCAD.ReadOID (id);
-        return notificacionProyectoEN;
-}
-
-public System.Collections.Generic.IList<NotificacionProyectoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionProyectoEN> list = null;
-
-        list = _INotificacionProyectoCAD.ReadAll (first, size);
-        return list;
-}
 public void Destroy (int id
                      )
 {

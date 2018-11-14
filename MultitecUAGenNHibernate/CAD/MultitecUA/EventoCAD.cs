@@ -259,16 +259,18 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorCategoria (System.Collections.Generic.IList<int> p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosFiltrados (int p_categoria, Nullable<DateTime> p_fecha_anterior, Nullable<DateTime> p_fecha_posterior)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en join en.CategoriasEventos cat where cat.Id = :p_OID ";
+                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosPorCategoriaHQL");
-                query.SetParameter ("p_OID", p_OID);
+                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosFiltradosHQL");
+                query.SetParameter ("p_categoria", p_categoria);
+                query.SetParameter ("p_fecha_anterior", p_fecha_anterior);
+                query.SetParameter ("p_fecha_posterior", p_fecha_posterior);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
                 SessionCommit ();
@@ -365,96 +367,6 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
         {
                 SessionClose ();
         }
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPosterioresA (Nullable<DateTime> p_fecha)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM EventoEN self where FROM EventoEN en where en.FechaFin > :p_fecha";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosPosterioresAHQL");
-                query.SetParameter ("p_fecha", p_fecha);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAnterioresA (Nullable<DateTime> p_fecha)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM EventoEN self where FROM EventoEN en where en.FechaFin < :p_fecha";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosAnterioresAHQL");
-                query.SetParameter ("p_fecha", p_fecha);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAbiertos (Nullable<DateTime> p_fecha)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM EventoEN self where FROM EventoEN en where en.FechaInicioInscripcion < :p_fecha and en.FechaTopeInscripcion > :p_fecha";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosAbiertosHQL");
-                query.SetParameter ("p_fecha", p_fecha);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
 }
 }
 }

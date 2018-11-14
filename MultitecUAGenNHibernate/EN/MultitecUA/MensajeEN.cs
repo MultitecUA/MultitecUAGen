@@ -48,9 +48,9 @@ private System.Collections.Generic.IList<string> archivosAdjuntos;
 
 
 /**
- *	Atributo estado
+ *	Atributo estadoLecutra
  */
-private MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estado;
+private MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estadoLecutra;
 
 
 
@@ -65,6 +65,20 @@ private Nullable<DateTime> fecha;
  *	Atributo notificacionGenerada
  */
 private System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN> notificacionGenerada;
+
+
+
+/**
+ *	Atributo bandejaAutor
+ */
+private MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaAutor;
+
+
+
+/**
+ *	Atributo bandejaReceptor
+ */
+private MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaReceptor;
 
 
 
@@ -107,8 +121,8 @@ public virtual System.Collections.Generic.IList<string> ArchivosAdjuntos {
 
 
 
-public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum Estado {
-        get { return estado; } set { estado = value;  }
+public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum EstadoLecutra {
+        get { return estadoLecutra; } set { estadoLecutra = value;  }
 }
 
 
@@ -125,6 +139,18 @@ public virtual System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.Multi
 
 
 
+public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum BandejaAutor {
+        get { return bandejaAutor; } set { bandejaAutor = value;  }
+}
+
+
+
+public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum BandejaReceptor {
+        get { return bandejaReceptor; } set { bandejaReceptor = value;  }
+}
+
+
+
 
 
 public MensajeEN()
@@ -134,20 +160,20 @@ public MensajeEN()
 
 
 
-public MensajeEN(int id, string titulo, string cuerpo, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioAutor, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioReceptor, System.Collections.Generic.IList<string> archivosAdjuntos, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estado, Nullable<DateTime> fecha, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN> notificacionGenerada
+public MensajeEN(int id, string titulo, string cuerpo, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioAutor, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioReceptor, System.Collections.Generic.IList<string> archivosAdjuntos, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estadoLecutra, Nullable<DateTime> fecha, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN> notificacionGenerada, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaAutor, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaReceptor
                  )
 {
-        this.init (Id, titulo, cuerpo, usuarioAutor, usuarioReceptor, archivosAdjuntos, estado, fecha, notificacionGenerada);
+        this.init (Id, titulo, cuerpo, usuarioAutor, usuarioReceptor, archivosAdjuntos, estadoLecutra, fecha, notificacionGenerada, bandejaAutor, bandejaReceptor);
 }
 
 
 public MensajeEN(MensajeEN mensaje)
 {
-        this.init (Id, mensaje.Titulo, mensaje.Cuerpo, mensaje.UsuarioAutor, mensaje.UsuarioReceptor, mensaje.ArchivosAdjuntos, mensaje.Estado, mensaje.Fecha, mensaje.NotificacionGenerada);
+        this.init (Id, mensaje.Titulo, mensaje.Cuerpo, mensaje.UsuarioAutor, mensaje.UsuarioReceptor, mensaje.ArchivosAdjuntos, mensaje.EstadoLecutra, mensaje.Fecha, mensaje.NotificacionGenerada, mensaje.BandejaAutor, mensaje.BandejaReceptor);
 }
 
 private void init (int id
-                   , string titulo, string cuerpo, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioAutor, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioReceptor, System.Collections.Generic.IList<string> archivosAdjuntos, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estado, Nullable<DateTime> fecha, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN> notificacionGenerada)
+                   , string titulo, string cuerpo, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioAutor, MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuarioReceptor, System.Collections.Generic.IList<string> archivosAdjuntos, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum estadoLecutra, Nullable<DateTime> fecha, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN> notificacionGenerada, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaAutor, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum bandejaReceptor)
 {
         this.Id = id;
 
@@ -162,11 +188,15 @@ private void init (int id
 
         this.ArchivosAdjuntos = archivosAdjuntos;
 
-        this.Estado = estado;
+        this.EstadoLecutra = estadoLecutra;
 
         this.Fecha = fecha;
 
         this.NotificacionGenerada = notificacionGenerada;
+
+        this.BandejaAutor = bandejaAutor;
+
+        this.BandejaReceptor = bandejaReceptor;
 }
 
 public override bool Equals (object obj)

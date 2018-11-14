@@ -207,6 +207,32 @@ public void Destroy (int id
         }
 }
 
+public void CambiarDisponibilidad (ServicioEN servicio)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                ServicioEN servicioEN = (ServicioEN)session.Load (typeof(ServicioEN), servicio.Id);
+
+                servicioEN.Estado = servicio.Estado;
+
+                session.Update (servicioEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ServicioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> result;

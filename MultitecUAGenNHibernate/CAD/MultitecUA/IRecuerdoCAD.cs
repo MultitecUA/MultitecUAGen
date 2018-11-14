@@ -24,6 +24,6 @@ void Destroy (int id
               );
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdos (int p_OID);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdosPorProyecto (int p_OID);
 }
 }

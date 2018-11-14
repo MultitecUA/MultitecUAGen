@@ -39,17 +39,17 @@ public IProyectoCAD get_IProyectoCAD ()
         return this._IProyectoCAD;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPertenecientes (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioPertenece (int p_OID)
 {
-        return _IProyectoCAD.DameProyectosPertenecientes (p_OID);
+        return _IProyectoCAD.DameProyectosUsuarioPertenece (p_OID);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosSolicitantes (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioEsCandidato (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
 {
-        return _IProyectoCAD.DameProyectosSolicitantes (p_OIDCategorias, p_OIDUsuario);
+        return _IProyectoCAD.DameProyectosUsuarioEsCandidato (p_OIDCategorias, p_OIDUsuario);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPresentados (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEvento (int p_OID)
 {
-        return _IProyectoCAD.DameProyectosPresentados (p_OID);
+        return _IProyectoCAD.DameProyectosPorEvento (p_OID);
 }
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (System.Collections.Generic.IList<int> p_OID_Categoria)
 {

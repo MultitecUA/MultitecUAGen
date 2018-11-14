@@ -213,7 +213,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM NoticiaEN self where top :p_n FROM NoticiaEN en order by en.Fecha";
+                //String sql = @"FROM NoticiaEN self where FROM NoticiaEN en order by en.Fecha";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("NoticiaENdameNUltimasNoticiasHQL");
                 query.SetParameter ("p_n", p_n);

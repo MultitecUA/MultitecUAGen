@@ -25,7 +25,7 @@ void Destroy (int id
 
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatos (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatosAProyecto (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto);
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameModeradoresProyecto (int p_ID);
@@ -39,5 +39,8 @@ void AgregaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> 
 void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> p_categoriasUsuarios_OIDs);
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria);
+
+
+void CambiarRol (UsuarioEN usuario);
 }
 }

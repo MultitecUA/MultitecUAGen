@@ -23,11 +23,17 @@
 						</key>
 						<element column="ArchivosAdjuntos" type="string"/> 
     				</bag>
-					<property name="Estado" > 
-						<column name="estado"  not-null="true"/>
+					<property name="EstadoLecutra" > 
+						<column name="estadoLecutra"  not-null="true"/>
 					</property>
 					<property name="Fecha" type="timestamp"> 
 						<column name="fecha"  not-null="true"/>
+					</property>
+					<property name="BandejaAutor" > 
+						<column name="bandejaAutor"  not-null="true"/>
+					</property>
+					<property name="BandejaReceptor" > 
+						<column name="bandejaReceptor"  not-null="true"/>
 					</property>
 			
 			
@@ -59,6 +65,10 @@
 							<one-to-many class="MultitecUAGenNHibernate.EN.MultitecUA.NotificacionMensajeEN"/>
 					    </bag>
 					
+			
+			
+					
+					
 					
 					
 					
@@ -74,10 +84,7 @@
 		  <query name="MensajeENReadAllHQL">from MensajeEN</query>
 		  <query name="MensajeENdameMensajesPorReceptorHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
 		  <query name="MensajeENdameMensajesPorAutorHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
-		  <query name="MensajeENdameMensajesPorReceptorNoLeidosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Estado = 2]]></query>
-		  <query name="MensajeENdameMensajesPorAutorPosterioresAHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario and en.Fecha > :p_fecha]]></query>
-		  <query name="MensajeENdameMensajesPorAutorAnterioresAHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario and en.Fecha < :p_fecha]]></query>
-		  <query name="MensajeENdameMensajesPorReceptorPosterioresAHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Fecha > :p_fecha]]></query>
-		  <query name="MensajeENdameMensajesPorReceptorAnterioresAHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.Fecha < :p_fecha]]></query>
+		  <query name="MensajeENdameMensajesPorReceptorFiltradosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMensajesPorAutorFiltradosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
 		</hibernate-mapping>
 	

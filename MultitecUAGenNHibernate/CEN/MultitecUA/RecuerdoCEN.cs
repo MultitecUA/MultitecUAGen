@@ -45,9 +45,9 @@ public void Destroy (int id
         _IRecuerdoCAD.Destroy (id);
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdos (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> DameRecuerdosPorProyecto (int p_OID)
 {
-        return _IRecuerdoCAD.DameRecuerdos (p_OID);
+        return _IRecuerdoCAD.DameRecuerdosPorProyecto (p_OID);
 }
 }
 }

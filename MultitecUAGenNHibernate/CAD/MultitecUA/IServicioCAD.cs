@@ -24,6 +24,8 @@ void Destroy (int id
               );
 
 
+void CambiarDisponibilidad (ServicioEN servicio);
+
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado);
 }

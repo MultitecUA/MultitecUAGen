@@ -142,6 +142,9 @@ public int New_ (ProyectoEN proyecto)
                         .Add (proyecto);
                 }
 
+                //proyecto.UsuariosModeradores[0].ProyectosModerados.Add(proyecto);
+                //proyecto.UsuariosParticipantes[0].ProyectosPertenecientes.Add(proyecto);
+
                 session.Save (proyecto);
                 SessionCommit ();
         }
@@ -297,7 +300,7 @@ public void AgregaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<i
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPertenecientes (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioPertenece (int p_OID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
         try
@@ -305,7 +308,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 SessionInitializeTransaction ();
                 //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en join en.UsuariosParticipantes usu where usu.Id = :p_OID";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPertenecientesHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosUsuarioPerteneceHQL");
                 query.SetParameter ("p_OID", p_OID);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
@@ -327,7 +330,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosSolicitantes (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioEsCandidato (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
         try
@@ -335,7 +338,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 SessionInitializeTransaction ();
                 //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en join en.CategoriasBuscadas pro where  pro.Id  = :p_OIDCategorias and en.UsuariosParticipantes != :p_OIDUsuario";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosSolicitantesHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosUsuarioEsCandidatoHQL");
                 query.SetParameter ("p_OIDCategorias", p_OIDCategorias);
                 query.SetParameter ("p_OIDUsuario", p_OIDUsuario);
 
@@ -358,7 +361,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPresentados (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEvento (int p_OID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
         try
@@ -366,7 +369,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 SessionInitializeTransaction ();
                 //String sql = @"FROM ProyectoEN self where select(en) FROM ProyectoEN en join en.EventosAsociados eve where eve.Id = :p_OID";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPresentadosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPorEventoHQL");
                 query.SetParameter ("p_OID", p_OID);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();

@@ -39,17 +39,21 @@ public ISolicitudCAD get_ISolicitudCAD ()
         return this._ISolicitudCAD;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorEstado (int p_OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum ? p_estado)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorProyectoYEstado (int p_OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum ? p_estado)
 {
-        return _ISolicitudCAD.DameSolicitudesPorEstado (p_OIDProyecto, p_estado);
+        return _ISolicitudCAD.DameSolicitudesPorProyectoYEstado (p_OIDProyecto, p_estado);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorUsuario (int p_OID)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPorUsuarioYEstado (int p_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum ? p_estado)
 {
-        return _ISolicitudCAD.DameSolicitudesPorUsuario (p_OID);
+        return _ISolicitudCAD.DameSolicitudesPorUsuarioYEstado (p_OID, p_estado);
 }
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicidudesPorUsuarioYProyecto (int p_proyecto, int p_usuario)
 {
         return _ISolicitudCAD.DameSolicidudesPorUsuarioYProyecto (p_proyecto, p_usuario);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDe (int p_proyecto, int p_usuario)
+{
+        return _ISolicitudCAD.DameSolicitudesPendientesPorProyectoDe (p_proyecto, p_usuario);
 }
 }
 }

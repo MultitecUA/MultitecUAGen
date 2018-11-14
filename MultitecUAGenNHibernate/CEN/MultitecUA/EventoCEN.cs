@@ -43,10 +43,6 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
 {
         return _IEventoCAD.DameEventosPorProyecto (p_OID);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorCategoria (System.Collections.Generic.IList<int> p_OID)
-{
-        return _IEventoCAD.DameEventosPorCategoria (p_OID);
-}
 public void AgregaCategorias (int p_Evento_OID, System.Collections.Generic.IList<int> p_categoriasEventos_OIDs)
 {
         //Call to EventoCAD
@@ -58,18 +54,6 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
         //Call to EventoCAD
 
         _IEventoCAD.EliminaCategorias (p_Evento_OID, p_categoriasEventos_OIDs);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPosterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IEventoCAD.DameEventosPosterioresA (p_fecha);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAnterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IEventoCAD.DameEventosAnterioresA (p_fecha);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosAbiertos (Nullable<DateTime> p_fecha)
-{
-        return _IEventoCAD.DameEventosAbiertos (p_fecha);
 }
 }
 }

@@ -19,13 +19,19 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class UsuarioCEN
 {
-public void CambiarRol (int p_oid, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum p_rol)
+public void CambiarRol (int p_Usuario_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum p_rol)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Usuario_cambiarRol) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Usuario_cambiarRol_customized) START*/
 
-        // Write here your custom code...
+        UsuarioEN usuarioEN = null;
 
-        throw new NotImplementedException ("Method CambiarRol() not yet implemented.");
+        //Initialized UsuarioEN
+        usuarioEN = new UsuarioEN ();
+        usuarioEN.Id = p_Usuario_OID;
+        usuarioEN.Rol = p_rol;
+        //Call to UsuarioCAD
+
+        _IUsuarioCAD.CambiarRol (usuarioEN);
 
         /*PROTECTED REGION END*/
 }

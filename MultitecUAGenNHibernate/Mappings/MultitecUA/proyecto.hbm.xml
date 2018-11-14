@@ -132,9 +132,9 @@
 		 </class>	
 		  
 		  <query name="ProyectoENReadAllHQL">from ProyectoEN</query>
-		  <query name="ProyectoENdameProyectosPertenecientesHQL"><![CDATA[select (en) FROM ProyectoEN en join en.UsuariosParticipantes usu where usu.Id = :p_OID]]></query>
-		  <query name="ProyectoENdameProyectosSolicitantesHQL"><![CDATA[select (en) FROM ProyectoEN en join en.CategoriasBuscadas pro where  pro.Id  = :p_OIDCategorias and en.UsuariosParticipantes != :p_OIDUsuario]]></query>
-		  <query name="ProyectoENdameProyectosPresentadosHQL"><![CDATA[select(en) FROM ProyectoEN en join en.EventosAsociados eve where eve.Id = :p_OID]]></query>
+		  <query name="ProyectoENdameProyectosUsuarioPerteneceHQL"><![CDATA[select (en) FROM ProyectoEN en join en.UsuariosParticipantes usu where usu.Id = :p_OID]]></query>
+		  <query name="ProyectoENdameProyectosUsuarioEsCandidatoHQL"><![CDATA[select (en) FROM ProyectoEN en join en.CategoriasBuscadas pro where  pro.Id  = :p_OIDCategorias and en.UsuariosParticipantes != :p_OIDUsuario]]></query>
+		  <query name="ProyectoENdameProyectosPorEventoHQL"><![CDATA[select(en) FROM ProyectoEN en join en.EventosAsociados eve where eve.Id = :p_OID]]></query>
 		  <query name="ProyectoENdameProyectosPorCategoriaHQL"><![CDATA[select (en) FROM ProyectoEN en join en.CategoriasProyectos cat where cat.Id = :p_OID_Categoria]]></query>
 		  <query name="ProyectoENdameProyectosPorEstadoHQL"><![CDATA[FROM ProyectoEN en where en.Estado = :p_estado]]></query>
 		</hibernate-mapping>

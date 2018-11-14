@@ -56,9 +56,9 @@ public string Login (int p_Usuario_OID, string p_pass)
         return result;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatos (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatosAProyecto (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto)
 {
-        return _IUsuarioCAD.DameUsuariosCandidatos (p_OIDCategoria, p_OIDProyecto);
+        return _IUsuarioCAD.DameUsuariosCandidatosAProyecto (p_OIDCategoria, p_OIDProyecto);
 }
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameModeradoresProyecto (int p_ID)
 {

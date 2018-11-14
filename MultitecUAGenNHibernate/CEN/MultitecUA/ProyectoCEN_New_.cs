@@ -21,7 +21,7 @@ public partial class ProyectoCEN
 {
 public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum p_estado, int p_usuarioCreador, System.Collections.Generic.IList<string> p_fotos)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_new__customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_new__customized) ENABLED START*/
 
         ProyectoEN proyectoEN = null;
 
@@ -39,6 +39,11 @@ public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.
         if (p_usuarioCreador != -1) {
                 proyectoEN.UsuarioCreador = new MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ();
                 proyectoEN.UsuarioCreador.Id = p_usuarioCreador;
+
+                UsuarioEN usuarioEN = new UsuarioEN();
+                usuarioEN.Id = p_usuarioCreador;
+                proyectoEN.UsuariosModeradores.Add(usuarioEN);
+                proyectoEN.UsuariosParticipantes.Add(usuarioEN);
         }
 
         proyectoEN.Fotos = p_fotos;

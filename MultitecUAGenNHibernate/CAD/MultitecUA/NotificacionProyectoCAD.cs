@@ -143,66 +143,6 @@ public int New_ (NotificacionProyectoEN notificacionProyecto)
         return notificacionProyecto.Id;
 }
 
-//Sin e: ReadOID
-//Con e: NotificacionProyectoEN
-public NotificacionProyectoEN ReadOID (int id
-                                       )
-{
-        NotificacionProyectoEN notificacionProyectoEN = null;
-
-        try
-        {
-                SessionInitializeTransaction ();
-                notificacionProyectoEN = (NotificacionProyectoEN)session.Get (typeof(NotificacionProyectoEN), id);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionProyectoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return notificacionProyectoEN;
-}
-
-public System.Collections.Generic.IList<NotificacionProyectoEN> ReadAll (int first, int size)
-{
-        System.Collections.Generic.IList<NotificacionProyectoEN> result = null;
-        try
-        {
-                SessionInitializeTransaction ();
-                if (size > 0)
-                        result = session.CreateCriteria (typeof(NotificacionProyectoEN)).
-                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionProyectoEN>();
-                else
-                        result = session.CreateCriteria (typeof(NotificacionProyectoEN)).List<NotificacionProyectoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionProyectoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
-
 public void Destroy (int id
                      )
 {

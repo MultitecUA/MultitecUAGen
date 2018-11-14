@@ -227,7 +227,7 @@ public void Destroy (int id
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatos (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatosAProyecto (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;
         try
@@ -235,7 +235,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
                 SessionInitializeTransaction ();
                 //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro join en.CategoriasUsuarios cat where cat.Id = :p_OIDCategoria and pro.Id != :p_OIDProyecto";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosCandidatosHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosCandidatosAProyectoHQL");
                 query.SetParameter ("p_OIDCategoria", p_OIDCategoria);
                 query.SetParameter ("p_OIDProyecto", p_OIDProyecto);
 
@@ -424,6 +424,32 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
         }
 
         return result;
+}
+public void CambiarRol (UsuarioEN usuario)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                UsuarioEN usuarioEN = (UsuarioEN)session.Load (typeof(UsuarioEN), usuario.Id);
+
+                usuarioEN.Rol = usuario.Rol;
+
+                session.Update (usuarioEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
 }
 }
 }

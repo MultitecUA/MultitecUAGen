@@ -53,25 +53,5 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
 {
         return _IMensajeCAD.DameMensajesPorAutor (p_oid_usuario);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorNoLeidos (int p_oid_usuario)
-{
-        return _IMensajeCAD.DameMensajesPorReceptorNoLeidos (p_oid_usuario);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorAutorPosterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IMensajeCAD.DameMensajesPorAutorPosterioresA (p_fecha);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorAutorAnterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IMensajeCAD.DameMensajesPorAutorAnterioresA (p_fecha);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorPosterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IMensajeCAD.DameMensajesPorReceptorPosterioresA (p_fecha);
-}
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorAnterioresA (Nullable<DateTime> p_fecha)
-{
-        return _IMensajeCAD.DameMensajesPorReceptorAnterioresA (p_fecha);
-}
 }
 }

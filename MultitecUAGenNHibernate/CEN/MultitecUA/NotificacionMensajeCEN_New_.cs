@@ -21,7 +21,7 @@ public partial class NotificacionMensajeCEN
 {
 public int New_ (string p_titulo, string p_mensaje, int p_mensajeGenerador)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionMensaje_new__customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionMensaje_new__customized) ENABLED START*/
 
         NotificacionMensajeEN notificacionMensajeEN = null;
 
@@ -38,6 +38,8 @@ public int New_ (string p_titulo, string p_mensaje, int p_mensajeGenerador)
                 notificacionMensajeEN.MensajeGenerador = new MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN ();
                 notificacionMensajeEN.MensajeGenerador.Id = p_mensajeGenerador;
         }
+
+        notificacionMensajeEN.Fecha = DateTime.Now;
 
         //Call to NotificacionMensajeCAD
 

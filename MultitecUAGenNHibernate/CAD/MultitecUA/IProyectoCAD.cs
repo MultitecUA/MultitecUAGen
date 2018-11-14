@@ -29,13 +29,13 @@ void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IList<int
 
 void AgregaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs);
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPertenecientes (int p_OID);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioPertenece (int p_OID);
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosSolicitantes (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioEsCandidato (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario);
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPresentados (int p_OID);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEvento (int p_OID);
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (System.Collections.Generic.IList<int> p_OID_Categoria);

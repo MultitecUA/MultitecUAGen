@@ -21,7 +21,7 @@ public partial class NotificacionUsuarioCEN
 {
 public int New_ (int p_usuarioNotificado, int p_notificacionGenerada)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_new__customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_new__customized) ENABLED START*/
 
         NotificacionUsuarioEN notificacionUsuarioEN = null;
 
@@ -40,6 +40,8 @@ public int New_ (int p_usuarioNotificado, int p_notificacionGenerada)
                 notificacionUsuarioEN.NotificacionGenerada = new MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEN ();
                 notificacionUsuarioEN.NotificacionGenerada.Id = p_notificacionGenerada;
         }
+
+        notificacionUsuarioEN.Estado = Enumerated.MultitecUA.EstadoLecturaEnum.NoLeido;
 
         //Call to NotificacionUsuarioCAD
 

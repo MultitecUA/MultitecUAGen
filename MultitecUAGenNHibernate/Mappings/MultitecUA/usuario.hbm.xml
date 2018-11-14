@@ -150,7 +150,7 @@
 		 </class>	
 		  
 		  <query name="UsuarioENReadAllHQL">from UsuarioEN</query>
-		  <query name="UsuarioENdameUsuariosCandidatosHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro join en.CategoriasUsuarios cat where cat.Id = :p_OIDCategoria and pro.Id != :p_OIDProyecto]]></query>
+		  <query name="UsuarioENdameUsuariosCandidatosAProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro join en.CategoriasUsuarios cat where cat.Id = :p_OIDCategoria and pro.Id != :p_OIDProyecto]]></query>
 		  <query name="UsuarioENdameModeradoresProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosModerados pro where pro.Id = :p_ID]]></query>
 		  <query name="UsuarioENdameParticipantesProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro where pro.Id = :p_ID]]></query>
 		  <query name="UsuarioENdameUsuariosPorCategoriaHQL"><![CDATA[FROM UsuarioEN en join en.CategoriasUsuarios cat where cat = :p_categoria]]></query>

@@ -11,7 +11,7 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.CAD.MultitecUA;
 
 
-/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_cambiarEstado) ENABLED START*/
+/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_cambiarBandejaAutor) ENABLED START*/
 //  references to other libraries
 /*PROTECTED REGION END*/
 
@@ -19,19 +19,19 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class MensajeCEN
 {
-public void CambiarEstado (int p_Mensaje_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum p_estadoLecutra)
+public void CambiarBandejaAutor (int p_Mensaje_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum p_bandejaAutor)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_cambiarEstado_customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_cambiarBandejaAutor_customized) START*/
 
         MensajeEN mensajeEN = null;
 
         //Initialized MensajeEN
         mensajeEN = new MensajeEN ();
         mensajeEN.Id = p_Mensaje_OID;
-        mensajeEN.EstadoLecutra = p_estadoLecutra;
+        mensajeEN.BandejaAutor = p_bandejaAutor;
         //Call to MensajeCAD
 
-        _IMensajeCAD.CambiarEstado (mensajeEN);
+        _IMensajeCAD.CambiarBandejaAutor (mensajeEN);
 
         /*PROTECTED REGION END*/
 }

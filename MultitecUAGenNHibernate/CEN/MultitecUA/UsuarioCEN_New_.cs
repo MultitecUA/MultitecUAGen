@@ -21,7 +21,7 @@ public partial class UsuarioCEN
 {
 public int New_ (string p_nombre, String p_password, string p_foto, string p_email, string p_nick)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Usuario_new__customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Usuario_new__customized) ENABLED START*/
 
         UsuarioEN usuarioEN = null;
 
@@ -38,6 +38,10 @@ public int New_ (string p_nombre, String p_password, string p_foto, string p_ema
         usuarioEN.Email = p_email;
 
         usuarioEN.Nick = p_nick;
+
+        usuarioEN.FechaAlta = DateTime.Now;
+
+        usuarioEN.Rol = Enumerated.MultitecUA.RolUsuarioEnum.Miembro;
 
         //Call to UsuarioCAD
 
