@@ -39,6 +39,6 @@
 		 </class>	
 		  
 		  <query name="NoticiaENReadAllHQL">from NoticiaEN</query>
-		  <query name="NoticiaENdameNUltimasNoticiasHQL"><![CDATA[FROM NoticiaEN en order by en.Fecha]]></query>
+		  <query name="NoticiaENdameNUltimasNoticiasHQL"><![CDATA[select (en) FROM NoticiaEN en order by en.Fecha]]></query>
 		</hibernate-mapping>
 	

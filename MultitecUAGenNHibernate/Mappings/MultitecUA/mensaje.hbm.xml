@@ -82,9 +82,9 @@
 		 </class>	
 		  
 		  <query name="MensajeENReadAllHQL">from MensajeEN</query>
-		  <query name="MensajeENdameMensajesPorReceptorHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
-		  <query name="MensajeENdameMensajesPorAutorHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
-		  <query name="MensajeENdameMensajesPorReceptorFiltradosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
-		  <query name="MensajeENdameMensajesPorAutorFiltradosHQL"><![CDATA[FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMensajesPorReceptorHQL"><![CDATA[select (en) FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMensajesPorAutorHQL"><![CDATA[select (en) FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMensajesPorReceptorFiltradosHQL"><![CDATA[select (en) FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario]]></query>
+		  <query name="MensajeENdameMensajesPorAutorFiltradosHQL"><![CDATA[select (en) FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario]]></query>
 		</hibernate-mapping>
 	

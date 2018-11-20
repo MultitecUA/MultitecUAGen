@@ -401,7 +401,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM UsuarioEN self where FROM UsuarioEN en join en.CategoriasUsuarios cat where cat = :p_categoria";
+                //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en join en.CategoriasUsuarios cat where cat = :p_categoria";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosPorCategoriaHQL");
                 query.SetParameter ("p_categoria", p_categoria);

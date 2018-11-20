@@ -45,7 +45,7 @@ void AgregaCategoriasUsuario (int p_Proyecto_OID, System.Collections.Generic.ILi
 
 void AgregaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_categoriasProyectos_OIDs);
 
-void AgregaParticipante (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs);
+void AgregaParticipante (int p_Proyecto_OID, int p_usuario);
 
 void EliminaModeradores (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosModeradores_OIDs);
 

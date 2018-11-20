@@ -40,10 +40,10 @@ public int New_ (string p_nombre, string p_descripcion, MultitecUAGenNHibernate.
                 proyectoEN.UsuarioCreador = new MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ();
                 proyectoEN.UsuarioCreador.Id = p_usuarioCreador;
 
-                UsuarioEN usuarioEN = new UsuarioEN();
+                UsuarioEN usuarioEN = new UsuarioEN ();
                 usuarioEN.Id = p_usuarioCreador;
-                proyectoEN.UsuariosModeradores.Add(usuarioEN);
-                proyectoEN.UsuariosParticipantes.Add(usuarioEN);
+                //proyectoEN.UsuariosModeradores.Add (usuarioEN);
+                //proyectoEN.UsuariosParticipantes.Add (usuarioEN);
         }
 
         proyectoEN.Fotos = p_fotos;

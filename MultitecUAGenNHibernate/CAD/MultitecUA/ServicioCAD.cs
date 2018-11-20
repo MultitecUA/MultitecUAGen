@@ -239,7 +239,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Se
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM ServicioEN self where FROM ServicioEN en where en.Estado = :p_estado";
+                //String sql = @"FROM ServicioEN self where select (en) FROM ServicioEN en where en.Estado = :p_estado";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ServicioENdameServiciosPorEstadoHQL");
                 query.SetParameter ("p_estado", p_estado);

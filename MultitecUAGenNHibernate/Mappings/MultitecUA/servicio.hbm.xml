@@ -41,6 +41,6 @@
 		 </class>	
 		  
 		  <query name="ServicioENReadAllHQL">from ServicioEN</query>
-		  <query name="ServicioENdameServiciosPorEstadoHQL"><![CDATA[FROM ServicioEN en where en.Estado = :p_estado]]></query>
+		  <query name="ServicioENdameServiciosPorEstadoHQL"><![CDATA[select (en) FROM ServicioEN en where en.Estado = :p_estado]]></query>
 		</hibernate-mapping>
 	

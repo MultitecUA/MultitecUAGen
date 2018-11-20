@@ -142,8 +142,14 @@ public int New_ (ProyectoEN proyecto)
                         .Add (proyecto);
                 }
 
-                //proyecto.UsuariosModeradores[0].ProyectosModerados.Add(proyecto);
-                //proyecto.UsuariosParticipantes[0].ProyectosPertenecientes.Add(proyecto);
+                proyecto.UsuariosModeradores = new System.Collections.Generic.List<UsuarioEN>();
+                proyecto.UsuariosModeradores.Add(proyecto.UsuarioCreador);
+                proyecto.UsuariosModeradores[0].ProyectosModerados.Add(proyecto);
+
+
+                proyecto.UsuariosParticipantes = new System.Collections.Generic.List<UsuarioEN>();
+                proyecto.UsuariosParticipantes.Add(proyecto.UsuarioCreador);
+                proyecto.UsuariosParticipantes[0].ProyectosPertenecientes.Add(proyecto);
 
                 session.Save (proyecto);
                 SessionCommit ();
@@ -499,25 +505,17 @@ public void AgregaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Gen
         }
 }
 
-public void AgregaParticipante (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs)
+public void AgregaParticipante (int p_Proyecto_OID, int p_usuario)
 {
         MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN proyectoEN = null;
         try
         {
                 SessionInitializeTransaction ();
                 proyectoEN = (ProyectoEN)session.Load (typeof(ProyectoEN), p_Proyecto_OID);
-                MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuariosParticipantesENAux = null;
-                if (proyectoEN.UsuariosParticipantes == null) {
-                        proyectoEN.UsuariosParticipantes = new System.Collections.Generic.List<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
-                }
+                proyectoEN.UsuariosParticipantes.Add((UsuarioEN)session.Load (typeof(UsuarioEN), p_usuario));
 
-                foreach (int item in p_usuariosParticipantes_OIDs) {
-                        usuariosParticipantesENAux = new MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ();
-                        usuariosParticipantesENAux = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), item);
-                        usuariosParticipantesENAux.ProyectosPertenecientes.Add (proyectoEN);
+                proyectoEN.UsuariosParticipantes[proyectoEN.UsuariosParticipantes.Count-1].ProyectosPertenecientes.Add (proyectoEN);
 
-                        proyectoEN.UsuariosParticipantes.Add (usuariosParticipantesENAux);
-                }
 
 
                 session.Update (proyectoEN);
@@ -734,7 +732,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM ProyectoEN self where FROM ProyectoEN en where en.Estado = :p_estado";
+                //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en where en.Estado = :p_estado";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPorEstadoHQL");
                 query.SetParameter ("p_estado", p_estado);

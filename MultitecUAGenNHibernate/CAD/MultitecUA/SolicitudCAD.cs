@@ -164,7 +164,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM SolicitudEN self where FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = :p_estado";
+                //String sql = @"FROM SolicitudEN self where select (en) FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_OIDProyecto and en.Estado = :p_estado";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicitudesPorProyectoYEstadoHQL");
                 query.SetParameter ("p_OIDProyecto", p_OIDProyecto);
@@ -195,7 +195,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM SolicitudEN self where FROM SolicitudEN en where en.UsuarioSolicitante.Id = :p_OID and en.Estado = :p_estado";
+                //String sql = @"FROM SolicitudEN self where select (en) FROM SolicitudEN en where en.UsuarioSolicitante.Id = :p_OID and en.Estado = :p_estado";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicitudesPorUsuarioYEstadoHQL");
                 query.SetParameter ("p_OID", p_OID);
@@ -226,7 +226,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM SolicitudEN self where FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario";
+                //String sql = @"FROM SolicitudEN self where select (en) FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicidudesPorUsuarioYProyectoHQL");
                 query.SetParameter ("p_proyecto", p_proyecto);
@@ -257,7 +257,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM SolicitudEN self where FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario and en.Estado = 1";
+                //String sql = @"FROM SolicitudEN self where select (en) FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario and en.Estado = 1";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicitudesPendientesPorProyectoDeHQL");
                 query.SetParameter ("p_proyecto", p_proyecto);
