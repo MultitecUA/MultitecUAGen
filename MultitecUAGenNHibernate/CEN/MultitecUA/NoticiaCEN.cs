@@ -81,5 +81,22 @@ public void Destroy (int id
 {
         _INoticiaCAD.Destroy (id);
 }
+
+public NoticiaEN ReadOID (int id
+                          )
+{
+        NoticiaEN noticiaEN = null;
+
+        noticiaEN = _INoticiaCAD.ReadOID (id);
+        return noticiaEN;
+}
+
+public System.Collections.Generic.IList<NoticiaEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NoticiaEN> list = null;
+
+        list = _INoticiaCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

@@ -282,5 +282,64 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
 
         return result;
 }
+//Sin e: ReadOID
+//Con e: SolicitudEN
+public SolicitudEN ReadOID (int id
+                            )
+{
+        SolicitudEN solicitudEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                solicitudEN = (SolicitudEN)session.Get (typeof(SolicitudEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in SolicitudCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return solicitudEN;
+}
+
+public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<SolicitudEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(SolicitudEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<SolicitudEN>();
+                else
+                        result = session.CreateCriteria (typeof(SolicitudEN)).List<SolicitudEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in SolicitudCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

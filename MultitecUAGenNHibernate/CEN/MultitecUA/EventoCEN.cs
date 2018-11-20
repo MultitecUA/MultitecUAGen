@@ -55,5 +55,21 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
 
         _IEventoCAD.EliminaCategorias (p_Evento_OID, p_categoriasEventos_OIDs);
 }
+public EventoEN ReadOID (int id
+                         )
+{
+        EventoEN eventoEN = null;
+
+        eventoEN = _IEventoCAD.ReadOID (id);
+        return eventoEN;
+}
+
+public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<EventoEN> list = null;
+
+        list = _IEventoCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

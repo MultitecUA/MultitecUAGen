@@ -40,5 +40,12 @@ void CambiarBandejaReceptor (MensajeEN mensaje);
 
 
 void CambiarBandejaAutor (MensajeEN mensaje);
+
+
+MensajeEN ReadOID (int id
+                   );
+
+
+System.Collections.Generic.IList<MensajeEN> ReadAll (int first, int size);
 }
 }

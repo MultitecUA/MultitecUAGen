@@ -368,5 +368,64 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
                 SessionClose ();
         }
 }
+//Sin e: ReadOID
+//Con e: EventoEN
+public EventoEN ReadOID (int id
+                         )
+{
+        EventoEN eventoEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                eventoEN = (EventoEN)session.Get (typeof(EventoEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return eventoEN;
+}
+
+public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<EventoEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(EventoEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<EventoEN>();
+                else
+                        result = session.CreateCriteria (typeof(EventoEN)).List<EventoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

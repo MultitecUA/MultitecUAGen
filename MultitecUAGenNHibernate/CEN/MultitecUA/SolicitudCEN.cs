@@ -55,5 +55,21 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
 {
         return _ISolicitudCAD.DameSolicitudesPendientesPorProyectoDe (p_proyecto, p_usuario);
 }
+public SolicitudEN ReadOID (int id
+                            )
+{
+        SolicitudEN solicitudEN = null;
+
+        solicitudEN = _ISolicitudCAD.ReadOID (id);
+        return solicitudEN;
+}
+
+public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<SolicitudEN> list = null;
+
+        list = _ISolicitudCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

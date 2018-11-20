@@ -33,5 +33,11 @@ System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
 void AgregaCategorias (int p_Evento_OID, System.Collections.Generic.IList<int> p_categoriasEventos_OIDs);
 
 void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.IList<int> p_categoriasEventos_OIDs);
+
+EventoEN ReadOID (int id
+                  );
+
+
+System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size);
 }
 }

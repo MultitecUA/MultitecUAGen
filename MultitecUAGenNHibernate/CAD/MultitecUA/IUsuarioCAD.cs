@@ -42,5 +42,15 @@ System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN
 
 
 void CambiarRol (UsuarioEN usuario);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum ? p_rol);
+
+
+UsuarioEN ReadOID (int id
+                   );
+
+
+System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size);
 }
 }

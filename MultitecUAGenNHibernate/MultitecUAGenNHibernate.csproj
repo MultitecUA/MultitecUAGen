@@ -131,6 +131,9 @@
 			
 			<Compile Include="CEN\MultitecUA\UsuarioCEN_CambiarRol.cs" />
 			
+			
+			
+			
 	<Compile Include="EN\MultitecUA\ProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />
@@ -146,7 +149,7 @@
 			
 			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaModeradores.cs" />
 			
-			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaEvento.cs" />
+			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaEventos.cs" />
 			
 			
 			
@@ -154,15 +157,17 @@
 			
 			
 			
-			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaParticipante.cs" />
+			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaParticipantes.cs" />
 			
 			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaModeradores.cs" />
 			
-			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaEvento.cs" />
+			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaEventos.cs" />
 			
 			
 			
-			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaParticipante.cs" />
+			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaParticipantes.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\EventoEN.cs" />
@@ -181,6 +186,8 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\RecuerdoEN.cs" />
 	<Compile Include="CEN\MultitecUA\RecuerdoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IRecuerdoCAD.cs" />
@@ -189,6 +196,8 @@
 			<Compile Include="CEN\MultitecUA\RecuerdoCEN_New_.cs" />
 			
 			<Compile Include="CEN\MultitecUA\RecuerdoCEN_Modify.cs" />
+			
+			
 			
 			
 			
@@ -203,6 +212,8 @@
 			
 			
 			<Compile Include="CEN\MultitecUA\ServicioCEN_CambiarDisponibilidad.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\MensajeEN.cs" />
@@ -225,12 +236,16 @@
 			
 			<Compile Include="CEN\MultitecUA\MensajeCEN_CambiarBandejaAutor.cs" />
 			
+			
+			
 	<Compile Include="EN\MultitecUA\NotificacionEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionCAD.cs" />
 	<Compile Include="CAD\MultitecUA\NotificacionCAD.cs" />
 	<Compile Include="CP\MultitecUA\NotificacionCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionCEN_New_.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\NotificacionUsuarioEN.cs" />
@@ -245,6 +260,8 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\CategoriaProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\CategoriaProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\ICategoriaProyectoCAD.cs" />
@@ -253,11 +270,15 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\CategoriaUsuarioEN.cs" />
 	<Compile Include="CEN\MultitecUA\CategoriaUsuarioCEN.cs" />
 	<Compile Include="CAD\MultitecUA\ICategoriaUsuarioCAD.cs" />
 	<Compile Include="CAD\MultitecUA\CategoriaUsuarioCAD.cs" />
 	<Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
+			
+			
 			
 			
 			
@@ -276,12 +297,16 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
 	<Compile Include="CAD\MultitecUA\NotificacionProyectoCAD.cs" />
 	<Compile Include="CP\MultitecUA\NotificacionProyectoCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN_New_.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\NotificacionMensajeEN.cs" />
@@ -292,6 +317,8 @@
 			<Compile Include="CEN\MultitecUA\NotificacionMensajeCEN_New_.cs" />
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\NotificacionEventoEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionEventoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionEventoCAD.cs" />
@@ -300,12 +327,16 @@
 			<Compile Include="CEN\MultitecUA\NotificacionEventoCEN_New_.cs" />
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\NotificacionSolicitudEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionSolicitudCAD.cs" />
 	<Compile Include="CAD\MultitecUA\NotificacionSolicitudCAD.cs" />
 	<Compile Include="CP\MultitecUA\NotificacionSolicitudCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN_New_.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\NoticiaEN.cs" />
@@ -317,6 +348,8 @@
 			
 			
 			<Compile Include="CEN\MultitecUA\NoticiaCEN_DameNUltimasNoticias.cs" />
+			
+			
 			
 	<Compile Include="Enumerated\MultitecUA\EstadoProyectoEnum.cs" />
 	<Compile Include="Enumerated\MultitecUA\EstadoLecturaEnum.cs" />

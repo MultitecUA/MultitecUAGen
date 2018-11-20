@@ -29,5 +29,12 @@ System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Solicitud
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDe (int p_proyecto, int p_usuario);
+
+
+SolicitudEN ReadOID (int id
+                     );
+
+
+System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int size);
 }
 }

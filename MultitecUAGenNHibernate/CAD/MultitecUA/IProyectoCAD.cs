@@ -24,10 +24,12 @@ void Destroy (int id
               );
 
 
+void CambiarEstado (ProyectoEN proyecto);
+
 
 void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_Usuarios_OIDs);
 
-void AgregaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs);
+void AgregaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs);
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioPertenece (int p_OID);
 
@@ -45,18 +47,25 @@ void AgregaCategoriasUsuario (int p_Proyecto_OID, System.Collections.Generic.ILi
 
 void AgregaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_categoriasProyectos_OIDs);
 
-void AgregaParticipante (int p_Proyecto_OID, int p_usuario);
+void AgregaParticipantes (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs);
 
 void EliminaModeradores (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosModeradores_OIDs);
 
-void EliminaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs);
+void EliminaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs);
 
 void EliminaCategoriasUsuario (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_categoriasBuscadas_OIDs);
 
 void EliminaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_categoriasProyectos_OIDs);
 
-void EliminaParticipante (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs);
+void EliminaParticipantes (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs);
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum ? p_estado);
+
+
+ProyectoEN ReadOID (int id
+                    );
+
+
+System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size);
 }
 }

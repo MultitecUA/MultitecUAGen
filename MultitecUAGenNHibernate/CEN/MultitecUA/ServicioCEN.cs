@@ -49,5 +49,21 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Se
 {
         return _IServicioCAD.DameServiciosPorEstado (p_estado);
 }
+public ServicioEN ReadOID (int id
+                           )
+{
+        ServicioEN servicioEN = null;
+
+        servicioEN = _IServicioCAD.ReadOID (id);
+        return servicioEN;
+}
+
+public System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<ServicioEN> list = null;
+
+        list = _IServicioCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

@@ -25,5 +25,12 @@ void Destroy (int id
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN> DameNUltimasNoticias (int ? p_n);
+
+
+NoticiaEN ReadOID (int id
+                   );
+
+
+System.Collections.Generic.IList<NoticiaEN> ReadAll (int first, int size);
 }
 }

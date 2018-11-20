@@ -53,5 +53,21 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
 {
         return _INotificacionUsuarioCAD.DameNotificacionesNoLeidasPorUsuario (p_oid_usuario);
 }
+public NotificacionUsuarioEN ReadOID (int id
+                                      )
+{
+        NotificacionUsuarioEN notificacionUsuarioEN = null;
+
+        notificacionUsuarioEN = _INotificacionUsuarioCAD.ReadOID (id);
+        return notificacionUsuarioEN;
+}
+
+public System.Collections.Generic.IList<NotificacionUsuarioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NotificacionUsuarioEN> list = null;
+
+        list = _INotificacionUsuarioCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

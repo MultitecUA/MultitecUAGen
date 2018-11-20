@@ -19,13 +19,18 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class NotificacionUsuarioCEN
 {
-public void LeerNotificacion (int p_oid)
+public void LeerNotificacion (int p_NotificacionUsuario_OID)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_leerNotificacion) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_leerNotificacion_customized) START*/
 
-        // Write here your custom code...
+        NotificacionUsuarioEN notificacionUsuarioEN = null;
 
-        throw new NotImplementedException ("Method LeerNotificacion() not yet implemented.");
+        //Initialized NotificacionUsuarioEN
+        notificacionUsuarioEN = new NotificacionUsuarioEN ();
+        notificacionUsuarioEN.Id = p_NotificacionUsuario_OID;
+        //Call to NotificacionUsuarioCAD
+
+        _INotificacionUsuarioCAD.LeerNotificacion (notificacionUsuarioEN);
 
         /*PROTECTED REGION END*/
 }

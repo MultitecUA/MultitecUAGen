@@ -237,5 +237,64 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
 
         return result;
 }
+//Sin e: ReadOID
+//Con e: NoticiaEN
+public NoticiaEN ReadOID (int id
+                          )
+{
+        NoticiaEN noticiaEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                noticiaEN = (NoticiaEN)session.Get (typeof(NoticiaEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NoticiaCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return noticiaEN;
+}
+
+public System.Collections.Generic.IList<NoticiaEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NoticiaEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(NoticiaEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<NoticiaEN>();
+                else
+                        result = session.CreateCriteria (typeof(NoticiaEN)).List<NoticiaEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NoticiaCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

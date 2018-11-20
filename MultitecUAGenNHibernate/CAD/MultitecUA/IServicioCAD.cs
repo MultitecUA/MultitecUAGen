@@ -28,5 +28,12 @@ void CambiarDisponibilidad (ServicioEN servicio);
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN> DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum ? p_estado);
+
+
+ServicioEN ReadOID (int id
+                    );
+
+
+System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size);
 }
 }

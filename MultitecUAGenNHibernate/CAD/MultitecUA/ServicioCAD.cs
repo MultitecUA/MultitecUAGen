@@ -263,5 +263,64 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Se
 
         return result;
 }
+//Sin e: ReadOID
+//Con e: ServicioEN
+public ServicioEN ReadOID (int id
+                           )
+{
+        ServicioEN servicioEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                servicioEN = (ServicioEN)session.Get (typeof(ServicioEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ServicioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return servicioEN;
+}
+
+public System.Collections.Generic.IList<ServicioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<ServicioEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(ServicioEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<ServicioEN>();
+                else
+                        result = session.CreateCriteria (typeof(ServicioEN)).List<ServicioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ServicioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

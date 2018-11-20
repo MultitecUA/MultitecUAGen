@@ -167,5 +167,65 @@ public void Destroy (int id
                 SessionClose ();
         }
 }
+
+//Sin e: ReadOID
+//Con e: NotificacionSolicitudEN
+public NotificacionSolicitudEN ReadOID (int id
+                                        )
+{
+        NotificacionSolicitudEN notificacionSolicitudEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                notificacionSolicitudEN = (NotificacionSolicitudEN)session.Get (typeof(NotificacionSolicitudEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionSolicitudCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return notificacionSolicitudEN;
+}
+
+public System.Collections.Generic.IList<NotificacionSolicitudEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NotificacionSolicitudEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(NotificacionSolicitudEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionSolicitudEN>();
+                else
+                        result = session.CreateCriteria (typeof(NotificacionSolicitudEN)).List<NotificacionSolicitudEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionSolicitudCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

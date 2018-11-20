@@ -22,5 +22,12 @@ void Modify (CategoriaProyectoEN categoriaProyecto);
 
 void Destroy (int id
               );
+
+
+CategoriaProyectoEN ReadOID (int id
+                             );
+
+
+System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first, int size);
 }
 }

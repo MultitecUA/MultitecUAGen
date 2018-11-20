@@ -228,6 +228,32 @@ public void Destroy (int id
         }
 }
 
+public void CambiarEstado (ProyectoEN proyecto)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                ProyectoEN proyectoEN = (ProyectoEN)session.Load (typeof(ProyectoEN), proyecto.Id);
+
+                proyectoEN.Estado = proyecto.Estado;
+
+                session.Update (proyectoEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 public void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_Usuarios_OIDs)
 {
         MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN proyectoEN = null;
@@ -267,7 +293,7 @@ public void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IL
         }
 }
 
-public void AgregaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs)
+public void AgregaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs)
 {
         MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN proyectoEN = null;
         try
@@ -505,17 +531,25 @@ public void AgregaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Gen
         }
 }
 
-public void AgregaParticipante (int p_Proyecto_OID, int p_usuario)
+public void AgregaParticipantes (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs)
 {
         MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN proyectoEN = null;
         try
         {
                 SessionInitializeTransaction ();
                 proyectoEN = (ProyectoEN)session.Load (typeof(ProyectoEN), p_Proyecto_OID);
-                proyectoEN.UsuariosParticipantes.Add((UsuarioEN)session.Load (typeof(UsuarioEN), p_usuario));
+                MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN usuariosParticipantesENAux = null;
+                if (proyectoEN.UsuariosParticipantes == null) {
+                        proyectoEN.UsuariosParticipantes = new System.Collections.Generic.List<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
+                }
 
-                proyectoEN.UsuariosParticipantes[proyectoEN.UsuariosParticipantes.Count-1].ProyectosPertenecientes.Add (proyectoEN);
+                foreach (int item in p_usuariosParticipantes_OIDs) {
+                        usuariosParticipantesENAux = new MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ();
+                        usuariosParticipantesENAux = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), item);
+                        usuariosParticipantesENAux.ProyectosPertenecientes.Add (proyectoEN);
 
+                        proyectoEN.UsuariosParticipantes.Add (usuariosParticipantesENAux);
+                }
 
 
                 session.Update (proyectoEN);
@@ -574,7 +608,7 @@ public void EliminaModeradores (int p_Proyecto_OID, System.Collections.Generic.I
                 SessionClose ();
         }
 }
-public void EliminaEvento (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs)
+public void EliminaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs)
 {
         try
         {
@@ -688,7 +722,7 @@ public void EliminaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Ge
                 SessionClose ();
         }
 }
-public void EliminaParticipante (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs)
+public void EliminaParticipantes (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_usuariosParticipantes_OIDs)
 {
         try
         {
@@ -738,6 +772,65 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 query.SetParameter ("p_estado", p_estado);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+//Sin e: ReadOID
+//Con e: ProyectoEN
+public ProyectoEN ReadOID (int id
+                           )
+{
+        ProyectoEN proyectoEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                proyectoEN = (ProyectoEN)session.Get (typeof(ProyectoEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return proyectoEN;
+}
+
+public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<ProyectoEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(ProyectoEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<ProyectoEN>();
+                else
+                        result = session.CreateCriteria (typeof(ProyectoEN)).List<ProyectoEN>();
                 SessionCommit ();
         }
 

@@ -53,5 +53,21 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
 {
         return _IMensajeCAD.DameMensajesPorAutor (p_oid_usuario);
 }
+public MensajeEN ReadOID (int id
+                          )
+{
+        MensajeEN mensajeEN = null;
+
+        mensajeEN = _IMensajeCAD.ReadOID (id);
+        return mensajeEN;
+}
+
+public System.Collections.Generic.IList<MensajeEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<MensajeEN> list = null;
+
+        list = _IMensajeCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

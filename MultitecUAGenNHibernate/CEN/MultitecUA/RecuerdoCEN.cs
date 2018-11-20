@@ -49,5 +49,21 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Re
 {
         return _IRecuerdoCAD.DameRecuerdosPorProyecto (p_OID);
 }
+public RecuerdoEN ReadOID (int id
+                           )
+{
+        RecuerdoEN recuerdoEN = null;
+
+        recuerdoEN = _IRecuerdoCAD.ReadOID (id);
+        return recuerdoEN;
+}
+
+public System.Collections.Generic.IList<RecuerdoEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<RecuerdoEN> list = null;
+
+        list = _IRecuerdoCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

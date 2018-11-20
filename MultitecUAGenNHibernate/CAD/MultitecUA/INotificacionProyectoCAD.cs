@@ -19,5 +19,12 @@ int New_ (NotificacionProyectoEN notificacionProyecto);
 
 void Destroy (int id
               );
+
+
+NotificacionProyectoEN ReadOID (int id
+                                );
+
+
+System.Collections.Generic.IList<NotificacionProyectoEN> ReadAll (int first, int size);
 }
 }

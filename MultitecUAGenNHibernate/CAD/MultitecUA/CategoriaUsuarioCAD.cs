@@ -190,5 +190,65 @@ public void Destroy (int id
                 SessionClose ();
         }
 }
+
+//Sin e: ReadOID
+//Con e: CategoriaUsuarioEN
+public CategoriaUsuarioEN ReadOID (int id
+                                   )
+{
+        CategoriaUsuarioEN categoriaUsuarioEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                categoriaUsuarioEN = (CategoriaUsuarioEN)session.Get (typeof(CategoriaUsuarioEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in CategoriaUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return categoriaUsuarioEN;
+}
+
+public System.Collections.Generic.IList<CategoriaUsuarioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<CategoriaUsuarioEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(CategoriaUsuarioEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<CategoriaUsuarioEN>();
+                else
+                        result = session.CreateCriteria (typeof(CategoriaUsuarioEN)).List<CategoriaUsuarioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in CategoriaUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

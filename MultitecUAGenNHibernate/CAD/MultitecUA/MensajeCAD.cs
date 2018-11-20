@@ -402,5 +402,64 @@ public void CambiarBandejaAutor (MensajeEN mensaje)
                 SessionClose ();
         }
 }
+//Sin e: ReadOID
+//Con e: MensajeEN
+public MensajeEN ReadOID (int id
+                          )
+{
+        MensajeEN mensajeEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                mensajeEN = (MensajeEN)session.Get (typeof(MensajeEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return mensajeEN;
+}
+
+public System.Collections.Generic.IList<MensajeEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<MensajeEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(MensajeEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<MensajeEN>();
+                else
+                        result = session.CreateCriteria (typeof(MensajeEN)).List<MensajeEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in MensajeCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

@@ -19,5 +19,12 @@ int New_ (NotificacionMensajeEN notificacionMensaje);
 
 void Destroy (int id
               );
+
+
+NotificacionMensajeEN ReadOID (int id
+                               );
+
+
+System.Collections.Generic.IList<NotificacionMensajeEN> ReadAll (int first, int size);
 }
 }

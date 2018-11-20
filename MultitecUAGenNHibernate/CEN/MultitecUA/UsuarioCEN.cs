@@ -84,6 +84,26 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
 {
         return _IUsuarioCAD.DameUsuariosPorCategoria (p_categoria);
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum ? p_rol)
+{
+        return _IUsuarioCAD.DameUsuariosPorRol (p_rol);
+}
+public UsuarioEN ReadOID (int id
+                          )
+{
+        UsuarioEN usuarioEN = null;
+
+        usuarioEN = _IUsuarioCAD.ReadOID (id);
+        return usuarioEN;
+}
+
+public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<UsuarioEN> list = null;
+
+        list = _IUsuarioCAD.ReadAll (first, size);
+        return list;
+}
 
 
 

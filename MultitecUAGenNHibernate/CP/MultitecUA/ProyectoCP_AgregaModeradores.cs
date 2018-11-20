@@ -30,21 +30,21 @@ public void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IL
         ProyectoEN proyectoEN = null;
 
 
-            try
+        try
         {
                 SessionInitializeTransaction ();
                 proyectoCAD = new ProyectoCAD (session);
                 proyectoCEN = new  ProyectoCEN (proyectoCAD);
-                proyectoEN = proyectoCAD.ReadOIDDefault(p_Proyecto_OID);
+                proyectoEN = proyectoCAD.ReadOIDDefault (p_Proyecto_OID);
 
-                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
-                int OID_notificacionProyecto = notificacionProyectoCEN.New_("Nuevo moderador en el proyecto", "El proyecto " + proyectoEN.Nombre + " tiene un nuevo moderador", proyectoEN.Id);
+                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
+                int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Nuevo moderador en el proyecto", "El proyecto " + proyectoEN.Nombre + " tiene un nuevo moderador", proyectoEN.Id);
 
-                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-                UsuarioCAD usuarioCAD = new UsuarioCAD();
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                UsuarioCAD usuarioCAD = new UsuarioCAD ();
 
-                foreach (UsuarioEN usuario in usuarioCAD.DameModeradoresProyecto(p_Proyecto_OID))
-                    notificacionUsuarioCEN.New_(usuario.Id, OID_notificacionProyecto);
+                foreach (UsuarioEN usuario in usuarioCAD.DameModeradoresProyecto (p_Proyecto_OID))
+                        notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacionProyecto);
 
 
 

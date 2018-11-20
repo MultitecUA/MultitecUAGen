@@ -44,5 +44,22 @@ public void Destroy (int id
 {
         _INotificacionMensajeCAD.Destroy (id);
 }
+
+public NotificacionMensajeEN ReadOID (int id
+                                      )
+{
+        NotificacionMensajeEN notificacionMensajeEN = null;
+
+        notificacionMensajeEN = _INotificacionMensajeCAD.ReadOID (id);
+        return notificacionMensajeEN;
+}
+
+public System.Collections.Generic.IList<NotificacionMensajeEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NotificacionMensajeEN> list = null;
+
+        list = _INotificacionMensajeCAD.ReadAll (first, size);
+        return list;
+}
 }
 }

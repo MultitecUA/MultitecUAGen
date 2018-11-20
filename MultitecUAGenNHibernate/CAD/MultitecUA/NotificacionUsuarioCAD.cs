@@ -179,6 +179,29 @@ public void Destroy (int id
         }
 }
 
+public void LeerNotificacion (NotificacionUsuarioEN notificacionUsuario)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                NotificacionUsuarioEN notificacionUsuarioEN = (NotificacionUsuarioEN)session.Load (typeof(NotificacionUsuarioEN), notificacionUsuario.Id);
+                session.Update (notificacionUsuarioEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesPorUsuario (int p_oid_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> result;
@@ -221,6 +244,65 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+//Sin e: ReadOID
+//Con e: NotificacionUsuarioEN
+public NotificacionUsuarioEN ReadOID (int id
+                                      )
+{
+        NotificacionUsuarioEN notificacionUsuarioEN = null;
+
+        try
+        {
+                SessionInitializeTransaction ();
+                notificacionUsuarioEN = (NotificacionUsuarioEN)session.Get (typeof(NotificacionUsuarioEN), id);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in NotificacionUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return notificacionUsuarioEN;
+}
+
+public System.Collections.Generic.IList<NotificacionUsuarioEN> ReadAll (int first, int size)
+{
+        System.Collections.Generic.IList<NotificacionUsuarioEN> result = null;
+        try
+        {
+                SessionInitializeTransaction ();
+                if (size > 0)
+                        result = session.CreateCriteria (typeof(NotificacionUsuarioEN)).
+                                 SetFirstResult (first).SetMaxResults (size).List<NotificacionUsuarioEN>();
+                else
+                        result = session.CreateCriteria (typeof(NotificacionUsuarioEN)).List<NotificacionUsuarioEN>();
                 SessionCommit ();
         }
 

@@ -112,19 +112,20 @@ public static void InitializeData ()
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
-                int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.Propuesto, OIDUsuario, null);
+                int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
                 ProyectoCP proyectoCP = new ProyectoCP ();
-                int aux = usuarioCEN.New_("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
+                int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
                 List<int> aaux = new List<int>();
-                aaux.Add(aux);
-                proyectoCP.AgregaParticipante(OIDProyecto, aux);
-                proyectoCP.AgregaModeradores(OIDProyecto, aaux);
-                proyectoCP.AgregaParticipante(OIDProyecto, usuarioCEN.New_("Judith", "12345", null, "judith@gmail.com", "BenhMM"));
+                aaux.Add (aux);
+                proyectoCP.AgregaParticipantes (OIDProyecto, aaux);
+                proyectoCP.AgregaModeradores (OIDProyecto, aaux);
+                aaux [0] = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                proyectoCP.AgregaParticipantes (OIDProyecto, aaux);
                 proyectoCP.Modify (OIDProyecto, "APPPanic", "App que te ayuda en la vida", null);
                 proyectoCEN.CambiarEstado (OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo);
 
 
-                
+
 
                 Console.WriteLine (usuarioCEN.DameParticipantesProyecto (OIDProyecto).Count);
                 Console.WriteLine (usuarioCEN.DameModeradoresProyecto (OIDProyecto).Count);

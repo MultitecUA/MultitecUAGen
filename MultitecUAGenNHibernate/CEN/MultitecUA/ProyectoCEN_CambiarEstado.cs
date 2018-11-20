@@ -21,25 +21,27 @@ public partial class ProyectoCEN
 {
 public void CambiarEstado (int p_Proyecto_OID, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum p_estado)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_cambiarEstado) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Proyecto_cambiarEstado_customized) START*/
 
-        ProyectoCAD proyectoCAD = new ProyectoCAD ();
-        ProyectoEN proyectoEN = proyectoCAD.ReadOIDDefault (p_Proyecto_OID);
+        ProyectoEN proyectoEN = null;
 
+        //Initialized ProyectoEN
+        proyectoEN = new ProyectoEN ();
+        proyectoEN.Id = p_Proyecto_OID;
         proyectoEN.Estado = p_estado;
 
+            NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
+            int OID_notificacionProyecto = notificacionProyectoCEN.New_("Proyecto modificado", "El proyecto " + proyectoEN.Nombre + " ha pasado a estar " + p_estado.ToString(), proyectoEN.Id);
 
-        NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
-        int OID_notificacionProyecto = notificacionProyectoCEN.New_("Proyecto modificaco", "El proyecto " + proyectoEN.Nombre + " ha pasado a estar " + p_estado.ToString(), proyectoEN.Id);
+            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+            UsuarioCAD usuarioCAD = new UsuarioCAD();
 
-        NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-        UsuarioCAD usuarioCAD = new UsuarioCAD();
+            foreach (UsuarioEN usuario in usuarioCAD.DameModeradoresProyecto(p_Proyecto_OID))
+                notificacionUsuarioCEN.New_(usuario.Id, OID_notificacionProyecto);
 
-        foreach (UsuarioEN usuario in usuarioCAD.DameParticipantesProyecto(p_Proyecto_OID))
-            notificacionUsuarioCEN.New_(usuario.Id, OID_notificacionProyecto);
+            //Call to ProyectoCAD
 
-
-        proyectoCAD.Modify (proyectoEN);
+            _IProyectoCAD.CambiarEstado (proyectoEN);
 
         /*PROTECTED REGION END*/
 }
