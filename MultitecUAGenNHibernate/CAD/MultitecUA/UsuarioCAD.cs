@@ -227,37 +227,6 @@ public void Destroy (int id
         }
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosCandidatosAProyecto (System.Collections.Generic.IList<int> p_OIDCategoria, int p_OIDProyecto)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro join en.CategoriasUsuarios cat where cat.Id = :p_OIDCategoria and pro.Id != :p_OIDProyecto";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosCandidatosAProyectoHQL");
-                query.SetParameter ("p_OIDCategoria", p_OIDCategoria);
-                query.SetParameter ("p_OIDProyecto", p_OIDProyecto);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameModeradoresProyecto (int p_ID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;

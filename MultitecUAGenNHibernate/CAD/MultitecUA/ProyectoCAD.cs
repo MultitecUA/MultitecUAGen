@@ -362,37 +362,6 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioEsCandidato (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
-{
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en join en.CategoriasBuscadas pro where  pro.Id  = :p_OIDCategorias and en.UsuariosParticipantes != :p_OIDUsuario";
-                //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosUsuarioEsCandidatoHQL");
-                query.SetParameter ("p_OIDCategorias", p_OIDCategorias);
-                query.SetParameter ("p_OIDUsuario", p_OIDUsuario);
-
-                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-
-        return result;
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEvento (int p_OID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
@@ -423,7 +392,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (System.Collections.Generic.IList<int> p_OID_Categoria)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (int p_OID_Categoria)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
         try

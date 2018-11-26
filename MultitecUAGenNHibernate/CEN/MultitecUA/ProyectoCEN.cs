@@ -43,15 +43,11 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 {
         return _IProyectoCAD.DameProyectosUsuarioPertenece (p_OID);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosUsuarioEsCandidato (System.Collections.Generic.IList<int> p_OIDCategorias, int p_OIDUsuario)
-{
-        return _IProyectoCAD.DameProyectosUsuarioEsCandidato (p_OIDCategorias, p_OIDUsuario);
-}
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorEvento (int p_OID)
 {
         return _IProyectoCAD.DameProyectosPorEvento (p_OID);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (System.Collections.Generic.IList<int> p_OID_Categoria)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoria (int p_OID_Categoria)
 {
         return _IProyectoCAD.DameProyectosPorCategoria (p_OID_Categoria);
 }

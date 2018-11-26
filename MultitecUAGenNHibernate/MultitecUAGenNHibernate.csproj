@@ -128,7 +128,6 @@
 			
 			
 			
-			
 			<Compile Include="CEN\MultitecUA\UsuarioCEN_CambiarRol.cs" />
 			
 			
@@ -150,7 +149,6 @@
 			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaModeradores.cs" />
 			
 			<Compile Include="CP\MultitecUA\ProyectoCP_AgregaEventos.cs" />
-			
 			
 			
 			
