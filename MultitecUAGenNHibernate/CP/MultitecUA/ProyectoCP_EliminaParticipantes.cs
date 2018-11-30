@@ -34,10 +34,18 @@ public void EliminaParticipantes (int p_Proyecto_OID, System.Collections.Generic
         {
                 SessionInitializeTransaction ();
                 proyectoCAD = new ProyectoCAD (session);
-                proyectoCEN = new  ProyectoCEN (proyectoCAD);
+                proyectoCEN = new ProyectoCEN (proyectoCAD);
+                ProyectoEN proyectoEN = proyectoCAD.ReadOIDDefault (p_Proyecto_OID);
 
 
+                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
+                int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Miembros eliminados del proyecto", "Han habido cambios en los miembros del proyecto " + proyectoEN.Nombre, proyectoEN.Id);
 
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
+
+                foreach (UsuarioEN usuario in usuarioCEN.DameModeradoresProyecto (p_Proyecto_OID))
+                        notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacionProyecto);
 
 
 

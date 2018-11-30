@@ -265,7 +265,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en";
+                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en join en.CategoriasEventos cat where cat.Id = :p_categoria and en.FechaInicio < :p_fecha_anterior and en.FechaInicio > :p_fecha_posterior";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosFiltradosHQL");
                 query.SetParameter ("p_categoria", p_categoria);

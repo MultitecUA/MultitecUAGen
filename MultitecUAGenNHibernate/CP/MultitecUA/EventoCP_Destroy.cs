@@ -27,6 +27,7 @@ public void Destroy (int p_Evento_OID)
 
         IEventoCAD eventoCAD = null;
         EventoCEN eventoCEN = null;
+        EventoEN eventoEN = null;
 
 
 
@@ -35,9 +36,24 @@ public void Destroy (int p_Evento_OID)
                 SessionInitializeTransaction ();
                 eventoCAD = new EventoCAD (session);
                 eventoCEN = new  EventoCEN (eventoCAD);
+                eventoEN = eventoCAD.ReadOID (p_Evento_OID);
+
+                NotificacionCEN notificacionCEN = new NotificacionCEN ();
+                int OID_notificacionEvento = notificacionCEN.New_ ("Evento eliminado", "El evento " + eventoEN.Nombre + " ha sido eliminado");
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN ();
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                List<int> OIDsParticipantes = new List<int>();
+
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorEvento (p_Evento_OID))
+                        foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (proyectoEN.Id))
+                                if (!OIDsParticipantes.Contains (usuario.Id))
+                                        OIDsParticipantes.Add (usuario.Id);
 
 
-
+                foreach (int OIDUsuario in OIDsParticipantes)
+                        notificacionUsuarioCEN.New_ (OIDUsuario, OID_notificacionEvento);
 
                 eventoCAD.Destroy (p_Evento_OID);
 

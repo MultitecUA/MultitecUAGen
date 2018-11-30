@@ -51,9 +51,9 @@ public void Modify (int p_Proyecto_OID, string p_nombre, string p_descripcion, S
                 int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Proyecto modificado", "El proyecto " + proyectoEN.Nombre + " ha sido modificado", proyectoEN.Id);
 
                 NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
-                UsuarioCAD usuarioCAD = new UsuarioCAD ();
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
 
-                foreach (UsuarioEN usuario in usuarioCAD.DameParticipantesProyecto (p_Proyecto_OID))
+                foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (p_Proyecto_OID))
                         notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacionProyecto);
 
 

@@ -186,6 +186,8 @@
 			
 			
 			
+			<Compile Include="CEN\MultitecUA\EventoCEN_PublicaEvento.cs" />
+			
 	<Compile Include="EN\MultitecUA\RecuerdoEN.cs" />
 	<Compile Include="CEN\MultitecUA\RecuerdoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IRecuerdoCAD.cs" />

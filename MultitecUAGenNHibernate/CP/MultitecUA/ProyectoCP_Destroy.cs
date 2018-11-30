@@ -57,9 +57,8 @@ public void Destroy (int p_Proyecto_OID)
                 int OID_notificacion = notificacionCEN.New_ ("Proyecto eliminado", "El proyecto " + proyectoEN.Nombre + " ha sido eliminado");
 
                 NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
-                UsuarioCAD usuarioCAD = new UsuarioCAD ();
 
-                foreach (UsuarioEN usuario in usuarioCAD.DameParticipantesProyecto (p_Proyecto_OID))
+                foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (p_Proyecto_OID))
                         notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacion);
 
                 proyectoCAD.Destroy (p_Proyecto_OID);

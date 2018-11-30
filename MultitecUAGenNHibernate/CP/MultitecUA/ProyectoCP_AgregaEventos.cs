@@ -37,19 +37,18 @@ public void AgregaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<
                 proyectoCEN = new  ProyectoCEN (proyectoCAD);
                 ProyectoEN proyectoEN = proyectoCAD.ReadOID (p_Proyecto_OID);
 
-                EventoCEN eventoCEN = new EventoCEN();
-                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
-                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-                UsuarioCAD usuarioCAD = new UsuarioCAD();
+                EventoCEN eventoCEN = new EventoCEN ();
+                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
 
-                foreach (int OID_Evento in p_eventosAsociados_OIDs)
-                {
-                    EventoEN eventoEN = eventoCEN.ReadOID(OID_Evento);
+                foreach (int OID_Evento in p_eventosAsociados_OIDs) {
+                        EventoEN eventoEN = eventoCEN.ReadOID (OID_Evento);
 
-                    int OID_notificacionProyecto = notificacionProyectoCEN.New_("Proyecto presentado a evento", "El proyecto " + proyectoEN.Nombre + " se ha presentado al evento " + eventoEN.Nombre, proyectoEN.Id);
+                        int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Proyecto presentado a evento", "El proyecto " + proyectoEN.Nombre + " se ha presentado al evento " + eventoEN.Nombre, proyectoEN.Id);
 
-                    foreach (UsuarioEN usuario in usuarioCAD.DameParticipantesProyecto(p_Proyecto_OID))
-                        notificacionUsuarioCEN.New_(usuario.Id, OID_notificacionProyecto);
+                        foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (p_Proyecto_OID))
+                                notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacionProyecto);
                 }
 
 

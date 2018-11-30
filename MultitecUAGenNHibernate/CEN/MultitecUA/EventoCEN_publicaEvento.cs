@@ -11,19 +11,22 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.CAD.MultitecUA;
 
 
-/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Noticia_dameNUltimasNoticias) ENABLED START*/
+/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Evento_publicaEvento) ENABLED START*/
 //  references to other libraries
 /*PROTECTED REGION END*/
 
 namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
-public partial class NoticiaCEN
+public partial class EventoCEN
 {
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN> DameNUltimasNoticias (int ? p_n)
+public void PublicaEvento (int p_oid)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Noticia_dameNUltimasNoticias_customized) START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Evento_publicaEvento) ENABLED START*/
 
-        return _INoticiaCAD.DameNUltimasNoticias (p_n);
+        // Write here your custom code...
+
+        throw new NotImplementedException ("Method PublicaEvento() not yet implemented.");
+
         /*PROTECTED REGION END*/
 }
 }

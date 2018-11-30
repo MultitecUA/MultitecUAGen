@@ -142,8 +142,8 @@ public static void InitializeData ()
                 Console.WriteLine ("Usuarios: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Miembro).Count);
                 Console.WriteLine ("Miembros de honor: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.MiembroHonor).Count);
 
-                Console.WriteLine("Proyectos totales: " + proyectoCEN.ReadAll(0, -1).Count);
-                Console.WriteLine("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID(OIDProyecto).Id);
+                Console.WriteLine ("Proyectos totales: " + proyectoCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID (OIDProyecto).Id);
 
                 /*CATEGORIA PROYECTO*/
                 CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN ();
@@ -170,19 +170,31 @@ public static void InitializeData ()
                 /*EVENTOS*/
                 EventoCEN eventoCEN = new EventoCEN ();
                 int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                int OIDEventoABorrar = eventoCEN.New_ ("EventoABorrar", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
                 EventoCP eventoCP = new EventoCP ();
-                eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
                 eventoCEN.AgregaCategorias (OIDEvento, listaCategoriasProyecto);
+                listaCategoriasProyecto.RemoveAt (0);
+                eventoCEN.EliminaCategorias (OIDEvento, listaCategoriasProyecto);
 
                 List<int> listaEventos = new List<int>();
-                listaEventos.Add(OIDEvento);
+                listaEventos.Add (OIDEvento);
+                listaEventos.Add (OIDEventoABorrar);
 
                 proyectoCP.AgregaEventos (OIDProyecto, listaEventos);
-                Console.WriteLine("Eventos por proyecto: " + eventoCEN.DameEventosPorProyecto (OIDProyecto).Count);
+                Console.WriteLine ("Eventos por proyecto: " + eventoCEN.DameEventosPorProyecto (OIDProyecto).Count);
 
-                Console.WriteLine("Proyectos por evento: " + proyectoCEN.DameProyectosPorEvento(OIDEvento).Count);
+                Console.WriteLine ("Proyectos por evento: " + proyectoCEN.DameProyectosPorEvento (OIDEvento).Count);
+                eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                eventoCP.Destroy (OIDEventoABorrar);
 
-                proyectoCP.EliminaEventos(OIDProyecto, listaEventos);
+                listaEventos.Remove (OIDEventoABorrar);
+
+                proyectoCP.EliminaEventos (OIDProyecto, listaEventos);
+
+                Console.WriteLine ("Eventos filtrados: " + eventoCEN.DameEventosFiltrados (-1, DateTime.Parse ("01/01/2030"), null).Count);
+
+                Console.WriteLine ("Eventos totales: " + eventoCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Evento con OID " + OIDEvento + ": " + eventoCEN.ReadOID (OIDEvento).Id);
 
                 /*SOLICITUD*/
                 SolicitudCEN solicitudCEN = new SolicitudCEN ();

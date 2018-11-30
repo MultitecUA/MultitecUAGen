@@ -105,6 +105,6 @@
 		  
 		  <query name="EventoENReadAllHQL">from EventoEN</query>
 		  <query name="EventoENdameEventosPorProyectoHQL"><![CDATA[select(en) FROM EventoEN en join en.ProyectosPresentados pro where pro.Id = :p_OID]]></query>
-		  <query name="EventoENdameEventosFiltradosHQL"><![CDATA[select (en) FROM EventoEN en]]></query>
+		  <query name="EventoENdameEventosFiltradosHQL"><![CDATA[select (en) FROM EventoEN en join en.CategoriasEventos cat where cat.Id = :p_categoria and en.FechaInicio < :p_fecha_anterior and en.FechaInicio > :p_fecha_posterior]]></query>
 		</hibernate-mapping>
 	

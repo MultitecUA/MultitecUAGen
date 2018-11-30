@@ -34,7 +34,7 @@ public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nul
         {
                 SessionInitializeTransaction ();
                 eventoCAD = new EventoCAD (session);
-                eventoCEN = new  EventoCEN (eventoCAD);
+                eventoCEN = new EventoCEN (eventoCAD);
 
 
 
@@ -50,6 +50,24 @@ public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nul
                 eventoEN.FechaInicioInscripcion = p_fechaInicioInscripcion;
                 eventoEN.FechaTopeInscripcion = p_fechaTopeInscripcion;
                 eventoEN.Fotos = p_fotos;
+
+
+                NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
+                int OID_notificacionEvento = notificacionEventoCEN.New_ ("Evento modificado", "El evento " + eventoEN.Nombre + " ha sido modificado", eventoEN.Id);
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN ();
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                List<int> OIDsParticipantes = new List<int>();
+
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorEvento (p_Evento_OID))
+                        foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (proyectoEN.Id))
+                                if (!OIDsParticipantes.Contains (usuario.Id))
+                                        OIDsParticipantes.Add (usuario.Id);
+
+                foreach (int OIDUsuario in OIDsParticipantes)
+                        notificacionUsuarioCEN.New_ (OIDUsuario, OID_notificacionEvento);
+
                 //Call to EventoCAD
 
                 eventoCAD.Modify (eventoEN);

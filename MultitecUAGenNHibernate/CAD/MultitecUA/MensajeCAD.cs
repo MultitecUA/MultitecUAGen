@@ -290,7 +290,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM MensajeEN self where select (en) FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario";
+                //String sql = @"FROM MensajeEN self where select (en) FROM MensajeEN en where en.UsuarioReceptor.Id = :p_oid_usuario and en.BandejaReceptor = :p_bandeja and en.Fecha < :p_fecha_anterior and en.Fecha > :p_fecha_posterior";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesPorReceptorFiltradosHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
@@ -323,7 +323,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM MensajeEN self where select (en) FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario";
+                //String sql = @"FROM MensajeEN self where select (en) FROM MensajeEN en where en.UsuarioAutor.Id = :p_oid_usuario and en.BandejaAutor = :p_bandeja and en.Fecha < :p_fecha_anterior and en.Fecha > :p_fecha_posterior";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesPorAutorFiltradosHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
