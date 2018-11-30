@@ -135,21 +135,18 @@ public int New_ (ProyectoEN proyecto)
         {
                 SessionInitializeTransaction ();
                 if (proyecto.UsuarioCreador != null) {
-                        // Argumento OID y no colección.
-                        proyecto.UsuarioCreador = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), proyecto.UsuarioCreador.Id);
+                    // Argumento OID y no colección.
+                    proyecto.UsuarioCreador = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load(typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), proyecto.UsuarioCreador.Id);
 
-                        proyecto.UsuarioCreador.ProyectosCreados
-                        .Add (proyecto);
+                    proyecto.UsuarioCreador.ProyectosCreados
+                    .Add(proyecto);
+
+                    proyecto.UsuarioCreador.ProyectosModerados.Add(proyecto);
+                    proyecto.UsuarioCreador.ProyectosPertenecientes.Add(proyecto);
+
+                    proyecto.UsuariosModeradores.Add(proyecto.UsuarioCreador);
+                    proyecto.UsuariosParticipantes.Add(proyecto.UsuarioCreador);
                 }
-
-                proyecto.UsuariosModeradores = new System.Collections.Generic.List<UsuarioEN>();
-                proyecto.UsuariosModeradores.Add(proyecto.UsuarioCreador);
-                proyecto.UsuariosModeradores[0].ProyectosModerados.Add(proyecto);
-
-
-                proyecto.UsuariosParticipantes = new System.Collections.Generic.List<UsuarioEN>();
-                proyecto.UsuariosParticipantes.Add(proyecto.UsuarioCreador);
-                proyecto.UsuariosParticipantes[0].ProyectosPertenecientes.Add(proyecto);
 
                 session.Save (proyecto);
                 SessionCommit ();

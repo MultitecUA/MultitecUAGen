@@ -236,6 +236,8 @@
 			
 			
 			
+			<Compile Include="CEN\MultitecUA\MensajeCEN_EnviarMensaje.cs" />
+			
 	<Compile Include="EN\MultitecUA\NotificacionEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionCAD.cs" />
@@ -297,6 +299,8 @@
 			
 			
 			
+			<Compile Include="CEN\MultitecUA\SolicitudCEN_EnviarSolicitud.cs" />
+			
 	<Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
@@ -342,6 +346,7 @@
 	<Compile Include="CAD\MultitecUA\INoticiaCAD.cs" />
 	<Compile Include="CAD\MultitecUA\NoticiaCAD.cs" />
 	<Compile Include="CP\MultitecUA\NoticiaCP.cs" />
+			<Compile Include="CEN\MultitecUA\NoticiaCEN_New_.cs" />
 			
 			
 			

@@ -13,7 +13,7 @@ using MultitecUAGenNHibernate.CEN.MultitecUA;
 
 
 
-/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CP.MultitecUA_Proyecto_eliminaEventos) ENABLED START*/
+/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CP.MultitecUA_Proyecto_agregaEvento) ENABLED START*/
 //  references to other libraries
 /*PROTECTED REGION END*/
 
@@ -21,9 +21,9 @@ namespace MultitecUAGenNHibernate.CP.MultitecUA
 {
 public partial class ProyectoCP : BasicCP
 {
-public void EliminaEventos (int p_Proyecto_OID, System.Collections.Generic.IList<int> p_eventosAsociados_OIDs)
+public void AgregaEvento (int p_Proyecto_OID, int p_eventoAsociado_OID)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CP.MultitecUA_Proyecto_eliminaEventos) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CP.MultitecUA_Proyecto_agregaEvento) ENABLED START*/
 
         IProyectoCAD proyectoCAD = null;
         ProyectoCEN proyectoCEN = null;
@@ -43,7 +43,7 @@ public void EliminaEventos (int p_Proyecto_OID, System.Collections.Generic.IList
 
                 //Call to ProyectoCAD
 
-                proyectoCAD.EliminaEventos (p_Proyecto_OID, p_eventosAsociados_OIDs);
+                proyectoCAD.AgregaEvento (p_Proyecto_OID, p_eventoAsociado_OID);
 
 
 

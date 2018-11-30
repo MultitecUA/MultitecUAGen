@@ -29,18 +29,9 @@ public void CambiarEstado (int p_Proyecto_OID, MultitecUAGenNHibernate.Enumerate
         proyectoEN = new ProyectoEN ();
         proyectoEN.Id = p_Proyecto_OID;
         proyectoEN.Estado = p_estado;
+        //Call to ProyectoCAD
 
-            NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
-            int OID_notificacionProyecto = notificacionProyectoCEN.New_("Proyecto modificado", "El proyecto ha pasado a estar " + p_estado.ToString(), proyectoEN.Id);
-
-            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-            UsuarioCAD usuarioCAD = new UsuarioCAD();
-
-            foreach (UsuarioEN usuario in usuarioCAD.DameParticipantesProyecto(p_Proyecto_OID))
-                notificacionUsuarioCEN.New_(usuario.Id, OID_notificacionProyecto);
-            //Call to ProyectoCAD
-
-            _IProyectoCAD.CambiarEstado (proyectoEN);
+        _IProyectoCAD.CambiarEstado (proyectoEN);
 
         /*PROTECTED REGION END*/
 }

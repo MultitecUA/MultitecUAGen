@@ -38,7 +38,7 @@ public void AgregaModeradores (int p_Proyecto_OID, System.Collections.Generic.IL
                 proyectoEN = proyectoCAD.ReadOIDDefault (p_Proyecto_OID);
 
                 NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
-                int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Nuevo moderador en el proyecto", "El proyecto " + proyectoEN.Nombre + " tiene un nuevo moderador", proyectoEN.Id);
+                int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Nuevos moderadores en el proyecto", "El proyecto " + proyectoEN.Nombre + " tiene nuevo(s) moderador(es)", proyectoEN.Id);
 
                 NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
                 UsuarioCAD usuarioCAD = new UsuarioCAD ();

@@ -11,206 +11,228 @@ using MultitecUAGenNHibernate.CEN.MultitecUA;
 /*PROTECTED REGION END*/
 namespace InitializeDB
 {
-    public class CreateDB
-    {
-        public static void Create(string databaseArg, string userArg, string passArg)
-        {
-            String database = databaseArg;
-            String user = userArg;
-            String pass = passArg;
+public class CreateDB
+{
+public static void Create (string databaseArg, string userArg, string passArg)
+{
+        String database = databaseArg;
+        String user = userArg;
+        String pass = passArg;
 
-            // Conex DB
-            SqlConnection cnn = new SqlConnection(@"Server=(local)\sqlexpress; database=master; integrated security=yes");
+        // Conex DB
+        SqlConnection cnn = new SqlConnection (@"Server=(local)\sqlexpress; database=master; integrated security=yes");
 
-            // Order T-SQL create user
-            String createUser = @"IF NOT EXISTS(SELECT name FROM master.dbo.syslogins WHERE name = '" + user + @"')
+        // Order T-SQL create user
+        String createUser = @"IF NOT EXISTS(SELECT name FROM master.dbo.syslogins WHERE name = '" + user + @"')
             BEGIN
-                CREATE LOGIN [" + user + @"] WITH PASSWORD=N'" + pass + @"', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
-            END";
+                CREATE LOGIN ["                                                                                                                                     + user + @"] WITH PASSWORD=N'" + pass + @"', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+            END"                                                                                                                                                                                                                                                                                    ;
 
-            //Order delete user if exist
-            String deleteDataBase = @"if exists(select * from sys.databases where name = '" + database + "') DROP DATABASE [" + database + "]";
-            //Order create databas
-            string createBD = "CREATE DATABASE " + database;
-            //Order associate user with database
-            String associatedUser = @"USE [" + database + "];CREATE USER [" + user + "] FOR LOGIN [" + user + "];USE [" + database + "];EXEC sp_addrolemember N'db_owner', N'" + user + "'";
-            SqlCommand cmd = null;
+        //Order delete user if exist
+        String deleteDataBase = @"if exists(select * from sys.databases where name = '" + database + "') DROP DATABASE [" + database + "]";
+        //Order create databas
+        string createBD = "CREATE DATABASE " + database;
+        //Order associate user with database
+        String associatedUser = @"USE [" + database + "];CREATE USER [" + user + "] FOR LOGIN [" + user + "];USE [" + database + "];EXEC sp_addrolemember N'db_owner', N'" + user + "'";
+        SqlCommand cmd = null;
 
-            try
-            {
+        try
+        {
                 // Open conex
-                cnn.Open();
+                cnn.Open ();
 
                 //Create user in SQLSERVER
-                cmd = new SqlCommand(createUser, cnn);
-                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand (createUser, cnn);
+                cmd.ExecuteNonQuery ();
 
                 //DELETE database if exist
-                cmd = new SqlCommand(deleteDataBase, cnn);
-                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand (deleteDataBase, cnn);
+                cmd.ExecuteNonQuery ();
 
                 //CREATE DB
-                cmd = new SqlCommand(createBD, cnn);
-                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand (createBD, cnn);
+                cmd.ExecuteNonQuery ();
 
                 //Associate user with db
-                cmd = new SqlCommand(associatedUser, cnn);
-                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand (associatedUser, cnn);
+                cmd.ExecuteNonQuery ();
 
-                System.Console.WriteLine("DataBase create sucessfully..");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (cnn.State == ConnectionState.Open)
-                {
-                    cnn.Close();
-                }
-            }
+                System.Console.WriteLine ("DataBase create sucessfully..");
         }
-
-        public static void InitializeData()
+        catch (Exception ex)
         {
-            /*PROTECTED REGION ID(initializeDataMethod) ENABLED START*/
-            try
-            {
+                throw ex;
+        }
+        finally
+        {
+                if (cnn.State == ConnectionState.Open) {
+                        cnn.Close ();
+                }
+        }
+}
+
+public static void InitializeData ()
+{
+        /*PROTECTED REGION ID(initializeDataMethod) ENABLED START*/
+        try
+        {
                 // Insert the initilizations of entities using the CEN classes
 
                 /*USUARIOS*/
-                UsuarioCEN usuarioCEN = new UsuarioCEN();
-                int OIDUsuario = usuarioCEN.New_("Judith", "12345", null, "judith@gmail.com", "BenhMM");
-                usuarioCEN.Modify(OIDUsuario, "Victor", "54321", "nedyar@hotmail.es", "Nedyar94", null);
-                Console.WriteLine("Login key: " + usuarioCEN.Login(OIDUsuario, "54321"));
-                //usuarioCEN.Destroy(OIDUsuario);
-                usuarioCEN.CambiarRol(OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador);
-                Console.WriteLine("Administradores: " + usuarioCEN.DameUsuariosPorRol(MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador).Count);
+                UsuarioCEN usuarioCEN = new UsuarioCEN ();
+                int OIDUsuario = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                usuarioCEN.Modify (OIDUsuario, "Victor", "54321", "nedyar@hotmail.es", "Nedyar94", null);
+                Console.WriteLine ("Login key: " + usuarioCEN.Login (OIDUsuario, "54321"));
+                int OIDUsuarioABorrar = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                usuarioCEN.Destroy (OIDUsuarioABorrar);
+                usuarioCEN.CambiarRol (OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador);
+                Console.WriteLine ("Administradores: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador).Count);
 
                 /*CATEGORIAS DE USUARIOS*/
-                CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+                CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN ();
 
                 List<int> OIDsCategorias = new List<int>();
-                int OIDCategoria = categoriaUsuarioCEN.New_("Programado");
-                categoriaUsuarioCEN.Modify(OIDCategoria, "Programador");
-                OIDsCategorias.Add(OIDCategoria);
-                OIDCategoria = categoriaUsuarioCEN.New_("Dise�ador");
-                OIDsCategorias.Add(OIDCategoria);
-                OIDCategoria = categoriaUsuarioCEN.New_("Puto Amo");
-                OIDsCategorias.Add(OIDCategoria);
+                int OIDCategoria = categoriaUsuarioCEN.New_ ("Programado");
+                categoriaUsuarioCEN.Modify (OIDCategoria, "Programador");
+                OIDsCategorias.Add (OIDCategoria);
+                OIDCategoria = categoriaUsuarioCEN.New_ ("Dise�ador");
+                OIDsCategorias.Add (OIDCategoria);
+                OIDCategoria = categoriaUsuarioCEN.New_ ("Puto Amo");
+                OIDsCategorias.Add (OIDCategoria);
 
-                categoriaUsuarioCEN.Modify(OIDCategoria, "Putisimo Amo");
+                categoriaUsuarioCEN.Modify (OIDCategoria, "Putisimo Amo");
                 //categoriaUsuarioCEN.Destroy(OIDCategoria);
 
-                usuarioCEN.AgregaCategorias(OIDUsuario, OIDsCategorias);
+                usuarioCEN.AgregaCategorias (OIDUsuario, OIDsCategorias);
 
-                OIDsCategorias.RemoveAt(2);
-                usuarioCEN.EliminaCategorias(OIDUsuario, OIDsCategorias);
+                OIDsCategorias.RemoveAt (2);
+                usuarioCEN.EliminaCategorias (OIDUsuario, OIDsCategorias);
 
-                Console.WriteLine("Usuarios por categoria: " + usuarioCEN.DameUsuariosPorCategoria(OIDCategoria).Count);
+                Console.WriteLine ("Usuarios por categoria: " + usuarioCEN.DameUsuariosPorCategoria (OIDCategoria).Count);
+
+                Console.WriteLine ("Usuarios totales: " + usuarioCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Usuario con OID " + OIDUsuario + ": " + usuarioCEN.ReadOID (OIDUsuario).Id);
 
                 /*PROYECTO*/
-                ProyectoCEN proyectoCEN = new ProyectoCEN();
-                int OIDProyecto = proyectoCEN.New_("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
-                ProyectoCP proyectoCP = new ProyectoCP();
-                int aux = usuarioCEN.New_("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
+                ProyectoCEN proyectoCEN = new ProyectoCEN ();
+                int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
+                ProyectoCP proyectoCP = new ProyectoCP ();
+                int OIDProyectoABorrar = proyectoCEN.New_ ("APPANICasdasd", "App que te ayuda en la vida", OIDUsuario, null);
+                proyectoCP.Destroy (OIDProyectoABorrar);
+                int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
+                usuarioCEN.CambiarRol (aux, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.MiembroHonor);
                 List<int> aaux = new List<int>();
-                aaux.Add(aux);
-                proyectoCP.AgregaParticipantes(OIDProyecto, aaux);
-                proyectoCP.AgregaModeradores(OIDProyecto, aaux);
-                proyectoCP.EliminaModeradores(OIDProyecto, aaux);
-                aaux[0] = usuarioCEN.New_("Judith", "12345", null, "judith@gmail.com", "BenhMM");
-                proyectoCP.AgregaParticipantes(OIDProyecto, aaux);
-                proyectoCP.EliminaParticipantes(OIDProyecto, aaux);
-                proyectoCP.Modify(OIDProyecto, "APPPanic", "App que te ayuda en la vida", null);
+                aaux.Add (aux);
+                proyectoCP.AgregaParticipantes (OIDProyecto, aaux);
+                proyectoCP.AgregaModeradores (OIDProyecto, aaux);
+                proyectoCP.EliminaModeradores (OIDProyecto, aaux);
+                aaux [0] = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
+                proyectoCP.AgregaParticipantes (OIDProyecto, aaux);
+                proyectoCP.EliminaParticipantes (OIDProyecto, aaux);
+                proyectoCP.Modify (OIDProyecto, "APPPanic", "App que te ayuda en la vida", null);
 
-                proyectoCEN.CambiarEstado(OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo);
-                Console.WriteLine("Proyectos por estado: " + proyectoCEN.DameProyectosPorEstado(MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo).Count);
+                proyectoCEN.CambiarEstado (OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo);
+                Console.WriteLine ("Proyectos por estado: " + proyectoCEN.DameProyectosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoProyectoEnum.EnDesarrollo).Count);
 
-                Console.WriteLine("Proyectos usuario pertenece: " + proyectoCEN.DameProyectosUsuarioPertenece(OIDUsuario).Count);
+                Console.WriteLine ("Proyectos usuario pertenece: " + proyectoCEN.DameProyectosUsuarioPertenece (OIDUsuario).Count);
 
-                Console.WriteLine("Participantes proyecto: " + usuarioCEN.DameParticipantesProyecto(OIDProyecto).Count);
-                Console.WriteLine("Moderadores proyecto: " + usuarioCEN.DameModeradoresProyecto(OIDProyecto).Count);
+                Console.WriteLine ("Participantes proyecto: " + usuarioCEN.DameParticipantesProyecto (OIDProyecto).Count);
+                Console.WriteLine ("Moderadores proyecto: " + usuarioCEN.DameModeradoresProyecto (OIDProyecto).Count);
+
+                Console.WriteLine ("Usuarios: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Miembro).Count);
+                Console.WriteLine ("Miembros de honor: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.MiembroHonor).Count);
+
+                Console.WriteLine("Proyectos totales: " + proyectoCEN.ReadAll(0, -1).Count);
+                Console.WriteLine("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID(OIDProyecto).Id);
 
                 /*CATEGORIA PROYECTO*/
-                CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+                CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN ();
 
                 List<int> listaCategoriasProyecto = new List<int>();
 
-                int OIDCategoriaProyecto = categoriaProyectoCEN.New_("Salu");
-                categoriaProyectoCEN.Modify(OIDCategoriaProyecto, "Salud");
-                listaCategoriasProyecto.Add(OIDCategoriaProyecto);
-                OIDCategoriaProyecto = categoriaProyectoCEN.New_("Tecnologico");
-                listaCategoriasProyecto.Add(OIDCategoriaProyecto);
-                OIDCategoriaProyecto = categoriaProyectoCEN.New_("Puto Amo2");
-                listaCategoriasProyecto.Add(OIDCategoriaProyecto);
-                proyectoCEN.AgregaCategoriasProyecto(OIDProyecto, listaCategoriasProyecto);
+                int OIDCategoriaProyecto = categoriaProyectoCEN.New_ ("Salu");
+                categoriaProyectoCEN.Modify (OIDCategoriaProyecto, "Salud");
+                listaCategoriasProyecto.Add (OIDCategoriaProyecto);
+                OIDCategoriaProyecto = categoriaProyectoCEN.New_ ("Tecnologico");
+                listaCategoriasProyecto.Add (OIDCategoriaProyecto);
+                OIDCategoriaProyecto = categoriaProyectoCEN.New_ ("Puto Amo2");
+                listaCategoriasProyecto.Add (OIDCategoriaProyecto);
+                proyectoCEN.AgregaCategoriasProyecto (OIDProyecto, listaCategoriasProyecto);
 
-                listaCategoriasProyecto.RemoveAt(2);
-                proyectoCEN.EliminaCategoriasProyecto(OIDProyecto, listaCategoriasProyecto);
-                Console.WriteLine("Proyectos por categoria: " + proyectoCEN.DameProyectosPorCategoria(OIDCategoriaProyecto).Count);
+                listaCategoriasProyecto.RemoveAt (2);
+                proyectoCEN.EliminaCategoriasProyecto (OIDProyecto, listaCategoriasProyecto);
+                Console.WriteLine ("Proyectos por categoria: " + proyectoCEN.DameProyectosPorCategoria (OIDCategoriaProyecto).Count);
 
-                proyectoCEN.AgregaCategoriasUsuario(OIDProyecto, OIDsCategorias);
-                OIDsCategorias.RemoveAt(0);
-                proyectoCEN.EliminaCategoriasUsuario(OIDProyecto, OIDsCategorias);
+                proyectoCEN.AgregaCategoriasUsuario (OIDProyecto, OIDsCategorias);
+                OIDsCategorias.RemoveAt (0);
+                proyectoCEN.EliminaCategoriasUsuario (OIDProyecto, OIDsCategorias);
 
                 /*EVENTOS*/
-                EventoCEN eventoCEN = new EventoCEN();
-                int OIDEvento = eventoCEN.New_("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                EventoCP eventoCP = new EventoCP();
-                eventoCP.Modify(OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                eventoCEN.AgregaCategorias(OIDEvento, listaCategoriasProyecto);
+                EventoCEN eventoCEN = new EventoCEN ();
+                int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                EventoCP eventoCP = new EventoCP ();
+                eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                eventoCEN.AgregaCategorias (OIDEvento, listaCategoriasProyecto);
+
+                List<int> listaEventos = new List<int>();
+                listaEventos.Add(OIDEvento);
+
+                proyectoCP.AgregaEventos (OIDProyecto, listaEventos);
+                Console.WriteLine("Eventos por proyecto: " + eventoCEN.DameEventosPorProyecto (OIDProyecto).Count);
+
+                Console.WriteLine("Proyectos por evento: " + proyectoCEN.DameProyectosPorEvento(OIDEvento).Count);
+
+                proyectoCP.EliminaEventos(OIDProyecto, listaEventos);
 
                 /*SOLICITUD*/
-                SolicitudCEN solicitudCEN = new SolicitudCEN();
-                int OIDSolicitud = solicitudCEN.New_(OIDUsuario, OIDProyecto);
-                solicitudCEN.Aceptar(OIDSolicitud);
-                solicitudCEN.Rechazar(OIDSolicitud);
+                SolicitudCEN solicitudCEN = new SolicitudCEN ();
+                int OIDSolicitud = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
+                solicitudCEN.Aceptar (OIDSolicitud);
+                solicitudCEN.Rechazar (OIDSolicitud);
 
                 /*MENSAJES*/
-                MensajeCEN mensajeCEN = new MensajeCEN();
-                int OIDMensaje = mensajeCEN.New_("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDUsuario, null);
+                MensajeCEN mensajeCEN = new MensajeCEN ();
+                int OIDMensaje = mensajeCEN.New_ ("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDUsuario, null);
 
                 /*SERVICIOS*/
-                ServicioCEN servicioCEN = new ServicioCEN();
-                int OIDServicio = servicioCEN.New_("Hosting", "Servicio de alojamiento web", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
-                servicioCEN.Modify(OIDServicio, "Hosting Ilimitado", "Servicio de alojamiento web sin limites", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+                ServicioCEN servicioCEN = new ServicioCEN ();
+                int OIDServicio = servicioCEN.New_ ("Hosting", "Servicio de alojamiento web", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+                servicioCEN.Modify (OIDServicio, "Hosting Ilimitado", "Servicio de alojamiento web sin limites", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
 
 
                 /*NOTIFICACION
-                * NotificacionCEN notificacionCEN = new NotificacionCEN ();
-                * int OIDNotificacion = notificacionCEN.New_ ("Notificacion1", "esto es una notificacion");
-                *
-                * /*NOTIFICACION SOLICITUD
-                * NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN ();
-                * int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_ ("NotificacionSolicitud1", "mensaje", OIDSolicitud);
-                *
-                * /*NOTIFICACIONMENSAJE
-                * NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
-                * int OIDNoificacionMensaje = notificacionMensajeCEN.New_ ("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", OIDMensaje);
-                *
-                * /*NOTIFICACION PROYECTO
-                * NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
-                * int OIDNotificacionProyecto = notificacionProyectoCEN.New_ ("NotificacionProyecto1", "mensaje", OIDProyecto);
-                *
-                * /*NOTIFICACION EVENTO
-                * NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
-                * int OIDNotificacionEvento = notificacionEventoCEN.New_ ("NotificacionEvento1", "mensaje loco de evento", OIDEvento);
-                *
-                * /*NOTIFICACION USUARIO
-                * NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
-                * int OIDNotificacionUsuario = notificacionUsuarioCEN.New_ (OIDUsuario, OIDNotificacion);*/
+                 * NotificacionCEN notificacionCEN = new NotificacionCEN ();
+                 * int OIDNotificacion = notificacionCEN.New_ ("Notificacion1", "esto es una notificacion");
+                 *
+                 * /*NOTIFICACION SOLICITUD
+                 * NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN ();
+                 * int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_ ("NotificacionSolicitud1", "mensaje", OIDSolicitud);
+                 *
+                 * /*NOTIFICACIONMENSAJE
+                 * NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
+                 * int OIDNoificacionMensaje = notificacionMensajeCEN.New_ ("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", OIDMensaje);
+                 *
+                 * /*NOTIFICACION PROYECTO
+                 * NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
+                 * int OIDNotificacionProyecto = notificacionProyectoCEN.New_ ("NotificacionProyecto1", "mensaje", OIDProyecto);
+                 *
+                 * /*NOTIFICACION EVENTO
+                 * NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
+                 * int OIDNotificacionEvento = notificacionEventoCEN.New_ ("NotificacionEvento1", "mensaje loco de evento", OIDEvento);
+                 *
+                 * /*NOTIFICACION USUARIO
+                 * NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                 * int OIDNotificacionUsuario = notificacionUsuarioCEN.New_ (OIDUsuario, OIDNotificacion);*/
 
                 /*RECUERDO*/
-                RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
-                int OIDRecuerdo = recuerdoCEN.New_("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
-                recuerdoCEN.Modify(OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
+                RecuerdoCEN recuerdoCEN = new RecuerdoCEN ();
+                int OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
+                recuerdoCEN.Modify (OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
 
 
 
 
-                Console.WriteLine("Todo ha ido bien");
+                Console.WriteLine ("Todo ha ido bien");
 
                 // p.e. CustomerCEN customer = new CustomerCEN();
                 // customer.New_ (p_user:"user", p_password:"1234");
@@ -218,12 +240,12 @@ namespace InitializeDB
 
 
                 /*PROTECTED REGION END*/
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.InnerException);
-                throw ex;
-            }
         }
-    }
+        catch (Exception ex)
+        {
+                System.Console.WriteLine (ex.InnerException);
+                throw ex;
+        }
+}
+}
 }
