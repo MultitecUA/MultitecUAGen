@@ -202,31 +202,6 @@ public void Modify (UsuarioEN usuario)
                 SessionClose ();
         }
 }
-public void Destroy (int id
-                     )
-{
-        try
-        {
-                SessionInitializeTransaction ();
-                UsuarioEN usuarioEN = (UsuarioEN)session.Load (typeof(UsuarioEN), id);
-                session.Delete (usuarioEN);
-                SessionCommit ();
-        }
-
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
-        }
-
-
-        finally
-        {
-                SessionClose ();
-        }
-}
-
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameModeradoresProyecto (int p_ID)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;

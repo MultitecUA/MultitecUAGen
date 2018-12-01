@@ -61,6 +61,12 @@ public void Destroy (int p_Proyecto_OID)
                 foreach (UsuarioEN usuario in usuarioCEN.DameParticipantesProyecto (p_Proyecto_OID))
                         notificacionUsuarioCEN.New_ (usuario.Id, OID_notificacion);
 
+                SolicitudCEN solicitudCEN = new SolicitudCEN ();
+                foreach (SolicitudEN solicitud in solicitudCEN.DameSolicitudesPorProyectoYEstado (p_Proyecto_OID, Enumerated.MultitecUA.EstadoSolicitudEnum.Pendiente)) {
+                        notificacionUsuarioCEN.New_ (solicitud.UsuarioSolicitante.Id, OID_notificacion);
+                }
+
+
                 proyectoCAD.Destroy (p_Proyecto_OID);
 
 

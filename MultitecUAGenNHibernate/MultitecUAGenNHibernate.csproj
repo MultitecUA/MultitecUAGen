@@ -127,7 +127,6 @@
 			
 			
 			
-			
 			<Compile Include="CEN\MultitecUA\UsuarioCEN_CambiarRol.cs" />
 			
 			
@@ -247,6 +246,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionCP_Destroy.cs" />
 			
 			
 			
@@ -257,6 +257,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionUsuarioCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionUsuarioCP_Destroy.cs" />
 			
 			<Compile Include="CEN\MultitecUA\NotificacionUsuarioCEN_LeerNotificacion.cs" />
 			
@@ -271,6 +272,7 @@
 	<Compile Include="CP\MultitecUA\CategoriaProyectoCP.cs" />
 			
 			
+			<Compile Include="CP\MultitecUA\CategoriaProyectoCP_Destroy.cs" />
 			
 			
 			
@@ -281,6 +283,7 @@
 	<Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
 			
 			
+			<Compile Include="CP\MultitecUA\CategoriaUsuarioCP_Destroy.cs" />
 			
 			
 			
@@ -303,6 +306,7 @@
 			
 			<Compile Include="CEN\MultitecUA\SolicitudCEN_EnviarSolicitud.cs" />
 			
+			
 	<Compile Include="EN\MultitecUA\NotificacionProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\INotificacionProyectoCAD.cs" />
@@ -310,6 +314,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionProyectoCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionProyectoCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionProyectoCP_Destroy.cs" />
 			
 			
 			
@@ -320,6 +325,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionMensajeCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionMensajeCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionMensajeCP_Destroy.cs" />
 			
 			
 			
@@ -330,6 +336,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionEventoCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionEventoCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionEventoCP_Destroy.cs" />
 			
 			
 			
@@ -340,6 +347,7 @@
 	<Compile Include="CP\MultitecUA\NotificacionSolicitudCP.cs" />
 			<Compile Include="CEN\MultitecUA\NotificacionSolicitudCEN_New_.cs" />
 			
+			<Compile Include="CP\MultitecUA\NotificacionSolicitudCP_Destroy.cs" />
 			
 			
 			

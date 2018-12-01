@@ -51,9 +51,9 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
 {
         return _ISolicitudCAD.DameSolicidudesPorUsuarioYProyecto (p_proyecto, p_usuario);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDe (int p_proyecto, int p_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDeUsuario (int p_proyecto, int p_usuario)
 {
-        return _ISolicitudCAD.DameSolicitudesPendientesPorProyectoDe (p_proyecto, p_usuario);
+        return _ISolicitudCAD.DameSolicitudesPendientesPorProyectoDeUsuario (p_proyecto, p_usuario);
 }
 public SolicitudEN ReadOID (int id
                             )
@@ -70,6 +70,11 @@ public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int siz
 
         list = _ISolicitudCAD.ReadAll (first, size);
         return list;
+}
+public void Destroy (int id
+                     )
+{
+        _ISolicitudCAD.Destroy (id);
 }
 }
 }

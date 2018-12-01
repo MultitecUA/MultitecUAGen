@@ -67,12 +67,6 @@ public void Modify (int p_CategoriaProyecto_OID, string p_nombre)
         _ICategoriaProyectoCAD.Modify (categoriaProyectoEN);
 }
 
-public void Destroy (int id
-                     )
-{
-        _ICategoriaProyectoCAD.Destroy (id);
-}
-
 public CategoriaProyectoEN ReadOID (int id
                                     )
 {

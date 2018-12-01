@@ -39,12 +39,6 @@ public INotificacionUsuarioCAD get_INotificacionUsuarioCAD ()
         return this._INotificacionUsuarioCAD;
 }
 
-public void Destroy (int id
-                     )
-{
-        _INotificacionUsuarioCAD.Destroy (id);
-}
-
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN> DameNotificacionesPorUsuario (int p_oid_usuario)
 {
         return _INotificacionUsuarioCAD.DameNotificacionesPorUsuario (p_oid_usuario);

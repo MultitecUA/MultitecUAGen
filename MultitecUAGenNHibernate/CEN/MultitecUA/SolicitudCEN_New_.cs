@@ -24,7 +24,7 @@ public int New_ (int p_usuarioSolicitante, int p_proyectoSolicitado)
         /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Solicitud_new__customized) ENABLED START*/
         SolicitudCAD solicitudCAD = new SolicitudCAD ();
 
-        if (solicitudCAD.DameSolicitudesPendientesPorProyectoDe (p_proyectoSolicitado, p_usuarioSolicitante).Count == 0) {
+        if (solicitudCAD.DameSolicitudesPendientesPorProyectoDeUsuario (p_proyectoSolicitado, p_usuarioSolicitante).Count == 0) {
                 SolicitudEN solicitudEN = null;
 
                 int oid;

@@ -83,8 +83,8 @@ public static void InitializeData ()
                 int OIDUsuario = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
                 usuarioCEN.Modify (OIDUsuario, "Victor", "54321", "nedyar@hotmail.es", "Nedyar94", null);
                 Console.WriteLine ("Login key: " + usuarioCEN.Login (OIDUsuario, "54321"));
-                int OIDUsuarioABorrar = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
-                usuarioCEN.Destroy (OIDUsuarioABorrar);
+                //int OIDUsuarioABorrar = usuarioCEN.New_ ("Judith", "12345", null, "juditsdfh@gmail.com", "BenhasdfasdfMM");
+                // en lugar de destroy tiene cambiar rol usuarioCEN.Destroy (OIDUsuarioABorrar);
                 usuarioCEN.CambiarRol (OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador);
                 Console.WriteLine ("Administradores: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador).Count);
 
@@ -112,13 +112,18 @@ public static void InitializeData ()
 
                 Console.WriteLine ("Usuarios totales: " + usuarioCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Usuario con OID " + OIDUsuario + ": " + usuarioCEN.ReadOID (OIDUsuario).Id);
+                Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
+
+                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP ();
+                categoriaUsuarioCP.Destroy (OIDCategoria);
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
                 int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
                 ProyectoCP proyectoCP = new ProyectoCP ();
                 int OIDProyectoABorrar = proyectoCEN.New_ ("APPANICasdasd", "App que te ayuda en la vida", OIDUsuario, null);
-                proyectoCP.Destroy (OIDProyectoABorrar);
+
                 int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
                 usuarioCEN.CambiarRol (aux, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.MiembroHonor);
                 List<int> aaux = new List<int>();
@@ -142,8 +147,10 @@ public static void InitializeData ()
                 Console.WriteLine ("Usuarios: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Miembro).Count);
                 Console.WriteLine ("Miembros de honor: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.MiembroHonor).Count);
 
-                Console.WriteLine ("Proyectos totales: " + proyectoCEN.ReadAll (0, -1).Count);
+
                 Console.WriteLine ("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID (OIDProyecto).Id);
+
+
 
                 /*CATEGORIA PROYECTO*/
                 CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN ();
@@ -166,6 +173,16 @@ public static void InitializeData ()
                 proyectoCEN.AgregaCategoriasUsuario (OIDProyecto, OIDsCategorias);
                 OIDsCategorias.RemoveAt (0);
                 proyectoCEN.EliminaCategoriasUsuario (OIDProyecto, OIDsCategorias);
+
+                Console.WriteLine ("Categorias Proyecto totales: " + categoriaProyectoCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Categoria Proyecto con OID " + OIDCategoriaProyecto + ": " + categoriaProyectoCEN.ReadOID (OIDCategoriaProyecto).Id);
+
+
+
+                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP ();
+                categoriaProyectoCP.Destroy (OIDCategoriaProyecto);
+
+
 
                 /*EVENTOS*/
                 EventoCEN eventoCEN = new EventoCEN ();
@@ -201,6 +218,11 @@ public static void InitializeData ()
                 int OIDSolicitud = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
                 solicitudCEN.Aceptar (OIDSolicitud);
                 solicitudCEN.Rechazar (OIDSolicitud);
+                //OIDSolicitud = solicitudCEN.New_(OIDUsuario, OIDProyecto);
+
+                Console.WriteLine ("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID (OIDProyecto).Id);
+                proyectoCP.Destroy (OIDProyecto);
+                Console.WriteLine ("Proyectos totales: " + proyectoCEN.ReadAll (0, -1).Count);
 
                 /*MENSAJES*/
                 MensajeCEN mensajeCEN = new MensajeCEN ();

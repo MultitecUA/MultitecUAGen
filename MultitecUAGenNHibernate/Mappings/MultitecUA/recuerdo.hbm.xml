@@ -43,6 +43,6 @@
 		 </class>	
 		  
 		  <query name="RecuerdoENReadAllHQL">from RecuerdoEN</query>
-		  <query name="RecuerdoENdameRecuerdosPorProyectoHQL"><![CDATA[select (en) FROM RecuerdoEN en where en.EventoRecordado = :p_OID]]></query>
+		  <query name="RecuerdoENdameRecuerdosPorProyectoHQL"><![CDATA[select (en) FROM RecuerdoEN en where en.EventoRecordado.Id = :p_OID]]></query>
 		</hibernate-mapping>
 	

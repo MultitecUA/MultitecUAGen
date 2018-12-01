@@ -20,10 +20,6 @@ int New_ (UsuarioEN usuario);
 void Modify (UsuarioEN usuario);
 
 
-void Destroy (int id
-              );
-
-
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameModeradoresProyecto (int p_ID);
 

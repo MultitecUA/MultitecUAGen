@@ -39,12 +39,6 @@ public INotificacionProyectoCAD get_INotificacionProyectoCAD ()
         return this._INotificacionProyectoCAD;
 }
 
-public void Destroy (int id
-                     )
-{
-        _INotificacionProyectoCAD.Destroy (id);
-}
-
 public NotificacionProyectoEN ReadOID (int id
                                        )
 {

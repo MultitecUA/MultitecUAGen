@@ -39,12 +39,6 @@ public IUsuarioCAD get_IUsuarioCAD ()
         return this._IUsuarioCAD;
 }
 
-public void Destroy (int id
-                     )
-{
-        _IUsuarioCAD.Destroy (id);
-}
-
 public string Login (int p_Usuario_OID, string p_pass)
 {
         string result = null;

@@ -251,7 +251,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDe (int p_proyecto, int p_usuario)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> DameSolicitudesPendientesPorProyectoDeUsuario (int p_proyecto, int p_usuario)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN> result;
         try
@@ -259,7 +259,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.So
                 SessionInitializeTransaction ();
                 //String sql = @"FROM SolicitudEN self where select (en) FROM SolicitudEN en where en.ProyectoSolicitado.Id = :p_proyecto and en.UsuarioSolicitante.Id = :p_usuario and en.Estado = 1";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicitudesPendientesPorProyectoDeHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("SolicitudENdameSolicitudesPendientesPorProyectoDeUsuarioHQL");
                 query.SetParameter ("p_proyecto", p_proyecto);
                 query.SetParameter ("p_usuario", p_usuario);
 
@@ -340,6 +340,31 @@ public System.Collections.Generic.IList<SolicitudEN> ReadAll (int first, int siz
         }
 
         return result;
+}
+
+public void Destroy (int id
+                     )
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                SolicitudEN solicitudEN = (SolicitudEN)session.Load (typeof(SolicitudEN), id);
+                session.Delete (solicitudEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in SolicitudCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
 }
 }
 }

@@ -215,7 +215,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Re
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM RecuerdoEN self where select (en) FROM RecuerdoEN en where en.EventoRecordado = :p_OID";
+                //String sql = @"FROM RecuerdoEN self where select (en) FROM RecuerdoEN en where en.EventoRecordado.Id = :p_OID";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("RecuerdoENdameRecuerdosPorProyectoHQL");
                 query.SetParameter ("p_OID", p_OID);
