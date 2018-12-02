@@ -284,7 +284,7 @@ public void CambiarEstado (MensajeEN mensaje)
                 SessionClose ();
         }
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorFiltrados (int p_oid_usuario, Nullable<DateTime> p_fecha_anterior, Nullable<DateTime> p_fecha_posteror, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum ? p_bandeja)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorFiltrados (int p_oid_usuario, Nullable<DateTime> p_fecha_anterior, Nullable<DateTime> p_fecha_posterior, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum ? p_bandeja)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> result;
         try
@@ -295,7 +295,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Me
                 IQuery query = (IQuery)session.GetNamedQuery ("MensajeENdameMensajesPorReceptorFiltradosHQL");
                 query.SetParameter ("p_oid_usuario", p_oid_usuario);
                 query.SetParameter ("p_fecha_anterior", p_fecha_anterior);
-                query.SetParameter ("p_fecha_posteror", p_fecha_posteror);
+                query.SetParameter ("p_fecha_posterior", p_fecha_posterior);
                 query.SetParameter ("p_bandeja", p_bandeja);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN>();

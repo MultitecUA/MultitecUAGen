@@ -228,6 +228,29 @@ public static void InitializeData ()
                 MensajeCEN mensajeCEN = new MensajeCEN ();
                 int OIDMensaje = mensajeCEN.New_ ("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDUsuario, null);
 
+                Console.WriteLine("Mensajes por receptor: " + mensajeCEN.DameMensajesPorReceptor(OIDUsuario).Count);
+
+                Console.WriteLine("Mensajes por autor: " + mensajeCEN.DameMensajesPorAutor(OIDUsuario).Count);
+
+                mensajeCEN.CambiarEstado(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum.Leido);
+
+                Console.WriteLine("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+
+                mensajeCEN.CambiarBandejaAutor(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
+                mensajeCEN.CambiarBandejaReceptor(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
+
+                Console.WriteLine("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+
+                mensajeCEN.EnviarMensaje(OIDMensaje);
+
+                Console.WriteLine("Mensajes totales: " + mensajeCEN.ReadAll(0, -1).Count);
+                Console.WriteLine("Mensajes con OID " + OIDMensaje + ": " + mensajeCEN.ReadOID(OIDMensaje).Id);
+
+                mensajeCEN.Destroy(OIDMensaje);
+
+
                 /*SERVICIOS*/
                 ServicioCEN servicioCEN = new ServicioCEN ();
                 int OIDServicio = servicioCEN.New_ ("Hosting", "Servicio de alojamiento web", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
