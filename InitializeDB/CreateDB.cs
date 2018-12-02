@@ -202,7 +202,7 @@ public static void InitializeData ()
 
                 Console.WriteLine ("Proyectos por evento: " + proyectoCEN.DameProyectosPorEvento (OIDEvento).Count);
                 eventoCP.Modify (OIDEvento, "Evento", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                eventoCP.Destroy (OIDEventoABorrar);
+                //eventoCP.Destroy (OIDEventoABorrar);
 
                 listaEventos.Remove (OIDEventoABorrar);
 
@@ -263,7 +263,7 @@ public static void InitializeData ()
                 int OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
                 recuerdoCEN.Modify (OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
 
-
+                eventoCP.Destroy (OIDEvento);
 
 
                 Console.WriteLine ("Todo ha ido bien");

@@ -39,5 +39,9 @@ EventoEN ReadOID (int id
 
 
 System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size);
+
+
+
+void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Generic.IList<int> p_proyectosPresentados_OIDs);
 }
 }

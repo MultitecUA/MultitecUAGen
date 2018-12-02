@@ -39,7 +39,7 @@ public void Destroy (int p_Evento_OID)
                 eventoEN = eventoCAD.ReadOID (p_Evento_OID);
 
                 NotificacionCEN notificacionCEN = new NotificacionCEN ();
-                int OID_notificacionEvento = notificacionCEN.New_ ("Evento eliminado", "El evento " + eventoEN.Nombre + " ha sido eliminado");
+                int OID_notificacionEvento = notificacionCEN.New_ ("Evento eliminado", "El evento " + eventoEN.Nombre + " ha sido cancelado");
 
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
                 UsuarioCEN usuarioCEN = new UsuarioCEN ();
@@ -54,6 +54,15 @@ public void Destroy (int p_Evento_OID)
 
                 foreach (int OIDUsuario in OIDsParticipantes)
                         notificacionUsuarioCEN.New_ (OIDUsuario, OID_notificacionEvento);
+
+                // Eliminar todos las relaciones entre proyectos presentados a este evento
+                ProyectoCP proyectoCP = new ProyectoCP ();
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorEvento(p_Evento_OID))
+                {
+                    proyectoCP.EliminaEventos(proyectoEN.Id, new List<int> { p_Evento_OID });
+                }
+
+                
 
                 eventoCAD.Destroy (p_Evento_OID);
 

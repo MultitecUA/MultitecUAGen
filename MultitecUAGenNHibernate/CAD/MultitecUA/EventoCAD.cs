@@ -427,5 +427,44 @@ public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
 
         return result;
 }
+
+public void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Generic.IList<int> p_proyectosPresentados_OIDs)
+{
+        try
+        {
+                SessionInitializeTransaction ();
+                MultitecUAGenNHibernate.EN.MultitecUA.EventoEN eventoEN = null;
+                eventoEN = (EventoEN)session.Load (typeof(EventoEN), p_Evento_OID);
+
+                MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN proyectosPresentadosENAux = null;
+                if (eventoEN.ProyectosPresentados != null) {
+                        foreach (int item in p_proyectosPresentados_OIDs) {
+                                proyectosPresentadosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN), item);
+                                if (eventoEN.ProyectosPresentados.Contains (proyectosPresentadosENAux) == true) {
+                                        eventoEN.ProyectosPresentados.Remove (proyectosPresentadosENAux);
+                                        proyectosPresentadosENAux.EventosAsociados.Remove (eventoEN);
+                                }
+                                else
+                                        throw new ModelException ("The identifier " + item + " in p_proyectosPresentados_OIDs you are trying to unrelationer, doesn't exist in EventoEN");
+                        }
+                }
+
+                session.Update (eventoEN);
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+}
 }
 }
