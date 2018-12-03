@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.CEN.MultitecUA;
+using MultitecUAGenNHibernate.EN.MultitecUA;
 
 /*PROTECTED REGION END*/
 namespace InitializeDB
@@ -255,6 +256,26 @@ public static void InitializeData ()
                 ServicioCEN servicioCEN = new ServicioCEN ();
                 int OIDServicio = servicioCEN.New_ ("Hosting", "Servicio de alojamiento web", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
                 servicioCEN.Modify (OIDServicio, "Hosting Ilimitado", "Servicio de alojamiento web sin limites", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+                OIDServicio = servicioCEN.New_ ("Prueba", "Probando el insertar mas servicios para ver si funciona la fecha", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.NoDisponible, null);
+                OIDServicio = servicioCEN.New_ ("Borrar", "Pues... Aqui voy a probar que funcione el destroy", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+                servicioCEN.Destroy (OIDServicio);
+                OIDServicio = servicioCEN.New_ ("Borrar2", "Este realmente se va a quedar", MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.Disponible, null);
+                IList<ServicioEN> listaServicios = servicioCEN.ReadAll (0, -1);
+                Console.WriteLine ("**** LISTANDO LOS SERVICIOS");
+                foreach (ServicioEN elemento in listaServicios) {
+                        Console.WriteLine (elemento.Nombre + " " + elemento.Estado);
+                }
+                servicioCEN.CambiarDisponibilidad (OIDServicio, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.NoDisponible);
+                listaServicios = servicioCEN.ReadAll (0, -1);
+                Console.WriteLine ("**** LISTANDO LOS SERVICIOS");
+                foreach (ServicioEN elemento in listaServicios) {
+                        Console.WriteLine (elemento.Nombre + " " + elemento.Estado);
+                }
+                IList<ServicioEN> listaServiciosNoDispo = servicioCEN.DameServiciosPorEstado (MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum.NoDisponible);
+                Console.WriteLine ("********* SERVICIOS NO DISPONIBLES");
+                foreach (ServicioEN elemento in listaServiciosNoDispo) {
+                        Console.WriteLine (elemento.Nombre + " " + elemento.Estado);
+                }
 
 
                 /*NOTIFICACION
@@ -285,6 +306,17 @@ public static void InitializeData ()
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN ();
                 int OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
                 recuerdoCEN.Modify (OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
+                OIDRecuerdo = recuerdoCEN.New_("Recuerdo2", "Este es un segundo recuerdo", OIDEvento, null);
+                OIDRecuerdo = recuerdoCEN.New_("Recuerdo3", "Haciendo mas recuerdos", OIDEvento, null);
+                OIDRecuerdo = recuerdoCEN.New_("Recuerdo4", "Otro recuerdo", OIDEvento, null);
+
+        
+                IList<RecuerdoEN> listaRecuerdosFiltro = recuerdoCEN.DameRecuerdosPorProyecto(OIDEvento);
+                Console.WriteLine("**** FILTRO DE RECUERDOS ******");
+                foreach (RecuerdoEN elemento in listaRecuerdosFiltro)
+                {
+                    Console.WriteLine(elemento.Titulo +": "+ elemento.Cuerpo);
+                }
 
                 eventoCP.Destroy (OIDEvento);
 
