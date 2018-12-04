@@ -21,14 +21,9 @@ public partial class MensajeCEN
 {
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.MensajeEN> DameMensajesPorReceptorFiltrados (int p_oid_usuario, Nullable<DateTime> p_fecha_anterior, Nullable<DateTime> p_fecha_posterior, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum ? p_bandeja)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_dameMensajesPorReceptorFiltrados_customized) START*/
-            if (p_fecha_anterior == null)
-                p_fecha_anterior = DateTime.Parse("01/01/9999");
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_dameMensajesPorReceptorFiltrados_customized) START*/
 
-            if (p_fecha_posterior == null)
-                p_fecha_posterior = DateTime.Parse("01/01/1753");
-
-            return _IMensajeCAD.DameMensajesPorReceptorFiltrados (p_oid_usuario, p_fecha_anterior, p_fecha_posterior, p_bandeja);
+        return _IMensajeCAD.DameMensajesPorReceptorFiltrados (p_oid_usuario, p_fecha_anterior, p_fecha_posterior, p_bandeja);
         /*PROTECTED REGION END*/
 }
 }

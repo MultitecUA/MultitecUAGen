@@ -39,22 +39,6 @@ public INoticiaCAD get_INoticiaCAD ()
         return this._INoticiaCAD;
 }
 
-public void Modify (int p_Noticia_OID, string p_titulo, string p_cuerpo, string p_foto, Nullable<DateTime> p_fecha)
-{
-        NoticiaEN noticiaEN = null;
-
-        //Initialized NoticiaEN
-        noticiaEN = new NoticiaEN ();
-        noticiaEN.Id = p_Noticia_OID;
-        noticiaEN.Titulo = p_titulo;
-        noticiaEN.Cuerpo = p_cuerpo;
-        noticiaEN.Foto = p_foto;
-        noticiaEN.Fecha = p_fecha;
-        //Call to NoticiaCAD
-
-        _INoticiaCAD.Modify (noticiaEN);
-}
-
 public void Destroy (int id
                      )
 {

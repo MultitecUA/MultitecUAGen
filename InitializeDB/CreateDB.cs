@@ -229,27 +229,27 @@ public static void InitializeData ()
                 MensajeCEN mensajeCEN = new MensajeCEN ();
                 int OIDMensaje = mensajeCEN.New_ ("Esto es un mensaje", "Mi primerito mensaje", OIDUsuario, OIDUsuario, null);
 
-                Console.WriteLine("Mensajes por receptor: " + mensajeCEN.DameMensajesPorReceptor(OIDUsuario).Count);
+                Console.WriteLine ("Mensajes por receptor: " + mensajeCEN.DameMensajesPorReceptor (OIDUsuario).Count);
 
-                Console.WriteLine("Mensajes por autor: " + mensajeCEN.DameMensajesPorAutor(OIDUsuario).Count);
+                Console.WriteLine ("Mensajes por autor: " + mensajeCEN.DameMensajesPorAutor (OIDUsuario).Count);
 
-                mensajeCEN.CambiarEstado(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum.Leido);
+                mensajeCEN.CambiarEstado (OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoLecturaEnum.Leido);
 
-                Console.WriteLine("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
-                Console.WriteLine("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine ("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados (OIDUsuario, DateTime.Parse ("01/01/2030"), DateTime.Parse ("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine ("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados (OIDUsuario, DateTime.Parse ("01/01/2030"), DateTime.Parse ("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
 
-                mensajeCEN.CambiarBandejaAutor(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
-                mensajeCEN.CambiarBandejaReceptor(OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
+                mensajeCEN.CambiarBandejaAutor (OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
+                mensajeCEN.CambiarBandejaReceptor (OIDMensaje, MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado);
 
-                Console.WriteLine("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
-                Console.WriteLine("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados(OIDUsuario, DateTime.Parse("01/01/2030"), DateTime.Parse("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine ("Mensajes por autor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorAutorFiltrados (OIDUsuario, DateTime.Parse ("01/01/2030"), DateTime.Parse ("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
+                Console.WriteLine ("Mensajes por receptor filtrados (Archivados) : " + mensajeCEN.DameMensajesPorReceptorFiltrados (OIDUsuario, DateTime.Parse ("01/01/2030"), DateTime.Parse ("01/01/1800"), MultitecUAGenNHibernate.Enumerated.MultitecUA.BandejaMensajeEnum.Archivado).Count);
 
-                mensajeCEN.EnviarMensaje(OIDMensaje);
+                mensajeCEN.EnviarMensaje (OIDMensaje);
 
-                Console.WriteLine("Mensajes totales: " + mensajeCEN.ReadAll(0, -1).Count);
-                Console.WriteLine("Mensajes con OID " + OIDMensaje + ": " + mensajeCEN.ReadOID(OIDMensaje).Id);
+                Console.WriteLine ("Mensajes totales: " + mensajeCEN.ReadAll (0, -1).Count);
+                Console.WriteLine ("Mensajes con OID " + OIDMensaje + ": " + mensajeCEN.ReadOID (OIDMensaje).Id);
 
-                mensajeCEN.Destroy(OIDMensaje);
+                mensajeCEN.Destroy (OIDMensaje);
 
 
                 /*SERVICIOS*/
@@ -306,20 +306,38 @@ public static void InitializeData ()
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN ();
                 int OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
                 recuerdoCEN.Modify (OIDRecuerdo, "Recuerdo", "Esto es un recuerdo modificado", null);
-                OIDRecuerdo = recuerdoCEN.New_("Recuerdo2", "Este es un segundo recuerdo", OIDEvento, null);
-                OIDRecuerdo = recuerdoCEN.New_("Recuerdo3", "Haciendo mas recuerdos", OIDEvento, null);
-                OIDRecuerdo = recuerdoCEN.New_("Recuerdo4", "Otro recuerdo", OIDEvento, null);
+                OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo2", "Este es un segundo recuerdo", OIDEvento, null);
+                OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo3", "Haciendo mas recuerdos", OIDEvento, null);
+                OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo4", "Otro recuerdo", OIDEvento, null);
 
-        
-                IList<RecuerdoEN> listaRecuerdosFiltro = recuerdoCEN.DameRecuerdosPorProyecto(OIDEvento);
-                Console.WriteLine("**** FILTRO DE RECUERDOS ******");
-                foreach (RecuerdoEN elemento in listaRecuerdosFiltro)
-                {
-                    Console.WriteLine(elemento.Titulo +": "+ elemento.Cuerpo);
+
+                IList<RecuerdoEN> listaRecuerdosFiltro = recuerdoCEN.DameRecuerdosPorProyecto (OIDEvento);
+                Console.WriteLine ("**** FILTRO DE RECUERDOS ******");
+                foreach (RecuerdoEN elemento in listaRecuerdosFiltro) {
+                        Console.WriteLine (elemento.Titulo + ": " + elemento.Cuerpo);
                 }
 
                 eventoCP.Destroy (OIDEvento);
 
+                /*NOTICIA*/
+                NoticiaCEN noticiaCEN = new NoticiaCEN ();
+                int OIDNoticia = noticiaCEN.New_ ("Noticia 1", "cuerpo", null);
+                noticiaCEN.Modify (OIDNoticia, "Noticia 1 Modificada", "Noticion informativo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 2", "cuerpo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 3", "cuerpo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 4", "cuerpo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 5", "cuerpo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 6", "cuerpo", null);
+                OIDNoticia = noticiaCEN.New_ ("Noticia 7", "cuerpo", null);
+
+
+                foreach (NoticiaEN noticia in noticiaCEN.DameNUltimasNoticias (4))
+                        Console.WriteLine (noticia.Titulo + ": " + noticia.Cuerpo);
+
+                Console.WriteLine (noticiaCEN.ReadAll (0, -1).Count);
+                noticiaCEN.ReadOID (OIDNoticia);
+
+                noticiaCEN.Destroy (OIDNoticia);
 
                 Console.WriteLine ("Todo ha ido bien");
 

@@ -57,12 +57,11 @@ public void Destroy (int p_Evento_OID)
 
                 // Eliminar todos las relaciones entre proyectos presentados a este evento
                 ProyectoCP proyectoCP = new ProyectoCP ();
-                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorEvento(p_Evento_OID))
-                {
-                    proyectoCP.EliminaEventos(proyectoEN.Id, new List<int> { p_Evento_OID });
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorEvento (p_Evento_OID)) {
+                        proyectoCP.EliminaEventos (proyectoEN.Id, new List<int> { p_Evento_OID });
                 }
 
-                
+
 
                 eventoCAD.Destroy (p_Evento_OID);
 

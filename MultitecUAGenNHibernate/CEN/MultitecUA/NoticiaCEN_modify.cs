@@ -11,7 +11,7 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.CAD.MultitecUA;
 
 
-/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Noticia_new_) ENABLED START*/
+/*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Noticia_modify) ENABLED START*/
 //  references to other libraries
 /*PROTECTED REGION END*/
 
@@ -19,28 +19,22 @@ namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
 public partial class NoticiaCEN
 {
-public int New_ (string p_titulo, string p_cuerpo, string p_foto)
+public void Modify (int p_Noticia_OID, string p_titulo, string p_cuerpo, string p_foto)
 {
-        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Noticia_new__customized) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Noticia_modify_customized) START*/
 
         NoticiaEN noticiaEN = null;
 
-        int oid;
-
         //Initialized NoticiaEN
         noticiaEN = new NoticiaEN ();
+        noticiaEN.Id = p_Noticia_OID;
         noticiaEN.Titulo = p_titulo;
-
         noticiaEN.Cuerpo = p_cuerpo;
-
         noticiaEN.Foto = p_foto;
-
-        noticiaEN.Fecha = DateTime.Now;
-
         //Call to NoticiaCAD
 
-        oid = _INoticiaCAD.New_ (noticiaEN);
-        return oid;
+        _INoticiaCAD.Modify (noticiaEN);
+
         /*PROTECTED REGION END*/
 }
 }

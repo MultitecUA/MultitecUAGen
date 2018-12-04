@@ -19,7 +19,7 @@
 						<column name="cuerpo"  not-null="true"/>
 					</property>
 					<property name="Foto" type="string"> 
-						<column name="foto"  not-null="true"/>
+						<column name="foto" />
 					</property>
 					<property name="Fecha" type="timestamp"> 
 						<column name="fecha"  not-null="true"/>
@@ -39,6 +39,6 @@
 		 </class>	
 		  
 		  <query name="NoticiaENReadAllHQL">from NoticiaEN</query>
-		  <query name="NoticiaENdameNUltimasNoticiasHQL"><![CDATA[select (en) FROM NoticiaEN en order by en.Fecha desc limit ':p_n']]></query>
+		  <query name="NoticiaENdameNUltimasNoticiasHQL"><![CDATA[select (en) FROM NoticiaEN en order by en.Fecha desc]]></query>
 		</hibernate-mapping>
 	

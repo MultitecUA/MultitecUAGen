@@ -21,19 +21,19 @@ public partial class MensajeCEN
 {
 public void EnviarMensaje (int p_oid)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_enviarMensaje) ENABLED START*/
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Mensaje_enviarMensaje) ENABLED START*/
 
 
-            NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN();
-            int OID_notificacionMensaje = notificacionMensajeCEN.New_("Nuevo mensaje", "Tienes un nuevo mensaje", p_oid);
+        NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
+        int OID_notificacionMensaje = notificacionMensajeCEN.New_ ("Nuevo mensaje", "Tienes un nuevo mensaje", p_oid);
 
-            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+        NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
 
-            MensajeCEN mensajeCEN = new MensajeCEN();
-            MensajeEN mensaje = mensajeCEN.ReadOID(p_oid);
+        MensajeCEN mensajeCEN = new MensajeCEN ();
+        MensajeEN mensaje = mensajeCEN.ReadOID (p_oid);
 
-            notificacionUsuarioCEN.New_(mensaje.UsuarioReceptor.Id, OID_notificacionMensaje);
-        
+        notificacionUsuarioCEN.New_ (mensaje.UsuarioReceptor.Id, OID_notificacionMensaje);
+
 
         /*PROTECTED REGION END*/
 }

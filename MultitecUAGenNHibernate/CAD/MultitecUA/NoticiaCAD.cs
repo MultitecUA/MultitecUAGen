@@ -162,9 +162,6 @@ public void Modify (NoticiaEN noticia)
 
                 noticiaEN.Foto = noticia.Foto;
 
-
-                noticiaEN.Fecha = noticia.Fecha;
-
                 session.Update (noticiaEN);
                 SessionCommit ();
         }
@@ -213,10 +210,10 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.No
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM NoticiaEN self where select (en) FROM NoticiaEN en order by en.Fecha desc limit ':p_n'";
+                //String sql = @"FROM NoticiaEN self where select (en) FROM NoticiaEN en order by en.Fecha desc";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("NoticiaENdameNUltimasNoticiasHQL");
-                query.SetParameter ("p_n", p_n);
+                query.SetMaxResults((int) p_n);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN>();
                 SessionCommit ();

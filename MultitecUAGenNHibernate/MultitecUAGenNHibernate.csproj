@@ -359,6 +359,7 @@
 	<Compile Include="CP\MultitecUA\NoticiaCP.cs" />
 			<Compile Include="CEN\MultitecUA\NoticiaCEN_New_.cs" />
 			
+			<Compile Include="CEN\MultitecUA\NoticiaCEN_Modify.cs" />
 			
 			
 			<Compile Include="CEN\MultitecUA\NoticiaCEN_DameNUltimasNoticias.cs" />
