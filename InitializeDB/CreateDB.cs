@@ -214,16 +214,39 @@ public static void InitializeData ()
                 Console.WriteLine ("Eventos totales: " + eventoCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Evento con OID " + OIDEvento + ": " + eventoCEN.ReadOID (OIDEvento).Id);
 
-                /*SOLICITUD*/
-                SolicitudCEN solicitudCEN = new SolicitudCEN ();
-                int OIDSolicitud = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
-                solicitudCEN.Aceptar (OIDSolicitud);
-                solicitudCEN.Rechazar (OIDSolicitud);
-                //OIDSolicitud = solicitudCEN.New_(OIDUsuario, OIDProyecto);
 
-                Console.WriteLine ("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID (OIDProyecto).Id);
-                proyectoCP.Destroy (OIDProyecto);
-                Console.WriteLine ("Proyectos totales: " + proyectoCEN.ReadAll (0, -1).Count);
+                /*SOLICITUD*/
+
+                SolicitudCEN solicitudCEN = new SolicitudCEN();
+                int OIDSolicitud = solicitudCEN.New_(OIDUsuario, OIDProyecto);
+                solicitudCEN.Aceptar(OIDSolicitud);
+                solicitudCEN.Rechazar(OIDSolicitud);
+
+                
+                int OIDSolicitud2 = solicitudCEN.New_(OIDUsuario, OIDProyecto);
+                solicitudCEN.Aceptar(OIDSolicitud2);
+
+                solicitudCEN.New_(OIDUsuario, OIDProyecto);
+
+                //Filtros de SOLICITUD
+                Console.WriteLine("DameSolicitudesPorProyectoYEstado: " + solicitudCEN.DameSolicitudesPorProyectoYEstado(OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
+                Console.WriteLine("DameSolicitudesPorUsuarioYEstado: " + solicitudCEN.DameSolicitudesPorUsuarioYEstado(OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
+                Console.WriteLine("DameSolicidudesPorUsuarioYProyecto: " + solicitudCEN.DameSolicidudesPorUsuarioYProyecto(OIDProyecto, OIDUsuario).Count);      
+                Console.WriteLine("DameSolicitudesPendientesPorProyectoDe: " + solicitudCEN.DameSolicitudesPendientesPorProyectoDeUsuario(OIDProyecto, OIDUsuario).Count);
+
+                solicitudCEN.EnviarSolicitud(OIDSolicitud2);
+
+                solicitudCEN.Destroy(OIDSolicitud);
+
+                Console.WriteLine("Solicitud con OID " + OIDSolicitud2 + ": " + solicitudCEN.ReadOID(OIDSolicitud2).Id);
+                Console.WriteLine("Solicitudes totales: " + solicitudCEN.ReadAll(0, -1).Count);
+
+
+                Console.WriteLine("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID(OIDProyecto).Id);
+                proyectoCP.Destroy(OIDProyecto);
+                Console.WriteLine("Proyectos totales: " + proyectoCEN.ReadAll(0, -1).Count);
+
+
 
                 /*MENSAJES*/
                 MensajeCEN mensajeCEN = new MensajeCEN ();
@@ -278,30 +301,6 @@ public static void InitializeData ()
                 }
 
 
-                /*NOTIFICACION
-                 * NotificacionCEN notificacionCEN = new NotificacionCEN ();
-                 * int OIDNotificacion = notificacionCEN.New_ ("Notificacion1", "esto es una notificacion");
-                 *
-                 * /*NOTIFICACION SOLICITUD
-                 * NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN ();
-                 * int OIDNotificacionSolicitud = notificacionSolicitudCEN.New_ ("NotificacionSolicitud1", "mensaje", OIDSolicitud);
-                 *
-                 * /*NOTIFICACIONMENSAJE
-                 * NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN ();
-                 * int OIDNoificacionMensaje = notificacionMensajeCEN.New_ ("Tienes un mensaje nuevo", "Te han dejado un mensaje en tu bandeja", OIDMensaje);
-                 *
-                 * /*NOTIFICACION PROYECTO
-                 * NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
-                 * int OIDNotificacionProyecto = notificacionProyectoCEN.New_ ("NotificacionProyecto1", "mensaje", OIDProyecto);
-                 *
-                 * /*NOTIFICACION EVENTO
-                 * NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
-                 * int OIDNotificacionEvento = notificacionEventoCEN.New_ ("NotificacionEvento1", "mensaje loco de evento", OIDEvento);
-                 *
-                 * /*NOTIFICACION USUARIO
-                 * NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
-                 * int OIDNotificacionUsuario = notificacionUsuarioCEN.New_ (OIDUsuario, OIDNotificacion);*/
-
                 /*RECUERDO*/
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN ();
                 int OIDRecuerdo = recuerdoCEN.New_ ("Recuerdo1", "esto es un recuerdo", OIDEvento, null);
@@ -339,13 +338,38 @@ public static void InitializeData ()
 
                 noticiaCEN.Destroy (OIDNoticia);
 
-                Console.WriteLine ("Todo ha ido bien");
-
-                // p.e. CustomerCEN customer = new CustomerCEN();
-                // customer.New_ (p_user:"user", p_password:"1234");
 
 
+                /*NOTIFICACION*/
+                NotificacionCEN notificacionCEN = new NotificacionCEN();
 
+
+                /*NOTIFICACION SOLICITUD*/
+                NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN();
+
+
+                /*NOTIFICACIONMENSAJE*/
+                NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN();
+
+
+                /*NOTIFICACION PROYECTO*/
+                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
+
+
+                /*NOTIFICACION EVENTO*/
+                NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN();
+
+
+                /*NOTIFICACION USUARIO*/
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+                Console.WriteLine("Notificaciones por usuario: " + notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDUsuario).Count);
+                Console.WriteLine("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDUsuario).Count);
+                notificacionUsuarioCEN.LeerNotificacion(notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDUsuario)[0].Id);
+                Console.WriteLine("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDUsuario).Count);
+
+
+
+                Console.WriteLine("Todo ha ido bien");
                 /*PROTECTED REGION END*/
         }
         catch (Exception ex)
