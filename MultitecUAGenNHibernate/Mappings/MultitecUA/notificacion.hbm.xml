@@ -27,7 +27,7 @@
 			
 			
 		  			
-						<bag name="NotificacionesGeneradas" >
+						<bag name="NotificacionesGeneradas" cascade="delete">
 							<key>
 							
 								

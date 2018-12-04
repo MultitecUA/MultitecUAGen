@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDB", "InitializeD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultitecUAGenNHibernate", "MultitecUAGenNHibernate\MultitecUAGenNHibernate.csproj", "{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_MultitecUA", "MVC_MultitecUA\MVC_MultitecUA.csproj", "{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,14 @@ Global
 		{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}.Release|x86.ActiveCfg = Release|Any CPU
 		{66C66636-FD6A-4A3F-A7C5-FE88BBA117AF}.Release|x86.Build.0 = Release|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Debug|x86.Build.0 = Debug|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Release|x86.ActiveCfg = Release|Any CPU
+		{0962ADAF-7AF6-4972-92F9-BAC3153C4BEA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

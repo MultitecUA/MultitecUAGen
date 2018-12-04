@@ -217,34 +217,34 @@ public static void InitializeData ()
 
                 /*SOLICITUD*/
 
-                SolicitudCEN solicitudCEN = new SolicitudCEN();
-                int OIDSolicitud = solicitudCEN.New_(OIDUsuario, OIDProyecto);
-                solicitudCEN.Aceptar(OIDSolicitud);
-                solicitudCEN.Rechazar(OIDSolicitud);
+                SolicitudCEN solicitudCEN = new SolicitudCEN ();
+                int OIDSolicitud = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
+                solicitudCEN.Aceptar (OIDSolicitud);
+                solicitudCEN.Rechazar (OIDSolicitud);
 
-                
-                int OIDSolicitud2 = solicitudCEN.New_(OIDUsuario, OIDProyecto);
-                solicitudCEN.Aceptar(OIDSolicitud2);
 
-                solicitudCEN.New_(OIDUsuario, OIDProyecto);
+                int OIDSolicitud2 = solicitudCEN.New_ (OIDUsuario, OIDProyecto);
+                solicitudCEN.Aceptar (OIDSolicitud2);
+
+                solicitudCEN.New_ (OIDUsuario, OIDProyecto);
 
                 //Filtros de SOLICITUD
-                Console.WriteLine("DameSolicitudesPorProyectoYEstado: " + solicitudCEN.DameSolicitudesPorProyectoYEstado(OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
-                Console.WriteLine("DameSolicitudesPorUsuarioYEstado: " + solicitudCEN.DameSolicitudesPorUsuarioYEstado(OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
-                Console.WriteLine("DameSolicidudesPorUsuarioYProyecto: " + solicitudCEN.DameSolicidudesPorUsuarioYProyecto(OIDProyecto, OIDUsuario).Count);      
-                Console.WriteLine("DameSolicitudesPendientesPorProyectoDe: " + solicitudCEN.DameSolicitudesPendientesPorProyectoDeUsuario(OIDProyecto, OIDUsuario).Count);
+                Console.WriteLine ("DameSolicitudesPorProyectoYEstado: " + solicitudCEN.DameSolicitudesPorProyectoYEstado (OIDProyecto, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
+                Console.WriteLine ("DameSolicitudesPorUsuarioYEstado: " + solicitudCEN.DameSolicitudesPorUsuarioYEstado (OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada).Count);
+                Console.WriteLine ("DameSolicidudesPorUsuarioYProyecto: " + solicitudCEN.DameSolicidudesPorUsuarioYProyecto (OIDProyecto, OIDUsuario).Count);
+                Console.WriteLine ("DameSolicitudesPendientesPorProyectoDe: " + solicitudCEN.DameSolicitudesPendientesPorProyectoDeUsuario (OIDProyecto, OIDUsuario).Count);
 
-                solicitudCEN.EnviarSolicitud(OIDSolicitud2);
+                solicitudCEN.EnviarSolicitud (OIDSolicitud2);
 
-                solicitudCEN.Destroy(OIDSolicitud);
+                solicitudCEN.Destroy (OIDSolicitud);
 
-                Console.WriteLine("Solicitud con OID " + OIDSolicitud2 + ": " + solicitudCEN.ReadOID(OIDSolicitud2).Id);
-                Console.WriteLine("Solicitudes totales: " + solicitudCEN.ReadAll(0, -1).Count);
+                Console.WriteLine ("Solicitud con OID " + OIDSolicitud2 + ": " + solicitudCEN.ReadOID (OIDSolicitud2).Id);
+                Console.WriteLine ("Solicitudes totales: " + solicitudCEN.ReadAll (0, -1).Count);
 
 
-                Console.WriteLine("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID(OIDProyecto).Id);
-                proyectoCP.Destroy(OIDProyecto);
-                Console.WriteLine("Proyectos totales: " + proyectoCEN.ReadAll(0, -1).Count);
+                Console.WriteLine ("Proyecto con OID " + OIDProyecto + ": " + proyectoCEN.ReadOID (OIDProyecto).Id);
+                proyectoCP.Destroy (OIDProyecto);
+                Console.WriteLine ("Proyectos totales: " + proyectoCEN.ReadAll (0, -1).Count);
 
 
 
@@ -340,36 +340,16 @@ public static void InitializeData ()
 
 
 
-                /*NOTIFICACION*/
-                NotificacionCEN notificacionCEN = new NotificacionCEN();
-
-
-                /*NOTIFICACION SOLICITUD*/
-                NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN();
-
-
-                /*NOTIFICACIONMENSAJE*/
-                NotificacionMensajeCEN notificacionMensajeCEN = new NotificacionMensajeCEN();
-
-
-                /*NOTIFICACION PROYECTO*/
-                NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN();
-
-
-                /*NOTIFICACION EVENTO*/
-                NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN();
-
-
                 /*NOTIFICACION USUARIO*/
-                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-                Console.WriteLine("Notificaciones por usuario: " + notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDUsuario).Count);
-                Console.WriteLine("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDUsuario).Count);
-                notificacionUsuarioCEN.LeerNotificacion(notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDUsuario)[0].Id);
-                Console.WriteLine("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDUsuario).Count);
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+                Console.WriteLine ("Notificaciones por usuario: " + notificacionUsuarioCEN.DameNotificacionesPorUsuario (OIDUsuario).Count);
+                Console.WriteLine ("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario (OIDUsuario).Count);
+                notificacionUsuarioCEN.LeerNotificacion (notificacionUsuarioCEN.DameNotificacionesPorUsuario (OIDUsuario) [0].Id);
+                Console.WriteLine ("Notificaciones no leidas por usuario: " + notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario (OIDUsuario).Count);
 
 
 
-                Console.WriteLine("Todo ha ido bien");
+                Console.WriteLine ("Todo ha ido bien");
                 /*PROTECTED REGION END*/
         }
         catch (Exception ex)

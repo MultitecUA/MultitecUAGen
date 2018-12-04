@@ -95,7 +95,7 @@
     					</bag>
 			
 		  			
-						<bag name="SolicitudRecibida" >
+						<bag name="SolicitudRecibida" cascade="delete">
 							<key>
 							
 								
@@ -106,7 +106,7 @@
 					
 			
 		  			
-						<bag name="NotificacionGenerada" >
+						<bag name="NotificacionGenerada" cascade="delete">
 							<key>
 							
 								
