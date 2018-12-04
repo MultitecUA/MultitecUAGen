@@ -8,12 +8,11 @@ using NHibernate.Criterion;
 using NHibernate.Exceptions;
 using MultitecUAGenNHibernate.Exceptions;
 using MultitecUAGenNHibernate.EN.MultitecUA;
-using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.CAD.MultitecUA;
 
 
 /*PROTECTED REGION ID(usingMultitecUAGenNHibernate.CEN.MultitecUA_Solicitud_aceptar) ENABLED START*/
-//  references to other libraries
+using MultitecUAGenNHibernate.CP.MultitecUA;
 /*PROTECTED REGION END*/
 
 namespace MultitecUAGenNHibernate.CEN.MultitecUA
@@ -30,16 +29,16 @@ public void Aceptar (int p_oid)
         solicitudEN.Estado = Enumerated.MultitecUA.EstadoSolicitudEnum.Aceptada;
 
 
-            NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN();
-            int OID_notificacionSolicitud = notificacionSolicitudCEN.New_("Solicitud Aceptada", "Tu solicitud ha sido aceptada", p_oid);
+        NotificacionSolicitudCEN notificacionSolicitudCEN = new NotificacionSolicitudCEN ();
+        int OID_notificacionSolicitud = notificacionSolicitudCEN.New_ ("Solicitud Aceptada", "Tu solicitud ha sido aceptada", p_oid);
 
-            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-            notificacionUsuarioCEN.New_(solicitudEN.UsuarioSolicitante.Id, OID_notificacionSolicitud);
+        NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
+        notificacionUsuarioCEN.New_ (solicitudEN.UsuarioSolicitante.Id, OID_notificacionSolicitud);
 
-            ProyectoCP proyectoCP = new ProyectoCP();
-            proyectoCP.AgregaParticipantes(solicitudEN.ProyectoSolicitado.Id, new List<int> { solicitudEN.UsuarioSolicitante.Id });
+        ProyectoCP proyectoCP = new ProyectoCP ();
+        proyectoCP.AgregaParticipantes (solicitudEN.ProyectoSolicitado.Id, new List<int> { solicitudEN.UsuarioSolicitante.Id });
 
-            solicitudCAD.ModifyDefault (solicitudEN);
+        solicitudCAD.ModifyDefault (solicitudEN);
 
         /*PROTECTED REGION END*/
 }

@@ -35,7 +35,7 @@
 											 					
 			
 		  			
-						<bag name="NotificacionGenerada" >
+						<bag name="NotificacionGenerada" cascade="delete">
 							<key>
 							
 								
