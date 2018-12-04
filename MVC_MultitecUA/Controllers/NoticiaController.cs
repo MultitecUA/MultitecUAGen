@@ -22,9 +22,7 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult Details(int id)
         {
             NoticiaCEN noticiaCEN = new NoticiaCEN();
-
             NoticiaEN noticiaEN = noticiaCEN.ReadOID(id);
-
             return View(noticiaEN);
         }
 
@@ -42,9 +40,7 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 NoticiaCEN noticiaCEN = new NoticiaCEN();
-
                 noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.Foto);
-
                 return RedirectToAction("Index");
             }
             catch
@@ -68,9 +64,7 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 NoticiaCEN noticiaCEN = new NoticiaCEN();
-
                 noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.Foto);
-
                 return RedirectToAction("Index");
             }
             catch
@@ -94,9 +88,7 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 NoticiaCEN noticiaCEN = new NoticiaCEN();
-
                 noticiaCEN.Destroy(id);
-
                 return RedirectToAction("Index");
             }
             catch
