@@ -136,5 +136,6 @@
 		  <query name="ProyectoENdameProyectosPorEventoHQL"><![CDATA[select(en) FROM ProyectoEN en join en.EventosAsociados eve where eve.Id = :p_OID]]></query>
 		  <query name="ProyectoENdameProyectosPorCategoriaHQL"><![CDATA[select (en) FROM ProyectoEN en join en.CategoriasProyectos cat where cat.Id = :p_OID_Categoria]]></query>
 		  <query name="ProyectoENdameProyectosPorEstadoHQL"><![CDATA[select (en) FROM ProyectoEN en where en.Estado = :p_estado]]></query>
+		  <query name="ProyectoENreadNombreHQL"><![CDATA[select (en) FROM ProyectoEN en where en.Nombre = :p_nombre]]></query>
 		</hibernate-mapping>
 	

@@ -88,6 +88,7 @@ public static void InitializeData ()
                 // en lugar de destroy tiene cambiar rol usuarioCEN.Destroy (OIDUsuarioABorrar);
                 usuarioCEN.CambiarRol (OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador);
                 Console.WriteLine ("Administradores: " + usuarioCEN.DameUsuariosPorRol (MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador).Count);
+                Console.WriteLine ("Usuarios por nick: " + usuarioCEN.ReadNick ("Nedyar94"));
 
                 /*CATEGORIAS DE USUARIOS*/
                 CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN ();
@@ -118,6 +119,7 @@ public static void InitializeData ()
 
                 CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP ();
                 categoriaUsuarioCP.Destroy (OIDCategoria);
+                Console.WriteLine("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll(0, -1).Count);
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();

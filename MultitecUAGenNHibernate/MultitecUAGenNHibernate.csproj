@@ -132,6 +132,7 @@
 			
 			
 			
+			
 	<Compile Include="EN\MultitecUA\ProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />
@@ -163,6 +164,7 @@
 			
 			
 			<Compile Include="CP\MultitecUA\ProyectoCP_EliminaParticipantes.cs" />
+			
 			
 			
 			

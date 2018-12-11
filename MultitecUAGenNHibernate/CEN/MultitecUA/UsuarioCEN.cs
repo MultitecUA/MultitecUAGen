@@ -94,6 +94,10 @@ public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
         list = _IUsuarioCAD.ReadAll (first, size);
         return list;
 }
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> ReadNick (string p_nick)
+{
+        return _IUsuarioCAD.ReadNick (p_nick);
+}
 
 
 

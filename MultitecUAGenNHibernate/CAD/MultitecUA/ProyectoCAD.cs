@@ -815,5 +815,36 @@ public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size
 
         return result;
 }
+
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> ReadNombre (string p_nombre)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en where en.Nombre = :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENreadNombreHQL");
+                query.SetParameter ("p_nombre", p_nombre);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

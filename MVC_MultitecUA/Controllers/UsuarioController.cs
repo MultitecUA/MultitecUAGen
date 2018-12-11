@@ -1,6 +1,8 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
+using MultitecUAGenNHibernate.Enumerated.MultitecUA;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -95,6 +97,14 @@ namespace MVC_MultitecUA.Controllers
             {
                 return View();
             }
+        }
+
+        //GET: Usuario/ForNick/5
+        public ActionResult ForNick(FormCollection formCollection)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadNick(formCollection["nick"]);
+            return View(listaUsuarios);
         }
     }
 }

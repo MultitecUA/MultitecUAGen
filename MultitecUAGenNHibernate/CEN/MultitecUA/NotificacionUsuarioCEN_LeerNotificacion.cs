@@ -17,23 +17,23 @@ using MultitecUAGenNHibernate.CAD.MultitecUA;
 
 namespace MultitecUAGenNHibernate.CEN.MultitecUA
 {
-    public partial class NotificacionUsuarioCEN
-    {
-        public void LeerNotificacion(int p_NotificacionUsuario_OID)
-        {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_leerNotificacion_customized) START*/
+public partial class NotificacionUsuarioCEN
+{
+public void LeerNotificacion (int p_NotificacionUsuario_OID)
+{
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_NotificacionUsuario_leerNotificacion_customized) ENABLED START*/
 
-            NotificacionUsuarioEN notificacionUsuarioEN = null;
-            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+        NotificacionUsuarioEN notificacionUsuarioEN = null;
+        NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
 
-            //Initialized NotificacionUsuarioEN
-            notificacionUsuarioEN = notificacionUsuarioCEN.ReadOID(p_NotificacionUsuario_OID);
-            notificacionUsuarioEN.Estado = Enumerated.MultitecUA.EstadoLecturaEnum.Leido;
-            //Call to NotificacionUsuarioCAD
+        //Initialized NotificacionUsuarioEN
+        notificacionUsuarioEN = notificacionUsuarioCEN.ReadOID (p_NotificacionUsuario_OID);
+        notificacionUsuarioEN.Estado = Enumerated.MultitecUA.EstadoLecturaEnum.Leido;
+        //Call to NotificacionUsuarioCAD
 
-            _INotificacionUsuarioCAD.ModifyDefault(notificacionUsuarioEN);
+        _INotificacionUsuarioCAD.ModifyDefault (notificacionUsuarioEN);
 
-            /*PROTECTED REGION END*/
-        }
-    }
+        /*PROTECTED REGION END*/
+}
+}
 }

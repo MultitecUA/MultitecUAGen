@@ -64,5 +64,8 @@ ProyectoEN ReadOID (int id
 
 
 System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> ReadNombre (string p_nombre);
 }
 }
