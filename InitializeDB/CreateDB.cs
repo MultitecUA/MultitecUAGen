@@ -190,8 +190,10 @@ public static void InitializeData ()
                 /*EVENTOS*/
                 EventoCEN eventoCEN = new EventoCEN ();
                 int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
+                eventoCEN.PublicaEvento(OIDEvento);
                 int OIDEventoABorrar = eventoCEN.New_ ("EventoABorrar", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                EventoCP eventoCP = new EventoCP ();
+                eventoCEN.PublicaEvento(OIDEventoABorrar);
+                EventoCP eventoCP = new EventoCP();
                 eventoCEN.AgregaCategorias (OIDEvento, listaCategoriasProyecto);
                 listaCategoriasProyecto.RemoveAt (0);
                 eventoCEN.EliminaCategorias (OIDEvento, listaCategoriasProyecto);

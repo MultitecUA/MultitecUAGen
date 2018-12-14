@@ -1,7 +1,6 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
-using MultitecUAGenNHibernate.CAD.MultitecUA;
+using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
-using MVC_MultitecUA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,43 +14,34 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto
         public ActionResult Index()
         {
-            SessionInitialize();
-            ProyectoCAD cadPro = new ProyectoCAD(session);
-            ProyectoCEN proyectoCEN = new ProyectoCEN(cadPro);
-            IList<ProyectoEN> listaProyectosEn = proyectoCEN.ReadAll(0, -1).ToList();
-            IEnumerable<ProyectoModel> listaProyectos = new AssemblerProyecto().ConvertListENToModel(listaProyectosEn).ToList();
-            SessionClose();
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            IList<ProyectoEN> listaProyectos = proyectoCEN.ReadAll(0, -1).ToList();
             return View(listaProyectos);
         }
 
         // GET: Proyecto/Details/5
         public ActionResult Details(int id)
         {
-            ProyectoModel proy = null;
-            SessionInitialize();
-            ProyectoEN proyectoEN = new ProyectoCAD(session).ReadOID(id);
-            proy = new AssemblerProyecto().ConvertENToModelUI(proyectoEN);
-            SessionClose();
-            return View(proy);
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            return View(proyectoEN);
         }
 
         // GET: Proyecto/Create
         public ActionResult Create()
         {
-            ProyectoModel proyectoM = new ProyectoModel();
-            return View(proyectoM);
+            ProyectoEN proyectoEN = new ProyectoEN();
+            return View(proyectoEN);
         }
 
         // POST: Proyecto/Create
         [HttpPost]
-        public ActionResult Create(ProyectoModel proyectoModel)
+        public ActionResult Create(ProyectoEN proyectoEN)
         {
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
-
-                proyectoCEN.New_(proyectoModel.Nombre, proyectoModel.Descripcion, proyectoModel.usuarioId, null);
-
+                proyectoCEN.New_(proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.UsuarioCreador.Id, proyectoEN.Fotos);
                 return RedirectToAction("Index");
             }
             catch
@@ -63,17 +53,19 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            return View(proyectoEN);
         }
 
         // POST: Proyecto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ProyectoEN proyectoEN)
         {
             try
             {
-                // TODO: Add update logic here
-
+                ProyectoCP proyectoCP = new ProyectoCP();
+                proyectoCP.Modify(id, proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.Fotos);
                 return RedirectToAction("Index");
             }
             catch
@@ -85,17 +77,19 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            return View(proyectoEN);
         }
 
         // POST: Proyecto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, ProyectoEN proyectoEN)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                ProyectoCP proyectoCP = new ProyectoCP();
+                proyectoCP.Destroy(id);
                 return RedirectToAction("Index");
             }
             catch

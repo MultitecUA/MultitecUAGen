@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace MVC_MultitecUA.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : BasicController
     {
         // GET: Usuario
         public ActionResult Index()
