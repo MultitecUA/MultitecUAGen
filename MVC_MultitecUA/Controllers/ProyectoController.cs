@@ -1,4 +1,5 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+using MultitecUAGenNHibernate.CAD.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using MVC_MultitecUA.Models;
 using System;
@@ -9,20 +10,29 @@ using System.Web.Mvc;
 
 namespace MVC_MultitecUA.Controllers
 {
-    public class ProyectoController : Controller
+    public class ProyectoController : BasicController
     {
         // GET: Proyecto
         public ActionResult Index()
         {
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
-            IList<ProyectoEN> listaUsuarios = proyectoCEN.ReadAll(0, -1).ToList();
-            return View(listaUsuarios);
+            SessionInitialize();
+            ProyectoCAD cadPro = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(cadPro);
+            IList<ProyectoEN> listaProyectosEn = proyectoCEN.ReadAll(0, -1).ToList();
+            IEnumerable<ProyectoModel> listaProyectos = new AssemblerProyecto().ConvertListENToModel(listaProyectosEn).ToList();
+            SessionClose();
+            return View(listaProyectos);
         }
 
         // GET: Proyecto/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ProyectoModel proy = null;
+            SessionInitialize();
+            ProyectoEN proyectoEN = new ProyectoCAD(session).ReadOID(id);
+            proy = new AssemblerProyecto().ConvertENToModelUI(proyectoEN);
+            SessionClose();
+            return View(proy);
         }
 
         // GET: Proyecto/Create
@@ -34,11 +44,13 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Proyecto/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ProyectoModel proyectoModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+                proyectoCEN.New_(proyectoModel.Nombre, proyectoModel.Descripcion, proyectoModel.usuarioId, null);
 
                 return RedirectToAction("Index");
             }

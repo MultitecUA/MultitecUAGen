@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
+﻿@model IEnumerable<MVC_MultitecUA.Models.ProyectoModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.usuarioId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
@@ -22,6 +25,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuarioId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>

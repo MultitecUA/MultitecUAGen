@@ -9,25 +9,22 @@ namespace MVC_MultitecUA.Models
     public class ProyectoModel
     {
 
-
-
         [ScaffoldColumn(false)]
         public string Id { get; set; }
 
-        [Display(Prompt = "Nombre del evento", Description = "Nombre del evento", Name = "Nombre ")]
-        [Required(ErrorMessage = "Debe indicar un nombre para el evento")]
+        [Display(Prompt = "Usuario creador del proyecto", Description = "Usuario creador del proyecto", Name = "Creador ")]
+        [Required(ErrorMessage = "Debe indicar un creador del proyecto")]
+        public int usuarioId { get; set; }
+
+        [Display(Prompt = "Nombre del proyecto", Description = "Nombre del proyecto", Name = "Nombre ")]
+        [Required(ErrorMessage = "Debe indicar un nombre para el proyecto")]
         [StringLength(maximumLength: 200, ErrorMessage = "El nombre no puede tener más de 200 caracteres")]
         public string Nombre { get; set; }
 
-        [Display(Prompt = "Descripción del servicio", Description = "Descripción del servicio", Name = "Descripción ")]
-        [Required(ErrorMessage = "Debe indicar una descripción para el servicio")]
+        [Display(Prompt = "Descripción del proyecto", Description = "Descripción del proyecto", Name = "Descripción ")]
+        [Required(ErrorMessage = "Debe indicar una descripción para el proyecto")]
         [StringLength(maximumLength: 4000, ErrorMessage = "La descripción no puede tener más de 4000 caracteres")]
         public string Descripcion { get; set; }
-
-        [Display(Prompt = "Estado del servicio", Description = "Estado del servicio", Name = "Estado ")]
-        [Required(ErrorMessage = "Debe indicar un estado para el servicio")]
-        public MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum Estado { get; set; }
-
 
     }
 }

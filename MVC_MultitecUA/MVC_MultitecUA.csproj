@@ -216,6 +216,7 @@
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\ChangeRol.cshtml" />
     <Content Include="Views\Usuario\ForNick.cshtml" />
+    <Content Include="Views\Proyecto\Create.cshtml" />
     <Content Include="Views\Proyecto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

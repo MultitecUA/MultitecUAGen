@@ -6,14 +6,15 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 
 namespace MVC_MultitecUA.Models
 {
-    public class AssemblerServicio
+    public class AssemblerProyecto
     {
         // Convierte en en lista
         public ProyectoModel ConvertENToModelUI(ProyectoEN en)
         {
             ProyectoModel serv = new ProyectoModel();
-            // Modelo.Atributo = ProyectoEN.Atributo
-            serv.Id = en.Id.ToString();
+            
+            //serv.Id = en.Id.ToString();
+            serv.usuarioId = en.UsuarioCreador.Id;
             serv.Nombre = en.Nombre;
             serv.Descripcion = en.Descripcion;
             
@@ -23,9 +24,9 @@ namespace MVC_MultitecUA.Models
         }
 
         // Convierte listas en modelo
-        public IList<ProyectoModel> ConvertListENToModel (IList<ServicioEN> ens){
+        public IList<ProyectoModel> ConvertListENToModel (IList<ProyectoEN> ens){
             IList<ProyectoModel> servis = new List<ProyectoModel>();
-            foreach (ServicioEN en in ens)
+            foreach (ProyectoEN en in ens)
             {
                 servis.Add(ConvertENToModelUI(en));
             }
