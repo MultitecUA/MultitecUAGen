@@ -155,10 +155,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BasicController.cs" />
+    <Compile Include="Controllers\CategoriaProyectoController.cs" />
+    <Compile Include="Controllers\CategoriaUsuarioController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MensajeController.cs" />
     <Compile Include="Controllers\NoticiaController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
+    <Compile Include="Controllers\RecuerdoController.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -225,13 +230,41 @@
     <Content Include="Views\Solicitud\Delete.cshtml" />
     <Content Include="Views\Solicitud\Details.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Evento\Create.cshtml" />
+    <Content Include="Views\Evento\Edit.cshtml" />
+    <Content Include="Views\Evento\Delete.cshtml" />
+    <Content Include="Views\CategoriaUsuario\Index.cshtml" />
+    <Content Include="Views\CategoriaUsuario\Details.cshtml" />
+    <Content Include="Views\CategoriaUsuario\Create.cshtml" />
+    <Content Include="Views\CategoriaUsuario\Edit.cshtml" />
+    <Content Include="Views\CategoriaUsuario\Delete.cshtml" />
+    <Content Include="Views\CategoriaProyecto\Index.cshtml" />
+    <Content Include="Views\CategoriaProyecto\Details.cshtml" />
+    <Content Include="Views\CategoriaProyecto\Create.cshtml" />
+    <Content Include="Views\CategoriaProyecto\Edit.cshtml" />
+    <Content Include="Views\CategoriaProyecto\Delete.cshtml" />
+    <Content Include="Views\Servicio\Index.cshtml" />
+    <Content Include="Views\Servicio\Details.cshtml" />
+    <Content Include="Views\Servicio\Create.cshtml" />
+    <Content Include="Views\Servicio\Edit.cshtml" />
+    <Content Include="Views\Servicio\Delete.cshtml" />
+    <Content Include="Views\Recuerdo\Index.cshtml" />
+    <Content Include="Views\Recuerdo\Details.cshtml" />
+    <Content Include="Views\Recuerdo\Create.cshtml" />
+    <Content Include="Views\Recuerdo\Edit.cshtml" />
+    <Content Include="Views\Recuerdo\Delete.cshtml" />
+    <Content Include="Views\Mensaje\Index.cshtml" />
+    <Content Include="Views\Mensaje\Details.cshtml" />
+    <Content Include="Views\Mensaje\Create.cshtml" />
+    <Content Include="Views\Mensaje\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assembler\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Basic\" />
-    <Folder Include="Views\Evento\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
