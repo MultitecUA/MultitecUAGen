@@ -177,14 +177,30 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fontello\css\animation.css" />
+    <Content Include="fontello\css\fontello-codes.css" />
+    <Content Include="fontello\css\fontello-embedded.css" />
+    <Content Include="fontello\css\fontello-ie7-codes.css" />
+    <Content Include="fontello\css\fontello-ie7.css" />
+    <Content Include="fontello\css\fontello.css" />
+    <Content Include="fontello\demo.html" />
+    <Content Include="fontello\font\fontello.svg" />
+    <Content Include="fontello\LICENSE.txt" />
+    <Content Include="fontello\README.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Multitec.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fontello\config.json" />
+    <Content Include="fontello\font\fontello.eot" />
+    <Content Include="fontello\font\fontello.ttf" />
+    <Content Include="fontello\font\fontello.woff" />
+    <Content Include="fontello\font\fontello.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

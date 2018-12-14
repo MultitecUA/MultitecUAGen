@@ -1,31 +1,130 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Panel de Administración";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="jumbotron" style="text-align:center">
+    <h1>PANEL DE ADMINISTRACIÓN</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+	<div class="col-md-3" style="text-align:center;">
+		<a href="../Usuario" style="text-decoration: none;">
+			<h2>Usuarios</h2>
+			<span class="icon-user" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../Noticia" style="text-decoration: none;">
+			<h2>Noticias</h2>
+			<span class="icon-newspaper" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../Proyecto" style="text-decoration: none;">
+			<h2>Proyectos</h2>
+			<span class="icon-doc-text-inv" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../Servicio" style="text-decoration: none;">
+			<h2>Servicios</h2>
+			<span class="icon-server" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-3" style="text-align:center">
+        <a href="../Solicitud" style="text-decoration: none;">
+            <h2>Solicitudes</h2>
+            <span class="icon-sticky-note" style="font-size:80px;"></span>
+            <br />
+        </a>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-3" style="text-align:center">
+        <a href="../Mensaje" style="text-decoration: none;">
+            <h2>Mensajes</h2>
+            <span class="icon-comment" style="font-size:80px;"></span>
+            <br />
+        </a>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-md-3" style="text-align:center">
+        <a href="../Evento" style="text-decoration: none;">
+            <h2>Eventos</h2>
+            <span class="icon-campsite" style="font-size:80px;"></span>
+            <br />
+        </a>
+    </div>
+    <div class="col-md-3" style="text-align:center">
+        <a href="../Recuerdo" style="text-decoration: none;">
+            <h2>Recuerdos</h2>
+            <span class="icon-lightbulb" style="font-size:80px;"></span>
+            <br />
+        </a>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-3" style="text-align:center">
+        <a href="../CategoriaUSuario" style="text-decoration: none;">
+            <h2>Categorías Usuarios</h2>
+            <span class="icon-user" style="font-size:80px;"></span>
+            <br />
+        </a>
+    </div>
+    <div class="col-md-3" style="text-align:center">
+        <a href="../CategoriaProyecto" style="text-decoration: none;">
+            <h2>Categorías Proyectos</h2>
+            <span class="icon-doc-text-inv" style="font-size:80px;"></span>
+            <br />
+        </a>
+    </div>
+    <!--
+    <div class="col-md-3" style="text-align:center">
+        <a href="../Notificacion" style="text-decoration: none;">
+            <h2>Notificaciones</h2>
+            <span class="icon-mail-alt" style="font-size:80px;"></span>
+            <br />
+        </a>
+    </div>
+    <div class="col-md-3" style="text-align:center">
+        <a href="../NotificacionUsuario" style="text-decoration: none;">
+            <h2>Not.Usuarios</h2>
+            <span class="icon-user" style="font-size:80px;"></span>
+            <br />
+        </a>
+    </div>-->
+</div>
+<!--
+<div class="row">
+	<div class="col-md-3" style="text-align:center">
+		<a href="../NotificacionMensaje" style="text-decoration: none;">
+			<h2>Not.Mensajes</h2>
+			<span class="icon-comment" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../NotificacionProyecto" style="text-decoration: none;">
+			<h2>Not.Proyectos</h2>
+			<span class="icon-doc-text-inv" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../NotificacionSolicitud" style="text-decoration: none;">
+			<h2>Not.Solicitud</h2>
+			<span class="icon-sticky-note" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+	<div class="col-md-3" style="text-align:center">
+		<a href="../NotificacionEvento" style="text-decoration: none;">
+			<h2>Not.Eventos</h2>
+			<span class="icon-campsite" style="font-size:80px;"></span>
+			<br />
+		</a>
+	</div>
+</div>-->

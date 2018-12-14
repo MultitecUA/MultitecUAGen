@@ -84,7 +84,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: CategoriaProyecto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, CategoriaProyectoEN categoriaProyectoEN)
         {
             try
             {

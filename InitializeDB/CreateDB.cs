@@ -103,7 +103,8 @@ public static void InitializeData ()
                 OIDsCategorias.Add (OIDCategoria);
 
                 categoriaUsuarioCEN.Modify (OIDCategoria, "Putisimo Amo");
-                //categoriaUsuarioCEN.Destroy(OIDCategoria);
+                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();
+                categoriaUsuarioCP.Destroy(OIDCategoria);
 
                 usuarioCEN.AgregaCategorias (OIDUsuario, OIDsCategorias);
 
@@ -117,7 +118,6 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
 
-                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP ();
                 categoriaUsuarioCP.Destroy (OIDCategoria);
                 Console.WriteLine("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll(0, -1).Count);
 
