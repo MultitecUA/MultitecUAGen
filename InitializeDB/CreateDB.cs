@@ -103,8 +103,8 @@ public static void InitializeData ()
                 OIDsCategorias.Add (OIDCategoria);
 
                 categoriaUsuarioCEN.Modify (OIDCategoria, "Putisimo Amo");
-                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();
-                categoriaUsuarioCP.Destroy(OIDCategoria);
+
+                categoriaUsuarioCEN.Destroy (OIDCategoria);
 
                 usuarioCEN.AgregaCategorias (OIDUsuario, OIDsCategorias);
 
@@ -118,8 +118,8 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
 
-                categoriaUsuarioCP.Destroy (OIDCategoria);
-                Console.WriteLine("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll(0, -1).Count);
+                categoriaUsuarioCEN.Destroy (OIDCategoria);
+                Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
@@ -181,19 +181,17 @@ public static void InitializeData ()
                 Console.WriteLine ("Categoria Proyecto con OID " + OIDCategoriaProyecto + ": " + categoriaProyectoCEN.ReadOID (OIDCategoriaProyecto).Id);
 
 
-
-                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP ();
-                categoriaProyectoCP.Destroy (OIDCategoriaProyecto);
+                categoriaProyectoCEN.Destroy (OIDCategoriaProyecto);
 
 
 
                 /*EVENTOS*/
                 EventoCEN eventoCEN = new EventoCEN ();
                 int OIDEvento = eventoCEN.New_ ("Evento1", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                eventoCEN.PublicaEvento(OIDEvento);
+                eventoCEN.PublicaEvento (OIDEvento);
                 int OIDEventoABorrar = eventoCEN.New_ ("EventoABorrar", "El Mas guay", DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, null);
-                eventoCEN.PublicaEvento(OIDEventoABorrar);
-                EventoCP eventoCP = new EventoCP();
+                eventoCEN.PublicaEvento (OIDEventoABorrar);
+                EventoCP eventoCP = new EventoCP ();
                 eventoCEN.AgregaCategorias (OIDEvento, listaCategoriasProyecto);
                 listaCategoriasProyecto.RemoveAt (0);
                 eventoCEN.EliminaCategorias (OIDEvento, listaCategoriasProyecto);

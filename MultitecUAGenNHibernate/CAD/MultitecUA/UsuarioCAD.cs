@@ -491,7 +491,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en where en.Nick = :p_nick";
+                //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en where en.Nick like :p_nick";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENreadNickHQL");
                 query.SetParameter ("p_nick", p_nick);

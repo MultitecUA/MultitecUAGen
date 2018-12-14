@@ -21,24 +21,24 @@ public partial class EventoCEN
 {
 public void PublicaEvento (int p_oid)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Evento_publicaEvento) ENABLED START*/
-            EventoEN eventoEN = ReadOID(p_oid);
-            NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN();
-            int OID_notificacionEvento = notificacionEventoCEN.New_("Nuevo evento publicado", "Se acaba de publicar un nuevo evento: " + eventoEN.Nombre, eventoEN.Id);
+        /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Evento_publicaEvento) ENABLED START*/
+        EventoEN eventoEN = ReadOID (p_oid);
+        NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();
+        int OID_notificacionEvento = notificacionEventoCEN.New_ ("Nuevo evento publicado", "Se acaba de publicar un nuevo evento: " + eventoEN.Nombre, eventoEN.Id);
 
-            UsuarioCEN usuarioCEN = new UsuarioCEN();
-            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+        UsuarioCEN usuarioCEN = new UsuarioCEN ();
+        NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN ();
 
-            List<int> listaOIDsUsuarios = new List<int>();
+        List<int> listaOIDsUsuarios = new List<int>();
 
-            foreach (UsuarioEN usuarioEN in usuarioCEN.ReadAll(0, -1))
-                listaOIDsUsuarios.Add(usuarioEN.Id);
+        foreach (UsuarioEN usuarioEN in usuarioCEN.ReadAll (0, -1))
+                listaOIDsUsuarios.Add (usuarioEN.Id);
 
-            foreach (int OIDUsuario in listaOIDsUsuarios)
-                notificacionUsuarioCEN.New_(OIDUsuario, OID_notificacionEvento);
+        foreach (int OIDUsuario in listaOIDsUsuarios)
+                notificacionUsuarioCEN.New_ (OIDUsuario, OID_notificacionEvento);
 
 
-            /*PROTECTED REGION END*/
-        }
-    }
+        /*PROTECTED REGION END*/
+}
+}
 }

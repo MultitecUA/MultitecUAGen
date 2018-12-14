@@ -154,6 +154,6 @@
 		  <query name="UsuarioENdameParticipantesProyectoHQL"><![CDATA[select (en) FROM UsuarioEN en join en.ProyectosPertenecientes pro where pro.Id = :p_ID]]></query>
 		  <query name="UsuarioENdameUsuariosPorCategoriaHQL"><![CDATA[select (en) FROM UsuarioEN en join en.CategoriasUsuarios cat where cat = :p_categoria]]></query>
 		  <query name="UsuarioENdameUsuariosPorRolHQL"><![CDATA[select (en) FROM UsuarioEN en where en.Rol = :p_rol]]></query>
-		  <query name="UsuarioENreadNickHQL"><![CDATA[select (en) FROM UsuarioEN en where en.Nick = :p_nick]]></query>
+		  <query name="UsuarioENreadNickHQL"><![CDATA[select (en) FROM UsuarioEN en where en.Nick like :p_nick]]></query>
 		</hibernate-mapping>
 	

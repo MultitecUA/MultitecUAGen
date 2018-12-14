@@ -275,7 +275,6 @@
 	<Compile Include="CP\MultitecUA\CategoriaProyectoCP.cs" />
 			
 			
-			<Compile Include="CP\MultitecUA\CategoriaProyectoCP_Destroy.cs" />
 			
 			
 			
@@ -286,7 +285,6 @@
 	<Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
 			
 			
-			<Compile Include="CP\MultitecUA\CategoriaUsuarioCP_Destroy.cs" />
 			
 			
 			

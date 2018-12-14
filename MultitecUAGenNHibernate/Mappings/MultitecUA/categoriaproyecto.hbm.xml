@@ -20,7 +20,7 @@
 			
 			
 		  			
-						<bag name="ProyectosCateogrizados" table="[proyecto_categoriaProyecto]" inverse="true" >
+						<bag name="ProyectosCateogrizados" table="[proyecto_categoriaProyecto]" inverse="true" cascade="delete">
 							<key>
 								
 									<column name="FK_idCategoriaProyecto_idCategoriaProyecto"/> 
@@ -31,7 +31,7 @@
     					</bag>
 			
 		  			
-						<bag name="EventosCategorizados" table="[evento_categoriaProyecto]" inverse="true" >
+						<bag name="EventosCategorizados" table="[evento_categoriaProyecto]" inverse="true" cascade="delete">
 							<key>
 								
 									<column name="FK_idCategoriaProyecto_idCategoriaProyecto"/> 

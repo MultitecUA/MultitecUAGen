@@ -20,7 +20,7 @@
 			
 			
 		  			
-						<bag name="UsuariosCategorizados" table="[usuario_categoriaUsuario]" inverse="true" >
+						<bag name="UsuariosCategorizados" table="[usuario_categoriaUsuario]" inverse="true" cascade="delete">
 							<key>
 								
 									<column name="FK_idCategoriaUsuario_idCategoriaUsuario"/> 
@@ -31,7 +31,7 @@
     					</bag>
 			
 		  			
-						<bag name="ProyectosSolicitantes" table="[proyecto_categoriaUsuario]" inverse="true" >
+						<bag name="ProyectosSolicitantes" table="[proyecto_categoriaUsuario]" inverse="true" cascade="delete">
 							<key>
 								
 									<column name="FK_idCategoriaUsuario_idCategoriasBuscadas"/> 
