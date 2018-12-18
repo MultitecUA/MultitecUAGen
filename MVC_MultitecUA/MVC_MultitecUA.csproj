@@ -236,7 +236,6 @@
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\ChangeRol.cshtml" />
-    <Content Include="Views\Usuario\ForNick.cshtml" />
     <Content Include="Views\Proyecto\Index.cshtml" />
     <Content Include="Views\Proyecto\Details.cshtml" />
     <Content Include="Views\Proyecto\Create.cshtml" />
@@ -275,6 +274,7 @@
     <Content Include="Views\Mensaje\Details.cshtml" />
     <Content Include="Views\Mensaje\Create.cshtml" />
     <Content Include="Views\Mensaje\Delete.cshtml" />
+    <Content Include="Views\Usuario\ForNick.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
