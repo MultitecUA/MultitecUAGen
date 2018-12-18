@@ -43,5 +43,10 @@ System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size);
 
 
 void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Generic.IList<int> p_proyectosPresentados_OIDs);
+
+MultitecUAGenNHibernate.EN.MultitecUA.EventoEN ReadNombre (string p_nombre);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorNombre (string p_nombre);
 }
 }

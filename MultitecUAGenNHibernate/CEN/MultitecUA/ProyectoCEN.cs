@@ -95,9 +95,17 @@ public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size
         list = _IProyectoCAD.ReadAll (first, size);
         return list;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> ReadNombre (string p_nombre)
+public MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN ReadNombre (string p_nombre)
 {
         return _IProyectoCAD.ReadNombre (p_nombre);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorNombre (string p_nombre)
+{
+        return _IProyectoCAD.DameProyectosPorNombre (p_nombre);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DamePoyectosPorCategoriaUsuario (int p_OID_Categoria)
+{
+        return _IProyectoCAD.DamePoyectosPorCategoriaUsuario (p_OID_Categoria);
 }
 }
 }

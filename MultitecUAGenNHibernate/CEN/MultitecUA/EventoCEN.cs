@@ -77,5 +77,13 @@ public void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Gene
 
         _IEventoCAD.EliminaProyectosAsociados (p_Evento_OID, p_proyectosPresentados_OIDs);
 }
+public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN ReadNombre (string p_nombre)
+{
+        return _IEventoCAD.ReadNombre (p_nombre);
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorNombre (string p_nombre)
+{
+        return _IEventoCAD.DameEventosPorNombre (p_nombre);
+}
 }
 }

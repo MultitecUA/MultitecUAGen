@@ -250,5 +250,37 @@ public System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first,
 
         return result;
 }
+
+public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string arg0)
+{
+        MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM CategoriaProyectoEN self where select (en) FROM CategoriaProyectoEN en where en.Nombre = :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("CategoriaProyectoENreadNombreHQL");
+                query.SetParameter ("arg0", arg0);
+
+
+                result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in CategoriaProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

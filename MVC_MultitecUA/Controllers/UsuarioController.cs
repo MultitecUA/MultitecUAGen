@@ -100,10 +100,10 @@ namespace MVC_MultitecUA.Controllers
         }
 
         //GET: Usuario/ForNick/5
-        public ActionResult ForNick(FormCollection formCollection)
+        public ActionResult ForNick(UsuarioEN usuarioEN)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
-            IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadNick(formCollection["nick"]);
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
             return View(listaUsuarios);
         }
     }

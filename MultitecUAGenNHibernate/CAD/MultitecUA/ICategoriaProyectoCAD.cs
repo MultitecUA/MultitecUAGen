@@ -29,5 +29,8 @@ CategoriaProyectoEN ReadOID (int id
 
 
 System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first, int size);
+
+
+MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string arg0);
 }
 }

@@ -88,8 +88,8 @@ namespace MVC_MultitecUA.Controllers
         {
             try
             {
-                CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
-                categoriaProyectoCEN.Destroy(id);
+                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP();
+                categoriaProyectoCP.Destroy(id);
                 return RedirectToAction("Index");
             }
             catch

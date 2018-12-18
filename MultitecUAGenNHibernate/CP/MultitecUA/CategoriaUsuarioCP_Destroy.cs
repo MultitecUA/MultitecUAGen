@@ -45,9 +45,8 @@ public void Destroy (int p_CategoriaUsuario_OID)
                 List<int> OIDCategoriaABorrar = new List<int>();
                 OIDCategoriaABorrar.Add (p_CategoriaUsuario_OID);
 
-                foreach (ProyectoEN proyectoEN in proyectoCEN.ReadAll (0, -1))
-                        if (proyectoEN.CategoriasBuscadas.Contains (categoriaUsuarioEN))
-                                proyectoCEN.EliminaCategoriasUsuario (proyectoEN.Id, OIDCategoriaABorrar);
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DamePoyectosPorCategoriaUsuario(p_CategoriaUsuario_OID))
+                    proyectoCEN.EliminaCategoriasUsuario(proyectoEN.Id, OIDCategoriaABorrar);
 
                 foreach (UsuarioEN usuarioEN in usuarioCEN.DameUsuariosPorCategoria (p_CategoriaUsuario_OID))
                         usuarioCEN.EliminaCategorias (usuarioEN.Id, OIDCategoriaABorrar);

@@ -466,5 +466,66 @@ public void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Gene
                 SessionClose ();
         }
 }
+public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN ReadNombre (string p_nombre)
+{
+        MultitecUAGenNHibernate.EN.MultitecUA.EventoEN result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en where en.Nombre = :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("EventoENreadNombreHQL");
+                query.SetParameter ("p_nombre", p_nombre);
+
+
+                result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> DameEventosPorNombre (string p_nombre)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en where en.Nombre like :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosPorNombreHQL");
+                query.SetParameter ("p_nombre", p_nombre);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in EventoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

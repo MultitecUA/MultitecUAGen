@@ -67,12 +67,6 @@ public void Modify (int p_CategoriaUsuario_OID, string p_nombre)
         _ICategoriaUsuarioCAD.Modify (categoriaUsuarioEN);
 }
 
-public void Destroy (int id
-                     )
-{
-        _ICategoriaUsuarioCAD.Destroy (id);
-}
-
 public CategoriaUsuarioEN ReadOID (int id
                                    )
 {
@@ -88,6 +82,10 @@ public System.Collections.Generic.IList<CategoriaUsuarioEN> ReadAll (int first, 
 
         list = _ICategoriaUsuarioCAD.ReadAll (first, size);
         return list;
+}
+public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ReadNombre (string arg0)
+{
+        return _ICategoriaUsuarioCAD.ReadNombre (arg0);
 }
 }
 }

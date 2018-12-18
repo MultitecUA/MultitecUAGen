@@ -13,14 +13,14 @@
 			
 					
 					<property name="Nombre" type="string"> 
-						<column name="nombre"  not-null="true"/>
+						<column name="nombre"  unique="true" not-null="true"/>
 					</property>
 			
 			
 			
 			
 		  			
-						<bag name="UsuariosCategorizados" table="[usuario_categoriaUsuario]" inverse="true" cascade="delete">
+						<bag name="UsuariosCategorizados" table="[usuario_categoriaUsuario]" inverse="true" >
 							<key>
 								
 									<column name="FK_idCategoriaUsuario_idCategoriaUsuario"/> 
@@ -31,7 +31,7 @@
     					</bag>
 			
 		  			
-						<bag name="ProyectosSolicitantes" table="[proyecto_categoriaUsuario]" inverse="true" cascade="delete">
+						<bag name="ProyectosSolicitantes" table="[proyecto_categoriaUsuario]" inverse="true" >
 							<key>
 								
 									<column name="FK_idCategoriaUsuario_idCategoriasBuscadas"/> 
@@ -48,5 +48,6 @@
 		 </class>	
 		  
 		  <query name="CategoriaUsuarioENReadAllHQL">from CategoriaUsuarioEN</query>
+		  <query name="CategoriaUsuarioENreadNombreHQL"><![CDATA[select (en) FROM CategoriaUsuarioEN en where en.Nombre = :p_nombre]]></query>
 		</hibernate-mapping>
 	

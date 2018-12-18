@@ -104,8 +104,9 @@ public static void InitializeData ()
 
                 categoriaUsuarioCEN.Modify (OIDCategoria, "Putisimo Amo");
 
-                categoriaUsuarioCEN.Destroy (OIDCategoria);
+                //categoriaUsuarioCEN.Destroy (OIDCategoria);
 
+                Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
                 usuarioCEN.AgregaCategorias (OIDUsuario, OIDsCategorias);
 
                 OIDsCategorias.RemoveAt (2);
@@ -118,13 +119,17 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
 
-                categoriaUsuarioCEN.Destroy (OIDCategoria);
+                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();
+                categoriaUsuarioCP.Destroy (OIDCategoria);
+                Console.WriteLine ("Usuario con OID " + OIDUsuario + ": " + usuarioCEN.ReadOID (OIDUsuario).Id);
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
+                Console.WriteLine ("Aqui no llega");
                 int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
                 ProyectoCP proyectoCP = new ProyectoCP ();
+                Console.WriteLine ("Aqui no llega");
                 int OIDProyectoABorrar = proyectoCEN.New_ ("APPANICasdasd", "App que te ayuda en la vida", OIDUsuario, null);
 
                 int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");
@@ -180,8 +185,8 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Proyecto totales: " + categoriaProyectoCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Proyecto con OID " + OIDCategoriaProyecto + ": " + categoriaProyectoCEN.ReadOID (OIDCategoriaProyecto).Id);
 
-
-                categoriaProyectoCEN.Destroy (OIDCategoriaProyecto);
+                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP();
+                categoriaProyectoCP.Destroy (OIDCategoriaProyecto);
 
 
 

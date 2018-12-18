@@ -133,6 +133,7 @@
 			
 			
 			
+			
 	<Compile Include="EN\MultitecUA\ProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />
@@ -169,6 +170,8 @@
 			
 			
 			
+			
+			
 	<Compile Include="EN\MultitecUA\EventoEN.cs" />
 	<Compile Include="CEN\MultitecUA\EventoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IEventoCAD.cs" />
@@ -188,6 +191,8 @@
 			
 			
 			<Compile Include="CEN\MultitecUA\EventoCEN_PublicaEvento.cs" />
+			
+			
 			
 			
 	<Compile Include="EN\MultitecUA\RecuerdoEN.cs" />
@@ -275,6 +280,8 @@
 	<Compile Include="CP\MultitecUA\CategoriaProyectoCP.cs" />
 			
 			
+			<Compile Include="CP\MultitecUA\CategoriaProyectoCP_Destroy.cs" />
+			
 			
 			
 			
@@ -284,6 +291,8 @@
 	<Compile Include="CAD\MultitecUA\CategoriaUsuarioCAD.cs" />
 	<Compile Include="CP\MultitecUA\CategoriaUsuarioCP.cs" />
 			
+			
+			<Compile Include="CP\MultitecUA\CategoriaUsuarioCP_Destroy.cs" />
 			
 			
 			

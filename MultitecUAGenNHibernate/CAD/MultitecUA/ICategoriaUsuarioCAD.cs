@@ -29,5 +29,8 @@ CategoriaUsuarioEN ReadOID (int id
 
 
 System.Collections.Generic.IList<CategoriaUsuarioEN> ReadAll (int first, int size);
+
+
+MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ReadNombre (string arg0);
 }
 }

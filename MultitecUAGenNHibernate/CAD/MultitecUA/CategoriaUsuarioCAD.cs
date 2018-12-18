@@ -250,5 +250,37 @@ public System.Collections.Generic.IList<CategoriaUsuarioEN> ReadAll (int first, 
 
         return result;
 }
+
+public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ReadNombre (string arg0)
+{
+        MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM CategoriaUsuarioEN self where select (en) FROM CategoriaUsuarioEN en where en.Nombre = :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("CategoriaUsuarioENreadNombreHQL");
+                query.SetParameter ("arg0", arg0);
+
+
+                result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in CategoriaUsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

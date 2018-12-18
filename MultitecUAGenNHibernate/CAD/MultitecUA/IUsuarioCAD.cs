@@ -47,6 +47,9 @@ UsuarioEN ReadOID (int id
 System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size);
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> ReadNick (string p_nick);
+MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ReadNick (string p_nick);
+
+
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorNick (string p_nick);
 }
 }

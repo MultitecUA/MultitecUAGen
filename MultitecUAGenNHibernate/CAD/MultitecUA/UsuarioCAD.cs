@@ -485,7 +485,38 @@ public System.Collections.Generic.IList<UsuarioEN> ReadAll (int first, int size)
         return result;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> ReadNick (string p_nick)
+public MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ReadNick (string p_nick)
+{
+        MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en where en.Nick = :p_nick";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENreadNickHQL");
+                query.SetParameter ("p_nick", p_nick);
+
+
+                result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in UsuarioCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorNick (string p_nick)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> result;
         try
@@ -493,8 +524,8 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
                 SessionInitializeTransaction ();
                 //String sql = @"FROM UsuarioEN self where select (en) FROM UsuarioEN en where en.Nick like :p_nick";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENreadNickHQL");
-                query.SetParameter ("p_nick", p_nick);
+                IQuery query = (IQuery)session.GetNamedQuery ("UsuarioENdameUsuariosPorNickHQL");
+                query.SetParameter ("p_nick", "%"+p_nick+"%");
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>();
                 SessionCommit ();

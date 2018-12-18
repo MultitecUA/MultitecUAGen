@@ -816,9 +816,9 @@ public System.Collections.Generic.IList<ProyectoEN> ReadAll (int first, int size
         return result;
 }
 
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> ReadNombre (string p_nombre)
+public MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN ReadNombre (string p_nombre)
 {
-        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
+        MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN result;
         try
         {
                 SessionInitializeTransaction ();
@@ -826,6 +826,67 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENreadNombreHQL");
                 query.SetParameter ("p_nombre", p_nombre);
+
+
+                result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorNombre (string p_nombre)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en where en.Nombre like :p_nombre";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPorNombreHQL");
+                query.SetParameter ("p_nombre", p_nombre);
+
+                result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is MultitecUAGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new MultitecUAGenNHibernate.Exceptions.DataLayerException ("Error in ProyectoCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DamePoyectosPorCategoriaUsuario (int p_OID_Categoria)
+{
+        System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en join en.CategoriasBuscadas cat where cat.Id = :p_OID_Categoria";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdamePoyectosPorCategoriaUsuarioHQL");
+                query.SetParameter ("p_OID_Categoria", p_OID_Categoria);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();
                 SessionCommit ();
