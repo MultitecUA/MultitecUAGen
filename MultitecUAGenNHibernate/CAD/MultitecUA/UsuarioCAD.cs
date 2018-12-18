@@ -277,9 +277,11 @@ public void AgregaCategorias (int p_Usuario_OID, System.Collections.Generic.ILis
                 foreach (int item in p_categoriasUsuarios_OIDs) {
                         categoriasUsuariosENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ();
                         categoriasUsuariosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN), item);
-                        categoriasUsuariosENAux.UsuariosCategorizados.Add (usuarioEN);
+                    if (!categoriasUsuariosENAux.UsuariosCategorizados.Contains(usuarioEN))
+                        categoriasUsuariosENAux.UsuariosCategorizados.Add(usuarioEN);
 
-                        usuarioEN.CategoriasUsuarios.Add (categoriasUsuariosENAux);
+                    if (!usuarioEN.CategoriasUsuarios.Contains(categoriasUsuariosENAux))
+                        usuarioEN.CategoriasUsuarios.Add(categoriasUsuariosENAux);
                 }
 
 
@@ -313,12 +315,13 @@ public void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.ILi
                 if (usuarioEN.CategoriasUsuarios != null) {
                         foreach (int item in p_categoriasUsuarios_OIDs) {
                                 categoriasUsuariosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN), item);
-                                if (usuarioEN.CategoriasUsuarios.Contains (categoriasUsuariosENAux) == true) {
-                                        usuarioEN.CategoriasUsuarios.Remove (categoriasUsuariosENAux);
-                                        categoriasUsuariosENAux.UsuariosCategorizados.Remove (usuarioEN);
-                                }
-                                else
-                                        throw new ModelException ("The identifier " + item + " in p_categoriasUsuarios_OIDs you are trying to unrelationer, doesn't exist in UsuarioEN");
+                                if (categoriasUsuariosENAux.UsuariosCategorizados.Contains(usuarioEN))
+                                    if (usuarioEN.CategoriasUsuarios.Contains (categoriasUsuariosENAux) == true) {
+                                                usuarioEN.CategoriasUsuarios.Remove (categoriasUsuariosENAux);
+                                                categoriasUsuariosENAux.UsuariosCategorizados.Remove (usuarioEN);
+                                        }
+                                        else
+                                                throw new ModelException ("The identifier " + item + " in p_categoriasUsuarios_OIDs you are trying to unrelationer, doesn't exist in UsuarioEN");
                         }
                 }
 

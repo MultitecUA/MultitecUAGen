@@ -434,9 +434,11 @@ public void AgregaCategoriasUsuario (int p_Proyecto_OID, System.Collections.Gene
                 foreach (int item in p_categoriasBuscadas_OIDs) {
                         categoriasBuscadasENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ();
                         categoriasBuscadasENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN), item);
-                        categoriasBuscadasENAux.ProyectosSolicitantes.Add (proyectoEN);
+                        if (!categoriasBuscadasENAux.ProyectosSolicitantes.Contains(proyectoEN))
+                            categoriasBuscadasENAux.ProyectosSolicitantes.Add(proyectoEN);
 
-                        proyectoEN.CategoriasBuscadas.Add (categoriasBuscadasENAux);
+                        if (!proyectoEN.CategoriasBuscadas.Contains(categoriasBuscadasENAux))
+                            proyectoEN.CategoriasBuscadas.Add(categoriasBuscadasENAux);
                 }
 
 
@@ -473,9 +475,11 @@ public void AgregaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Gen
                 foreach (int item in p_categoriasProyectos_OIDs) {
                         categoriasProyectosENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ();
                         categoriasProyectosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN), item);
-                        categoriasProyectosENAux.ProyectosCateogrizados.Add (proyectoEN);
+                        if (!categoriasProyectosENAux.ProyectosCateogrizados.Contains(proyectoEN))
+                            categoriasProyectosENAux.ProyectosCateogrizados.Add(proyectoEN);
 
-                        proyectoEN.CategoriasProyectos.Add (categoriasProyectosENAux);
+                        if (!proyectoEN.CategoriasProyectos.Contains(categoriasProyectosENAux))
+                            proyectoEN.CategoriasProyectos.Add(categoriasProyectosENAux);
                 }
 
 
@@ -624,13 +628,14 @@ public void EliminaCategoriasUsuario (int p_Proyecto_OID, System.Collections.Gen
                 if (proyectoEN.CategoriasBuscadas != null) {
                         foreach (int item in p_categoriasBuscadas_OIDs) {
                                 categoriasBuscadasENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN), item);
-                                if (proyectoEN.CategoriasBuscadas.Contains (categoriasBuscadasENAux) == true) {
-                                        proyectoEN.CategoriasBuscadas.Remove (categoriasBuscadasENAux);
-                                        categoriasBuscadasENAux.ProyectosSolicitantes.Remove (proyectoEN);
-                                }
-                                else
-                                        throw new ModelException ("The identifier " + item + " in p_categoriasBuscadas_OIDs you are trying to unrelationer, doesn't exist in ProyectoEN");
-                        }
+                                if (categoriasBuscadasENAux.ProyectosSolicitantes.Contains(proyectoEN))
+                                    if (proyectoEN.CategoriasBuscadas.Contains (categoriasBuscadasENAux) == true) {
+                                                proyectoEN.CategoriasBuscadas.Remove (categoriasBuscadasENAux);
+                                                categoriasBuscadasENAux.ProyectosSolicitantes.Remove (proyectoEN);
+                                        }
+                                        else
+                                                throw new ModelException ("The identifier " + item + " in p_categoriasBuscadas_OIDs you are trying to unrelationer, doesn't exist in ProyectoEN");
+                                    }
                 }
 
                 session.Update (proyectoEN);
@@ -662,13 +667,14 @@ public void EliminaCategoriasProyecto (int p_Proyecto_OID, System.Collections.Ge
                 if (proyectoEN.CategoriasProyectos != null) {
                         foreach (int item in p_categoriasProyectos_OIDs) {
                                 categoriasProyectosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN), item);
-                                if (proyectoEN.CategoriasProyectos.Contains (categoriasProyectosENAux) == true) {
-                                        proyectoEN.CategoriasProyectos.Remove (categoriasProyectosENAux);
-                                        categoriasProyectosENAux.ProyectosCateogrizados.Remove (proyectoEN);
-                                }
-                                else
-                                        throw new ModelException ("The identifier " + item + " in p_categoriasProyectos_OIDs you are trying to unrelationer, doesn't exist in ProyectoEN");
-                        }
+                                if (categoriasProyectosENAux.ProyectosCateogrizados.Contains(proyectoEN))
+                                    if (proyectoEN.CategoriasProyectos.Contains (categoriasProyectosENAux) == true) {
+                                                proyectoEN.CategoriasProyectos.Remove (categoriasProyectosENAux);
+                                                categoriasProyectosENAux.ProyectosCateogrizados.Remove (proyectoEN);
+                                        }
+                                        else
+                                                throw new ModelException ("The identifier " + item + " in p_categoriasProyectos_OIDs you are trying to unrelationer, doesn't exist in ProyectoEN");
+                                    }
                 }
 
                 session.Update (proyectoEN);

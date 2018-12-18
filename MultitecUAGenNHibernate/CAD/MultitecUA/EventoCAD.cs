@@ -306,9 +306,11 @@ public void AgregaCategorias (int p_Evento_OID, System.Collections.Generic.IList
                 foreach (int item in p_categoriasEventos_OIDs) {
                         categoriasEventosENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ();
                         categoriasEventosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN), item);
-                        categoriasEventosENAux.EventosCategorizados.Add (eventoEN);
+                    if (!categoriasEventosENAux.EventosCategorizados.Contains(eventoEN))
+                        categoriasEventosENAux.EventosCategorizados.Add(eventoEN);
 
-                        eventoEN.CategoriasEventos.Add (categoriasEventosENAux);
+                    if (!eventoEN.CategoriasEventos.Contains(categoriasEventosENAux))
+                        eventoEN.CategoriasEventos.Add(categoriasEventosENAux);
                 }
 
 
@@ -342,12 +344,13 @@ public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.ILis
                 if (eventoEN.CategoriasEventos != null) {
                         foreach (int item in p_categoriasEventos_OIDs) {
                                 categoriasEventosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN), item);
-                                if (eventoEN.CategoriasEventos.Contains (categoriasEventosENAux) == true) {
-                                        eventoEN.CategoriasEventos.Remove (categoriasEventosENAux);
-                                        categoriasEventosENAux.EventosCategorizados.Remove (eventoEN);
-                                }
-                                else
-                                        throw new ModelException ("The identifier " + item + " in p_categoriasEventos_OIDs you are trying to unrelationer, doesn't exist in EventoEN");
+                                if (categoriasEventosENAux.EventosCategorizados.Contains(eventoEN))
+                                    if (eventoEN.CategoriasEventos.Contains (categoriasEventosENAux) == true) {
+                                                    eventoEN.CategoriasEventos.Remove(categoriasEventosENAux);
+                                                    categoriasEventosENAux.EventosCategorizados.Remove(eventoEN);
+                                    }
+                                        else
+                                                throw new ModelException ("The identifier " + item + " in p_categoriasEventos_OIDs you are trying to unrelationer, doesn't exist in EventoEN");
                         }
                 }
 
