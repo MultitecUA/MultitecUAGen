@@ -1,0 +1,37 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
+
+@{
+    ViewBag.Title = "PorFiltro";
+}
+
+<h2>PorFiltro</h2>
+
+<div>
+    @using (Html.BeginForm("Filtrar", "Evento"))
+    {
+    <div class="form-horizontal">
+        <!--foreach (string a in (List<string>)ViewData["listaCateP"])
+        {
+            <label class="checkbox-inline">
+                <input type="checkbox" name="categoria" value="a"> a
+            </label>
+        }-->
+        <label>Categoria</label>
+        <input type="text" name="Categoria" class="form-control" />
+       
+    </div>
+    <div class="form-horizontal">
+        <label>Fecha entre </label>
+        <input type="datetime" name="FechaAnterior" class="form-control"/>
+        <label> y </label>
+        <input type="datetime" name="FechaFinal" class="form-control" />
+    </div>
+        <div class="form-horizontal">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
