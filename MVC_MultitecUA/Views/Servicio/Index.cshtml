@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ServicioEN>
+﻿@model IEnumerable<MVC_MultitecUA.Models.Servicio>
 
 @{
     ViewBag.Title = "Index";
@@ -6,40 +6,60 @@
 
 <h2>Index</h2>
 
+
+<hr />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear", "Create")
+
+    @using (Html.BeginForm("PorEstado", "Servicio"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label>Filtrar por: </label>
+                    @Html.DropDownList("Estados", new SelectList((System.Collections.IEnumerable)ViewData["listaEstadosServicio"]))
+                    <input type="submit" value="Buscar" class="btn btn-default" />
+                </div>
+
+            </div>
+        </div>
+    }
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Descripcion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { item.Id }) |
+                @Html.ActionLink("Datalles", "Details", new { item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+

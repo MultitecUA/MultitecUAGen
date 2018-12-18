@@ -1,14 +1,14 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Borrar recuerdo";
 }
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Estás seguro de que quiere borrar este recuerdo?</h3>
 <div>
-    <h4>RecuerdoEN</h4>
+    <h4>Recuerdo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,6 +27,7 @@
             @Html.DisplayFor(model => model.Cuerpo)
         </dd>
 
+
     </dl>
 
     @using (Html.BeginForm()) {
@@ -34,7 +35,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Volver", "Index")
         </div>
     }
 </div>

@@ -1,69 +1,82 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Eventos";
 }
 
-<h2>Index</h2>
+<h2>Eventos</h2>
+
+
+
+
+
+@Html.ActionLink("Filtrar", "PorFiltro")
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo evento", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Descripción
+            <!--Html.DisplayNameFor(model => model.Descripcion) -->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaInicio)
+            Inicio
+            <!--Html.DisplayNameFor(model => model.FechaInicio)-->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaFin)
+            Fin
+            <!-- @Html.DisplayNameFor(model => model.FechaFin) -->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaInicioInscripcion)
+            Inicio de inscripción
+            <!-- Html.DisplayNameFor(model => model.FechaInicioInscripcion) -->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaTopeInscripcion)
+            Tope de inscripción
+            <!--Html.DisplayNameFor(model => model.FechaTopeInscripcion)-->
+        </th>
+        <th>
+            Proyectos asociados
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Proyectos", "ProyectosPorEvento", new { id = item.Id })
+            </td>
+
+            <td style="text-align: center;">
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

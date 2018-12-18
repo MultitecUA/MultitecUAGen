@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN>
+﻿@model IEnumerable<MVC_MultitecUA.Models.Recuerdo>
 
 @{
     ViewBag.Title = "Index";
@@ -7,18 +7,21 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Titulo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cuerpo)
+        </th>
+        <th>
+            <label>IdEvento</label>
+        </th>
+        <th>
+            <label>Evento</label>
         </th>
         <th></th>
     </tr>
@@ -26,18 +29,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Titulo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cuerpo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.DisplayFor(modelItem => item.IdEvento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreEvento)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

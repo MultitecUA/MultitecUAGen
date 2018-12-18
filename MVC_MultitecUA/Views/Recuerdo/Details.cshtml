@@ -1,23 +1,15 @@
-﻿@model MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN
+﻿@model MVC_MultitecUA.Models.Recuerdo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detalles del recuerdo</h2>
 
 <div>
-    <h4>RecuerdoEN</h4>
+    <h4>Recuerdo</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Titulo)
         </dt>
@@ -34,9 +26,17 @@
             @Html.DisplayFor(model => model.Cuerpo)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdEvento)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
 </p>

@@ -1,23 +1,14 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles del evento";
 }
 
-<h2>Details</h2>
+<h2>Evento: @ViewData["NombreEvento"]</h2>
 
 <div>
-    <h4>EventoEN</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
@@ -67,8 +58,38 @@
         </dd>
 
     </dl>
+    <br />
+    <div class="dl-horizontal">
+        @using (Html.BeginForm("AgregarCat", "Evento"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Agregar categoria:</label>
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasP"]))
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        }
+
+        @using (Html.BeginForm("EliminarCat", "Evento"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Eliminar categoria:</label>
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasP"]))
+                <input type="submit" value="Eliminar" class="btn btn-default" />
+            </div>
+        }
+
+        @Html.ActionLink("Proyectos", "ProyectosPorEvento", new { id = ViewData["IdEvento"] })
+        @Html.ActionLink("Proyectos", "EliminarProyectos", new { id = ViewData["IdEvento"] })
+        <br />
+        @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { id = ViewData["IdEvento"] },null)
+
+
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar evento", "Edit", new { id = Model.Id }) 
+    <br />
+    @Html.ActionLink("Volver", "Index")
 </p>
