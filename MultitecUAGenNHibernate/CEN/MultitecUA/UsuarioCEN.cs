@@ -60,15 +60,38 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Us
 }
 public void AgregaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> p_categoriasUsuarios_OIDs)
 {
-        //Call to UsuarioCAD
+            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Usuario_agregaCategorias) ENABLED START*/
+            /*UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadOID(p_Usuario_OID);
 
-        _IUsuarioCAD.AgregaCategorias (p_Usuario_OID, p_categoriasUsuarios_OIDs);
+            foreach (CategoriaUsuarioEN categoria in usuarioEN.CategoriasUsuarios)
+            {
+                if (p_categoriasUsuarios_OIDs.Contains(categoria.Id))
+                {
+                    p_categoriasUsuarios_OIDs.Remove(categoria.Id);
+                }
+            }*/
+            /*PROTECTED REGION END*/
+            //Call to UsuarioCAD
+            _IUsuarioCAD.AgregaCategorias (p_Usuario_OID, p_categoriasUsuarios_OIDs);
 }
 public void EliminaCategorias (int p_Usuario_OID, System.Collections.Generic.IList<int> p_categoriasUsuarios_OIDs)
 {
-        //Call to UsuarioCAD
 
-        _IUsuarioCAD.EliminaCategorias (p_Usuario_OID, p_categoriasUsuarios_OIDs);
+
+            /*UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadOID(p_Usuario_OID);
+            
+            foreach (CategoriaUsuarioEN categoria in usuarioEN.CategoriasUsuarios)
+            {
+                if (p_categoriasUsuarios_OIDs.Contains(categoria.Id))
+                {
+                    p_categoriasUsuarios_OIDs.Remove(categoria.Id);
+                }
+            }
+            */
+            //Call to UsuarioCAD
+            _IUsuarioCAD.EliminaCategorias (p_Usuario_OID, p_categoriasUsuarios_OIDs);
 }
 public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorCategoria (int p_categoria)
 {

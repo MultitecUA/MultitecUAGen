@@ -16,19 +16,19 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento
         public ActionResult Index()
         {
-            SessionInitialize();
-            EventoCAD cadEven = new EventoCAD(session);
-            EventoCEN eventoCEN = new EventoCEN(cadEven);
+           
+           
+            EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> listaEventoEn = eventoCEN.ReadAll(0, -1).ToList();
             //IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(listaServiciosEn).ToList();
-            SessionClose();
+           
             return View(listaEventoEn);
         }
 
         // GET: Evento/Details/5
         public ActionResult Details(int id)
         {
-            SessionInitialize();
+            
             ArrayList listaCates = new ArrayList();
             CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             List<CategoriaProyectoEN> cat = categoriasP.ReadAll(0, -1).ToList();
@@ -37,12 +37,11 @@ namespace MVC_MultitecUA.Controllers
                 listaCates.Add(a.Id);
             }
             ViewData["listaCategoriasP"] = listaCates;
-            EventoCAD servicioCAD = new EventoCAD(session);
-            EventoCEN eventoCEN = new EventoCEN(servicioCAD);
+            EventoCEN eventoCEN = new EventoCEN();
             EventoEN eventoEN = new EventoCEN().ReadOID(id);
             ViewData["NombreEvento"] = eventoEN.Nombre;
             ViewData["IdEvento"] = id;
-            SessionClose();
+            
             return View(eventoEN);
         }
 
@@ -74,7 +73,7 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento/Edit/5
         public ActionResult Edit(int id)
         {
-            EventoEN eventoEN = new EventoCAD(session).ReadOID(id);
+            EventoEN eventoEN = new EventoCEN().ReadOID(id);
             return View(eventoEN);
         }
 
@@ -124,7 +123,7 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult PorFiltro()
         {
-            SessionInitialize();
+            
             EventoEN evento = new EventoEN();
             //CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             //IList<CategoriaProyectoEN> categoriasProyecto = categoriasP.ReadAll(0, -1).ToList();
@@ -134,13 +133,13 @@ namespace MVC_MultitecUA.Controllers
             //listaCateP.Add(a.Nombre);
             //}
             //ViewData["listaCateP"] = listaCateP;
-            SessionClose();
+            
             return View(evento);
         }
 
         public ActionResult Filtrar(FormCollection f)
         {
-            SessionInitialize();
+           
             //if (f["categoria"] != null)
             //{
             /*string[] ps = f["categoria"].Split(',');
@@ -151,8 +150,8 @@ namespace MVC_MultitecUA.Controllers
             }*/
 
             //}
-            EventoCAD eventoCAD = new EventoCAD(session);
-            EventoCEN evento = new EventoCEN(eventoCAD);
+           
+            EventoCEN evento = new EventoCEN();
             int num = int.Parse(f["Categoria"]);
             IList<EventoEN> listaEventos;
 
@@ -177,7 +176,7 @@ namespace MVC_MultitecUA.Controllers
                 listaEventos = evento.DameEventosFiltrados(num, fa, null);
             }
 
-            SessionClose();
+            
             return View(listaEventos);
         }
 

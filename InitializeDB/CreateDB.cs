@@ -119,7 +119,7 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Usuario con OID " + OIDCategoria + ": " + categoriaUsuarioCEN.ReadOID (OIDCategoria).Id);
 
-                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();
+                CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP ();
                 categoriaUsuarioCP.Destroy (OIDCategoria);
                 Console.WriteLine ("Usuario con OID " + OIDUsuario + ": " + usuarioCEN.ReadOID (OIDUsuario).Id);
                 Console.WriteLine ("Categorias Usuarios totales: " + categoriaUsuarioCEN.ReadAll (0, -1).Count);
@@ -185,7 +185,7 @@ public static void InitializeData ()
                 Console.WriteLine ("Categorias Proyecto totales: " + categoriaProyectoCEN.ReadAll (0, -1).Count);
                 Console.WriteLine ("Categoria Proyecto con OID " + OIDCategoriaProyecto + ": " + categoriaProyectoCEN.ReadOID (OIDCategoriaProyecto).Id);
 
-                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP();
+                CategoriaProyectoCP categoriaProyectoCP = new CategoriaProyectoCP ();
                 categoriaProyectoCP.Destroy (OIDCategoriaProyecto);
 
 
