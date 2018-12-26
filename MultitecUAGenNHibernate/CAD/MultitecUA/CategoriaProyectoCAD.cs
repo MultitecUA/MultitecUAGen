@@ -251,7 +251,7 @@ public System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first,
         return result;
 }
 
-public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string arg0)
+public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string p_nombre)
 {
         MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN result;
         try
@@ -260,7 +260,7 @@ public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (str
                 //String sql = @"FROM CategoriaProyectoEN self where select (en) FROM CategoriaProyectoEN en where en.Nombre = :p_nombre";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("CategoriaProyectoENreadNombreHQL");
-                query.SetParameter ("arg0", arg0);
+                query.SetParameter ("p_nombre", p_nombre);
 
 
                 result = query.UniqueResult<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN>();

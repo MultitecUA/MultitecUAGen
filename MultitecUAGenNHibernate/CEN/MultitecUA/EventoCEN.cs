@@ -45,23 +45,9 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
 }
 public void AgregaCategorias (int p_Evento_OID, System.Collections.Generic.IList<int> p_categoriasEventos_OIDs)
 {
-            /*PROTECTED REGION ID(MultitecUAGenNHibernate.CEN.MultitecUA_Evento_agregaCategorias) ENABLED START*/
-            /*EventoCEN eventoCEN = new EventoCEN();
-            IList<CategoriaProyectoEN> lista = eventoCEN.ReadOID(p_Evento_OID).CategoriasEventos;
+        //Call to EventoCAD
 
-            
-            foreach (CategoriaProyectoEN categoria in lista)
-            {
-                if (p_categoriasEventos_OIDs.Contains(categoria.Id))
-                {
-                    p_categoriasEventos_OIDs.Remove(categoria.Id);
-                }
-            }*/
-
-            /*PROTECTED REGION END*/
-            //Call to EventoCAD
-
-            _IEventoCAD.AgregaCategorias (p_Evento_OID, p_categoriasEventos_OIDs);
+        _IEventoCAD.AgregaCategorias (p_Evento_OID, p_categoriasEventos_OIDs);
 }
 public void EliminaCategorias (int p_Evento_OID, System.Collections.Generic.IList<int> p_categoriasEventos_OIDs)
 {

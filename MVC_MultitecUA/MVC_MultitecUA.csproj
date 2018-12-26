@@ -282,6 +282,7 @@
     <Content Include="Views\Servicio\Edit.cshtml" />
     <Content Include="Views\Servicio\Index.cshtml" />
     <Content Include="Views\Servicio\PorEstado.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

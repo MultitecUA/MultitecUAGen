@@ -83,9 +83,9 @@ public System.Collections.Generic.IList<CategoriaProyectoEN> ReadAll (int first,
         list = _ICategoriaProyectoCAD.ReadAll (first, size);
         return list;
 }
-public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string arg0)
+public MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ReadNombre (string p_nombre)
 {
-        return _ICategoriaProyectoCAD.ReadNombre (arg0);
+        return _ICategoriaProyectoCAD.ReadNombre (p_nombre);
 }
 }
 }

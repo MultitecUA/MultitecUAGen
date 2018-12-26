@@ -1,4 +1,5 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.Enumerated.MultitecUA;
 using System;
@@ -105,6 +106,29 @@ namespace MVC_MultitecUA.Controllers
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
             return View(listaUsuarios);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+            return View(usuarioEN);
+        }
+
+        // POST: Solicitud/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, SolicitudEN solicitudEN)
+        {
+            try
+            {
+                UsuarioCP usuarioCP = new UsuarioCP();
+                usuarioCP.Destroy(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

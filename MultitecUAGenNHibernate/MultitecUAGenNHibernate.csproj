@@ -134,6 +134,8 @@
 			
 			
 			
+			<Compile Include="CP\MultitecUA\UsuarioCP_Destroy.cs" />
+			
 	<Compile Include="EN\MultitecUA\ProyectoEN.cs" />
 	<Compile Include="CEN\MultitecUA\ProyectoCEN.cs" />
 	<Compile Include="CAD\MultitecUA\IProyectoCAD.cs" />

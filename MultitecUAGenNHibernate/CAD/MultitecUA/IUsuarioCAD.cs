@@ -51,5 +51,9 @@ MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN ReadNick (string p_nick);
 
 
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN> DameUsuariosPorNick (string p_nick);
+
+
+void Destroy (int id
+              );
 }
 }
