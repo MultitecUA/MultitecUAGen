@@ -11,10 +11,27 @@ namespace MVC_MultitecUA.Controllers
     public class NoticiaController : BasicController
     {
         // GET: Noticia
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
             NoticiaCEN noticiaCEN = new NoticiaCEN();
-            IList<NoticiaEN> listaNoticias = noticiaCEN.ReadAll(0, -1).ToList();
+
+            int tamPag = 10;
+
+            int numPags = (noticiaCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<NoticiaEN> listaNoticias = noticiaCEN.ReadAll(inicio, tamPag).ToList();
+
             return View(listaNoticias);
         }
 

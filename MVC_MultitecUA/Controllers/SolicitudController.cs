@@ -11,10 +11,27 @@ namespace MVC_MultitecUA.Controllers
     public class SolicitudController : BasicController
     {
         // GET: Solicitud
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
             SolicitudCEN solicitudCEN = new SolicitudCEN();
-            IList<SolicitudEN> listaSolicitudes = solicitudCEN.ReadAll(0, -1).ToList();
+
+            int tamPag = 10;
+
+            int numPags = (solicitudCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<SolicitudEN> listaSolicitudes = solicitudCEN.ReadAll(inicio, tamPag).ToList();
+
             return View(listaSolicitudes);
         }
 

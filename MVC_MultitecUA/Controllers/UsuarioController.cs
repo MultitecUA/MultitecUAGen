@@ -14,10 +14,42 @@ namespace MVC_MultitecUA.Controllers
     public class UsuarioController : BasicController
     {
         // GET: Usuario
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
-            IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
+
+            ArrayList listaRoles = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(RolUsuarioEnum)))
+                listaRoles.Add(a);
+
+            ViewData["listaRoles"] = listaRoles;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))            
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
+
+            int tamPag = 10;
+
+            int numPags = (usuarioCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(inicio, tamPag).ToList();
+
             return View(listaUsuarios);
         }
 
@@ -81,6 +113,14 @@ namespace MVC_MultitecUA.Controllers
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+
+            ArrayList listaRoles = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(RolUsuarioEnum)))
+                listaRoles.Add(a);
+
+            ViewData["listaRoles"] = listaRoles;
+
             return View(usuarioEN);
         }
 
@@ -104,10 +144,75 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult ForNick(UsuarioEN usuarioEN)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ArrayList listaRoles = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(RolUsuarioEnum)))
+                listaRoles.Add(a);
+
+            ViewData["listaRoles"] = listaRoles;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
+            
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
             return View(listaUsuarios);
         }
 
+        //GET: Usuario/ForRol/5
+        public ActionResult ForRol(UsuarioEN usuarioEN)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ArrayList listaRoles = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(RolUsuarioEnum)))
+                listaRoles.Add(a);
+
+            ViewData["listaRoles"] = listaRoles;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorRol(usuarioEN.Rol);
+            return View(listaUsuarios);
+        }
+
+        //GET: Usuario/ForCategoria/5
+        public ActionResult ForCategoria(int categoria)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ArrayList listaRoles = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(RolUsuarioEnum)))
+                listaRoles.Add(a);
+
+            ViewData["listaRoles"] = listaRoles;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a);
+
+            ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(categoria);
+            return View(listaUsuarios);
+        }
+
+        // GET: Solicitud/Delete/5
         public ActionResult Delete(int id)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();

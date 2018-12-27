@@ -16,14 +16,34 @@ namespace MVC_MultitecUA.Controllers
     public class RecuerdoController : BasicController
     {
         // GET: Recuerdo
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
             SessionInitialize();
+
             RecuerdoCAD cadRec = new RecuerdoCAD(session);
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN(cadRec);
-            IList<RecuerdoEN> listaRecuerdosEn = recuerdoCEN.ReadAll(0, -1).ToList();
+
+            int tamPag = 10;
+
+            int numPags = (recuerdoCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<RecuerdoEN> listaRecuerdosEn = recuerdoCEN.ReadAll(inicio, tamPag).ToList();
+
             IEnumerable<Recuerdo> listaRecuerdos = new AssemblerRecuerdo().ConvertListENToModel(listaRecuerdosEn).ToList();
+
             SessionClose();
+
             return View(listaRecuerdos);
         }
 

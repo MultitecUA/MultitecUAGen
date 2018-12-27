@@ -16,20 +16,41 @@ namespace MVC_MultitecUA.Controllers
     public class ServicioController : BasicController
     {
         // GET: Servicio
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
             SessionInitialize();
+
             ArrayList listaEstados = new ArrayList();
-            foreach (var a in Enum.GetNames(typeof(EstadoServicioEnum)))
-            {
+
+            foreach (var a in Enum.GetNames(typeof(EstadoServicioEnum)))  
                 listaEstados.Add(a);
-            }
+          
             ViewData["listaEstadosServicio"] = listaEstados;
+
             ServicioCAD cadServ = new ServicioCAD(session);
             ServicioCEN servicioCEN = new ServicioCEN(cadServ);
-            IList<ServicioEN> listaServiciosEn = servicioCEN.ReadAll(0,-1).ToList();
-            IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(listaServiciosEn).ToList();
+
+            int tamPag = 10;
+
+            int numPags = (servicioCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<ServicioEN> listaServiciosEN = servicioCEN.ReadAll(inicio, tamPag).ToList();
+
+            IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(listaServiciosEN).ToList();
+
             SessionClose();
+
             return View(listaServicios);
         }
 
@@ -37,23 +58,30 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult PorEstado(FormCollection f)
         {
             if(f == null)
-            {
                 return RedirectToAction("Index");
-            }
+            
             SessionInitialize();
+
             ArrayList listaEstados = new ArrayList();
+
             foreach (var cosa in Enum.GetNames(typeof(EstadoServicioEnum)))
-            {
                 listaEstados.Add(cosa);
-            }
+
             ViewData["listaEstadosServicio"] = listaEstados;
+
             ServicioCAD cadServ = new ServicioCAD(session);
             ServicioCEN servicioCEN = new ServicioCEN(cadServ);
+
             var a = Enum.Parse(typeof(EstadoServicioEnum), f["Estados"]);
+
             ViewData["filtroEstado"] = f["Estados"];
+
             IList<ServicioEN> lista = servicioCEN.DameServiciosPorEstado((EstadoServicioEnum)a);
+
             IEnumerable<Servicio> listaServiciosEstados = new AssemblerServicio().ConvertListENToModel(lista).ToList();
+
             SessionClose();
+
             return View(listaServiciosEstados);
         }
 

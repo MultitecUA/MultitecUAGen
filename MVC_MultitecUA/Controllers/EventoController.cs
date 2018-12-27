@@ -14,12 +14,26 @@ namespace MVC_MultitecUA.Controllers
     public class EventoController : BasicController
     {
         // GET: Evento
-        public ActionResult Index()
+        public ActionResult Index(int? pag)
         {
-           
-           
             EventoCEN eventoCEN = new EventoCEN();
-            IList<EventoEN> listaEventoEn = eventoCEN.ReadAll(0, -1).ToList();
+
+            int tamPag = 10;
+
+            int numPags = (eventoCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<EventoEN> listaEventoEn = eventoCEN.ReadAll(inicio, tamPag).ToList();
             //IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(listaServiciosEn).ToList();
            
             return View(listaEventoEn);

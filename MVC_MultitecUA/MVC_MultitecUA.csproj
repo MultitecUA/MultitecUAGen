@@ -263,7 +263,6 @@
     <Content Include="Views\Mensaje\Details.cshtml" />
     <Content Include="Views\Mensaje\Create.cshtml" />
     <Content Include="Views\Mensaje\Delete.cshtml" />
-    <Content Include="Views\Usuario\ForNick.cshtml" />
     <Content Include="Views\Evento\Create.cshtml" />
     <Content Include="Views\Evento\Delete.cshtml" />
     <Content Include="Views\Evento\Details.cshtml" />
@@ -283,6 +282,9 @@
     <Content Include="Views\Servicio\Index.cshtml" />
     <Content Include="Views\Servicio\PorEstado.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\ForNick.cshtml" />
+    <Content Include="Views\Usuario\ForRol.cshtml" />
+    <Content Include="Views\Usuario\ForCategoria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
