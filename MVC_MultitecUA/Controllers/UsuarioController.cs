@@ -189,7 +189,7 @@ namespace MVC_MultitecUA.Controllers
         }
 
         //GET: Usuario/ForCategoria/5
-        public ActionResult ForCategoria(int categoria)
+        public ActionResult ForCategoria(FormCollection formCollection)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
@@ -204,11 +204,15 @@ namespace MVC_MultitecUA.Controllers
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
 
             foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
-                listaCategoriasUsuarios.Add(a);
+                listaCategoriasUsuarios.Add(a.Nombre);
 
             ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
 
-            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(categoria);
+            string nombre = formCollection["categoria"];
+
+            int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(id);
             return View(listaUsuarios);
         }
 
