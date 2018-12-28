@@ -13,7 +13,7 @@ namespace MVC_MultitecUA.Models
             Recuerdo serv = new Recuerdo();
             serv.Id = en.Id.ToString();
             serv.IdEvento = en.EventoRecordado.Id;
-            serv.NombreEvento = en.EventoRecordado.Nombre;
+            //serv.NombreEvento = en.EventoRecordado.Nombre;
             serv.Titulo = en.Titulo;
             serv.Cuerpo = en.Cuerpo;
             

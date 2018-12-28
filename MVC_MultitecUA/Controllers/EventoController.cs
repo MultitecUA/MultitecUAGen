@@ -42,21 +42,32 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento/Details/5
         public ActionResult Details(int id)
         {
-            
-            ArrayList listaCates = new ArrayList();
+            SessionInitialize();
+            ArrayList listaCatesE = new ArrayList();
+            ArrayList listaCatesA = new ArrayList();
             CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             List<CategoriaProyectoEN> cat = categoriasP.ReadAll(0, -1).ToList();
+
+            EventoCAD eventoCAD = new EventoCAD(session);
+            EventoCEN eventoCEN = new EventoCEN(eventoCAD);
+            EventoEN evento = eventoCEN.ReadOID(id);
             foreach (CategoriaProyectoEN a in cat)
             {
-                listaCates.Add(a.Id);
+                if (!evento.CategoriasEventos.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                if (evento.CategoriasEventos.Contains(a))
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
             }
-            ViewData["listaCategoriasP"] = listaCates;
-            EventoCEN eventoCEN = new EventoCEN();
-            EventoEN eventoEN = new EventoCEN().ReadOID(id);
-            ViewData["NombreEvento"] = eventoEN.Nombre;
+            ViewData["listaCategoriasAgregar"] = listaCatesA;
+            ViewData["listaCategoriasEliminar"] = listaCatesE;
+            ViewData["NombreEvento"] = evento.Nombre;
             ViewData["IdEvento"] = id;
-            
-            return View(eventoEN);
+            SessionClose();
+            return View(evento);
         }
 
         // GET: Evento/Create
@@ -166,7 +177,8 @@ namespace MVC_MultitecUA.Controllers
             //}
            
             EventoCEN evento = new EventoCEN();
-            int num = int.Parse(f["Categoria"]);
+            EventoEN eventoEN = evento.ReadNombre(f["Categoria"]);
+            int num = eventoEN.Id;
             IList<EventoEN> listaEventos;
 
             if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
@@ -202,10 +214,14 @@ namespace MVC_MultitecUA.Controllers
             if (f["Categoria"] != "")
             {
                 int num = id;//int.Parse(f["IdEvento"]);
+                CategoriaProyectoCEN categoria = new CategoriaProyectoCEN();
+                CategoriaProyectoEN categoriaEN = categoria.ReadNombre(f["Categoria"]);
                 List<int> categorias = new List<int>();
-                categorias.Add(int.Parse(f["Categoria"]));
-                EventoCEN evento = new EventoCEN();
-                evento.AgregaCategorias(num, categorias);
+
+                categorias.Add(categoriaEN.Id);
+
+                EventoCEN eventoCEN = new EventoCEN();
+                eventoCEN.AgregaCategorias(num, categorias);
                 return RedirectToAction("Details", new { id });
             }
 
@@ -221,10 +237,14 @@ namespace MVC_MultitecUA.Controllers
             if (f["Categoria"] != "")
             {
                 int num = id;//int.Parse(f["IdEvento"]);
+                CategoriaProyectoCEN categoria = new CategoriaProyectoCEN();
+                CategoriaProyectoEN categoriaEN = categoria.ReadNombre(f["Categoria"]);
                 List<int> categorias = new List<int>();
-                categorias.Add(int.Parse(f["Categoria"]));
-                EventoCEN evento = new EventoCEN();
-                evento.EliminaCategorias(num, categorias);
+
+                categorias.Add(categoriaEN.Id);
+
+                EventoCEN eventoCEN = new EventoCEN();
+                eventoCEN.EliminaCategorias(num, categorias);
                 return RedirectToAction("Details", new { id });
             }
             return RedirectToAction("Details", new { id });
@@ -233,6 +253,42 @@ namespace MVC_MultitecUA.Controllers
         }
 
 
+        public ActionResult porProyecto(int id)
+        {
+            EventoCEN eventoCEN = new EventoCEN();
+            IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
+            return View(eventos);
+        }
+
+
+        public ActionResult eliminarProyectosAsociados(int id)
+        {
+            EventoCEN eventoCEN = new EventoCEN();
+            EventoEN evento = eventoCEN.ReadOID(id);
+            ViewData["IdEvento"] = id;
+            IList<ProyectoEN> proyectos = evento.ProyectosPresentados;
+            return View(proyectos);
+        }
+
+        public ActionResult eliminandoRelacion(int idP, int idE)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyecto = proyectoCEN.ReadOID(idP);
+            EventoCEN eventoCEN = new EventoCEN();
+            EventoEN evento = eventoCEN.ReadOID(idE);
+            ViewData["idEvento"] = idE;
+            ViewData["nombreEvento"] = evento.Nombre;
+            return View(proyecto);
+        }
+
+
+        public ActionResult ForNombre(EventoEN eventoEN)
+        {
+            EventoCEN eventoCEN = new EventoCEN();
+            IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(eventoEN.Nombre);
+            ViewData["Buscando"] = eventoEN.Nombre;
+            return View(listaEventos);
+        }
 
     }
 }

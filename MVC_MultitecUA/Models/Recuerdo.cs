@@ -15,8 +15,8 @@ namespace MVC_MultitecUA.Models
 
         
 
-        [ScaffoldColumn(false)]
-        public string NombreEvento { get; set; }
+        //[ScaffoldColumn(false)]
+        //public string NombreEvento { get; set; }
 
         [Display(Prompt = "Titulo del recuerdo", Description = "Titulo del recuerdo", Name = "Titulo ")]
         [Required(ErrorMessage = "Debe indicar un titulo para el recuerdo")]

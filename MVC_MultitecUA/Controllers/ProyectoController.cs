@@ -114,5 +114,14 @@ namespace MVC_MultitecUA.Controllers
                 return View();
             }
         }
+
+        // GET: Proyecto/Delete/5
+        public ActionResult ProyectosPorEvento(int id)
+        {
+            /*
+             * TODO
+             */
+            return null;
+        }
     }
 }

@@ -59,35 +59,24 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Recuerdo/Create
-        public ActionResult Create(int id)
+        public ActionResult Create(int idEvento)
         {
-            /*ArrayList listaEventosNombre = new ArrayList();
-            ArrayList listaEventosId = new ArrayList();
-            SessionInitialize();
-            EventoCAD eventoCAD = new EventoCAD(session);
-            EventoCEN eventoCEN = new EventoCEN(eventoCAD);
-            IList<EventoEN> recuerdos = eventoCEN.ReadAll(0,-1).ToList();
-            foreach (EventoEN elemento in recuerdos)
-            {
-                listaEventosNombre.Add(elemento.Nombre);
-                listaEventosId.Add(elemento.Id);
-            }
-            ViewData["ListaEventosNombre"] = listaEventosNombre;
-            ViewData["ListaEventosId"] = listaEventosId;*/
             Recuerdo rec = new Recuerdo();
-            //SessionClose();
+            ViewData["idevento"] = idEvento;
             return View(rec);
         }
 
         // POST: Recuerdo/Create
         [HttpPost]
-        public ActionResult Create(int id, Recuerdo rec)
+        public ActionResult Create(int idEvento, Recuerdo rec)
         {
             try
             {
                 // TODO: Add insert logic here
                 RecuerdoCEN cen = new RecuerdoCEN();
-                cen.New_(rec.Titulo, rec.Cuerpo, id,null);
+                EventoCEN eventoCEN = new EventoCEN();
+                EventoEN evento = eventoCEN.ReadOID(idEvento);
+                cen.New_(rec.Titulo, rec.Cuerpo, idEvento,null);
 
                 return RedirectToAction("Index");
             }
@@ -149,6 +138,17 @@ namespace MVC_MultitecUA.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult porEvento (int idEvento)
+        {
+            RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
+            IList<RecuerdoEN> recuerdo = recuerdoCEN.DameRecuerdosPorProyecto(idEvento);
+            IEnumerable<Recuerdo> listaRecuerdos = new AssemblerRecuerdo().ConvertListENToModel(recuerdo).ToList();
+            EventoCEN eventoCEN = new EventoCEN();
+            EventoEN evento = eventoCEN.ReadOID(idEvento);
+            ViewData["nombreEvento"] = evento.Nombre;
+            return View(listaRecuerdos);
         }
     }
 }

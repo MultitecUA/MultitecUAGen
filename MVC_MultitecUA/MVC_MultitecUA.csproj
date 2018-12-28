@@ -285,6 +285,11 @@
     <Content Include="Views\Usuario\ForNick.cshtml" />
     <Content Include="Views\Usuario\ForRol.cshtml" />
     <Content Include="Views\Usuario\ForCategoria.cshtml" />
+    <Content Include="Views\Recuerdo\porEvento.cshtml" />
+    <Content Include="Views\Evento\eliminandoRelacion.cshtml" />
+    <Content Include="Views\Evento\eliminarProyectosAsociados.cshtml" />
+    <Content Include="Views\Evento\ForNombre.cshtml" />
+    <Content Include="Views\Evento\porProyecto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
