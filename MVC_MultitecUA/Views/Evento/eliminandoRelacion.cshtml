@@ -1,0 +1,39 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN
+
+@{
+    ViewBag.Title = "eliminandoRelacion";
+}
+
+<h2>eliminandoRelacion</h2>
+
+<h3>¿Seguro que quieres eliminar la relación entre el proyecto y el evento?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+        </div>
+    }
+</div>
