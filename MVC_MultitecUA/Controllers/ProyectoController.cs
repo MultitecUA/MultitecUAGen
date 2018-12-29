@@ -1,7 +1,9 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
+using MultitecUAGenNHibernate.Enumerated.MultitecUA;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +17,29 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult Index(int? pag)
         {
             ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
 
             int tamPag = 10;
 
@@ -115,13 +140,149 @@ namespace MVC_MultitecUA.Controllers
             }
         }
 
-        // GET: Proyecto/Delete/5
+        // GET: Proyecto/ProyectosPorEvento/5
         public ActionResult ProyectosPorEvento(int id)
         {
             /*
              * TODO
              */
             return null;
+        }
+
+        //GET: Proyecto/ForNombre/5
+        public ActionResult ForNombre(ProyectoEN proyectoEN)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorNombre(proyectoEN.Nombre);
+            return View(listaProyectos);
+        }
+
+        //GET: Proyecto/ForEstado/5
+        public ActionResult ForEstado(ProyectoEN proyectoEN)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEstado(proyectoEN.Estado);
+            return View(listaProyectos);
+        }
+
+        //GET: Proyecto/ForCategoriaProyecto/5
+        public ActionResult ForCategoriaProyecto(FormCollection formCollection)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            string nombre = formCollection["categoriaP"];
+
+            int id = categoriaProyectoCEN.ReadNombre(nombre).Id;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoria(id);
+            return View(listaProyectos);
+        }
+
+        //GET: Proyecto/ForCategoriaUsuario/5
+        public ActionResult ForCategoriaUsuario(FormCollection formCollection)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            string nombre = formCollection["categoriaU"];
+
+            int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DamePoyectosPorCategoriaUsuario(id);
+            return View(listaProyectos);
         }
     }
 }
