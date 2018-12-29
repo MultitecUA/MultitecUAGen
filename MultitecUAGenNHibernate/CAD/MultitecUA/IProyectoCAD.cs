@@ -72,6 +72,6 @@ MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN ReadNombre (string p_nombre);
 System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorNombre (string p_nombre);
 
 
-System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DamePoyectosPorCategoriaUsuario (int p_OID_Categoria);
+System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoriaUsuario (int p_OID_Categoria);
 }
 }

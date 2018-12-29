@@ -127,7 +127,7 @@ public static void InitializeData ()
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
                 int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
-                ProyectoCP proyectoCP = new ProyectoCP();
+                ProyectoCP proyectoCP = new ProyectoCP ();
                 int OIDProyectoABorrar = proyectoCEN.New_ ("APPANICasdasd", "App que te ayuda en la vida", OIDUsuario, null);
 
                 int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");

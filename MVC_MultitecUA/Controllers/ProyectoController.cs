@@ -281,7 +281,7 @@ namespace MVC_MultitecUA.Controllers
 
             int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
 
-            IList<ProyectoEN> listaProyectos = proyectoCEN.DamePoyectosPorCategoriaUsuario(id);
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoriaUsuario(id);
             return View(listaProyectos);
         }
     }

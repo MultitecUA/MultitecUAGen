@@ -883,7 +883,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 
         return result;
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DamePoyectosPorCategoriaUsuario (int p_OID_Categoria)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoriaUsuario (int p_OID_Categoria)
 {
         System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> result;
         try
@@ -891,7 +891,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
                 SessionInitializeTransaction ();
                 //String sql = @"FROM ProyectoEN self where select (en) FROM ProyectoEN en join en.CategoriasBuscadas cat where cat.Id = :p_OID_Categoria";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdamePoyectosPorCategoriaUsuarioHQL");
+                IQuery query = (IQuery)session.GetNamedQuery ("ProyectoENdameProyectosPorCategoriaUsuarioHQL");
                 query.SetParameter ("p_OID_Categoria", p_OID_Categoria);
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>();

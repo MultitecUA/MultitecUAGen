@@ -45,7 +45,7 @@ public void Destroy (int p_CategoriaUsuario_OID)
                 List<int> OIDCategoriaABorrar = new List<int>();
                 OIDCategoriaABorrar.Add (p_CategoriaUsuario_OID);
 
-                foreach (ProyectoEN proyectoEN in proyectoCEN.DamePoyectosPorCategoriaUsuario (p_CategoriaUsuario_OID))
+                foreach (ProyectoEN proyectoEN in proyectoCEN.DameProyectosPorCategoriaUsuario (p_CategoriaUsuario_OID))
                         proyectoCEN.EliminaCategoriasUsuario (proyectoEN.Id, OIDCategoriaABorrar);
 
                 foreach (UsuarioEN usuarioEN in usuarioCEN.DameUsuariosPorCategoria (p_CategoriaUsuario_OID))

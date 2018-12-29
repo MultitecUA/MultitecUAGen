@@ -103,9 +103,9 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Pr
 {
         return _IProyectoCAD.DameProyectosPorNombre (p_nombre);
 }
-public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DamePoyectosPorCategoriaUsuario (int p_OID_Categoria)
+public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> DameProyectosPorCategoriaUsuario (int p_OID_Categoria)
 {
-        return _IProyectoCAD.DamePoyectosPorCategoriaUsuario (p_OID_Categoria);
+        return _IProyectoCAD.DameProyectosPorCategoriaUsuario (p_OID_Categoria);
 }
 }
 }
