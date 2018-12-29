@@ -83,7 +83,7 @@ public static void InitializeData ()
                 UsuarioCEN usuarioCEN = new UsuarioCEN ();
                 int OIDUsuario = usuarioCEN.New_ ("Judith", "12345", null, "judith@gmail.com", "BenhMM");
                 usuarioCEN.Modify (OIDUsuario, "Victor", "54321", "nedyar@hotmail.es", "Nedyar94", null);
-                Console.WriteLine ("Login key: " + usuarioCEN.Login (OIDUsuario, "54321"));
+                Console.WriteLine ("Login key: " + usuarioCEN.Login (OIDUsuario, "dsfsdfgdsf"));
                 //int OIDUsuarioABorrar = usuarioCEN.New_ ("Judith", "12345", null, "juditsdfh@gmail.com", "BenhasdfasdfMM");
                 // en lugar de destroy tiene cambiar rol usuarioCEN.Destroy (OIDUsuarioABorrar);
                 usuarioCEN.CambiarRol (OIDUsuario, MultitecUAGenNHibernate.Enumerated.MultitecUA.RolUsuarioEnum.Administrador);
@@ -126,10 +126,8 @@ public static void InitializeData ()
 
                 /*PROYECTO*/
                 ProyectoCEN proyectoCEN = new ProyectoCEN ();
-                Console.WriteLine ("Aqui no llega");
                 int OIDProyecto = proyectoCEN.New_ ("APPANIC", "App que te ayuda en la vida", OIDUsuario, null);
-                ProyectoCP proyectoCP = new ProyectoCP ();
-                Console.WriteLine ("Aqui no llega");
+                ProyectoCP proyectoCP = new ProyectoCP();
                 int OIDProyectoABorrar = proyectoCEN.New_ ("APPANICasdasd", "App que te ayuda en la vida", OIDUsuario, null);
 
                 int aux = usuarioCEN.New_ ("Sergio", "12345", null, "email@gmail.com", "Yupipi93");

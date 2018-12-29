@@ -1,4 +1,5 @@
-﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+﻿using MultitecUAGenNHibernate.CAD.MultitecUA;
+using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.Enumerated.MultitecUA;
@@ -56,8 +57,29 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Details/5
         public ActionResult Details(int id)
         {
-            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+
+            ArrayList listaCatesE = new ArrayList();
+            ArrayList listaCatesA = new ArrayList();
+            CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
+            List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaUsuarioEN a in cat)
+            {
+                if (!usuarioEN.CategoriasUsuarios.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                else
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasAgregar"] = listaCatesA;
+            ViewData["listaCategoriasEliminar"] = listaCatesE;
+
             return View(usuarioEN);
         }
 
@@ -108,7 +130,7 @@ namespace MVC_MultitecUA.Controllers
             }
         }
 
-        // GET: Usuario/Edit/5
+        // GET: Usuario/ChangeRol/5
         public ActionResult ChangeRol(int id)
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -124,7 +146,7 @@ namespace MVC_MultitecUA.Controllers
             return View(usuarioEN);
         }
 
-        // POST: Usuario/Edit/5
+        // POST: Usuario/ChangeRol/5
         [HttpPost]
         public ActionResult ChangeRol(int id, UsuarioEN usuarioEN)
         {
@@ -214,6 +236,48 @@ namespace MVC_MultitecUA.Controllers
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(id);
             return View(listaUsuarios);
+        }
+
+        // POST: Usuario/AgregarCat
+        [HttpPost]
+        public ActionResult AgregarCat(int id, FormCollection formCollection)
+        {
+            if (formCollection["Categoria"] != "")
+            {
+                int num = id;
+                CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
+                CategoriaUsuarioEN categoriaEN = categoria.ReadNombre(formCollection["Categoria"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                usuarioCEN.AgregaCategorias(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        // POST: Usuario/EliminarCat
+        [HttpPost]
+        public ActionResult EliminarCat(int id, FormCollection formCollection)
+        {
+            if (formCollection["Categoria"] != "")
+            {
+                int num = id;
+                CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
+                CategoriaUsuarioEN categoriaEN = categoria.ReadNombre(formCollection["Categoria"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                usuarioCEN.EliminaCategorias(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
         }
 
         // GET: Solicitud/Delete/5

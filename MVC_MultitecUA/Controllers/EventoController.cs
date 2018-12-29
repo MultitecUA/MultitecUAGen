@@ -57,7 +57,7 @@ namespace MVC_MultitecUA.Controllers
                 {
                     listaCatesA.Add(a.Nombre);
                 }
-                if (evento.CategoriasEventos.Contains(a))
+                else
                 {
                     listaCatesE.Add(a.Nombre);
                 }
