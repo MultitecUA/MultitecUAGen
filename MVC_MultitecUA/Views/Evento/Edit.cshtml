@@ -38,7 +38,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="FechaInicio">Fecha de Inicio</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "mm/dd/yyyy hh:mm" })
                 @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="FechaFin">Fecha de Fin</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "mm/dd/yyyy hh:mm" })
                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="FechaInicioInscripcion">Fecha de Inicio de Inscripción</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaInicioInscripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaInicioInscripcion, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "mm/dd/yyyy hh:mm" })
                 @Html.ValidationMessageFor(model => model.FechaInicioInscripcion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="FechaTopeInscripcion">Fecha Tope de Inscripción</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaTopeInscripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaTopeInscripcion, new { htmlAttributes = new { @class = "form-control" } , @placeholder = "mm/dd/yyyy hh:mm" })
                 @Html.ValidationMessageFor(model => model.FechaTopeInscripcion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,6 +70,17 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-default" />
+                @{
+                    if (ViewData.ContainsKey("volverURL"))
+                    {
+                        <a href="@ViewData["volverURL"]" class="btn btn-default">Volver</a>
+                    }
+                    else
+                    {
+
+                        @Html.ActionLink("Volver", "Index",null,new { @class = "brn btn-default"})
+                    }
+                }
             </div>
         </div>
     </div>

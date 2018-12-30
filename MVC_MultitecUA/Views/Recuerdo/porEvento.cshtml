@@ -19,6 +19,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IdEvento)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreEvento)
+        </th>
         <th></th>
     </tr>
 
@@ -34,11 +37,18 @@
             @Html.DisplayFor(modelItem => item.IdEvento)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            @Html.DisplayFor(modelItem => item.NombreEvento)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
+            @Html.ActionLink("Borrar", "Delete", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri })
         </td>
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.ActionLink("Volver al Evento", "Details", "Evento", new { id = @ViewData["idevento"] }, null)
+</div>

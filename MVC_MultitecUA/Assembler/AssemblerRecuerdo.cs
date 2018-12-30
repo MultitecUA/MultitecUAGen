@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 
 namespace MVC_MultitecUA.Models
@@ -10,10 +11,13 @@ namespace MVC_MultitecUA.Models
     {
         public Recuerdo ConvertENToModelUI(RecuerdoEN en)
         {
+            EventoCEN eventoCEN = new EventoCEN();
+            EventoEN eventoEN = eventoCEN.ReadOID(en.EventoRecordado.Id);
+
             Recuerdo serv = new Recuerdo();
             serv.Id = en.Id.ToString();
             serv.IdEvento = en.EventoRecordado.Id;
-            //serv.NombreEvento = en.EventoRecordado.Nombre;
+            serv.NombreEvento = eventoEN.Nombre;
             serv.Titulo = en.Titulo;
             serv.Cuerpo = en.Cuerpo;
             

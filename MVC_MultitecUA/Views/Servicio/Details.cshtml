@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles</h2>
+<h2>Detalles de "@ViewData["servicio"]"</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Servicios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -40,6 +40,15 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver a la lista", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
+    @{
+        if (ViewData.ContainsKey("volver"))
+        {
+            <a href="@ViewData["volver"]">Volver a la lista</a>
+        }
+        else
+        {
+            @Html.ActionLink("Volver a servicios", "Index")
+        }
+    }
 </p>

@@ -37,7 +37,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(n => n.Estado, new SelectList((System.Collections.IEnumerable)ViewData["listaEstadosServicio"]))
+            @Html.DropDownListFor(n => n.Estado, new SelectList((System.Collections.IEnumerable)ViewData["listaEstadosServicio"]), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -51,7 +51,16 @@
 }
 
 <div>
-    @Html.ActionLink("Volver a la lista", "Index")
+    @{
+        if (ViewData.ContainsKey("volver"))
+        {
+            <a href="@ViewData["volver"]">Volver</a>
+        }
+        else
+        {
+            @Html.ActionLink("Volver a servicios", "Index")
+        }
+    }
 </div>
 
 @section Scripts {

@@ -61,15 +61,27 @@
             @Html.DisplayFor(model => model.FechaTopeInscripcion)
         </dd>
 
+		<dt>Categorías:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
     </dl>
     <br />
     <div class="dl-horizontal">
         @using (Html.BeginForm("AgregarCat", "Evento"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
+            <div class="form-horizontal form-group form-inline left">
                 <label>Agregar categoria:</label>
-                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]))
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
                 <input type="submit" value="Agregar" class="btn btn-default" />
             </div>
         }
@@ -77,26 +89,25 @@
         @using (Html.BeginForm("EliminarCat", "Evento"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
+            <div class="form-horizontal form-group form-inline">
                 <label>Eliminar categoria:</label>
-                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]))
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
                 <input type="submit" value="Eliminar" class="btn btn-default" />
             </div>
         }
 
-        @Html.ActionLink("Proyectos asociados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["IdEvento"] }, null)
-        <br />
-        @Html.ActionLink("Eliminar proyectos presentados", "eliminarProyectosAsociados", new { id = ViewData["IdEvento"] })
-        <br />
-        @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, null)
-        <br />
-        @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, null)
+
+        <div class="form-inline">
+            @Html.ActionLink("Proyectos asociados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+        </div>
 
 
     </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) 
-    <br />
-    @Html.ActionLink("Volver a la lista", "Index")
+<br />
+<p class="form-inline">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-default" })
 </p>

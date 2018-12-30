@@ -96,9 +96,10 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Evento/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id,string url)
         {
             EventoEN eventoEN = new EventoCEN().ReadOID(id);
+            ViewData["volverURL"] = url;
             return View(eventoEN);
         }
 
@@ -164,7 +165,7 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult Filtrar(FormCollection f)
         {
-           
+
             //if (f["categoria"] != null)
             //{
             /*string[] ps = f["categoria"].Split(',');
@@ -175,34 +176,70 @@ namespace MVC_MultitecUA.Controllers
             }*/
 
             //}
-           
+
             EventoCEN evento = new EventoCEN();
-            EventoEN eventoEN = evento.ReadNombre(f["Categoria"]);
-            int num = eventoEN.Id;
             IList<EventoEN> listaEventos;
 
-            if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
+            CategoriaProyectoCEN categoriaCEN = new CategoriaProyectoCEN();
+            if (f["Categoria"] != "")
             {
-                listaEventos = evento.DameEventosFiltrados(num, null, null);
-            }
-            else if (f["FechaAnterior"] == "")
-            {
-                DateTime ff = DateTime.Parse(f["FechaFinal"]);
-                listaEventos = evento.DameEventosFiltrados(num, null, ff);
-            }
-            else if (f["FechaFinal"] == "")
-            {
-                DateTime fa = DateTime.Parse(f["FechaAnterior"]);
-                listaEventos = evento.DameEventosFiltrados(num, fa, null);
+                CategoriaProyectoEN categoria = categoriaCEN.ReadNombre(f["Categoria"]);
+                if(categoria == null)
+                {
+                    // No hagas redireccion, simplemente muestra el mensaje
+                    return View();
+                }
+                else
+                {
+                    int num = categoria.Id;
+                    
+                    if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
+                    {
+                        listaEventos = evento.DameEventosFiltrados(num, null, null);
+                    }
+                    else if (f["FechaAnterior"] == "")
+                    {
+                        DateTime ff = DateTime.Parse(f["FechaFinal"]);
+                        listaEventos = evento.DameEventosFiltrados(num, null, ff);
+                    }
+                    else if (f["FechaFinal"] == "")
+                    {
+                        DateTime fa = DateTime.Parse(f["FechaAnterior"]);
+                        listaEventos = evento.DameEventosFiltrados(num, fa, null);
+                    }
+                    else
+                    {
+                        DateTime ff = DateTime.Parse(f["FechaFinal"]);
+                        DateTime fa = DateTime.Parse(f["FechaAnterior"]);
+                        listaEventos = evento.DameEventosFiltrados(num, fa, ff);
+                    }
+
+                }
             }
             else
             {
-                DateTime ff = DateTime.Parse(f["FechaFinal"]);
-                DateTime fa = DateTime.Parse(f["FechaAnterior"]);
-                listaEventos = evento.DameEventosFiltrados(num, fa, null);
+                if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
+                {
+                    listaEventos = evento.DameEventosFiltrados(-1, null, null);
+                }
+                else if (f["FechaAnterior"] == "")
+                {
+                    DateTime ff = DateTime.Parse(f["FechaFinal"]);
+                    listaEventos = evento.DameEventosFiltrados(-1, null, ff);
+                }
+                else if (f["FechaFinal"] == "")
+                {
+                    DateTime fa = DateTime.Parse(f["FechaAnterior"]);
+                    listaEventos = evento.DameEventosFiltrados(-1, fa, null);
+                }
+                else
+                {
+                    DateTime ff = DateTime.Parse(f["FechaFinal"]);
+                    DateTime fa = DateTime.Parse(f["FechaAnterior"]);
+                    listaEventos = evento.DameEventosFiltrados(-1, fa, ff);
+                }
             }
-
-            
+           
             return View(listaEventos);
         }
 
@@ -282,13 +319,15 @@ namespace MVC_MultitecUA.Controllers
         }
 
 
-        public ActionResult ForNombre(EventoEN eventoEN)
+        public ActionResult ForNombre(FormCollection f)
         {
             EventoCEN eventoCEN = new EventoCEN();
-            IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(eventoEN.Nombre);
-            ViewData["Buscando"] = eventoEN.Nombre;
+            IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(f["nombre"]);
+            ViewData["Buscando"] = f["nombre"];
             return View(listaEventos);
         }
+
+
 
     }
 }

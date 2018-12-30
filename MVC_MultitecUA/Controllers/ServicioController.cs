@@ -55,7 +55,7 @@ namespace MVC_MultitecUA.Controllers
         }
 
         //POST: Servicio/PorEstado
-        public ActionResult PorEstado(FormCollection f)
+        public ActionResult PorEstado(FormCollection f, string url)
         {
             if(f == null)
                 return RedirectToAction("Index");
@@ -79,20 +79,20 @@ namespace MVC_MultitecUA.Controllers
             IList<ServicioEN> lista = servicioCEN.DameServiciosPorEstado((EstadoServicioEnum)a);
 
             IEnumerable<Servicio> listaServiciosEstados = new AssemblerServicio().ConvertListENToModel(lista).ToList();
-
+            ViewData["volver"] = url;
             SessionClose();
 
             return View(listaServiciosEstados);
         }
 
         // GET: Servicio/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, string url)
         {
             Servicio serv = null;
-            SessionInitialize();
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
-            SessionClose();
+            ViewData["servicio"] = servicioEN.Nombre;
+            ViewData["volver"] = url;
             return View(serv);
         }
 
@@ -129,7 +129,7 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Servicio/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string url)
         {
             Servicio serv = null;
             SessionInitialize();
@@ -141,6 +141,7 @@ namespace MVC_MultitecUA.Controllers
             ViewData["listaEstadosServicio"] = listaEstados;
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
+            ViewData["volver"] = url;
             SessionClose();
             return View(serv);
         }
@@ -168,6 +169,7 @@ namespace MVC_MultitecUA.Controllers
         {
             ServicioCEN servicioCEN = new ServicioCEN();
             ServicioEN servicioEN = servicioCEN.ReadOID(id);
+            ViewData["servicio"] = servicioEN.Nombre;
             return View(servicioEN);
         }
 

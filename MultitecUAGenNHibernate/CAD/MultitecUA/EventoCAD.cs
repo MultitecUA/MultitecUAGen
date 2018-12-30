@@ -509,7 +509,7 @@ public System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.Ev
                 //String sql = @"FROM EventoEN self where select (en) FROM EventoEN en where en.Nombre like :p_nombre";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("EventoENdameEventosPorNombreHQL");
-                query.SetParameter ("p_nombre", p_nombre);
+                query.SetParameter ("p_nombre", "%"+p_nombre+"%");
 
                 result = query.List<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>();
                 SessionCommit ();

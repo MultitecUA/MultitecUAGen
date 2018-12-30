@@ -48,13 +48,12 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Recuerdo/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, string url)
         {
             Recuerdo rec = null;
-            SessionInitialize();
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
-            SessionClose();
+            ViewData["urlVolver"] = url;
             return View(rec);
         }
 
@@ -66,7 +65,14 @@ namespace MVC_MultitecUA.Controllers
             return View(rec);
         }
 
-        // POST: Recuerdo/Create
+
+        public ActionResult CreateNoId()
+        {
+            Recuerdo recuerdo = new Recuerdo();
+            return View(recuerdo);
+        }
+
+        // POST: Recuerdo/Create/id
         [HttpPost]
         public ActionResult Create(int idEvento, Recuerdo rec)
         {
@@ -86,26 +92,19 @@ namespace MVC_MultitecUA.Controllers
             }
         }
 
-        // GET: Recuerdo/Edit/5
-        public ActionResult Edit(int id)
-        {
-            //Recuerdo rec = null;
-            SessionInitialize();
-            RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
-            //rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
-            SessionClose();
-            return View(recuerdoEN);
-        }
 
-        // POST: Recuerdo/Edit/5
+        // POST: Recuerdo/Create/id
         [HttpPost]
-        public ActionResult Edit(int id, Recuerdo rec)
+        public ActionResult CreateNoId(Recuerdo rec)
         {
             try
             {
-                // TODO: Add update logic here
+                // TODO: Add insert logic here
                 RecuerdoCEN cen = new RecuerdoCEN();
-                cen.Modify(id, rec.Titulo, rec.Cuerpo, null);
+                EventoCEN eventoCEN = new EventoCEN();
+                EventoEN evento = eventoCEN.ReadOID(rec.IdEvento);
+                cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, null);
+
                 return RedirectToAction("Index");
             }
             catch
@@ -114,25 +113,55 @@ namespace MVC_MultitecUA.Controllers
             }
         }
 
+
+
+
+        // GET: Recuerdo/Edit/5
+        public ActionResult Edit(int id, string url)
+        {
+            //Recuerdo rec = null;
+            RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
+            //rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
+            ViewData["urlVolver"] = url;
+            return View(recuerdoEN);
+        }
+
+        // POST: Recuerdo/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, string url, Recuerdo rec)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                RecuerdoCEN cen = new RecuerdoCEN();
+                cen.Modify(id, rec.Titulo, rec.Cuerpo, null);
+                return Redirect(url);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: Recuerdo/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, string url)
         {
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
             RecuerdoEN recuerdoEN = recuerdoCEN.ReadOID(id);
+            ViewData["urlVolver"] = url;
             return View(recuerdoEN);
         }
 
         // POST: Recuerdo/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, string url, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
                 recuerdoCEN.Destroy(id);
-
-                return RedirectToAction("Index");
+                return Redirect(url);
             }
             catch
             {
@@ -147,6 +176,7 @@ namespace MVC_MultitecUA.Controllers
             IEnumerable<Recuerdo> listaRecuerdos = new AssemblerRecuerdo().ConvertListENToModel(recuerdo).ToList();
             EventoCEN eventoCEN = new EventoCEN();
             EventoEN evento = eventoCEN.ReadOID(idEvento);
+            ViewData["idevento"] = idEvento;
             ViewData["nombreEvento"] = evento.Nombre;
             return View(listaRecuerdos);
         }
