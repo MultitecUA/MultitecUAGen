@@ -154,6 +154,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Assembler\AssemblerMensaje.cs" />
     <Compile Include="Assembler\AssemblerRecuerdo.cs" />
     <Compile Include="Assembler\AssemblerServicio.cs" />
     <Compile Include="Assembler\AssemblerSolicitud.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\RecuerdoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Models\MensajeModel.cs" />
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -306,6 +308,9 @@
     <Content Include="Views\Proyecto\ProyectosUsuarioPertenece.cshtml" />
     <Content Include="Views\Usuario\UsuariosParticipantes.cshtml" />
     <Content Include="Views\Usuario\UsuariosModeradores.cshtml" />
+    <Content Include="Views\Mensaje\Edit.cshtml" />
+    <Content Include="Views\Mensaje\EditAutor.cshtml" />
+    <Content Include="Views\Mensaje\EditReceptor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
