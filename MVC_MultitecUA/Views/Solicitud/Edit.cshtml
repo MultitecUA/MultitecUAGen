@@ -1,16 +1,17 @@
 ﻿@model MVC_MultitecUA.Models.Solicitud
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Editar";
 }
 
-<h2>Detalles de Solicitud</h2>
+<h2>Editar</h2>
 
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Solicitudes", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
 
-<div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Solicitud</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -86,8 +87,29 @@
         </dd>
 
     </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @{
+                if (Model.Estado == "Pendiente")
+                {
+                    @Html.ActionLink("Aceptar", "CambioEstado", new { id = ViewData["idSolicitud"], cambioEstado = "Aceptar" }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Rechazar", "CambioEstado", new { id = ViewData["idSolicitud"], cambioEstado = "Rechazar" }, new { @class = "btn btn-default" })
+                }
+                else
+                {
+                    <h3>Solo puedes modificar el estado de solicitudes pendientes</h3>
+                }
+            }
+            
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a solicitudes", "Index")
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

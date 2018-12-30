@@ -156,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Assembler\AssemblerRecuerdo.cs" />
     <Compile Include="Assembler\AssemblerServicio.cs" />
+    <Compile Include="Assembler\AssemblerSolicitud.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\CategoriaProyectoController.cs" />
     <Compile Include="Controllers\CategoriaUsuarioController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\RecuerdoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +300,7 @@
     <Content Include="Views\Proyecto\ChangeEstado.cshtml" />
     <Content Include="Views\Proyecto\ProyectosPorEvento.cshtml" />
     <Content Include="Views\Proyecto\GestionEventos.cshtml" />
+    <Content Include="Views\Solicitud\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

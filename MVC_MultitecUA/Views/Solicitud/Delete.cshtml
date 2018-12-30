@@ -1,4 +1,4 @@
-﻿@model MultitecUAGenNHibernate.EN.MultitecUA.SolicitudEN
+﻿@model MVC_MultitecUA.Models.Solicitud
 
 @{
     ViewBag.Title = "Borrar";
@@ -14,6 +14,70 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSolicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSolicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nick_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nick_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Proyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Proyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_Proyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Proyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Fecha)
         </dt>
