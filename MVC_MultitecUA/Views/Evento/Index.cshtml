@@ -72,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
             </td>
             <td>
-                @Html.ActionLink("Proyectos", "ProyectosPorEvento", new { id = item.Id })
+                @Html.ActionLink("Proyectos", "ProyectosPorEvento", "Proyecto", new { id = item.Id },null)
             </td>
 
             <td style="text-align: center;">

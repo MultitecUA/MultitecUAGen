@@ -296,6 +296,8 @@
     <Content Include="Views\Proyecto\ForEstado.cshtml" />
     <Content Include="Views\Recuerdo\CreateNoId.cshtml" />
     <Content Include="Views\Proyecto\ChangeEstado.cshtml" />
+    <Content Include="Views\Proyecto\ProyectosPorEvento.cshtml" />
+    <Content Include="Views\Proyecto\GestionEventos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

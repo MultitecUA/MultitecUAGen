@@ -272,10 +272,38 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/ProyectosPorEvento/5
         public ActionResult ProyectosPorEvento(int id)
         {
-            /*
-             * TODO
-             */
-            return null;
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            EventoCEN eventoCEN = new EventoCEN();
+            EventoEN eventoEN = eventoCEN.ReadOID(id);
+            ViewData["evento"] = eventoEN.Nombre;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEvento(id);
+
+            return View(listaProyectos);
         }
 
         //GET: Proyecto/ForNombre/5
@@ -444,6 +472,75 @@ namespace MVC_MultitecUA.Controllers
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
                 proyectoCEN.CambiarEstado(id, proyectoEN.Estado);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Proyecto/GestionEventos/5
+        public ActionResult GestionEventos(int id)
+        {
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            EventoCEN eventoCEN = new EventoCEN();
+
+            ArrayList listaEventosAgregar = new ArrayList();
+            ArrayList listaEventosEliminar = new ArrayList();
+
+            foreach (var a in eventoCEN.ReadAll(0,-1))
+            {
+                if (proyectoEN.EventosAsociados.Contains(a))
+                    listaEventosEliminar.Add(a.Nombre);
+                else
+                    listaEventosAgregar.Add(a.Nombre);
+            }
+
+
+            ViewData["listaEventosAgregar"] = listaEventosAgregar;
+            ViewData["listaEventosEliminar"] = listaEventosEliminar;
+            ViewData["nombre"] = proyectoEN.Nombre;
+
+            return View(proyectoEN);
+        }
+
+        // POST: Proyecto/AgregarEvento/5
+        [HttpPost]
+        public ActionResult AgregarEvento(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                EventoCEN eventoCEN = new EventoCEN();
+
+                List<int> eventos = new List<int>();
+                eventos.Add(eventoCEN.ReadNombre(formCollection["Evento"]).Id);
+
+                proyectoCP.AgregaEventos(id, eventos);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Proyecto/EliminarEvento/5
+        [HttpPost]
+        public ActionResult EliminarEvento(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                EventoCEN eventoCEN = new EventoCEN();
+
+                List<int> eventos = new List<int>();
+                eventos.Add(eventoCEN.ReadNombre(formCollection["Evento"]).Id);
+
+                proyectoCP.EliminaEventos(id, eventos);
                 return RedirectToAction("Index");
             }
             catch

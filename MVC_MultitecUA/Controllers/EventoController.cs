@@ -294,6 +294,7 @@ namespace MVC_MultitecUA.Controllers
         {
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
+            ViewData["idProyecto"] = id;
             return View(eventos);
         }
 
