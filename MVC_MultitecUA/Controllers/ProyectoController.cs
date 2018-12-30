@@ -274,34 +274,25 @@ namespace MVC_MultitecUA.Controllers
         {
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
-            ArrayList listaEstados = new ArrayList();
-
-            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
-                listaEstados.Add(a);
-
-            ViewData["listaEstados"] = listaEstados;
-
-            ArrayList listaCategoriasUsuarios = new ArrayList();
-            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
-
-            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
-                listaCategoriasUsuarios.Add(a.Nombre);
-
-            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
-
-            ArrayList listaCategoriasProyectos = new ArrayList();
-            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
-
-            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
-                listaCategoriasProyectos.Add(a.Nombre);
-
-            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
-
             EventoCEN eventoCEN = new EventoCEN();
             EventoEN eventoEN = eventoCEN.ReadOID(id);
             ViewData["evento"] = eventoEN.Nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEvento(id);
+
+            return View(listaProyectos);
+        }
+
+        // GET: Proyecto/ProyectosUsuarioPertenece/5
+        public ActionResult ProyectosUsuarioPertenece(int id)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+            ViewData["participante"] = usuarioEN.Nick;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(id);
 
             return View(listaProyectos);
         }
@@ -541,6 +532,144 @@ namespace MVC_MultitecUA.Controllers
                 eventos.Add(eventoCEN.ReadNombre(formCollection["Evento"]).Id);
 
                 proyectoCP.EliminaEventos(id, eventos);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Proyecto/GestionParticipantes/5
+        public ActionResult GestionParticipantes(int id)
+        {
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ArrayList listaUsuariosAgregar = new ArrayList();
+            ArrayList listaUsuariosEliminar = new ArrayList();
+
+            foreach (var a in usuarioCEN.ReadAll(0, -1))
+            {
+                if (proyectoEN.UsuariosParticipantes.Contains(a))
+                    listaUsuariosEliminar.Add(a.Nick);
+                else
+                    listaUsuariosAgregar.Add(a.Nick);
+            }
+
+
+            ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
+            ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
+            ViewData["nombre"] = proyectoEN.Nombre;
+
+            return View(proyectoEN);
+        }
+
+        // POST: Proyecto/AgregarParticipante/5
+        [HttpPost]
+        public ActionResult AgregarParticipante(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+                List<int> usuarios = new List<int>();
+                usuarios.Add(usuarioCEN.ReadNick(formCollection["Participante"]).Id);
+
+                proyectoCP.AgregaParticipantes(id, usuarios);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Proyecto/EliminarParticipante/5
+        [HttpPost]
+        public ActionResult EliminarParticipante(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+                List<int> usuarios = new List<int>();
+                usuarios.Add(usuarioCEN.ReadNick(formCollection["Participante"]).Id);
+
+                proyectoCP.EliminaParticipantes(id, usuarios);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Proyecto/GestionParticipantes/5
+        public ActionResult GestionModeradores(int id)
+        {
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ArrayList listaUsuariosAgregar = new ArrayList();
+            ArrayList listaUsuariosEliminar = new ArrayList();
+
+            foreach (var a in usuarioCEN.ReadAll(0, -1))
+            {
+                if (proyectoEN.UsuariosModeradores.Contains(a))
+                    listaUsuariosEliminar.Add(a.Nick);
+                else
+                    listaUsuariosAgregar.Add(a.Nick);
+            }
+
+
+            ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
+            ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
+            ViewData["nombre"] = proyectoEN.Nombre;
+
+            return View(proyectoEN);
+        }
+
+        // POST: Proyecto/AgregarModerador/5
+        [HttpPost]
+        public ActionResult AgregarModerador(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+                List<int> usuarios = new List<int>();
+                usuarios.Add(usuarioCEN.ReadNick(formCollection["Moderador"]).Id);
+
+                proyectoCP.AgregaModeradores(id, usuarios);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Proyecto/EliminarModerador/5
+        [HttpPost]
+        public ActionResult EliminarModerador(int id, FormCollection formCollection)
+        {
+            try
+            {
+                ProyectoCP proyectoCP = new ProyectoCP();
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+                List<int> usuarios = new List<int>();
+                usuarios.Add(usuarioCEN.ReadNick(formCollection["Moderador"]).Id);
+
+                proyectoCP.EliminaModeradores(id, usuarios);
                 return RedirectToAction("Index");
             }
             catch

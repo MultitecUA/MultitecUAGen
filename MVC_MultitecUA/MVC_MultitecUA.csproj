@@ -301,6 +301,11 @@
     <Content Include="Views\Proyecto\ProyectosPorEvento.cshtml" />
     <Content Include="Views\Proyecto\GestionEventos.cshtml" />
     <Content Include="Views\Solicitud\Edit.cshtml" />
+    <Content Include="Views\Proyecto\GestionParticipantes.cshtml" />
+    <Content Include="Views\Proyecto\GestionModeradores.cshtml" />
+    <Content Include="Views\Proyecto\ProyectosUsuarioPertenece.cshtml" />
+    <Content Include="Views\Usuario\UsuariosParticipantes.cshtml" />
+    <Content Include="Views\Usuario\UsuariosModeradores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -311,5 +311,33 @@ namespace MVC_MultitecUA.Controllers
                 return View();
             }
         }
+
+        // GET: Usuario/UsuariosParticipantes/5
+        public ActionResult UsuariosParticipantes(int id)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            ViewData["proyecto"] = proyectoEN.Nombre;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameParticipantesProyecto(id);
+
+            return View(listaUsuarios);
+        }
+
+        // GET: Usuario/UsuariosModeradores/5
+        public ActionResult UsuariosModeradores(int id)
+        {
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            ViewData["proyecto"] = proyectoEN.Nombre;
+
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.DameModeradoresProyecto(id);
+
+            return View(listaUsuarios);
+        }
     }
 }

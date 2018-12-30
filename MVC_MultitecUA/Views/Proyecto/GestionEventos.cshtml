@@ -17,7 +17,7 @@
         {
             @Html.HiddenFor(model => model.Id)
             <div class="form-horizontal">
-                <label>Participar Evento:</label>
+                <label>Participar en Evento:</label>
                 @Html.DropDownList("Evento", new SelectList((System.Collections.IEnumerable)ViewData["listaEventosAgregar"]), new { @class = "form-control" })
                 <input type="submit" value="Agregar" class="btn btn-default" />
             </div>
