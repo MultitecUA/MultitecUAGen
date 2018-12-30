@@ -71,12 +71,6 @@ public System.Collections.Generic.IList<EventoEN> ReadAll (int first, int size)
         list = _IEventoCAD.ReadAll (first, size);
         return list;
 }
-public void EliminaProyectosAsociados (int p_Evento_OID, System.Collections.Generic.IList<int> p_proyectosPresentados_OIDs)
-{
-        //Call to EventoCAD
-
-        _IEventoCAD.EliminaProyectosAsociados (p_Evento_OID, p_proyectosPresentados_OIDs);
-}
 public MultitecUAGenNHibernate.EN.MultitecUA.EventoEN ReadNombre (string p_nombre)
 {
         return _IEventoCAD.ReadNombre (p_nombre);

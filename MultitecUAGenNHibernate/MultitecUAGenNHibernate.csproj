@@ -194,6 +194,7 @@
 			
 			<Compile Include="CEN\MultitecUA\EventoCEN_PublicaEvento.cs" />
 			
+			<Compile Include="CP\MultitecUA\EventoCP_EliminaProyectosAsociados.cs" />
 			
 			
 			
