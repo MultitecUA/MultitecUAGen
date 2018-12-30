@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<MVC_MultitecUA.Models.Recuerdo>
 
 @{
-    ViewBag.Title = "porEvento";
+    ViewBag.Title = "Por Evento";
 }
 
 <h2>Recuerdos de @ViewData["nombreEvento"]</h2>
-
-
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <table class="table">
     <tr>
         <th>

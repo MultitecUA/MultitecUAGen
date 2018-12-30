@@ -1,13 +1,16 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detalles de @ViewData["usuario"]</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 <div>
-    <h4>UsuarioEN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,6 +94,6 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

@@ -40,6 +40,7 @@ namespace MVC_MultitecUA.Controllers
         {
             NoticiaCEN noticiaCEN = new NoticiaCEN();
             NoticiaEN noticiaEN = noticiaCEN.ReadOID(id);
+            ViewData["titulo"] = noticiaEN.Titulo;
             return View(noticiaEN);
         }
 
@@ -71,6 +72,7 @@ namespace MVC_MultitecUA.Controllers
         {
             NoticiaCEN noticiaCEN = new NoticiaCEN();
             NoticiaEN noticiaEN = noticiaCEN.ReadOID(id);
+            ViewData["titulo"] = noticiaEN.Titulo;
             return View(noticiaEN);
         }
 
@@ -95,6 +97,7 @@ namespace MVC_MultitecUA.Controllers
         {
             NoticiaCEN noticiaCEN = new NoticiaCEN();
             NoticiaEN noticiaEN = noticiaCEN.ReadOID(id);
+            ViewData["titulo"] = noticiaEN.Titulo;
             return View(noticiaEN);
         }
 

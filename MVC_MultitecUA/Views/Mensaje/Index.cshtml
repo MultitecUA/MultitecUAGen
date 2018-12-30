@@ -5,11 +5,14 @@
 }
 
 <h2>Mensajes</h2>
-
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <p>
 	@Html.ActionLink("Nuevo Mensaje", "Create")
 </p>
 <table class="table">
+<hr />
 	<tr>
 		<th>
 			@Html.DisplayNameFor(model => model.Id)
@@ -42,8 +45,8 @@
 				@Html.DisplayFor(modelItem => item.Fecha)
 			</td>
 			<td>
-				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+				@Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+				@Html.ActionLink("Borrar", "Delete", new { id = item.Id })
 			</td>
 		</tr>
 	}

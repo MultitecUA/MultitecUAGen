@@ -1,12 +1,16 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
 
 @{
-    ViewBag.Title = "Borrando evento";
+    ViewBag.Title = "Borrar";
 }
 
 <h2>Borrar</h2>
 
-<h3>¿Estás seguro que quieres borrar el evento @ViewData["NombreEvento"]?</h3>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<h3>¿Estás seguro de que deseas borrar esto?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -65,7 +69,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Borrar" class="btn btn-default" /> |
-            @Html.ActionLink("Volver", "Index")
+            @Html.ActionLink("Volver a la lista", "Index")
         </div>
     }
 </div>

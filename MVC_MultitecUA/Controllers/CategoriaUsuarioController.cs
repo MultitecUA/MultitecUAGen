@@ -41,6 +41,7 @@ namespace MVC_MultitecUA.Controllers
         {
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
+            ViewData["nombre"] = categoriaUsuarioEN.Nombre;
             return View(categoriaUsuarioEN);
         }
 
@@ -72,6 +73,7 @@ namespace MVC_MultitecUA.Controllers
         {
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
+            ViewData["nombre"] = categoriaUsuarioEN.Nombre;
             return View(categoriaUsuarioEN);
         }
 
@@ -96,6 +98,7 @@ namespace MVC_MultitecUA.Controllers
         {
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
+            ViewData["nombre"] = categoriaUsuarioEN.Nombre;
             return View(categoriaUsuarioEN);
         }
 

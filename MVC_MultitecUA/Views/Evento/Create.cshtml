@@ -1,11 +1,14 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
 
 @{
-    ViewBag.Title = "Crear nuevo evento";
+    ViewBag.Title = "Crear";
 }
 
-<h2>Crear evento</h2>
+<h2>Crear</h2>
 
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 @using (Html.BeginForm())
 {
@@ -64,14 +67,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Volver", "Index")
+    @Html.ActionLink("Volver a la lista", "Index")
 </div>
 
 @section Scripts {

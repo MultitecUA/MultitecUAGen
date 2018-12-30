@@ -4,10 +4,13 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles del recuerdo</h2>
+<h2>Detalles</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 <div>
-    <h4>Recuerdo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

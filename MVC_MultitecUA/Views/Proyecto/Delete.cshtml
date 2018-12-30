@@ -1,14 +1,17 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Borrar";
 }
 
-<h2>Delete</h2>
+<h2>Borrar @ViewData["titulo"]</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Proyectos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<h3>¿Estás seguro de que deseas borrar esto?</h3>
 <div>
-    <h4>ProyectoEN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,8 +36,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver a la lista", "Index")
         </div>
     }
 </div>

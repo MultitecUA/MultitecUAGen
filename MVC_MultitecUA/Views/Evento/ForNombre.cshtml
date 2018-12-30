@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
 
 @{
-    ViewBag.Title = "ForNombre";
+    ViewBag.Title = "For Nombre";
 }
 
 <h2>Buscando eventos que contengan '@ViewData["Buscando"]'</h2>
-
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <table class="table">
     <tr>
         <th>

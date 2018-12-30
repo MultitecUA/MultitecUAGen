@@ -1,10 +1,14 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
 
 @{
-    ViewBag.Title = "Detalles del evento";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Evento: @ViewData["NombreEvento"]</h2>
+<h2>Detalles</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 <div>
     <hr />
@@ -92,7 +96,7 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Editar evento", "Edit", new { id = Model.Id }) 
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) 
     <br />
-    @Html.ActionLink("Volver", "Index")
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

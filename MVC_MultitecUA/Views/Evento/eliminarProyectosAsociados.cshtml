@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
 
 @{
-    ViewBag.Title = "eliminarProyectosAsociados";
+    ViewBag.Title = "Eliminar Proyectos Asociados";
 }
 
-<h2>eliminarProyectosAsociados</h2>
+<h2>Eliminar Proyectos Asociados</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")

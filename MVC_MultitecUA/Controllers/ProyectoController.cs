@@ -66,6 +66,7 @@ namespace MVC_MultitecUA.Controllers
         {
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            ViewData["titulo"] = proyectoEN.Nombre;
             return View(proyectoEN);
         }
 
@@ -97,6 +98,7 @@ namespace MVC_MultitecUA.Controllers
         {
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            ViewData["titulo"] = proyectoEN.Nombre;
             return View(proyectoEN);
         }
 
@@ -121,6 +123,7 @@ namespace MVC_MultitecUA.Controllers
         {
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+            ViewData["titulo"] = proyectoEN.Nombre;
             return View(proyectoEN);
         }
 
@@ -176,6 +179,7 @@ namespace MVC_MultitecUA.Controllers
                 listaCategoriasProyectos.Add(a.Nombre);
 
             ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+            ViewData["titulo"] = proyectoEN.Nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorNombre(proyectoEN.Nombre);
             return View(listaProyectos);
@@ -208,6 +212,7 @@ namespace MVC_MultitecUA.Controllers
                 listaCategoriasProyectos.Add(a.Nombre);
 
             ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+            ViewData["estado"] = proyectoEN.Estado;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEstado(proyectoEN.Estado);
             return View(listaProyectos);
@@ -245,6 +250,8 @@ namespace MVC_MultitecUA.Controllers
 
             int id = categoriaProyectoCEN.ReadNombre(nombre).Id;
 
+            ViewData["categoria"] = nombre;
+
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoria(id);
             return View(listaProyectos);
         }
@@ -280,6 +287,7 @@ namespace MVC_MultitecUA.Controllers
             string nombre = formCollection["categoriaU"];
 
             int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
+            ViewData["categoria"] = nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoriaUsuario(id);
             return View(listaProyectos);

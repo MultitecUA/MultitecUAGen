@@ -4,8 +4,10 @@
     ViewBag.Title = "Proyectos filtrados por Estado";
 }
 
-<h2>Proyectos filtrados por Estado</h2>
-
+<h2>Proyectos filtrados por Estado: @ViewData["estado"]</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <p>
     <h3>Filtros:</h3>
     @using (Html.BeginForm("ForNombre", "Proyecto"))

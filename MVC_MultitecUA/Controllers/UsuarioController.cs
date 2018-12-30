@@ -79,6 +79,7 @@ namespace MVC_MultitecUA.Controllers
             }
             ViewData["listaCategoriasAgregar"] = listaCatesA;
             ViewData["listaCategoriasEliminar"] = listaCatesE;
+            ViewData["usuario"] = usuarioEN.Nick;
 
             return View(usuarioEN);
         }
@@ -111,6 +112,7 @@ namespace MVC_MultitecUA.Controllers
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+            ViewData["usuario"] = usuarioEN.Nick;
             return View(usuarioEN);
         }
 
@@ -142,6 +144,7 @@ namespace MVC_MultitecUA.Controllers
                 listaRoles.Add(a);
 
             ViewData["listaRoles"] = listaRoles;
+            ViewData["usuario"] = usuarioEN.Nick;
 
             return View(usuarioEN);
         }
@@ -181,7 +184,9 @@ namespace MVC_MultitecUA.Controllers
                 listaCategoriasUsuarios.Add(a.Nombre);
 
             ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
-            
+            ViewData["nick"] = usuarioEN.Nick;
+
+
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
             return View(listaUsuarios);
         }
@@ -205,6 +210,7 @@ namespace MVC_MultitecUA.Controllers
                 listaCategoriasUsuarios.Add(a.Nombre);
 
             ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
+            ViewData["rol"] = usuarioEN.Rol;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorRol(usuarioEN.Rol);
             return View(listaUsuarios);
@@ -233,6 +239,7 @@ namespace MVC_MultitecUA.Controllers
             string nombre = formCollection["categoria"];
 
             int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
+            ViewData["categoria"] = nombre;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(id);
             return View(listaUsuarios);
@@ -285,6 +292,7 @@ namespace MVC_MultitecUA.Controllers
         {
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+            ViewData["usuario"] = usuarioEN.Nick;
             return View(usuarioEN);
         }
 

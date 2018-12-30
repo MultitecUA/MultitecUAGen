@@ -1,14 +1,17 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN
 
 @{
-    ViewBag.Title = "Borrar recuerdo";
+    ViewBag.Title = "Borrar";
 }
 
-<h2>Delete</h2>
+<h2>Borrar</h2>
 
-<h3>¿Estás seguro de que quiere borrar este recuerdo?</h3>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<h3¿Estás seguro de que deseas borrar esto?</h3>
 <div>
-    <h4>Recuerdo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -34,7 +37,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
             @Html.ActionLink("Volver", "Index")
         </div>
     }

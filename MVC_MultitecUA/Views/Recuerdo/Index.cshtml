@@ -5,7 +5,9 @@
 }
 
 <h2>Recuerdos</h2>
-
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <p>
 	@Html.ActionLink("Nuevo Recuerdo", "Create")
 </p>
@@ -19,9 +21,6 @@
 		</th>
 		<th>
 			<label>IdEvento</label>
-		</th>
-		<th>
-			<label>Evento</label>
 		</th>
 		<th></th>
 	</tr>
@@ -37,9 +36,6 @@
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.IdEvento)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.NombreEvento)
 			</td>
 			<td>
 				@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |

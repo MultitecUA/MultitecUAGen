@@ -4,8 +4,10 @@
     ViewBag.Title = "Usuarios filtrados por Nick";
 }
 
-<h2>Usuarios filtrados por Nick</h2>
-
+<h2>Usuarios filtrados por Nick: @ViewData["nick"]</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <p>
     <h3>Filtros:</h3>
     @using (Html.BeginForm("ForNick", "Usuario"))
@@ -100,7 +102,7 @@
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
                 @Html.ActionLink("Cambiar Rol", "ChangeRol", new { id = item.Id })
             </td>
         </tr>

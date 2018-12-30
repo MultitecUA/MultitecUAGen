@@ -1,11 +1,13 @@
 ﻿@model MultitecUAGenNHibernate.EN.MultitecUA.EventoEN
 
 @{
-    ViewBag.Title = "PorFiltro";
+    ViewBag.Title = "Por Filtro";
 }
 
-<h2>PorFiltro</h2>
-
+<h2>Por Filtro</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <div>
     @using (Html.BeginForm("Filtrar", "Evento"))
     {
@@ -33,5 +35,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>
