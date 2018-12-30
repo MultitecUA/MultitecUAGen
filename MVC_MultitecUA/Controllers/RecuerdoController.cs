@@ -39,8 +39,20 @@ namespace MVC_MultitecUA.Controllers
             int inicio = (int)pag * tamPag;
 
             IList<RecuerdoEN> listaRecuerdosEn = recuerdoCEN.ReadAll(inicio, tamPag).ToList();
-
             IEnumerable<Recuerdo> listaRecuerdos = new AssemblerRecuerdo().ConvertListENToModel(listaRecuerdosEn).ToList();
+
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("nocreado"))
+            {
+                TempData.Remove("nocreado");
+            }
+            if (TempData.ContainsKey("editado"))
+            {
+                TempData.Remove("editado");
+            }
 
             SessionClose();
 
@@ -48,12 +60,12 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Recuerdo/Details/5
-        public ActionResult Details(int id, string url)
+        public ActionResult Details(int id)
         {
             Recuerdo rec = null;
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
-            ViewData["urlVolver"] = url;
+            ViewData["recuerdo"] = recuerdoEN.Titulo;
             return View(rec);
         }
 
@@ -62,6 +74,15 @@ namespace MVC_MultitecUA.Controllers
         {
             Recuerdo rec = new Recuerdo();
             ViewData["idevento"] = idEvento;
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("editado"))
+            {
+                TempData.Remove("editado");
+            }
+
             return View(rec);
         }
 
@@ -69,6 +90,14 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult CreateNoId()
         {
             Recuerdo recuerdo = new Recuerdo();
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("editado"))
+            {
+                TempData.Remove("editado");
+            }
             return View(recuerdo);
         }
 
@@ -82,12 +111,13 @@ namespace MVC_MultitecUA.Controllers
                 RecuerdoCEN cen = new RecuerdoCEN();
                 EventoCEN eventoCEN = new EventoCEN();
                 EventoEN evento = eventoCEN.ReadOID(idEvento);
-                cen.New_(rec.Titulo, rec.Cuerpo, idEvento,null);
-
-                return RedirectToAction("Index");
+                int id = cen.New_(rec.Titulo, rec.Cuerpo, idEvento,null);
+                TempData["creado"] = "si";
+                return Redirect("Details/"+id);
             }
             catch
             {
+                TempData["nocreado"] = "si";
                 return View();
             }
         }
@@ -103,12 +133,14 @@ namespace MVC_MultitecUA.Controllers
                 RecuerdoCEN cen = new RecuerdoCEN();
                 EventoCEN eventoCEN = new EventoCEN();
                 EventoEN evento = eventoCEN.ReadOID(rec.IdEvento);
-                cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, null);
+                int id = cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, null);
+                TempData["creado"] = "si";
 
-                return RedirectToAction("Index");
+                return Redirect("Details/" + id);
             }
             catch
             {
+                TempData["nocreado"] = "si";
                 return View();
             }
         }
@@ -117,51 +149,73 @@ namespace MVC_MultitecUA.Controllers
 
 
         // GET: Recuerdo/Edit/5
-        public ActionResult Edit(int id, string url)
+        public ActionResult Edit(int id)
         {
             //Recuerdo rec = null;
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             //rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
-            ViewData["urlVolver"] = url;
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("nocreado"))
+            {
+                TempData.Remove("nocreado");
+            }
+            ViewData["recuerdo"] = recuerdoEN.Titulo;
             return View(recuerdoEN);
         }
 
         // POST: Recuerdo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, string url, Recuerdo rec)
+        public ActionResult Edit(int id, Recuerdo rec)
         {
             try
             {
                 // TODO: Add update logic here
                 RecuerdoCEN cen = new RecuerdoCEN();
                 cen.Modify(id, rec.Titulo, rec.Cuerpo, null);
-                return Redirect(url);
+                TempData["editado"] = "si";
+                return RedirectToAction("Details/"+id);
             }
             catch
             {
+                //En teoría aquí no entra porque la validación ya la hace el modelo o el input
                 return View();
             }
         }
 
         // GET: Recuerdo/Delete/5
-        public ActionResult Delete(int id, string url)
+        public ActionResult Delete(int id)
         {
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
             RecuerdoEN recuerdoEN = recuerdoCEN.ReadOID(id);
-            ViewData["urlVolver"] = url;
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("nocreado"))
+            {
+                TempData.Remove("nocreado");
+            }
+            if (TempData.ContainsKey("editado"))
+            {
+                TempData.Remove("editado");
+            }
+            ViewData["recuerdo"] = recuerdoEN.Titulo;
             return View(recuerdoEN);
         }
 
         // POST: Recuerdo/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, string url, FormCollection collection)
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
                 recuerdoCEN.Destroy(id);
-                return Redirect(url);
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -178,6 +232,18 @@ namespace MVC_MultitecUA.Controllers
             EventoEN evento = eventoCEN.ReadOID(idEvento);
             ViewData["idevento"] = idEvento;
             ViewData["nombreEvento"] = evento.Nombre;
+            if (TempData.ContainsKey("creado"))
+            {
+                TempData.Remove("creado");
+            }
+            if (TempData.ContainsKey("nocreado"))
+            {
+                TempData.Remove("nocreado");
+            }
+            if (TempData.ContainsKey("editado"))
+            {
+                TempData.Remove("editado");
+            }
             return View(listaRecuerdos);
         }
     }

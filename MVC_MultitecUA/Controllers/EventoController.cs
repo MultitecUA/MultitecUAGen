@@ -96,10 +96,10 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Evento/Edit/5
-        public ActionResult Edit(int id,string url)
+        public ActionResult Edit(int id)
         {
             EventoEN eventoEN = new EventoCEN().ReadOID(id);
-            ViewData["volverURL"] = url;
+            ViewData["evento"] = eventoEN.Nombre;
             return View(eventoEN);
         }
 

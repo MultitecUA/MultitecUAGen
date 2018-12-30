@@ -4,14 +4,31 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles</h2>
 
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
+@{
+    if (TempData.ContainsKey("creado"))
+    {
+        <h2 class="text-danger">Se ha creado el recuerdo: @ViewData["recuerdo"]</h2>
+    }
+    else if (TempData.ContainsKey("editado"))
+    {
+        <h2 class="text-danger">Se ha editado con exito el recuerdo: @ViewData["recuerdo"]</h2>
+    }
+    else
+    {
+
+        <h2>Detalles del recuerdo: @ViewData["recuerdo"]</h2>
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+
 
 <div>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Titulo)
@@ -36,10 +53,17 @@
         <dd>
             @Html.DisplayFor(model => model.IdEvento)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEvento)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id,  }) |
-    <a href="@ViewData["urlVolver"]">Volver</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

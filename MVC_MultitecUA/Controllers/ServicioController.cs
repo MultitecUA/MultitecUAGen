@@ -55,7 +55,7 @@ namespace MVC_MultitecUA.Controllers
         }
 
         //POST: Servicio/PorEstado
-        public ActionResult PorEstado(FormCollection f, string url)
+        public ActionResult PorEstado(FormCollection f)
         {
             if(f == null)
                 return RedirectToAction("Index");
@@ -79,20 +79,18 @@ namespace MVC_MultitecUA.Controllers
             IList<ServicioEN> lista = servicioCEN.DameServiciosPorEstado((EstadoServicioEnum)a);
 
             IEnumerable<Servicio> listaServiciosEstados = new AssemblerServicio().ConvertListENToModel(lista).ToList();
-            ViewData["volver"] = url;
             SessionClose();
 
             return View(listaServiciosEstados);
         }
 
         // GET: Servicio/Details/5
-        public ActionResult Details(int id, string url)
+        public ActionResult Details(int id)
         {
             Servicio serv = null;
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
             ViewData["servicio"] = servicioEN.Nombre;
-            ViewData["volver"] = url;
             return View(serv);
         }
 
@@ -129,7 +127,7 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Servicio/Edit/5
-        public ActionResult Edit(int id, string url)
+        public ActionResult Edit(int id)
         {
             Servicio serv = null;
             SessionInitialize();
@@ -141,7 +139,7 @@ namespace MVC_MultitecUA.Controllers
             ViewData["listaEstadosServicio"] = listaEstados;
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
-            ViewData["volver"] = url;
+            ViewData["servicio"] = servicioEN.Nombre;
             SessionClose();
             return View(serv);
         }

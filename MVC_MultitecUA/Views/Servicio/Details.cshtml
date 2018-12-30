@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles de "@ViewData["servicio"]"</h2>
+<h2>Detalles del servicio: @ViewData["servicio"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Servicios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -48,7 +48,7 @@
         }
         else
         {
-            @Html.ActionLink("Volver a servicios", "Index")
+            @Html.ActionLink("Volver a la lista", "Index")
         }
     }
 </p>

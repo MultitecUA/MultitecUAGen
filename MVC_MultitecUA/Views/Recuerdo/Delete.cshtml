@@ -4,7 +4,7 @@
     ViewBag.Title = "Borrar";
 }
 
-<h2>Borrar</h2>
+<h2>Borrar el Recuerdo: @ViewData["recuerdo"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -36,9 +36,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Borrar" class="btn btn-default" /> |
-            <a href="@ViewData["urlVolver"]">Volver</a>
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Borrar" class="btn btn-default" /> |
+        @Html.ActionLink("Volver a la lista", "Index")
+    </div>
     }
 </div>

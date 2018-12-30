@@ -38,28 +38,28 @@
 			@Html.DisplayNameFor(model => model.Estado)
 		</th>
 
-		<th></th>
-	</tr>
+        <th>Acciones</th>
+    </tr>
 
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.Nombre)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Descripcion)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Estado)
-			</td>
-			<td>
-				@Html.ActionLink("Editar", "Edit", new { item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
-				@Html.ActionLink("Detalles", "Details", new { item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
-				@Html.ActionLink("Borrar", "Delete", new { item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri })
-			</td>
-		</tr>
-	}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
 

@@ -4,7 +4,7 @@
     ViewBag.Title = "Editar";
 }
 
-<h2>Editar</h2>
+<h2>Editar el evento: @ViewData["evento"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -70,17 +70,6 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-default" />
-                @{
-                    if (ViewData.ContainsKey("volverURL"))
-                    {
-                        <a href="@ViewData["volverURL"]" class="btn btn-default">Volver</a>
-                    }
-                    else
-                    {
-
-                        @Html.ActionLink("Volver", "Index",null,new { @class = "brn btn-default"})
-                    }
-                }
             </div>
         </div>
     </div>

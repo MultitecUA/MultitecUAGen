@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles</h2>
+<h2>Detalles del evento: @ViewData["nombreEvento"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -108,6 +108,6 @@
 </div>
 <br />
 <p class="form-inline">
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id}) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

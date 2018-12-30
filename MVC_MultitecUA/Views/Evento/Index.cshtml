@@ -76,7 +76,7 @@
             </td>
 
             <td style="text-align: center;">
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id}) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
             </td>

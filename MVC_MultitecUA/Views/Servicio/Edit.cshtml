@@ -4,7 +4,7 @@
     ViewBag.Title = "Editar";
 }
 
-<h2>Editar</h2>
+<h2>Editar servicio: @ViewData["servicio"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Servicios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -58,7 +58,7 @@
         }
         else
         {
-            @Html.ActionLink("Volver a servicios", "Index")
+            @Html.ActionLink("Volver a la lista", "Index")
         }
     }
 </div>

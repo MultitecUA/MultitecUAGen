@@ -25,7 +25,9 @@
 		<th>
 			<label>Evento</label>
 		</th>
-		<th></th>
+		<th>
+			Acciones
+		</th>
 	</tr>
 
 	@foreach (var item in Model)
@@ -44,9 +46,9 @@
             @Html.DisplayFor(modelItem => item.NombreEvento)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.Id, url = @HttpContext.Current.Request.Url.AbsoluteUri })
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
         </td>
     </tr>
 	}
