@@ -66,10 +66,9 @@ public void Destroy (int p_Proyecto_OID)
                         notificacionUsuarioCEN.New_ (solicitud.UsuarioSolicitante.Id, OID_notificacion);
                 }
 
-                EventoCP eventoCP = new EventoCP();
-                EventoCEN eventoCEN = new EventoCEN();
+                EventoCEN eventoCEN = new EventoCEN ();
                 foreach (EventoEN eventoEN in eventoCEN.DameEventosPorProyecto (p_Proyecto_OID))
-                    eventoCP.EliminaProyectosAsociados (eventoEN.Id, new List<int> { p_Proyecto_OID });
+                        eventoCEN.EliminaProyectosAsociados (eventoEN.Id, new List<int> { p_Proyecto_OID });
 
                 proyectoCAD.Destroy (p_Proyecto_OID);
 
