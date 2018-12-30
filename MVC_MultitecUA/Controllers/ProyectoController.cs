@@ -1,4 +1,5 @@
-﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+﻿using MultitecUAGenNHibernate.CAD.MultitecUA;
+using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.Enumerated.MultitecUA;
@@ -64,10 +65,135 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Details/5
         public ActionResult Details(int id)
         {
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+
+            ArrayList listaCatesE = new ArrayList();
+            ArrayList listaCatesA = new ArrayList();
+
+            CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
+            List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaUsuarioEN a in cat)
+            {
+                if (!proyectoEN.CategoriasBuscadas.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                else
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasUsuarioAgregar"] = listaCatesA;
+            ViewData["listaCategoriasUsuarioEliminar"] = listaCatesE;
+
+            listaCatesE = new ArrayList();
+            listaCatesA = new ArrayList();
+            CategoriaProyectoCEN categoriasProyectos = new CategoriaProyectoCEN();
+            List<CategoriaProyectoEN> catPro = categoriasProyectos.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaProyectoEN a in catPro)
+            {
+                if (!proyectoEN.CategoriasProyectos.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                else
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasProyectoAgregar"] = listaCatesA;
+            ViewData["listaCategoriasProyectoEliminar"] = listaCatesE;
+
             ViewData["titulo"] = proyectoEN.Nombre;
             return View(proyectoEN);
+        }
+
+        // POST: Proyecto/AgregarCatPro
+        [HttpPost]
+        public ActionResult AgregarCatPro(int id, FormCollection formCollection)
+        {
+            if (formCollection["CategoriaPro"] != "")
+            {
+                int num = id;
+                CategoriaProyectoCEN categoria = new CategoriaProyectoCEN();
+                CategoriaProyectoEN categoriaEN = categoria.ReadNombre(formCollection["CategoriaPro"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                proyectoCEN.AgregaCategoriasProyecto(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        // POST: Proyecto/EliminarCatPro
+        [HttpPost]
+        public ActionResult EliminarCatPro(int id, FormCollection formCollection)
+        {
+            if (formCollection["CategoriaPro"] != "")
+            {
+                int num = id;
+                CategoriaProyectoCEN categoria = new CategoriaProyectoCEN();
+                CategoriaProyectoEN categoriaEN = categoria.ReadNombre(formCollection["CategoriaPro"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                proyectoCEN.EliminaCategoriasProyecto(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        // POST: Proyecto/AgregarCatUsu
+        [HttpPost]
+        public ActionResult AgregarCatUsu(int id, FormCollection formCollection)
+        {
+            if (formCollection["CategoriaUsu"] != "")
+            {
+                int num = id;
+                CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
+                CategoriaUsuarioEN categoriaEN = categoria.ReadNombre(formCollection["CategoriaUsu"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                proyectoCEN.AgregaCategoriasUsuario(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        // POST: Proyecto/EliminarCatUsu
+        [HttpPost]
+        public ActionResult EliminarCatUsu(int id, FormCollection formCollection)
+        {
+            if (formCollection["CategoriaUsu"] != "")
+            {
+                int num = id;
+                CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
+                CategoriaUsuarioEN categoriaEN = categoria.ReadNombre(formCollection["CategoriaUsu"]);
+                List<int> categorias = new List<int>();
+
+                categorias.Add(categoriaEN.Id);
+
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                proyectoCEN.EliminaCategoriasUsuario(num, categorias);
+                return RedirectToAction("Details", new { id });
+            }
+
+            return RedirectToAction("Details", new { id });
         }
 
         // GET: Proyecto/Create
@@ -291,6 +417,39 @@ namespace MVC_MultitecUA.Controllers
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoriaUsuario(id);
             return View(listaProyectos);
+        }
+
+        // GET: Proyecto/ChangeEstado/5
+        public ActionResult ChangeEstado(int id)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["istaEstados"] = listaEstados;
+            ViewData["nombre"] = proyectoEN.Nombre;
+
+            return View(proyectoEN);
+        }
+
+        // POST: Proyecto/ChangeEstado/5
+        [HttpPost]
+        public ActionResult ChangeEstado(int id, ProyectoEN proyectoEN)
+        {
+            try
+            {
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                proyectoCEN.CambiarEstado(id, proyectoEN.Estado);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

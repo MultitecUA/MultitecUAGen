@@ -46,6 +46,50 @@
         </dd>
 
     </dl>
+
+    <div class="dl-horizontal">
+        @using (Html.BeginForm("AgregarCatPro", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Agregar Categoría de Proyecto:</label>
+                @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoAgregar"]), new { @class = "form-control" })
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        }
+
+        @using (Html.BeginForm("EliminarCatPro", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Eliminar Categoría de Proyecto:</label>
+                @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoEliminar"]), new { @class = "form-control" })
+                <input type="submit" value="Eliminar" class="btn btn-default" />
+            </div>
+        }
+    </div>
+
+    <div class="dl-horizontal">
+        @using (Html.BeginForm("AgregarCatUsu", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Agregar Categoría de Usuario:</label>
+                @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioAgregar"]), new { @class = "form-control" })
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        }
+
+        @using (Html.BeginForm("EliminarCatUsu", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Eliminar Categoría de Usuario:</label>
+                @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioEliminar"]), new { @class = "form-control" })
+                <input type="submit" value="Eliminar" class="btn btn-default" />
+            </div>
+        }
+    </div>
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
