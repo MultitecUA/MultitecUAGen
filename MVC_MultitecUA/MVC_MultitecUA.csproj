@@ -168,6 +168,7 @@
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\RecuerdoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Models\MensajeModel.cs" />
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
@@ -311,6 +312,10 @@
     <Content Include="Views\Mensaje\Edit.cshtml" />
     <Content Include="Views\Mensaje\EditAutor.cshtml" />
     <Content Include="Views\Mensaje\EditReceptor.cshtml" />
+    <Content Include="Views\Sesion\Login.cshtml" />
+    <Content Include="Views\Sesion\Logout.cshtml" />
+    <Content Include="Views\Sesion\Adminin.cshtml" />
+    <Content Include="Views\Sesion\Adminout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

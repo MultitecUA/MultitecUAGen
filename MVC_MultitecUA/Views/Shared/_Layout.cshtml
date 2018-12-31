@@ -1,50 +1,85 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../fontello/css/fontello.css">
-	<title>@ViewBag.Title - MultitecUA</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../fontello/css/fontello.css">
+    <title>@ViewBag.Title - MultitecUA</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-			<div class="navbar-header">
-				<a href="/">
-					<img src="../../Multitec.png" alt="Logo de la página. Enlace a índice">
-				</a>
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				
-			</div>
+            <div class="navbar-header">
+                <a href="/">
+                    <img src="../../Multitec.png" alt="Logo de la página. Enlace a índice">
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Administrar
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                            <li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
-                            <li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
-                            <li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
-                            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
-                            <li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
-                            <li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
-                            <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
-                            <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
-                            <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
-                        </ul>
-                    </li>
-                    <li><a href="http://multitecua.ml">Contacto / Acerca de</a></li>
+                    <li><a href="http://multitecua.ml" target="_blank" >Contacto / Acerca de</a></li>
                 </ul>
+                @{if (Session["usuario"] != null)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            @{ if (Session["modoAdmin"].ToString() == "true")
+                                {
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            Administrar
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                                            <li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
+                                            <li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
+                                            <li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
+                                            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
+                                            <li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
+                                            <li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
+                                            <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
+                                            <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
+                                            <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
+                                    </li>
+                                }
+                            }
+                            @{ if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "false")
+                                {
+                                    <li>
+                                        @Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
+                                    </li>
+                                }
+                            }
+                            <li>
+                                @Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
+                            </li>
+                        </ul>
+                    }
+
+                }
+                @{if (Session["usuario"] == null)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Iniciar Sesión", "Login", "Sesion")
+                            </li>
+                        </ul>
+                    }
+                }
             </div>
         </div>
     </div>
