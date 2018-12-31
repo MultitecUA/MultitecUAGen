@@ -20,7 +20,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -57,7 +57,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -98,7 +98,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -116,7 +116,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -143,7 +143,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -162,7 +162,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -189,7 +189,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -209,7 +209,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -234,7 +234,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -259,7 +259,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -350,7 +350,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -383,7 +383,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -415,7 +415,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -435,7 +435,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
@@ -457,7 +457,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Login", "Sesion");
 
             if (Session["esAdmin"].ToString() == "false")
-                return View("NoAdministrador");
+                return View("../NoAdministrador");
 
             if (Session["modoAdmin"].ToString() == "false")
             {
