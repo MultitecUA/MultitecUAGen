@@ -64,7 +64,14 @@ namespace MVC_MultitecUA.Controllers
             return View(listaServicios);
         }
 
+        //GET inexistente
+        public ActionResult PorEstado()
+        {
+            return RedirectToAction("Index");
+        }
+
         //POST: Servicio/PorEstado
+        [HttpPost]
         public ActionResult PorEstado(FormCollection f)
         {
             if (Session["usuario"] == null)
@@ -95,6 +102,9 @@ namespace MVC_MultitecUA.Controllers
             var a = Enum.Parse(typeof(EstadoServicioEnum), f["Estados"]);
 
             ViewData["filtroEstado"] = f["Estados"];
+
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
 
             IList<ServicioEN> lista = servicioCEN.DameServiciosPorEstado((EstadoServicioEnum)a);
 

@@ -1,78 +1,121 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
 
 @{
-    ViewBag.Title = "Filtrar avanzado";
+	ViewBag.Title = "Filtrar avanzado";
 }
 
 <h2>Eventos filtrados</h2>
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
-    <h3>Filtros:</h3>
-    @using (Html.BeginForm("ForNombre", "Evento"))
-    {
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="col-md-10 form-inline">
-                    <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
-                    <input type="submit" value="Buscar" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-    @Html.ActionLink("Filtro Avanzado", "PorFiltro")
+	<h3>Filtros:</h3>
+	@using (Html.BeginForm("ForNombre", "Evento"))
+	{
+		<div class="form-horizontal">
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				<div class="col-md-10 form-inline">
+					<label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
+					<input type="submit" value="Buscar" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+	}
+	@Html.ActionLink("Filtro Avanzado", "PorFiltro")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaFin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaInicioInscripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaTopeInscripcion)
-        </th>
-        <th></th>
-    </tr>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Nombre)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Descripcion)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.FechaInicio)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.FechaFin)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.FechaInicioInscripcion)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.FechaTopeInscripcion)
+		</th>
+		<th></th>
+	</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Nombre)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Descripcion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaInicio)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaFin)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+			</td>
+		</tr>
+	}
 
 </table>
+
+@{
+	/* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+	var siguiente = (int)ViewData["pag"] + 1;
+	var anterior = siguiente - 2;
+	var numPags = (int)ViewData["numeroPaginas"] + 1;
+}
+<p class="text-center">
+	@{
+		if (siguiente > 1)
+		{
+			<label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+			<span>|</span>
+			<label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+		}
+		else
+		{
+			<span>Primera</span>
+			<span>|</span>
+			<span>Anterior</span>
+		}
+	}
+
+	<span>|</span>
+	<label>Página @siguiente de @numPags</label>
+	<span>|</span>
+
+	@{
+		if (siguiente < numPags)
+		{
+			<label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+			<span>|</span>
+			<label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+		}
+		else
+		{
+			<span>Siguiente</span>
+			<span>|</span>
+			<span>Última</span>
+		}
+	}
+</p>

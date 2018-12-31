@@ -186,6 +186,8 @@ namespace MVC_MultitecUA.Controllers
             ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
             ViewData["nick"] = usuarioEN.Nick;
 
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
             return View(listaUsuarios);
@@ -211,6 +213,9 @@ namespace MVC_MultitecUA.Controllers
 
             ViewData["listaCategoriasUsuarios"] = listaCategoriasUsuarios;
             ViewData["rol"] = usuarioEN.Rol;
+
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorRol(usuarioEN.Rol);
             return View(listaUsuarios);
@@ -240,6 +245,9 @@ namespace MVC_MultitecUA.Controllers
 
             int id = categoriaUsuarioCEN.ReadNombre(nombre).Id;
             ViewData["categoria"] = nombre;
+
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(id);
             return View(listaUsuarios);

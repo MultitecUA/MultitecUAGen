@@ -253,6 +253,12 @@ namespace MVC_MultitecUA.Controllers
             return View(evento);
         }
 
+        public ActionResult Filtrar()
+        {
+            return RedirectToAction("PorFiltro");
+        }
+
+        [HttpPost]
         public ActionResult Filtrar(FormCollection f)
         {
             if (Session["usuario"] == null)
@@ -338,7 +344,10 @@ namespace MVC_MultitecUA.Controllers
                     listaEventos = evento.DameEventosFiltrados(-1, fa, ff);
                 }
             }
-           
+
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
+
             return View(listaEventos);
         }
 
@@ -372,7 +381,6 @@ namespace MVC_MultitecUA.Controllers
 
             return RedirectToAction("Details", new { id });
 
-
         }
 
 
@@ -404,7 +412,6 @@ namespace MVC_MultitecUA.Controllers
             }
             return RedirectToAction("Details", new { id });
 
-
         }
 
 
@@ -424,6 +431,8 @@ namespace MVC_MultitecUA.Controllers
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
             ViewData["idProyecto"] = id;
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
             return View(eventos);
         }
 
@@ -450,7 +459,12 @@ namespace MVC_MultitecUA.Controllers
             return View(proyecto);
         }
 
-        //GET
+        public ActionResult ForNombre()
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public ActionResult ForNombre(FormCollection f)
         {
             if (Session["usuario"] == null)
@@ -466,6 +480,8 @@ namespace MVC_MultitecUA.Controllers
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(f["nombre"]);
             ViewData["Buscando"] = f["nombre"];
+            ViewData["pag"] = 0;
+            ViewData["numeroPaginas"] = 0;
             return View(listaEventos);
         }
 
