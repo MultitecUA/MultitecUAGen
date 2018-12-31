@@ -21,24 +21,52 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection formCollection)
         {
+            // Mira si hay campos vacios
+            if (formCollection["nick"] == "" || formCollection["pass"] == "")
+            {
+                ViewData["camposvacios"] = "vacios";
+                return View();
+            }
+
+            //Si existia la clave, la quita para que no salga de nuevo
+            //if (ViewData.ContainsKey("camposvacios"))
+                //ViewData.Remove("composvacios");
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadNick(formCollection["nick"]);
-            if (usuarioEN != null)
+
+            //Mira si el nick existe
+            if (usuarioEN == null)
             {
-                int id = usuarioEN.Id;
-
-                if (usuarioCEN.Login(id, formCollection["pass"]) != "")
-                {
-                    Session["usuario"] = formCollection["nick"];
-
-                    if (usuarioEN.Rol == RolUsuarioEnum.Administrador)
-                        Session["esAdmin"] = "true";
-                    else
-                        Session["esAdmin"] = "false";
-
-                    Session["modoAdmin"] = "false";
-                }
+                ViewData["nonick"] = "mal";
+                return View();
             }
+
+            //Borro el tempdata porque el usuario existe
+            //if (TempData.ContainsKey("nonick"))
+                //TempData.Remove("noncik");
+
+            int id = usuarioEN.Id;
+            string token = usuarioCEN.Login(id, formCollection["pass"]);
+            if ( token == null)
+            {
+                ViewData["contrasena"] = "mal";
+                return View();
+            }
+            //if (TempData.ContainsKey("contrasena"))
+                //TempData.Remove("contrasena");
+
+            Session["usuario"] = formCollection["nick"];
+
+            if (usuarioEN.Rol == RolUsuarioEnum.Administrador)
+                Session["esAdmin"] = "true";
+            else
+                Session["esAdmin"] = "false";
+
+            Session["modoAdmin"] = "false";
+                
+            
+            //Esto redirige al inicio de usuario
             return View();
         }
 

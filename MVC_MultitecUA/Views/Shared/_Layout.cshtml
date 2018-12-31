@@ -29,45 +29,50 @@
                 </ul>
                 @{if (Session["usuario"] != null)
                     {
-                        <ul class="nav navbar-nav navbar-right">
-                            @{ if (Session["modoAdmin"].ToString() == "true")
-                                {
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            Administrar
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                                            <li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
-                                            <li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
-                                            <li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
-                                            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
-                                            <li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
-                                            <li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
-                                            <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
-                                            <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
-                                            <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
-                                        </ul>
-                                    </li>
+                <ul class="nav navbar-nav navbar-right">
 
-
-                                    <li>
-                                        @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
-                                    </li>
-                                }
-                            }
-                            @{ if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "false")
-                                {
-                                    <li>
-                                        @Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
-                                    </li>
-                                }
-                            }
-                            <li>
-                                @Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
+                    @{ if (Session["modoAdmin"].ToString() == "true")
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Administrar
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                                    <li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
+                                    <li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
+                                    <li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
+                                    <li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
+                                    <li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
+                                    <li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
+                                    <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
+                                    <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
+                                    <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
+                                </ul>
                             </li>
-                        </ul>
+
+
+                            <li>
+                                @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
+                            </li>
+                        }
+                    }
+                    @{ if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "false")
+                        {
+                            <li>
+                                @Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
+                            </li>
+                        }
+                    }
+                    <li style="color: white; height:100%;">
+                        <!--Html.ActionLink("Hola " + Session["usuario"].ToString() + "!", "Details", "Usuario", routeValues: null, null)-->
+                        <a href="">¡Hola @Session["usuario"].ToString()!</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
+                    </li>
+                </ul>
                     }
 
                 }
