@@ -22,7 +22,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-        <th></th>
+        <th>
+            Eventos
+        </th>
+        <th>
+            Participantes
+        </th>
+        <th>
+            Moderadores
+        </th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -40,11 +51,23 @@
             <th>
                 @Html.DisplayFor(model => item.Estado)
             </th>
+            <th>
+                @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Participantes", "UsuariosParticipantes", "Usuario", new { id = item.Id }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Moderadores", "UsuariosModeradores", "Usuario", new { id = item.Id }, null)
+            </th>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
-                @Html.ActionLink("Cambiar Estado", "ChangeEstado", new { id = item.Id })
+                @Html.ActionLink("Cambiar Estado", "ChangeEstado", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Moderadores", "GestionModeradores", new { id = item.Id })
             </td>
         </tr>
     }

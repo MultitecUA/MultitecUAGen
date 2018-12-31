@@ -4,7 +4,7 @@
     ViewBag.Title = "Usuarios moderadores";
 }
 
-<h2>Usuarios que moderal el Proyecto @ViewData["proyecto"]</h2>
+<h2>Usuarios que moderan el Proyecto @ViewData["proyecto"]</h2>
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
@@ -29,9 +29,11 @@
             @Html.DisplayNameFor(model => model.Rol)
         </th>
         <th>
+            Proyectos
+        </th>
+        <th>
             Acciones
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -54,6 +56,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+            <td>
+                @Html.ActionLink("Proyectos", "ProyectosUsuarioPertenece", "Proyecto", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |

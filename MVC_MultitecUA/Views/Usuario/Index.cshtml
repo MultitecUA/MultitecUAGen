@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN>
 
 @{
-	ViewBag.Title = "Usuarios";
+    ViewBag.Title = "Usuarios";
 }
 
 <h2>Usuarios</h2>
@@ -14,7 +14,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
                     <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
@@ -27,7 +27,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="rol">Rol: </label>
                     @Html.DropDownList("rol", new SelectList((System.Collections.IEnumerable)ViewData["listaRoles"]), new { @class = "form-control" })
@@ -41,7 +41,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="categoria">Categoría: </label>
                     @Html.DropDownList("categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarios"]), new { @class = "form-control" })
@@ -78,7 +78,6 @@
         <th>
             Acciones
         </th>
-        <th></th>
     </tr>
 
 	@foreach (var item in Model)

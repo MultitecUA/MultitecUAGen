@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles de @ViewData["usuario"]</h2>
+<h2>Detalles del Usuario: @ViewData["usuario"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -69,14 +69,27 @@
             @Html.DisplayFor(model => model.Rol)
         </dd>
 
+        <dt>Categorías:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
     </dl>
 
     <div class="dl-horizontal">
         @using (Html.BeginForm("AgregarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Agregar categoria:</label>
+            <div class="form-horizontal form-group form-inline">
+                <label>Agregar Categoría:</label>
                 @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
                 <input type="submit" value="Agregar" class="btn btn-default" />
             </div>
@@ -85,8 +98,8 @@
         @using (Html.BeginForm("EliminarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Eliminar categoria:</label>
+            <div class="form-horizontal form-group form-inline">
+                <label>Eliminar Categoría:</label>
                 @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
                 <input type="submit" value="Eliminar" class="btn btn-default" />
             </div>

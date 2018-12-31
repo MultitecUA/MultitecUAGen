@@ -6,7 +6,7 @@
 
 <h2>Proyectos filtrados por Nombre: @ViewData["titulo"]</h2>
 <p class="text-center">
-    <label<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Proyectos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Proyectos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
     <h3>Filtros:</h3>
@@ -14,7 +14,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nombre">Nombre: </label><input class="form-control" type="text" name="nombre" />
                     <input type="submit" value="Filtrar por Nombre" class="btn btn-default" />
@@ -27,7 +27,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Estado: </label>
                     @Html.DropDownList("estado", new SelectList((System.Collections.IEnumerable)ViewData["listaEstados"]), new { @class = "form-control" })
@@ -41,7 +41,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Categoría Proyecto: </label>
                     @Html.DropDownList("categoriaP", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasP"]), new { @class = "form-control" })
@@ -55,7 +55,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Categoría Usuario: </label>
                     @Html.DropDownList("categoriaU", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasU"]), new { @class = "form-control" })
@@ -64,9 +64,6 @@
             </div>
         </div>
     }
-</p>
-<p>
-    @Html.ActionLink("Nuevo Proyecto", "Create")
 </p>
 <table class="table">
     <tr>
@@ -82,7 +79,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-        <th></th>
+        <th>
+            Eventos
+        </th>
+        <th>
+            Participantes
+        </th>
+        <th>
+            Moderadores
+        </th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -100,10 +108,23 @@
             <th>
                 @Html.DisplayFor(model => item.Estado)
             </th>
+            <th>
+                @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Participantes", "UsuariosParticipantes", "Usuario", new { id = item.Id }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Moderadores", "UsuariosModeradores", "Usuario", new { id = item.Id }, null)
+            </th>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Cambiar Estado", "ChangeEstado", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = item.Id }) |
+                @Html.ActionLink("Gestionar Moderadores", "GestionModeradores", new { id = item.Id })
             </td>
         </tr>
     }

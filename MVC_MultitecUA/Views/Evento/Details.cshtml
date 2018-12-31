@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles del evento: @ViewData["nombreEvento"]</h2>
+<h2>Detalles del Evento: @ViewData["nombreEvento"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -13,6 +13,14 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
@@ -61,7 +69,7 @@
             @Html.DisplayFor(model => model.FechaTopeInscripcion)
         </dd>
 
-		<dt>Categorías:</dt>
+        <dt>Categorías:</dt>
         <dd>
             <ul>
 
@@ -79,8 +87,8 @@
         @using (Html.BeginForm("AgregarCat", "Evento"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal form-group form-inline left">
-                <label>Agregar categoria:</label>
+            <div class="form-horizontal form-group form-inline">
+                <label>Agregar Categoría:</label>
                 @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
                 <input type="submit" value="Agregar" class="btn btn-default" />
             </div>
@@ -90,7 +98,7 @@
         {
             @Html.HiddenFor(model => model.Id)
             <div class="form-horizontal form-group form-inline">
-                <label>Eliminar categoria:</label>
+                <label>Eliminar Categoría:</label>
                 @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
                 <input type="submit" value="Eliminar" class="btn btn-default" />
             </div>

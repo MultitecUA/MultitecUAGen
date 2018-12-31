@@ -1,15 +1,28 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
 
 @{
-    ViewBag.Title = "Filtrar";
+    ViewBag.Title = "Filtrar avanzado";
 }
 
-<h2>Filtrar</h2>
+<h2>Eventos filtrados</h2>
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <h3>Filtros:</h3>
+    @using (Html.BeginForm("ForNombre", "Evento"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10 form-inline">
+                    <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
+                    <input type="submit" value="Buscar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    @Html.ActionLink("Filtro Avanzado", "PorFiltro")
 </p>
 <table class="table">
     <tr>

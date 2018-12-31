@@ -1,13 +1,13 @@
 ﻿@model MVC_MultitecUA.Models.Recuerdo
 
 @{
-    ViewBag.Title = "Crear Recuerdo";
+    ViewBag.Title = "Crear";
 }
 
 <h2>Crear Recuerdo</h2>
-
-
-
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 @using (Html.BeginForm())
 {

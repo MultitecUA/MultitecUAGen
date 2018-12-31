@@ -9,29 +9,51 @@
 	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
+    <h3>Filtros:</h3>
+    <!-- TODO: HARECER FILTROS
+    @using (Html.BeginForm("ForNick", "Usuario"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-inline">
+                <div class="col-md-10">
+                    <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
+                    <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }-->
+</p>
+<p>
 	@Html.ActionLink("Nueva Solicitud", "Create")
 </p>
 <table class="table">
     <tr>
-        
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Nick_Solicitante)
-        </th>       
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre_Proyecto)
-        </th>    
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
         </th>
-        <th></th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-   
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nick_Solicitante)
         </td>
@@ -45,9 +67,9 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.Id })
+            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Modificar estado", "Edit", new { id = item.Id })
         </td>
     </tr>
 }

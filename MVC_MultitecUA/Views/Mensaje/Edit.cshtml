@@ -1,18 +1,20 @@
 ﻿@model MVC_MultitecUA.Models.MensajeModel
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Modificar estado de lectura";
 }
 
-<h2>Editar</h2>
+<h2>Modificar el estado de lectura de Mensaje</h2>
 
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mensajes", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div>
-	<h4>Editar</h4>
 	<hr />
 	<dl class="dl-horizontal">
 		<dt>

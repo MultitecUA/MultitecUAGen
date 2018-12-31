@@ -4,7 +4,7 @@
     ViewBag.Title = "Borrar";
 }
 
-<h2>Borrar @ViewData["usuario"]</h2>
+<h2>Borrar el Usuario: @ViewData["usuario"]</h2>
 
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -14,14 +14,6 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>

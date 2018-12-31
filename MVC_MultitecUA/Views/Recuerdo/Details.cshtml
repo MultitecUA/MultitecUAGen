@@ -17,7 +17,7 @@
     else
     {
 
-        <h2>Detalles del recuerdo: @ViewData["recuerdo"]</h2>
+        <h2>Detalles del Recuerdo: @ViewData["recuerdo"]</h2>
         <p class="text-center">
             <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Recuerdos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
         </p>
@@ -30,6 +30,14 @@
     <hr />
 
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Titulo)
         </dt>

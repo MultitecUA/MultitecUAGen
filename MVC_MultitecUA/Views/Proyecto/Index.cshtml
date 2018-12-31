@@ -14,7 +14,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nombre">Nombre: </label><input class="form-control" type="text" name="nombre" />
                     <input type="submit" value="Filtrar por Nombre" class="btn btn-default" />
@@ -27,7 +27,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Estado: </label>
                     @Html.DropDownList("estado", new SelectList((System.Collections.IEnumerable)ViewData["listaEstados"]), new { @class = "form-control" })
@@ -41,7 +41,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Categoría Proyecto: </label>
                     @Html.DropDownList("categoriaP", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasP"]), new { @class = "form-control" })
@@ -55,7 +55,7 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group form-inline">
                 <div class="col-md-10">
                     <label for="nick">Categoría Usuario: </label>
                     @Html.DropDownList("categoriaU", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasU"]), new { @class = "form-control" })
@@ -91,7 +91,9 @@
         <th>
             Moderadores
         </th>
-        <th></th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
 	@foreach (var item in Model)
