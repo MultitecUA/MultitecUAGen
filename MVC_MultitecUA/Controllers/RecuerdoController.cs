@@ -18,6 +18,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             SessionInitialize();
 
             RecuerdoCAD cadRec = new RecuerdoCAD(session);
@@ -62,6 +72,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             Recuerdo rec = null;
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
@@ -72,6 +92,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo/Create
         public ActionResult Create(int idEvento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             Recuerdo rec = new Recuerdo();
             ViewData["idevento"] = idEvento;
             if (TempData.ContainsKey("creado"))
@@ -89,6 +119,16 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult CreateNoId()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             Recuerdo recuerdo = new Recuerdo();
             if (TempData.ContainsKey("creado"))
             {
@@ -105,6 +145,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(int idEvento, Recuerdo rec)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add insert logic here
@@ -127,6 +177,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult CreateNoId(Recuerdo rec)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add insert logic here
@@ -151,6 +211,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             //Recuerdo rec = null;
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             //rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
@@ -170,6 +240,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Recuerdo rec)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add update logic here
@@ -188,6 +268,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
             RecuerdoEN recuerdoEN = recuerdoCEN.ReadOID(id);
             if (TempData.ContainsKey("creado"))
@@ -210,6 +300,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add delete logic here
@@ -225,6 +325,16 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult porEvento (int idEvento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
             IList<RecuerdoEN> recuerdo = recuerdoCEN.DameRecuerdosPorProyecto(idEvento);
             IEnumerable<Recuerdo> listaRecuerdos = new AssemblerRecuerdo().ConvertListENToModel(recuerdo).ToList();

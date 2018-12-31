@@ -18,6 +18,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Servicio
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             SessionInitialize();
 
             ArrayList listaEstados = new ArrayList();
@@ -57,7 +67,17 @@ namespace MVC_MultitecUA.Controllers
         //POST: Servicio/PorEstado
         public ActionResult PorEstado(FormCollection f)
         {
-            if(f == null)
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
+            if (f == null)
                 return RedirectToAction("Index");
             
             SessionInitialize();
@@ -87,6 +107,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Servicio/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             Servicio serv = null;
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
@@ -97,6 +127,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Servicio/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             ArrayList listaEstados = new ArrayList();
             foreach (var a in Enum.GetNames(typeof(EstadoServicioEnum)))
             {
@@ -111,7 +151,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(Servicio serv)
         {
-           
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add insert logic here
@@ -129,6 +178,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Servicio/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             Servicio serv = null;
             SessionInitialize();
             ArrayList listaEstados = new ArrayList();
@@ -148,6 +207,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Servicio serv)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add update logic here
@@ -165,6 +234,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Servicio/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             ServicioCEN servicioCEN = new ServicioCEN();
             ServicioEN servicioEN = servicioCEN.ReadOID(id);
             ViewData["servicio"] = servicioEN.Nombre;
@@ -175,6 +254,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, ServicioEN ser)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add delete logic here

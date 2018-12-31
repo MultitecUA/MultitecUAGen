@@ -16,6 +16,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoCEN eventoCEN = new EventoCEN();
 
             int tamPag = 10;
@@ -35,13 +45,24 @@ namespace MVC_MultitecUA.Controllers
 
             IList<EventoEN> listaEventoEn = eventoCEN.ReadAll(inicio, tamPag).ToList();
             //IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(listaServiciosEn).ToList();
-           
+
             return View(listaEventoEn);
+
         }
 
         // GET: Evento/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             SessionInitialize();
             ArrayList listaCatesE = new ArrayList();
             ArrayList listaCatesA = new ArrayList();
@@ -73,6 +94,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoEN evento = new EventoEN();
             return View(evento);
         }
@@ -81,6 +112,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(EventoEN evento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add insert logic here
@@ -98,6 +139,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoEN eventoEN = new EventoCEN().ReadOID(id);
             ViewData["evento"] = eventoEN.Nombre;
             return View(eventoEN);
@@ -107,6 +158,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, EventoEN evento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add update logic here
@@ -124,6 +185,16 @@ namespace MVC_MultitecUA.Controllers
         // GET: Evento/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoCEN eventoCEN = new EventoCEN();
             EventoEN eventoEN = eventoCEN.ReadOID(id);
             ViewData["NombreEvento"] = eventoEN.Nombre;
@@ -134,6 +205,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, EventoEN evento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             try
             {
                 // TODO: Add delete logic here
@@ -149,7 +230,16 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult PorFiltro()
         {
-            
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoEN evento = new EventoEN();
             //CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             //IList<CategoriaProyectoEN> categoriasProyecto = categoriasP.ReadAll(0, -1).ToList();
@@ -165,7 +255,16 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult Filtrar(FormCollection f)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
 
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             //if (f["categoria"] != null)
             //{
             /*string[] ps = f["categoria"].Split(',');
@@ -247,7 +346,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarCat(int id, FormCollection f)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
 
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             if (f["Categoria"] != "")
             {
                 int num = id;//int.Parse(f["IdEvento"]);
@@ -271,6 +379,16 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarCat(int id, FormCollection f)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             if (f["Categoria"] != "")
             {
                 int num = id;//int.Parse(f["IdEvento"]);
@@ -290,26 +408,39 @@ namespace MVC_MultitecUA.Controllers
         }
 
 
+        //GET
         public ActionResult porProyecto(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
             ViewData["idProyecto"] = id;
             return View(eventos);
         }
 
-
-        public ActionResult eliminarProyectosAsociados(int id)
-        {
-            EventoCEN eventoCEN = new EventoCEN();
-            EventoEN evento = eventoCEN.ReadOID(id);
-            ViewData["IdEvento"] = id;
-            IList<ProyectoEN> proyectos = evento.ProyectosPresentados;
-            return View(proyectos);
-        }
-
+  
+        //GET
         public ActionResult eliminandoRelacion(int idP, int idE)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyecto = proyectoCEN.ReadOID(idP);
             EventoCEN eventoCEN = new EventoCEN();
@@ -319,9 +450,19 @@ namespace MVC_MultitecUA.Controllers
             return View(proyecto);
         }
 
-
+        //GET
         public ActionResult ForNombre(FormCollection f)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            if (Session["esAdmin"].ToString() == "false")
+                return View("NoAdministrador");
+
+            if (Session["modoAdmin"].ToString() == "false")
+            {
+                Session["modoAdmin"] = "true";
+            }
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(f["nombre"]);
             ViewData["Buscando"] = f["nombre"];
