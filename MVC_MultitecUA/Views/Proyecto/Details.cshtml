@@ -10,6 +10,31 @@
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Proyectos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
+
+
+@{
+    if (TempData.ContainsKey("proyectocreado"))
+    {
+        <h2 class="text-success">@TempData["proyectocreado"]</h2>
+        TempData.Remove("proyectocreado");
+    }
+    else if (TempData.ContainsKey("eventoeditado"))
+    {
+        <h2 class="text-success">@TempData["proyectoeditado"]</h2>
+        TempData.Remove("proyectoeditado");
+    }
+    else
+    {
+        <h2>Detalles del Evento: @ViewData["NombreEvento"]</h2>
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+
+
+
 <div>
     <hr />
     <dl class="dl-horizontal">

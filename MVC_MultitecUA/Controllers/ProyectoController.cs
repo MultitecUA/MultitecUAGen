@@ -276,15 +276,17 @@ namespace MVC_MultitecUA.Controllers
                 return View("../NoAdministrador");
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
-
             
-
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
 
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
                 UsuarioEN usuarioEN = usuarioCEN.ReadNick(formCollection["creador"]);
+
+                string uno = formCollection["Nombre"];
+                string dos = formCollection["Descripcion"];
+                string tres = formCollection["creador"];
 
                 IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
                 ArrayList listaNicks = new ArrayList();
@@ -317,17 +319,20 @@ namespace MVC_MultitecUA.Controllers
 
                 //VALIDANDO DESCRIPCRION
                 pattern = new Regex("^.{5,200}$");
-                if (!pattern.IsMatch(ViewData["Descripcion"].ToString()))
+                if (!pattern.IsMatch(formCollection["Descripcion"].ToString()))
                 {
                     ViewData["formatodescripproyecto"] = "mal";
                     return View();
                 }
 
-                proyectoCEN.New_(formCollection["Nombre"], formCollection["Descripcion"], usuarioEN.Id, null);
-                return RedirectToAction("Index");
+                int OID = proyectoCEN.New_(formCollection["Nombre"], formCollection["Descripcion"], usuarioEN.Id, null);
+                TempData["proyectocreado"] = "Se ha creado el proyecto: "+formCollection["Nombre"];
+
+                return RedirectToAction("Details/" + OID);
             }
             catch
             {
+                ViewData["error"] = "Ha ocurrido un error al intentar crear.";
                 return View();
             }
         }
@@ -362,8 +367,40 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+                if (proyectoEN.Nombre == "" || proyectoEN.Descripcion == "")
+                {
+                    ViewData["proyectovacio"] = "vacio";
+                    return View();
+                }
+
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                if (!pattern.IsMatch(proyectoEN.Nombre))
+                {
+                    ViewData["fomatonombreproyecto"] = "mal";
+                    return View();
+                }
+
+                if (proyectoCEN.ReadNombre(proyectoEN.Nombre) != null)
+                {
+                    ViewData["nombreproyecto"] = "existe";
+                    return View();
+                }
+
+                //VALIDANDO DESCRIPCRION
+                pattern = new Regex("^.{5,200}$");
+                if (!pattern.IsMatch(proyectoEN.Descripcion.ToString()))
+                {
+                    ViewData["formatodescripproyecto"] = "mal";
+                    return View();
+                }
+
                 proyectoCP.Modify(id, proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.Fotos);
-                return RedirectToAction("Index");
+
+                TempData["proyectoeditado"] = "Se ha editado el proyecto: " + proyectoEN.Nombre;
+                return RedirectToAction("Details/" + id);
             }
             catch
             {
