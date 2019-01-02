@@ -25,7 +25,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://multitecua.ml" target="_blank" >Contacto / Acerca de</a></li>
+                    @{ if (Session["usuario"] == null || (Session["usuario"] != null && Session["modoAdmin"].ToString() == "false")){
+                        <li>@Html.ActionLink("Proyectos", "Index", "")</li>
+                        <li>@Html.ActionLink("Eventos", "Index", "")</li>
+                        <li>@Html.ActionLink("Servicios", "Index", "")</li>
+                    }
+                    }
+                    <li><a href="http://multitecua.ml" target="_blank">Contacto / Acerca de</a></li>
                 </ul>
                 @{if (Session["usuario"] != null)
                     {
@@ -49,12 +55,11 @@
                                     <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
                                     <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
                                     <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
+                                    </li>
                                 </ul>
-                            </li>
-
-
-                            <li>
-                                @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
                             </li>
                         }
                     }

@@ -63,7 +63,7 @@
             @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
             @{ if (ViewData.ContainsKey("FIMayorFF"))
                 {
-                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio no puede ser después o igual a la fecha de fin.</p>
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio no puede ser mayor a la fecha de fin.</p>
 
                 }
             }
@@ -85,11 +85,11 @@
             @Html.ValidationMessageFor(model => model.FechaInicioInscripcion, "", new { @class = "text-danger" })
             @{ if (ViewData.ContainsKey("FIIMayorFTI"))
                 {
-                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser después o igual a la fecha de tope de inscripción.</p>
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser mayor a la fecha de tope de inscripción.</p>
                 }
                 else if (ViewData.ContainsKey("FIIMayorFF"))
                 {
-                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser después o igual a la fecha de tope de inscripción.</p>
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser mayor a la fecha de tope de inscripción.</p>
                 }
             }
         </div>
@@ -102,7 +102,7 @@
             @Html.ValidationMessageFor(model => model.FechaTopeInscripcion, "", new { @class = "text-danger" })
             @{ if (ViewData.ContainsKey("FTIMayorFF"))
                 {
-                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de tope de inscripción no puede ser después o igual a la fecha de fin.</p>
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de tope de inscripción no puede ser mayor a la fecha de fin.</p>
                 }
             }
         </div>

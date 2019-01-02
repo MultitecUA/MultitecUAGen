@@ -15,13 +15,31 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
+    @{ if (ViewData.ContainsKey("proyectovacio"))
+        {
+            <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> No pueden haber campos vacios</p>
+            <br />
+        }
+        else
+        {
+            <br /><br />
+        }
+    }
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            @{ if (ViewData.ContainsKey("nombreproyecto"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> El nombre de este evento ya existe</p>
+                }
+                else if (ViewData.ContainsKey("fomatonombreproyecto"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> De 4 a 30 caracteres. Letras, números y espacios.</p>
+                }
+            }
         </div>
     </div>
 
@@ -29,23 +47,21 @@
         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            @{ if (ViewData.ContainsKey("formatodescripproyecto"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> De 5 a 200 caracteres.</p>
+
+                }
+            }
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.UsuarioCreador.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="creador">Creador:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.UsuarioCreador.Id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UsuarioCreador.Id, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fotos, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Fotos, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Fotos, "", new { @class = "text-danger" })
+            @{
+                @Html.DropDownList("creador", new SelectList((System.Collections.IEnumerable)ViewData["listaNicks"]), new { @class = "form-control" });
+            }
         </div>
     </div>
 

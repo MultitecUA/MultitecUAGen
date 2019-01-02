@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -123,6 +124,7 @@ namespace MVC_MultitecUA.Controllers
             ViewData["listaCategoriasProyectoEliminar"] = listaCatesE;
 
             ViewData["titulo"] = proyectoEN.Nombre;
+            ViewData["creador"] = proyectoEN.UsuarioCreador.Nombre + " ("+ proyectoEN.UsuarioCreador.Nick+")";
             return View(proyectoEN);
         }
 
@@ -248,13 +250,25 @@ namespace MVC_MultitecUA.Controllers
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
 
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
+
+            ArrayList listaNicks = new ArrayList();
+
+            foreach (var e in listaUsuarios)
+            {
+                listaNicks.Add(e.Nick);
+            }
+
+            ViewData["ListaNicks"] = listaNicks;
+
             ProyectoEN proyectoEN = new ProyectoEN();
             return View(proyectoEN);
         }
 
         // POST: Proyecto/Create
         [HttpPost]
-        public ActionResult Create(ProyectoEN proyectoEN)
+        public ActionResult Create(FormCollection formCollection)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -263,10 +277,53 @@ namespace MVC_MultitecUA.Controllers
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
 
+            
+
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
-                proyectoCEN.New_(proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.UsuarioCreador.Id, proyectoEN.Fotos);
+
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                UsuarioEN usuarioEN = usuarioCEN.ReadNick(formCollection["creador"]);
+
+                IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
+                ArrayList listaNicks = new ArrayList();
+                foreach (var e in listaUsuarios)
+                {
+                    listaNicks.Add(e.Nick);
+                }
+
+                ViewData["ListaNicks"] = listaNicks;
+
+                if (formCollection["Nombre"] == "" || formCollection["Descripcion"] == "")
+                {
+                    ViewData["proyectovacio"] = "vacio";
+                    return View();
+                }
+
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                if (!pattern.IsMatch(formCollection["Nombre"]))
+                {
+                    ViewData["fomatonombreproyecto"] = "mal";
+                    return View();
+                }
+
+                if (proyectoCEN.ReadNombre(formCollection["Nombre"]) != null)
+                {
+                    ViewData["nombreproyecto"] = "existe";
+                    return View();
+                }
+
+                //VALIDANDO DESCRIPCRION
+                pattern = new Regex("^.{5,200}$");
+                if (!pattern.IsMatch(ViewData["Descripcion"].ToString()))
+                {
+                    ViewData["formatodescripproyecto"] = "mal";
+                    return View();
+                }
+
+                proyectoCEN.New_(formCollection["Nombre"], formCollection["Descripcion"], usuarioEN.Id, null);
                 return RedirectToAction("Index");
             }
             catch

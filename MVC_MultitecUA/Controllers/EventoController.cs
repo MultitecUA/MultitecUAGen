@@ -146,17 +146,17 @@ namespace MVC_MultitecUA.Controllers
                     }
 
                 //VALIDANDO FECHAS  
-                    if(evento.FechaInicio >= evento.FechaFin)
+                    if(evento.FechaInicio > evento.FechaFin)
                     {
                         ViewData["FIMayorFF"] = "mal";
                         return View();
                     }
-                    if (evento.FechaInicioInscripcion >= evento.FechaTopeInscripcion)
+                    if (evento.FechaInicioInscripcion > evento.FechaTopeInscripcion)
                     {
                         ViewData["FIIMayorFTI"] = "mal";
                         return View();
                     }
-                    if(evento.FechaInicioInscripcion >= evento.FechaFin)
+                    if(evento.FechaInicioInscripcion > evento.FechaFin)
                     {
                         ViewData["FIIMayorFF"] = "mal";
                         return View();
@@ -248,17 +248,17 @@ namespace MVC_MultitecUA.Controllers
                     }
 
                 //VALIDANDO FECHAS  
-                    if (evento.FechaInicio >= evento.FechaFin)
+                    if (evento.FechaInicio > evento.FechaFin)
                     {
                         ViewData["FIMayorFF"] = "mal";
                         return View();
                     }
-                    if (evento.FechaInicioInscripcion >= evento.FechaTopeInscripcion)
+                    if (evento.FechaInicioInscripcion > evento.FechaTopeInscripcion)
                     {
                         ViewData["FIIMayorFTI"] = "mal";
                         return View();
                     }
-                    if (evento.FechaInicioInscripcion >= evento.FechaFin)
+                    if (evento.FechaInicioInscripcion > evento.FechaFin)
                     {
                         ViewData["FIIMayorFF"] = "mal";
                         return View();
