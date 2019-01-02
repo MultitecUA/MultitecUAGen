@@ -12,6 +12,20 @@
 
 <div>
     <hr />
+    <dl class="dl-horizontal">
+        <dt>Moderadores:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaUsuariosEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+    </dl>
     <div class="dl-horizontal">
         @using (Html.BeginForm("AgregarModerador", "Proyecto"))
         {

@@ -383,7 +383,7 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                if (proyectoCEN.ReadNombre(proyectoEN.Nombre) != null)
+                if (proyectoEN.Nombre != proyectoCEN.ReadOID(id).Nombre &&  proyectoCEN.ReadNombre(proyectoEN.Nombre) != null)
                 {
                     ViewData["nombreproyecto"] = "existe";
                     return View();

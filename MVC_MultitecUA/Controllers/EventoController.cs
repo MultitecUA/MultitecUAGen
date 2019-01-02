@@ -233,7 +233,7 @@ namespace MVC_MultitecUA.Controllers
                         return View();
                     }
 
-                    if (eventoCEN.ReadNombre(evento.Nombre) != null)
+                    if (evento.Nombre != eventoCEN.ReadOID(id).Nombre && eventoCEN.ReadNombre(evento.Nombre) != null)
                     {
                         ViewData["nombreevento"] = "existe";
                         return View();

@@ -67,7 +67,7 @@ namespace MVC_MultitecUA.Controllers
                 
             
             //Esto redirige al inicio de usuario
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Sesion/Logout
@@ -82,7 +82,7 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["esAdmin"] != null && Session["esAdmin"].ToString() == "true")
                 Session["modoAdmin"] = "true";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Sesion/Adminout
@@ -90,7 +90,7 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() == "true")
                 Session["modoAdmin"] = "false";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

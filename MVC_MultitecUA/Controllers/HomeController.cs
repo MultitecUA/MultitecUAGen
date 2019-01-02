@@ -10,6 +10,14 @@ namespace MVC_MultitecUA.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View("Index_Administrador");
+            else
+                return View("Index");
+        }
+
+        public ActionResult Index_Administrador()
+        {
             return View();
         }
 

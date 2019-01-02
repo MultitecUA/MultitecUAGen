@@ -314,13 +314,20 @@
     <Content Include="Views\Sesion\Logout.cshtml" />
     <Content Include="Views\Sesion\Adminin.cshtml" />
     <Content Include="Views\Sesion\Adminout.cshtml" />
-    <Content Include="Views\Evento\NoAdministrador.cshtml" />
-    <Content Include="Views\Home\Index_Administrador.cshtml" />
     <Content Include="Views\NoAdministrador.cshtml" />
+    <Content Include="Views\Home\Index_Administrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
+    <Folder Include="Views\Evento\VistaUsuario\" />
+    <Folder Include="Views\Mensaje\VistaUsuario\" />
+    <Folder Include="Views\Noticia\VistaUsuario\" />
+    <Folder Include="Views\Proyecto\VistaUsuario\" />
+    <Folder Include="Views\Recuerdo\VistaUsuario\" />
+    <Folder Include="Views\Servicio\VistaUsuario\" />
+    <Folder Include="Views\Solicitud\VistaUsuario\" />
+    <Folder Include="Views\Usuario\VistaUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
