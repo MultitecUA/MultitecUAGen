@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "No eres Administrador";
+}
+
+<h2>Acceso no autorizado</h2>
+
+<p class="text-danger">Debes ser Administrador para poder acceder a esa ruta.</p>
+
+@Html.ActionLink("Inicio","Index","Home",null, new { @class = "btn btn-default"})
