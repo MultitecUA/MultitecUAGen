@@ -17,6 +17,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -65,6 +72,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
@@ -116,6 +130,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarCatPro(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["CategoriaPro"] != "")
             {
                 int num = id;
@@ -137,6 +158,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarCatPro(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["CategoriaPro"] != "")
             {
                 int num = id;
@@ -158,6 +186,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarCatUsu(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["CategoriaUsu"] != "")
             {
                 int num = id;
@@ -179,6 +214,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarCatUsu(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["CategoriaUsu"] != "")
             {
                 int num = id;
@@ -199,6 +241,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoEN proyectoEN = new ProyectoEN();
             return View(proyectoEN);
         }
@@ -207,6 +256,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
@@ -222,6 +278,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
             ViewData["titulo"] = proyectoEN.Nombre;
@@ -232,6 +295,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -247,6 +317,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
             ViewData["titulo"] = proyectoEN.Nombre;
@@ -257,6 +334,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -272,6 +356,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/ProyectosPorEvento/5
         public ActionResult ProyectosPorEvento(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             EventoCEN eventoCEN = new EventoCEN();
@@ -286,6 +377,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/ProyectosUsuarioPertenece/5
         public ActionResult ProyectosUsuarioPertenece(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -300,6 +398,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Proyecto/ForNombre/5
         public ActionResult ForNombre(ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -333,6 +438,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Proyecto/ForEstado/5
         public ActionResult ForEstado(ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -366,6 +478,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Proyecto/ForCategoriaProyecto/5
         public ActionResult ForCategoriaProyecto(FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -404,6 +523,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Proyecto/ForCategoriaUsuario/5
         public ActionResult ForCategoriaUsuario(FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -441,6 +567,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/ChangeEstado/5
         public ActionResult ChangeEstado(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
 
@@ -459,6 +592,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult ChangeEstado(int id, ProyectoEN proyectoEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
@@ -474,6 +614,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/GestionEventos/5
         public ActionResult GestionEventos(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
@@ -502,6 +649,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarEvento(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -523,6 +677,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarEvento(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -543,6 +704,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/GestionParticipantes/5
         public ActionResult GestionParticipantes(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
@@ -571,6 +739,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarParticipante(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -592,6 +767,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarParticipante(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -612,6 +794,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/GestionParticipantes/5
         public ActionResult GestionModeradores(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
@@ -640,6 +829,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarModerador(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
@@ -661,6 +857,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarModerador(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();

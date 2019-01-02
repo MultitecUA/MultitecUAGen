@@ -14,63 +14,106 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Nombre">Nombre</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Descripcion">Descripción</label>
-            <div class="col-md-10">
-                @Html.TextArea("Descripcion", null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FechaInicio">Fecha de Inicio</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="El campo FechaInicio debe ser una fecha. Ejemplo: 01/01/2000 00:00" id="FechaInicio" name="FechaInicio" type="datetime" value=""  placeholder="mm/dd/yyyy hh:mm"/>
-                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FechaFin">Fecha de Fin</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha Fin debe ser una fecha. Ejemplo: 01/01/2000 00:00" id="FechaFin" name="FechaFin" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm"/>
-                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FechaInicioInscripcion">Fecha de Inicio de Inscripción</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha de Inicio de Inscripcion debe ser una fecha. Ejemplo: 01/01/2000 00:00" id="FechaInicioInscripcion" name="FechaInicioInscripcion" type="datetime" value=""  placeholder="mm/dd/yyyy hh:mm"/>
-                @Html.ValidationMessageFor(model => model.FechaInicioInscripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FechaTopeInscripcion">Fecha Tope de Inscripción</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha Tope de Inscripcion debe ser una fecha. Ejemplo: 01/01/2000 00:00" id="FechaTopeInscripcion" name="FechaTopeInscripcion" type="datetime" value=""  placeholder="mm/dd/yyyy hh:mm"/>
-                @Html.ValidationMessageFor(model => model.FechaTopeInscripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    @{ if (ViewData.ContainsKey("eventovacio"))
+        {
+            <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> No pueden haber campos vacios</p>
+            <br />
+        }
+        else
+        {
+            <br /><br />
+        }
+    }
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Nombre">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @{ if (ViewData.ContainsKey("nombreevento"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> El nombre de este evento ya existe</p>
+                }
+                else if (ViewData.ContainsKey("formatonombreevento"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> De 4 a 30 caracteres. Letras, números y espacios.</p>
+                }
+            }
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Descripcion">Descripción</label>
+        <div class="col-md-10">
+            @Html.TextArea("Descripcion", null, new { @class = "form-control" })
+            @{ if (ViewData.ContainsKey("formatodescripvento"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> De 5 a 200 caracteres.</p>
+
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FechaInicio">Fecha de Inicio</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="Fecha Inicio debe ser una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaInicio" name="FechaInicio" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+            @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+            @{ if (ViewData.ContainsKey("FIMayorFF"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio no puede ser después o igual a la fecha de fin.</p>
+
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FechaFin">Fecha de Fin</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha Fin debe ser una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaFin" name="FechaFin" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+            @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FechaInicioInscripcion">Fecha de Inicio de Inscripción</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha de Inicio de Inscripcion debe ser una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaInicioInscripcion" name="FechaInicioInscripcion" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+            @Html.ValidationMessageFor(model => model.FechaInicioInscripcion, "", new { @class = "text-danger" })
+            @{ if (ViewData.ContainsKey("FIIMayorFTI"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser después o igual a la fecha de tope de inscripción.</p>
+                }
+                else if (ViewData.ContainsKey("FIIMayorFF"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de inicio de inscripción no puede ser después o igual a la fecha de tope de inscripción.</p>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FechaTopeInscripcion">Fecha Tope de Inscripción</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="El campo Fecha Tope de Inscripcion debe ser una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaTopeInscripcion" name="FechaTopeInscripcion" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+            @Html.ValidationMessageFor(model => model.FechaTopeInscripcion, "", new { @class = "text-danger" })
+            @{ if (ViewData.ContainsKey("FTIMayorFF"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de tope de inscripción no puede ser después o igual a la fecha de fin.</p>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

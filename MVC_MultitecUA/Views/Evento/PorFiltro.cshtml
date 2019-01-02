@@ -13,27 +13,36 @@
     {
     <div class="form-horizontal">
         <!--foreach (string a in (List<string>)ViewData["listaCateP"])
-        {
-            <label class="checkbox-inline">
-                <input type="checkbox" name="categoria" value="a"> a
-            </label>
-        }-->
+    {
+        <label class="checkbox-inline">
+            <input type="checkbox" name="categoria" value="a"> a
+        </label>
+    }-->
+
         <label>Categoria</label>
-        <input type="text" name="Categoria" class="form-control" />
-       
+        <!--<input type="text" name="Categoria" class="form-control" />-->
+        @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listacategorias"]), new { @class = "form-control" })
+
     </div>
     <div class="form-horizontal">
-        <label>Fecha entre </label>
-        <input type="datetime" name="FechaAnterior" class="form-control"/>
-        <label> y </label>
-        <input type="datetime" name="FechaFinal" class="form-control" />
-    </div>
+        <label>Fecha de inicio entre </label>
+        <input class="form-control text-box single-line" data-val="true" data-val-date="Este campo debe contener una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaFinal" name="FechaFinal" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+        @{ if (ViewData.ContainsKey("fechamal"))
+            {
+                <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> Esta fecha no puede ser mayor o igual que la otra.</p>
+            }
+        }
+
+            <label> y </label>
+            <input class="form-control text-box single-line" data-val="true" data-val-date="Este campo debe contener una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaAnterior" name="FechaAnterior" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+
+        </div>
         <div class="form-horizontal">
             <input type="submit" value="Buscar" class="btn btn-default" />
         </div>
     }
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    <!--Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |-->
     @Html.ActionLink("Volver a la lista", "Index")
 </p>

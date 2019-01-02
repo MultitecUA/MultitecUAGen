@@ -16,12 +16,14 @@ namespace MVC_MultitecUA.Models
 
         [Display(Prompt = "Nombre del servicio", Description = "Nombre del servicio", Name = "Nombre ")]
         [Required(ErrorMessage = "Debe indicar un nombre para el servicio")]
-        [StringLength(maximumLength: 200, ErrorMessage = "El nombre no puede tener más de 200 caracteres")]
+        [RegularExpression("^[A-Za-z0-9 ñáéíóú]{5,}$", ErrorMessage = "El nombre solo puede contener letras, números y espacios. Mínimo 5 caracteres")]
+        [StringLength(maximumLength: 50, ErrorMessage = "El nombre no puede tener más de 200 caracteres")]
         public string Nombre { get; set; }
 
         [Display(Prompt = "Descripción del servicio", Description = "Descripción del servicio", Name = "Descripción ")]
         [Required(ErrorMessage = "Debe indicar una descripción para el servicio")]
         [StringLength(maximumLength: 4000, ErrorMessage = "La descripción no puede tener más de 4000 caracteres")]
+        [RegularExpression("^.{20,}$", ErrorMessage = "La descripción del servicio solo puede contener letras, números y espacios. Mínimo 20 caracteres.")]
         public string Descripcion { get; set; }
 
         [Display(Prompt = "Estado del servicio", Description = "Estado del servicio", Name = "Estado ")]

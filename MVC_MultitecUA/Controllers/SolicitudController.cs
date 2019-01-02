@@ -15,6 +15,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Solicitud
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             SolicitudCEN solicitudCEN = new SolicitudCEN();
 
             int tamPag = 10;
@@ -43,6 +50,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Solicitud/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             SolicitudCEN solicitudCEN = new SolicitudCEN();
             SolicitudEN solicitudEN = solicitudCEN.ReadOID(id);
 
@@ -53,6 +67,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Solicitud/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
 
@@ -89,6 +110,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(Solicitud solicitud)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 
@@ -114,6 +142,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             SolicitudCEN solicitudCEN = new SolicitudCEN();
             SolicitudEN solicitudEN = solicitudCEN.ReadOID(id);
             Solicitud solicitud = new AssemblerSolicitud().ConvertENToModelUI(solicitudEN);
@@ -125,6 +160,13 @@ namespace MVC_MultitecUA.Controllers
       
         public ActionResult CambioEstado(int id, String cambioEstado)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 SolicitudCEN solicitudCEN = new SolicitudCEN();
@@ -145,6 +187,13 @@ namespace MVC_MultitecUA.Controllers
         public ActionResult Delete(int id)
         {
 
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             SolicitudCEN solicitudCEN = new SolicitudCEN();
             SolicitudEN solicitudEN = solicitudCEN.ReadOID(id);
 
@@ -156,6 +205,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, SolicitudEN solicitudEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 SolicitudCEN solicitudCEN = new SolicitudCEN();

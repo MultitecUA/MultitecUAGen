@@ -1,86 +1,98 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN>
 
 @{
-	ViewBag.Title = "Categorías de Proyecto";
+    ViewBag.Title = "Categorías de Proyecto";
 }
 
 <h2>Categorías de Proyecto</h2>
 <p class="text-center">
-	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
+
+
+@{ if (TempData.ContainsKey("CPeditada"))
+    {
+        <p class="text-success" style="font-size:1.25em;"><span class="glyphicon glyphicon-ok-sign"></span> Se ha editado la categoria @TempData["CPeditada"].</p>
+        TempData.Remove("CPeditada");
+    }
+    else if (TempData.ContainsKey("CPcreada"))
+    {
+        <p class="text-success" style="font-size:1.25em;"><span class="glyphicon glyphicon-ok-sign"></span> Se ha editado la categoria @TempData["CPcreada"].</p>
+        TempData.Remove("CPcreada");
+    }
+}
 <p>
-	@Html.ActionLink("Nueva Categoría de Proyecto", "Create")
+    @Html.ActionLink("Nueva Categoría de Proyecto", "Create")
 </p>
 <table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.Id)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.Nombre)
-		</th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
         <th>
             Acciones
         </th>
-	</tr>
+    </tr>
 
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.Id)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Nombre)
-			</td>
-			<td>
-				@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-				@Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-				@Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-			</td>
-		</tr>
-	}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
 
 @{
-	/* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
-	var siguiente = (int)ViewData["pag"] + 1;
-	var anterior = siguiente - 2;
-	var numPags = (int)ViewData["numeroPaginas"] + 1;
+    /* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+    var siguiente = (int)ViewData["pag"] + 1;
+    var anterior = siguiente - 2;
+    var numPags = (int)ViewData["numeroPaginas"] + 1;
 }
 <p class="text-center">
-	@{
-		if (siguiente > 1)
-		{
-			<label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
-			<span>|</span>
-			<label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
-		}
-		else
-		{
-			<span>Primera</span>
-			<span>|</span>
-			<span>Anterior</span>
-		}
-	}
+    @{
+        if (siguiente > 1)
+        {
+            <label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+        }
+        else
+        {
+            <span>Primera</span>
+            <span>|</span>
+            <span>Anterior</span>
+        }
+    }
 
-	<span>|</span>
-	<label>Página @siguiente de @numPags</label>
-	<span>|</span>
+    <span>|</span>
+    <label>Página @siguiente de @numPags</label>
+    <span>|</span>
 
-	@{
-		if (siguiente < numPags)
-		{
-			<label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
-			<span>|</span>
-			<label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
-		}
-		else
-		{
-			<span>Siguiente</span>
-			<span>|</span>
-			<span>Última</span>
-		}
-	}
+    @{
+        if (siguiente < numPags)
+        {
+            <label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+        }
+        else
+        {
+            <span>Siguiente</span>
+            <span>|</span>
+            <span>Última</span>
+        }
+    }
 </p>

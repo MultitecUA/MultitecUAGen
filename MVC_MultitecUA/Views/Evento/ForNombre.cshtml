@@ -24,13 +24,13 @@
     }
     @Html.ActionLink("Filtro Avanzado", "PorFiltro")
 </p>
+<p>
+    @Html.ActionLink("Nuevo Evento", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaInicio)
@@ -51,9 +51,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaInicio)

@@ -255,12 +255,10 @@
     <Content Include="Views\Solicitud\Details.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\CategoriaUsuario\Index.cshtml" />
-    <Content Include="Views\CategoriaUsuario\Details.cshtml" />
     <Content Include="Views\CategoriaUsuario\Create.cshtml" />
     <Content Include="Views\CategoriaUsuario\Edit.cshtml" />
     <Content Include="Views\CategoriaUsuario\Delete.cshtml" />
     <Content Include="Views\CategoriaProyecto\Index.cshtml" />
-    <Content Include="Views\CategoriaProyecto\Details.cshtml" />
     <Content Include="Views\CategoriaProyecto\Create.cshtml" />
     <Content Include="Views\CategoriaProyecto\Edit.cshtml" />
     <Content Include="Views\CategoriaProyecto\Delete.cshtml" />
@@ -318,6 +316,7 @@
     <Content Include="Views\Sesion\Adminout.cshtml" />
     <Content Include="Views\Evento\NoAdministrador.cshtml" />
     <Content Include="Views\Home\Index_Administrador.cshtml" />
+    <Content Include="Views\NoAdministrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

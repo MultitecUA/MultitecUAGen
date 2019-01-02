@@ -24,6 +24,11 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                @{ if (ViewData.ContainsKey("formatotitulonoticia"))
+                    {
+                        <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> De 5 a 50 caracteres. Letras, números y espacios.</p>
+                    }
+                }
             </div>
         </div>
 
@@ -32,6 +37,11 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Cuerpo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Cuerpo, "", new { @class = "text-danger" })
+                @{ if (ViewData.ContainsKey("formatocuerponoticia"))
+                    {
+                        <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> El cuerpo debe ser de 10 a 4000 caracteres.</p>
+                    }
+                }
             </div>
         </div>
 

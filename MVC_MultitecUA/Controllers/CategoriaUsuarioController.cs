@@ -4,6 +4,7 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +15,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: CategoriaUsuario
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
 
             int tamPag = 10;
@@ -39,6 +47,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: CategoriaUsuario/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
             ViewData["nombre"] = categoriaUsuarioEN.Nombre;
@@ -48,6 +63,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: CategoriaUsuario/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             CategoriaUsuarioEN categoriaUsuarioEN = new CategoriaUsuarioEN();
             return View(categoriaUsuarioEN);
         }
@@ -56,10 +78,27 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(CategoriaUsuarioEN categoriaUsuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z áéíóúñç]{1,30}$");
+                if (!pattern.IsMatch(categoriaUsuarioEN.Nombre))
+                {
+                    ViewData["nombreCU"] = "mal";
+                    return View();
+                }
+
                 categoriaUsuarioCEN.New_(categoriaUsuarioEN.Nombre);
+                TempData["CUcreada"] = categoriaUsuarioEN.Nombre;
                 return RedirectToAction("Index");
             }
             catch
@@ -71,6 +110,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: CategoriaUsuario/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
             ViewData["nombre"] = categoriaUsuarioEN.Nombre;
@@ -81,10 +127,27 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, CategoriaUsuarioEN categoriaUsuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z áéíóúñç]{1,30}$");
+                if (!pattern.IsMatch(categoriaUsuarioEN.Nombre))
+                {
+                    ViewData["nombreCU"] = "mal";
+                    return View();
+                }
+
                 categoriaUsuarioCEN.Modify(id, categoriaUsuarioEN.Nombre);
+                TempData["CUeditada"] = categoriaUsuarioEN.Nombre;
                 return RedirectToAction("Index");
             }
             catch
@@ -96,6 +159,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: CategoriaUsuario/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
             CategoriaUsuarioEN categoriaUsuarioEN = categoriaUsuarioCEN.ReadOID(id);
             ViewData["nombre"] = categoriaUsuarioEN.Nombre;
@@ -106,6 +176,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, CategoriaUsuarioEN categoriaUsuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();

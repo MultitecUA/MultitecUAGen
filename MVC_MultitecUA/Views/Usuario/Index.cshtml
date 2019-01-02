@@ -16,8 +16,8 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
-                    <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
+                    <label for="nick">Nick:&nbsp;&nbsp;&nbsp;</label><input class="form-control" type="text" name="nick" />
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Nick" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -29,9 +29,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="rol">Rol: </label>
+                    <label for="rol">Rol:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     @Html.DropDownList("rol", new SelectList((System.Collections.IEnumerable)ViewData["listaRoles"]), new { @class = "form-control" })
-                    <input type="submit" value="Filtrar por Rol" class="btn btn-default" />
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Rol" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -43,9 +43,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="categoria">Categoría: </label>
+                    <label for="categoria">Categoría:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     @Html.DropDownList("categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarios"]), new { @class = "form-control" })
-                    <input type="submit" value="Filtrar por Categoría" class="btn btn-default" />
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Categoría" class="btn btn-default" />
                 </div>
             </div>
         </div>

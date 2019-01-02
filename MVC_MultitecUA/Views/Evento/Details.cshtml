@@ -4,11 +4,29 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles del Evento: @ViewData["nombreEvento"]</h2>
 
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
+
+@{
+    if (TempData.ContainsKey("eventocreado"))
+    {
+        <h2 class="text-danger">Se ha creado el evento: @ViewData["NombreEvento"]</h2>
+    }
+    else if (TempData.ContainsKey("eventoeditado"))
+    {
+        <h2 class="text-danger">Se ha editado con exito el evento: @ViewData["NombreEvento"]</h2>
+    }
+    else
+    {
+        <h2>Detalles del Evento: @ViewData["NombreEvento"]</h2>
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+
+
+
 
 <div>
     <hr />
@@ -116,6 +134,6 @@
 </div>
 <br />
 <p class="form-inline">
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id}) |
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Volver a la lista", "Index")
 </p>

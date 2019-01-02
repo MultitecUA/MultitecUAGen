@@ -16,6 +16,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Mensaje
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
 
             int tamPag = 10;
@@ -42,6 +49,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Solicitud/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
 
@@ -52,6 +66,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Mensaje/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
             ArrayList listaNicks = new ArrayList();
@@ -70,6 +91,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(MensajeModel mensaje)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -90,6 +118,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
             MensajeModel mensaje = new AssemblerMensajeModel().ConvertENToModelUI(mensajeEN);
@@ -100,6 +135,13 @@ namespace MVC_MultitecUA.Controllers
         // POST: Usuario/Edit/5
         public ActionResult CambioEstado(int id, String cambioEstado)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 var estado = Enum.Parse(typeof(EstadoLecturaEnum), cambioEstado);
@@ -117,6 +159,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Edit/5
         public ActionResult EditAutor(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
             MensajeModel mensaje = new AssemblerMensajeModel().ConvertENToModelUI(mensajeEN);
@@ -127,6 +176,13 @@ namespace MVC_MultitecUA.Controllers
         // POST: Usuario/Edit/5
         public ActionResult CambioBandejaAutor(int id, String cambioBandejaAutor)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaAutor);
@@ -143,15 +199,31 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Edit/5
         public ActionResult EditReceptor(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
             MensajeModel mensaje = new AssemblerMensajeModel().ConvertENToModelUI(mensajeEN);
             ViewData["idMensaje"] = id;
             return View(mensaje);
         }
+
+
         // POST: Usuario/Edit/5
         public ActionResult CambioBandejaReceptor(int id, String cambioBandejaReceptor)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaReceptor);
@@ -169,6 +241,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Mensaje/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
             return View(mensajeEN);
@@ -178,6 +257,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, MensajeEN mensajeEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 MensajeCEN mensajeCEN = new MensajeCEN();

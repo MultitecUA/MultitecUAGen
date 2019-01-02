@@ -17,6 +17,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario
         public ActionResult Index(int? pag)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -57,6 +64,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Details/5
         public ActionResult Details(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCAD usuarioCAD = new UsuarioCAD(session);
             UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
@@ -87,6 +101,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Create
         public ActionResult Create()
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioEN usuarioEN = new UsuarioEN();
             return View(usuarioEN);
         }
@@ -95,6 +116,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Create(UsuarioEN usuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -110,6 +138,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
             ViewData["usuario"] = usuarioEN.Nick;
@@ -120,6 +155,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Edit(int id, UsuarioEN usuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -135,6 +177,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/ChangeRol/5
         public ActionResult ChangeRol(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
 
@@ -153,6 +202,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult ChangeRol(int id, UsuarioEN usuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
@@ -168,6 +224,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Usuario/ForNick/5
         public ActionResult ForNick(UsuarioEN usuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -194,6 +257,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Usuario/ForRol/5
         public ActionResult ForRol(UsuarioEN usuarioEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -219,6 +289,13 @@ namespace MVC_MultitecUA.Controllers
         //GET: Usuario/ForCategoria/5
         public ActionResult ForCategoria(FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -249,6 +326,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult AgregarCat(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["Categoria"] != "")
             {
                 int num = id;
@@ -270,6 +354,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult EliminarCat(int id, FormCollection formCollection)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             if (formCollection["Categoria"] != "")
             {
                 int num = id;
@@ -290,6 +381,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Solicitud/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
             UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
             ViewData["usuario"] = usuarioEN.Nick;
@@ -300,6 +398,13 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Delete(int id, SolicitudEN solicitudEN)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             try
             {
                 UsuarioCP usuarioCP = new UsuarioCP();
@@ -315,6 +420,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/UsuariosParticipantes/5
         public ActionResult UsuariosParticipantes(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ProyectoCEN proyectoCEN = new ProyectoCEN();
@@ -329,6 +441,13 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario/UsuariosModeradores/5
         public ActionResult UsuariosModeradores(int id)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ProyectoCEN proyectoCEN = new ProyectoCEN();

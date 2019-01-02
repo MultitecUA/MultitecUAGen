@@ -88,21 +88,21 @@
         @using (Html.BeginForm("AgregarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal form-group form-inline">
-                <label>Agregar Categoría:</label>
-                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
-                <input type="submit" value="Agregar" class="btn btn-default" />
-            </div>
+        <div class="form-horizontal form-group form-inline">
+            <label>Agregar Categoría:&nbsp;&nbsp;</label>
+            @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
+            &nbsp;&nbsp;<input type="submit" value="Agregar" class="btn btn-default" />
+        </div>
         }
 
         @using (Html.BeginForm("EliminarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal form-group form-inline">
-                <label>Eliminar Categoría:</label>
-                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
-                <input type="submit" value="Eliminar" class="btn btn-default" />
-            </div>
+        <div class="form-horizontal form-group form-inline">
+            <label>Eliminar Categoría:&nbsp;&nbsp;</label>
+            @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
+            &nbsp;&nbsp;<input type="submit" value="Eliminar" class="btn btn-default" />
+        </div>
         }
     </div>
 </div>
