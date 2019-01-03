@@ -1,0 +1,17 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN
+
+@{
+	ViewBag.Title = "Noticia";
+}
+
+<div>
+	<h2 style="">@Html.DisplayFor(model => model.Titulo)</h2>
+	<hr />
+	<label>
+		@Html.DisplayFor(model => model.Fecha)
+	</label>
+	<hr />
+	<img src="@Html.DisplayFor(model => model.FotoNoticia)"/>
+	<hr />
+	@Html.Raw(Model.Cuerpo)
+</div>
