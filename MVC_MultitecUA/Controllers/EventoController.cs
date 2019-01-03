@@ -379,13 +379,7 @@ namespace MVC_MultitecUA.Controllers
 
         public ActionResult PorFiltro()
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-            
+
             EventoEN evento = new EventoEN();
             CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             IList<CategoriaProyectoEN> categoriasProyecto = categoriasP.ReadAll(0, -1).ToList();
@@ -394,14 +388,22 @@ namespace MVC_MultitecUA.Controllers
             foreach (CategoriaProyectoEN a in categoriasProyecto)
                 categorias.Add(a.Nombre);
 
-            ViewData["listacategorias"] = categorias;
-            
-            if (TempData.ContainsKey("eventocreado"))
-                TempData.Remove("eventocreado");
-            if (TempData.ContainsKey("eventoeditado"))
-                TempData.Remove("eventoeditado");
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                ViewData["listacategorias"] = categorias;
 
-            return View(evento);
+                if (TempData.ContainsKey("eventocreado"))
+                    TempData.Remove("eventocreado");
+                if (TempData.ContainsKey("eventoeditado"))
+                    TempData.Remove("eventoeditado");
+
+                return View(evento);
+            }
+            else
+            {
+                ViewData["listacategorias"] = categorias;
+                return View("./VistaUsuario/FiltroAvanzado", evento);
+            }
         }
 
 
@@ -409,24 +411,6 @@ namespace MVC_MultitecUA.Controllers
         [HttpPost]
         public ActionResult Filtrar(FormCollection f)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-            
-            //if (f["categoria"] != null)
-            //{
-            /*string[] ps = f["categoria"].Split(',');
-            List<string> a = new List<string>();
-            for (byte i = 0; i < ps.Length; i++)
-            {
-                a.Add(ps[i]);
-            }*/
-
-            //}
-
             EventoCEN evento = new EventoCEN();
             IList<EventoEN> listaEventos = new List<EventoEN>();
 
@@ -434,11 +418,11 @@ namespace MVC_MultitecUA.Controllers
             if (f["Categoria"] != "")
             {
                 CategoriaProyectoEN categoria = categoriaCEN.ReadNombre(f["Categoria"]);
-                if(categoria != null)
+                if (categoria != null)
                 {
                     ViewData["filtro"] = f["Categoria"] + " (Categoria)";
                     int num = categoria.Id;
-                    
+
                     if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
                     {
                         listaEventos = evento.DameEventosFiltrados(num, null, null);
@@ -459,7 +443,7 @@ namespace MVC_MultitecUA.Controllers
                     {
                         DateTime ff = DateTime.Parse(f["FechaFinal"]);
                         DateTime fa = DateTime.Parse(f["FechaAnterior"]);
-                        if (ff>=fa)
+                        if (ff >= fa)
                         {
                             CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
                             IList<CategoriaProyectoEN> categoriasProyecto = categoriasP.ReadAll(0, -1).ToList();
@@ -478,12 +462,21 @@ namespace MVC_MultitecUA.Controllers
                 }
             }
 
-            if (TempData.ContainsKey("eventocreado"))
-                TempData.Remove("eventocreado");
-            if (TempData.ContainsKey("eventoeditado"))
-                TempData.Remove("eventoeditado");
-            
-            return View(listaEventos);
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                if (TempData.ContainsKey("eventocreado"))
+                    TempData.Remove("eventocreado");
+                if (TempData.ContainsKey("eventoeditado"))
+                    TempData.Remove("eventoeditado");
+
+                return View(listaEventos);
+            }
+            else
+            {
+                return View("./VistaUsuario/FiltrarAv", listaEventos);
+            }
+
+                /*if (f["categoria"] != null)    {    string[] ps = f["categoria"].Split(',');    <string> a = new List<string>();    for (byte i = 0; i < ps.Length; i++)    {    a.Add(ps[i]);    }    }*/
         }
 
 
@@ -628,24 +621,80 @@ namespace MVC_MultitecUA.Controllers
         /********************************************************************************************************/
         /*    USUARIO    */
 
-        public ActionResult ProximosEventos()
+
+        public ActionResult TodosEventos(int? pag)
         {
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                return View("../Home/Index_Administrador");
+            
             EventoCEN eventoCEN = new EventoCEN();
-            IList<EventoEN> eventoEN = eventoCEN.ReadAll(0, -1);
 
-            IList<EventoEN> proximos = new List<EventoEN>();
+            int tamPag = 10;
+            int numPags = (eventoCEN.ReadAll(0, -1).Count - 1) / tamPag;
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
 
-            foreach(EventoEN evento in eventoEN)
-            {
-                if(evento.FechaInicio >= DateTime.Now)
-                {
-                    proximos.Add(evento);
-                }
-            }
+            ViewData["pag"] = pag;
+            ViewData["numeroPaginas"] = numPags;
+            int inicio = (int)pag * tamPag;
 
-            return View("./VistaUsuario/ProximosEventos", proximos);
+            IList<EventoEN> eventoEN = eventoCEN.ReadAll(inicio, tamPag).ToList();
+            
+            return View("./VistaUsuario/TodosEventos", eventoEN);
         }
 
+
+        //GET: VistaUsuario/Detalles/:id
+        public ActionResult Detalles(int id)
+        {
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                return View("../Home/Index_Administrador");
+
+            SessionInitialize();
+            EventoCAD eventoCAD = new EventoCAD(session);
+            EventoCEN eventoCEN = new EventoCEN(eventoCAD);
+            EventoEN evento = eventoCEN.ReadOID(id);
+
+            if(evento != null)
+            {
+                ArrayList categorias = new ArrayList();
+                CategoriaProyectoCAD categoriaPCAD = new CategoriaProyectoCAD(session);
+                CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN(categoriaPCAD);
+                List<CategoriaProyectoEN> cat = categoriasP.ReadAll(0, -1).ToList();
+
+                foreach (CategoriaProyectoEN a in cat)
+                    if (evento.CategoriasEventos.Contains(a))
+                        categorias.Add(a.Nombre);
+
+                ViewData["CategoriasEvento"] = categorias;
+                ViewData["idEvento"] = id;
+
+                SessionClose();
+                return View("./VistaUsuario/Detalles", evento);
+            }
+            else
+            {
+                SessionClose();
+                return View();
+            }
+        }
+
+
+        //Filtro por nombre del Index
+        public ActionResult FiltroNombre(FormCollection f)
+        {
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                return View("../Home/Index_Administrador");
+
+            EventoCEN eventoCEN = new EventoCEN();
+            IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(f["nombre"]);
+            ViewData["Buscando"] = f["nombre"];
+            ViewData["filtro"] = f["nombre"] + "(Nombre)";
+
+            return View("./VistaUsuario/FiltroNombre", listaEventos);
+        }
 
     }
 }
