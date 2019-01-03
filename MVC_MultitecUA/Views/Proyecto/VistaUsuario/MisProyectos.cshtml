@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
+
+@{
+    ViewBag.Title = "Proyectos en los que participas";
+}
+
+<h2>Proyectos en los que participas</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.Estado)
+            </th>
+        </tr>
+    }
+
+</table>
