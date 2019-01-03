@@ -9,13 +9,13 @@
 	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
-    <h3>Filtros:</h3>
-                                                         
-    @using (Html.BeginForm("FiltroAutorReceptor", "Mensaje"))
-    {
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group form-inline">
+	<h3>Filtros:</h3>
+
+	@using (Html.BeginForm("FiltroAutorReceptor", "Mensaje"))
+	{
+		<div class="form-horizontal">
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
 				<div class="col-md-10">
 
 					<label for="titulo">Título del mensaje: </label><input class="form-control" type="text" name="titulo" />
@@ -23,89 +23,101 @@
 					<label for="nickReceptor">Nick del receptor: </label><input class="form-control" type="text" name="nickReceptor" />
 					<label for="EstadoLectura">Estado del mensaje: </label>
 					@Html.DropDownList("EstadoLectura", new SelectList((System.Collections.IEnumerable)ViewData["listaEstados"]), new { @class = "form-control" })
-					<label for="BandejaAutor">Bandeja del autor: </label>
-					@Html.DropDownList("BandejaAutor", new SelectList((System.Collections.IEnumerable)ViewData["listaBandejaAutor"]), new { @class = "form-control" })
-					<label for="BandejaReceptor">Bandeja del receptor: </label>
-					@Html.DropDownList("BandejaReceptor", new SelectList((System.Collections.IEnumerable)ViewData["listaBandejaReceptor"]), new { @class = "form-control" })
-
-
-
-
 					<input type="submit" value="Filtrar" class="btn btn-default" />
 				</div>
-            </div>
-        </div>
-    }
+			</div>
+		</div>
+	}
 </p>
 <p>
 	@Html.ActionLink("Nuevo Mensaje", "Create")
 </p>
+@{
+	if (TempData["mal"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+		TempData.Remove("mal");
+	}
+	else
+	if (TempData["bien"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+		TempData.Remove("bien");
+	}
+}
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuerpo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NickAutor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandejaAutor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NickReceptor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BandejaReceptor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoLectura)
-        </th>
-        <th>
-            Acciones
-        </th>
-    </tr>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Titulo)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Cuerpo)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NickAutor)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.BandejaAutor)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NickReceptor)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.BandejaReceptor)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EstadoLectura)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Fecha)
+		</th>
+		<th>
+			Acciones
+		</th>
+	</tr>
 
 	@foreach (var item in Model)
 	{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuerpo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NickAutor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandejaAutor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NickReceptor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BandejaReceptor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoLectura)
-        </td>
-        <td>
-            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Cambiar estado lectura", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Cambiar bandeja de autor", "EditAutor", new { id = item.Id }) |
-            @Html.ActionLink("Cambiar bandeja de receptor", "EditReceptor", new { id = item.Id })
-        </td>
-    </tr>
+	<tr>
+		<td>
+			@Html.DisplayFor(modelItem => item.Id)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Titulo)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Cuerpo)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.NickAutor)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.BandejaAutor)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.NickReceptor)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.BandejaReceptor)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.EstadoLectura)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Fecha)
+		</td>
+		<td>
+			@Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+			@Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+			@Html.ActionLink("Cambiar estado lectura", "Edit", new { id = item.Id }) |
+			@Html.ActionLink("Cambiar bandeja de autor", "EditAutor", new { id = item.Id }) |
+			@Html.ActionLink("Cambiar bandeja de receptor", "EditReceptor", new { id = item.Id })
+		</td>
+	</tr>
 	}
 
 </table>

@@ -16,14 +16,14 @@ namespace MVC_MultitecUA.Models
         /*[ScaffoldColumn(false)]*/
         public int ReceptorId { get; set; }
 
-        //[Display(Prompt = "Título del mensaje", Description = "Título del mensaje", Name = "Título ")]
-        //[Required(ErrorMessage = "Debe indicar un título para el mensaje")]
-       // [StringLength(maximumLength: 100, ErrorMessage = "El título no puede tener más de 100 caracteres")]
+        [Display(Prompt = "Título del mensaje", Description = "Título del mensaje", Name = "Título ")]
+        [Required(ErrorMessage = "Debe indicar un título para el mensaje")]
+        [StringLength(maximumLength: 100, ErrorMessage = "El título no puede tener más de 100 caracteres")]
         public string Titulo { get; set; }
 
-        //[Display(Prompt = "Cuerpo del mensaje", Description = "Cuerpo del mensaje", Name = "Cuerpo ")]
-        //[Required(ErrorMessage = "Debe indicar un cuerpo para el mensaje")]
-        //[StringLength(maximumLength: 4000, ErrorMessage = "El cuerpo del mensaje no puede tener más de 4000 caracteres")]
+        [Display(Prompt = "Cuerpo del mensaje", Description = "Cuerpo del mensaje", Name = "Cuerpo ")]
+        [Required(ErrorMessage = "Debe indicar un cuerpo para el mensaje")]
+        [StringLength(maximumLength: 4000, ErrorMessage = "El cuerpo del mensaje no puede tener más de 4000 caracteres")]
         public string Cuerpo { get; set; }
 
         public string Fecha { get; set; }

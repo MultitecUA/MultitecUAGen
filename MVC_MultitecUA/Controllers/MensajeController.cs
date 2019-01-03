@@ -123,11 +123,14 @@ namespace MVC_MultitecUA.Controllers
                 MensajeCEN mensajeCEN = new MensajeCEN();
                 int mensajeId = mensajeCEN.New_(mensaje.Titulo, mensaje.Cuerpo, usuarioENAutor.Id, usuarioENReceptor.Id, null);
                 mensajeCEN.EnviarMensaje(mensajeId);
-                return RedirectToAction("Index");
+
+                TempData["bien"] = "El mensaje " + mensaje.Titulo + " se ha enviado correctamente.";
+                return RedirectToAction("Details", new {id = mensajeId });
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrió un problema al intentar crear el mensaje " + mensaje.Id;
+                return RedirectToAction("Index");
             }
         }
 
@@ -162,13 +165,15 @@ namespace MVC_MultitecUA.Controllers
             {
                 var estado = Enum.Parse(typeof(EstadoLecturaEnum), cambioEstado);
                 MensajeCEN mensajeCEN = new MensajeCEN();
-                mensajeCEN.CambiarEstado(id,(EstadoLecturaEnum)estado);
-                
-                return RedirectToAction("Index");
+                mensajeCEN.CambiarEstado(id, (EstadoLecturaEnum)estado);
+
+                TempData["bien"] = "Se ha modificado correctamente el estado del mensaje " + id;
+                return RedirectToAction("Details", new { id = id });
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrió un problema al intentar modificar el mensaje " + id;
+                return RedirectToAction("Index");
             }
         }
 
@@ -205,11 +210,13 @@ namespace MVC_MultitecUA.Controllers
                 MensajeCEN mensajeCEN = new MensajeCEN();
                 mensajeCEN.CambiarBandejaAutor(id, (BandejaMensajeEnum)bandeja);
 
-                return RedirectToAction("Index");
+                TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
+                return RedirectToAction("Details", new { id = id });
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                return RedirectToAction("Index");
             }
         }
         // GET: Usuario/Edit/5
@@ -246,11 +253,13 @@ namespace MVC_MultitecUA.Controllers
                 MensajeCEN mensajeCEN = new MensajeCEN();
                 mensajeCEN.CambiarBandejaReceptor(id, (BandejaMensajeEnum)bandeja);
 
-                return RedirectToAction("Index");
+                TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
+                return RedirectToAction("Details", new { id = id });
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                return RedirectToAction("Index");
             }
         }
 
@@ -284,25 +293,27 @@ namespace MVC_MultitecUA.Controllers
             {
                 MensajeCEN mensajeCEN = new MensajeCEN();
                 mensajeCEN.Destroy(id);
+                TempData["bien"] = "Se ha eliminado correctamente el mensaje " + id;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrió un problema al intentar eliminar el mensaje " + id;
+                return RedirectToAction("Index");
             }
         }
 
         [HttpPost]
         public ActionResult FiltroAutorReceptor(FormCollection nombres, int? pag)
         {
-        
-        if (Session["usuario"] == null)
+
+            if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
             if (Session["esAdmin"].ToString() == "false")
                 return View("../NoAdministrador");
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
-                
+
             SessionInitialize();
             UsuarioCAD usuarioCAD = new UsuarioCAD(session);
             MensajeCAD mensajeCAD = new MensajeCAD(session);
@@ -320,13 +331,13 @@ namespace MVC_MultitecUA.Controllers
             listaBandeja.Add("Archivado");
             listaBandeja.Add("Borrado");
 
-            
-            
+
+
             ViewData["listaEstados"] = listaEstados;
             ViewData["listaBandejaAutor"] = listaBandeja;
             ViewData["listaBandejaReceptor"] = listaBandeja;
 
-            
+
 
             IList<MensajeEN> mensajesFiltrados = new List<MensajeEN>();
             IList<MensajeEN> aux = new List<MensajeEN>();
@@ -336,29 +347,59 @@ namespace MVC_MultitecUA.Controllers
 
             if (nombres["Titulo"] != "")
             {
+
                 foreach (MensajeEN mensaje in aux)
                 {
                     if (mensaje.Titulo != nombres["Titulo"])
                         mensajesFiltrados.Remove(mensaje);
                 }
+
+                if (mensajesFiltrados.Count()==0)
+                {
+                    TempData["mal"] = "No existe ningún mensaje de título " + nombres["titulo"];
+                    return RedirectToAction("Index");
+                }
+
+                ViewData["filtro"] = nombres["titulo"] + " (Proyecto) ";
+
             }
 
             if (nombres["NickAutor"] != "")
             {
-                foreach(MensajeEN mensaje in aux)
+               
+                foreach (MensajeEN mensaje in aux)
                 {
                     if (mensaje.UsuarioAutor.Nick != nombres["NickAutor"])
                         mensajesFiltrados.Remove(mensaje);
                 }
+
+                if (mensajesFiltrados.Count() == 0)
+                {
+                    TempData["mal"] = "El usuario " + nombres["NickAutor"] + " no existe o no ha enviado ningún mensaje";
+                    return RedirectToAction("Index");
+                }
+
+                ViewData["filtro"] = ViewData["filtro"] + nombres["NickAutor"] + " (Autor) ";
             }
+
+
+
             if (nombres["NickReceptor"] != "")
             {
+
                 foreach (MensajeEN mensaje in aux)
                 {
                     if (mensaje.UsuarioReceptor.Nick != nombres["NickReceptor"])
                         mensajesFiltrados.Remove(mensaje);
                 }
 
+                if (mensajesFiltrados.Count() == 0)
+                {
+                    TempData["mal"] = "El usuario " + nombres["NickReceptor"] + " no existe o no ha recibido ningún mensaje";
+                    return RedirectToAction("Index");
+                }
+
+                ViewData["filtro"] = ViewData["filtro"] + nombres["NickReceptor"] + " (Receptor) ";
             }
             if (nombres["EstadoLectura"] != "")
             {
@@ -368,26 +409,15 @@ namespace MVC_MultitecUA.Controllers
                         mensajesFiltrados.Remove(mensaje);
                 }
 
-            }
-            if (nombres["BandejaAutor"] != "")
-            {
-                foreach (MensajeEN mensaje in aux)
+                if (mensajesFiltrados.Count() == 0)
                 {
-                    if (mensaje.BandejaAutor.ToString() != nombres["BandejaAutor"])
-                        mensajesFiltrados.Remove(mensaje);
+                    TempData["mal"] = "No hay ningún mensaje con el estado " + nombres["EstadoLectura"];
+                    return RedirectToAction("Index");
                 }
 
+                ViewData["filtro"] = ViewData["filtro"] + nombres["EstadoLectura"] + " (Estado) ";
             }
-            if (nombres["BandejaReceptor"] != "")
-            {
-                foreach (MensajeEN mensaje in aux)
-                {
-                    if (mensaje.BandejaReceptor.ToString() != nombres["BandejaReceptor"])
-                        mensajesFiltrados.Remove(mensaje);
-                }
 
-            }
-            
             int tamPag = 10;
 
             int numPags = (mensajesFiltrados.Count - 1) / tamPag;
@@ -403,34 +433,6 @@ namespace MVC_MultitecUA.Controllers
 
             int inicio = (int)pag * tamPag;
 
-            /* if (nombres["NickAutor"] != "" && nombres["NickReceptor"] != "")
-             {
-
-                 UsuarioEN usuarioAutor = usuarioCEN.ReadNick(nombres["NickAutor"]);
-                 //UsuarioEN usuarioReceptor = usuarioCEN.ReadNick(nombres["NickReceptor"]);
-
-                 mensajesFiltrados = mensajeCEN.DameMensajesPorAutor(usuarioAutor.Id);
-
-                 foreach(MensajeEN mensaje in mensajesFiltrados)
-                 {
-                     if(mensaje.UsuarioReceptor.Nick != nombres["NickReceptor"])
-                     {
-                         mensajesFiltrados.Remove(mensaje);
-                     }
-
-                 }
-             }else if (nombres["NickAutor"] != "")
-             {
-                 UsuarioEN usuarioAutor = usuarioCEN.ReadNick(nombres["NickAutor"]);
-                 mensajesFiltrados = mensajeCEN.DameMensajesPorAutor(usuarioAutor.Id);
-
-             }else if (nombres["NickReceptor"] != "")
-             {
-                 UsuarioEN usuarioReceptor = usuarioCEN.ReadNick(nombres["NickReceptor"]);
-                 mensajesFiltrados = mensajeCEN.DameMensajesPorReceptor(usuarioReceptor.Id);
-             }
-             else
-                 mensajesFiltrados = mensajeCEN.ReadAll(0, -1);*/
 
             IEnumerable<MensajeModel> mensajesConvertidos = new AssemblerMensajeModel().ConvertListENToModel(mensajesFiltrados).ToList();
             SessionClose();

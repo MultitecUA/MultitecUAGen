@@ -1,125 +1,133 @@
 ﻿@model MVC_MultitecUA.Models.MensajeModel
 
 @{
-    ViewBag.Title = "Detalles";
+	ViewBag.Title = "Detalles";
 }
 
 <h2>Detalles de Mensaje</h2>
 
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mensajes", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mensajes", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
+@{
+	if (TempData["bien"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+		TempData.Remove("bien");
+	}
+}
+
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Id)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.Id)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Titulo)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.Titulo)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cuerpo)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Cuerpo)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cuerpo)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.Cuerpo)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EstadoLectura)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.EstadoLectura)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EstadoLectura)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.EstadoLectura)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Fecha)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.Fecha)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AutorId)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.AutorId)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AutorId)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.AutorId)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreAutor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.NombreAutor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreAutor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.NombreAutor)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NickAutor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.NickAutor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NickAutor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.NickAutor)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandejaAutor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.BandejaAutor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandejaAutor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.BandejaAutor)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReceptorId)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.ReceptorId)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReceptorId)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.ReceptorId)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreReceptor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.NombreReceptor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreReceptor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.NombreReceptor)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NickReceptor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.NickReceptor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NickReceptor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.NickReceptor)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BandejaReceptor)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.BandejaReceptor)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BandejaReceptor)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.BandejaReceptor)
+		</dd>
 
-    </dl>
+	</dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver a la lista", "Index")
+	@Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Volver a la lista", "Index")
 </p>

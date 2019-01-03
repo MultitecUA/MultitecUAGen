@@ -165,7 +165,8 @@ namespace MVC_MultitecUA.Controllers
                 int solicitudId = solicitudCEN.New_(usuarioEN.Id, proyectoEN.Id);
                 solicitudCEN.EnviarSolicitud(solicitudId);
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = solicitudId });
             }
             catch
             {
@@ -212,7 +213,8 @@ namespace MVC_MultitecUA.Controllers
 
                 TempData["bien"] = "Se a modificado correctamente el estado de la solicitud "+id;
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id });
             }
             catch
             {
