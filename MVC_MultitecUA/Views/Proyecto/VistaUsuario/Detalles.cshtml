@@ -1,0 +1,104 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles del Proyecto: @ViewData["titulo"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            Creador
+        </dt>
+
+        <dd>
+            @ViewData["creador"]
+        </dd>
+
+        <dt>
+            Moderadores:
+        </dt>
+
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaModeradores"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            Participantes:
+        </dt>
+
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaParticipantes"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
+        <dt>Categorías Proyecto:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasProyectoEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
+        <dt>Categorías Usuario:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
+    </dl>
+
+</div>

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
+
+@{
+    ViewBag.Title = "Proyectos";
+}
+
+<h2>Proyectos Presentados</h2>
+
+<p>
+    <h3>Filtros:</h3>
+    @using (Html.BeginForm("ForNombre", "Proyecto"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-inline">
+                <div class="col-md-10">
+                    <label for="nombre">Nombre: </label><input class="form-control" type="text" name="nombre" />
+                    <input type="submit" value="Filtrar por Nombre" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("ForEstado", "Proyecto"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-inline">
+                <div class="col-md-10">
+                    <label for="nick">Estado: </label>
+                    @Html.DropDownList("estado", new SelectList((System.Collections.IEnumerable)ViewData["listaEstados"]), new { @class = "form-control" })
+                    <input type="submit" value="Filtrar por Estado" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("ForCategoriaProyecto", "Proyecto"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-inline">
+                <div class="col-md-10">
+                    <label for="nick">Categoría Proyecto: </label>
+                    @Html.DropDownList("categoriaP", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasP"]), new { @class = "form-control" })
+                    <input type="submit" value="Filtrar por Categoría Proyecto" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("ForCategoriaUsuario", "Proyecto"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-inline">
+                <div class="col-md-10">
+                    <label for="nick">Categoría Usuario: </label>
+                    @Html.DropDownList("categoriaU", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasU"]), new { @class = "form-control" })
+                    <input type="submit" value="Filtrar por Categoría Usuario" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</p>
+<table class="table">
+    <tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+    </tr>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Nombre, "Detalles", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.Estado)
+            </th>
+        </tr>
+    }
+
+</table>
+
+@if (ViewData["pag"] != null)
+{
+
+    /* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+    var siguiente = (int)ViewData["pag"] + 1;
+    var anterior = siguiente - 2;
+    var numPags = (int)ViewData["numeroPaginas"] + 1;
+
+    <p class="text-center">
+        @{
+            if (siguiente > 1)
+            {
+                <label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+                <span>|</span>
+                <label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+            }
+            else
+            {
+                <span>Primera</span>
+                <span>|</span>
+                <span>Anterior</span>
+            }
+        }
+
+        <span>|</span>
+        <label>Página @siguiente de @numPags</label>
+        <span>|</span>
+
+        @{
+            if (siguiente < numPags)
+            {
+                <label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+                <span>|</span>
+                <label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+            }
+            else
+            {
+                <span>Siguiente</span>
+                <span>|</span>
+                <span>Última</span>
+            }
+        }
+    </p>
+}
