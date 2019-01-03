@@ -316,13 +316,13 @@
     <Content Include="Views\Sesion\Adminout.cshtml" />
     <Content Include="Views\NoAdministrador.cshtml" />
     <Content Include="Views\Home\Index_Administrador.cshtml" />
+    <Content Include="Views\Noticia\VistaUsuario\Noticia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Evento\VistaUsuario\" />
     <Folder Include="Views\Mensaje\VistaUsuario\" />
-    <Folder Include="Views\Noticia\VistaUsuario\" />
     <Folder Include="Views\Proyecto\VistaUsuario\" />
     <Folder Include="Views\Recuerdo\VistaUsuario\" />
     <Folder Include="Views\Servicio\VistaUsuario\" />
