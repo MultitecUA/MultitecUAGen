@@ -234,11 +234,19 @@ namespace MVC_MultitecUA.Controllers
             ArrayList listaUsuarios = new ArrayList();
             foreach (UsuarioEN u in proyectoEN.UsuariosModeradores)
                 listaUsuarios.Add(u.Nick);
+            if (listaUsuarios.Contains(Session["usuario"]))
+            {
+                ViewData["esModerador"] = "true";
+            }
             ViewData["listaModeradores"] = listaUsuarios;
 
             listaUsuarios = new ArrayList();
             foreach (UsuarioEN u in proyectoEN.UsuariosParticipantes)
                 listaUsuarios.Add(u.Nick);
+            if (!listaUsuarios.Contains(Session["usuario"]))
+            {
+                ViewData["noParticpante"] = "true";
+            }
             ViewData["listaParticipantes"] = listaUsuarios;
 
             return View("./VistaUsuario/Detalles", proyectoEN);

@@ -102,3 +102,14 @@
     </dl>
 
 </div>
+
+<div>
+    @if (ViewData["esModerador"] != null)
+    {
+        @Html.ActionLink("Administrar solicitudes", "", "Solicitud", new { id = Model.Id }, null)
+    }
+    else if (ViewData["noParticpante"] != null)
+    {
+        @Html.ActionLink("Enviar solicitud", "", "Solicitud", new { id = Model.Id }, null)
+    }
+</div>
