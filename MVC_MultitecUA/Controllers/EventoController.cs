@@ -624,5 +624,28 @@ namespace MVC_MultitecUA.Controllers
 
 
 
+
+        /********************************************************************************************************/
+        /*    USUARIO    */
+
+        public ActionResult ProximosEventos()
+        {
+            EventoCEN eventoCEN = new EventoCEN();
+            IList<EventoEN> eventoEN = eventoCEN.ReadAll(0, -1);
+
+            IList<EventoEN> proximos = new List<EventoEN>();
+
+            foreach(EventoEN evento in eventoEN)
+            {
+                if(evento.FechaInicio >= DateTime.Now)
+                {
+                    proximos.Add(evento);
+                }
+            }
+
+            return View("./VistaUsuario/ProximosEventos", proximos);
+        }
+
+
     }
 }
