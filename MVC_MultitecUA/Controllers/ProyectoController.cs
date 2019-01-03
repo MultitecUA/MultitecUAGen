@@ -70,6 +70,22 @@ namespace MVC_MultitecUA.Controllers
             return View(listaProyectos);
         }
 
+        // GET: Proyecto/MisProyectos/5
+        public ActionResult MisProyectos()
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+
+            int OID_usuario = usuarioEN.Id;
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(OID_usuario);
+
+            return View("./VistaUsuario/MisProyectos", listaProyectos);
+        }
+
         // GET: Proyecto/Details/5
         public ActionResult Details(int id)
         {
