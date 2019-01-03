@@ -1,0 +1,66 @@
+﻿@model MVC_MultitecUA.Models.Recuerdo
+
+@{
+    ViewBag.Title = "Detalles del recuerdo";
+}
+
+@{
+    if (TempData.ContainsKey("creado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el recuerdo: @ViewData["recuerdo"]</h2>
+    }
+    else if (TempData.ContainsKey("editado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el recuerdo: @ViewData["recuerdo"]</h2>
+    }
+    else
+    {
+
+        <h2>Detalles del recuerdo @ViewData["recuerdo"] del evento @Html.DisplayFor(model=>model.NombreEvento)</h2>
+        <br />
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../porEvento?idEvento=@ViewData["idevento"]">Recuerdos</a></label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuerpo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuerpo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdEvento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEvento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver al evento", "Detalles", "Evento", new { id = ViewData["idEvento"] }, null)
+</p>

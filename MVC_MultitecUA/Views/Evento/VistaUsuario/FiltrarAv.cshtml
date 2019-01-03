@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.EventoEN>
+
+@{
+    ViewBag.Title = "Filtro de eventos";
+}
+
+<h2>Filtrando eventos: @ViewData["filtro"]</h2>
+<br />
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="./TodosEventos">Eventos</a></label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+<br />
+
+@using (Html.BeginForm("FiltroNombre", "Evento"))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10 form-inline">
+                <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@Html.ActionLink("Filtro Avanzado", "PorFiltro")
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width: 20em;">
+                <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+        </tr>
+    }
+
+</table>

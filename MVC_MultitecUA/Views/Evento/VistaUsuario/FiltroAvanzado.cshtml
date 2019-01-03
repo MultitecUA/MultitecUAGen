@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Eventos filtrados";
+}
+
+<h2>Filtrar Eventos por categoría y/o fecha</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+<div>
+    @using (Html.BeginForm("Filtrar", "Evento"))
+    {
+        <div class="form-horizontal">
+            <label>Categoria</label>
+            @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listacategorias"]), new { @class = "form-control" })
+
+        </div>
+        <div class="form-horizontal">
+            <label>Fecha de inicio entre </label>
+            <input class="form-control text-box single-line" data-val="true" data-val-date="Este campo debe contener una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaFinal" name="FechaFinal" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+            @{ if (ViewData.ContainsKey("fechamal"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> Esta fecha no puede ser mayor o igual que la otra.</p>
+                }
+            }
+
+            <label> y </label>
+            <input class="form-control text-box single-line" data-val="true" data-val-date="Este campo debe contener una fecha y hora. Ejemplo: 12/28/2000 01:00" id="FechaAnterior" name="FechaAnterior" type="datetime" value="" placeholder="mm/dd/yyyy hh:mm" />
+
+        </div>
+        <div class="form-horizontal">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Volver a la lista", "TodosEventos")
+</p>
