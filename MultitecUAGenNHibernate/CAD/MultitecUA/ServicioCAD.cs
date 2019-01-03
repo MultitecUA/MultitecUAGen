@@ -100,7 +100,7 @@ public void ModifyDefault (ServicioEN servicio)
                 servicioEN.Estado = servicio.Estado;
 
 
-                servicioEN.Fotos = servicio.Fotos;
+                servicioEN.FotosServicio = servicio.FotosServicio;
 
                 session.Update (servicioEN);
                 SessionCommit ();
@@ -163,7 +163,7 @@ public void Modify (ServicioEN servicio)
                 servicioEN.Estado = servicio.Estado;
 
 
-                servicioEN.Fotos = servicio.Fotos;
+                servicioEN.FotosServicio = servicio.FotosServicio;
 
                 session.Update (servicioEN);
                 SessionCommit ();

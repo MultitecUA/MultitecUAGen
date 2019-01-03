@@ -397,7 +397,7 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                proyectoCP.Modify(id, proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.Fotos);
+                proyectoCP.Modify(id, proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.FotosProyecto);
 
                 TempData["proyectoeditado"] = "Se ha editado el proyecto: " + proyectoEN.Nombre;
                 return RedirectToAction("Details/" + id);

@@ -97,7 +97,7 @@ public void ModifyDefault (NoticiaEN noticia)
                 noticiaEN.Cuerpo = noticia.Cuerpo;
 
 
-                noticiaEN.Foto = noticia.Foto;
+                noticiaEN.FotoNoticia = noticia.FotoNoticia;
 
 
                 noticiaEN.Fecha = noticia.Fecha;
@@ -160,7 +160,7 @@ public void Modify (NoticiaEN noticia)
                 noticiaEN.Cuerpo = noticia.Cuerpo;
 
 
-                noticiaEN.Foto = noticia.Foto;
+                noticiaEN.FotoNoticia = noticia.FotoNoticia;
 
                 session.Update (noticiaEN);
                 SessionCommit ();

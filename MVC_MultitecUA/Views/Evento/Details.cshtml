@@ -86,6 +86,22 @@
         <dd>
             @Html.DisplayFor(model => model.FechaTopeInscripcion)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FotosEvento)
+        </dt>
+
+        <dd>
+            <ul>
+                @{
+                    foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
+                    {
+                        <li style="list-style:none;">
+                            <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                        </li>
+                    }
+                }
+            </ul>
+        </dd>
 
         <dt>Categorías:</dt>
         <dd>

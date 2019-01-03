@@ -41,7 +41,7 @@ public int New_ (string p_nombre, string p_descripcion, Nullable<DateTime> p_fec
 
         eventoEN.FechaTopeInscripcion = p_fechaTopeInscripcion;
 
-        eventoEN.Fotos = p_fotos;
+        eventoEN.FotosEvento = p_fotos;
 
         //Call to EventoCAD
 

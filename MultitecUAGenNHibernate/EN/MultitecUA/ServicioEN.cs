@@ -34,9 +34,9 @@ private MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum estado;
 
 
 /**
- *	Atributo fotos
+ *	Atributo fotosServicio
  */
-private System.Collections.Generic.IList<string> fotos;
+private System.Collections.Generic.IList<string> fotosServicio;
 
 
 
@@ -67,8 +67,8 @@ public virtual MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum 
 
 
 
-public virtual System.Collections.Generic.IList<string> Fotos {
-        get { return fotos; } set { fotos = value;  }
+public virtual System.Collections.Generic.IList<string> FotosServicio {
+        get { return fotosServicio; } set { fotosServicio = value;  }
 }
 
 
@@ -81,20 +81,20 @@ public ServicioEN()
 
 
 
-public ServicioEN(int id, string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum estado, System.Collections.Generic.IList<string> fotos
+public ServicioEN(int id, string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum estado, System.Collections.Generic.IList<string> fotosServicio
                   )
 {
-        this.init (Id, nombre, descripcion, estado, fotos);
+        this.init (Id, nombre, descripcion, estado, fotosServicio);
 }
 
 
 public ServicioEN(ServicioEN servicio)
 {
-        this.init (Id, servicio.Nombre, servicio.Descripcion, servicio.Estado, servicio.Fotos);
+        this.init (Id, servicio.Nombre, servicio.Descripcion, servicio.Estado, servicio.FotosServicio);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum estado, System.Collections.Generic.IList<string> fotos)
+                   , string nombre, string descripcion, MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum estado, System.Collections.Generic.IList<string> fotosServicio)
 {
         this.Id = id;
 
@@ -105,7 +105,7 @@ private void init (int id
 
         this.Estado = estado;
 
-        this.Fotos = fotos;
+        this.FotosServicio = fotosServicio;
 }
 
 public override bool Equals (object obj)

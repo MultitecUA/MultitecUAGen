@@ -27,9 +27,9 @@ private string cuerpo;
 
 
 /**
- *	Atributo fotos
+ *	Atributo fotosRecuerdo
  */
-private System.Collections.Generic.IList<string> fotos;
+private System.Collections.Generic.IList<string> fotosRecuerdo;
 
 
 
@@ -61,8 +61,8 @@ public virtual string Cuerpo {
 
 
 
-public virtual System.Collections.Generic.IList<string> Fotos {
-        get { return fotos; } set { fotos = value;  }
+public virtual System.Collections.Generic.IList<string> FotosRecuerdo {
+        get { return fotosRecuerdo; } set { fotosRecuerdo = value;  }
 }
 
 
@@ -81,20 +81,20 @@ public RecuerdoEN()
 
 
 
-public RecuerdoEN(int id, string titulo, string cuerpo, System.Collections.Generic.IList<string> fotos, MultitecUAGenNHibernate.EN.MultitecUA.EventoEN eventoRecordado
+public RecuerdoEN(int id, string titulo, string cuerpo, System.Collections.Generic.IList<string> fotosRecuerdo, MultitecUAGenNHibernate.EN.MultitecUA.EventoEN eventoRecordado
                   )
 {
-        this.init (Id, titulo, cuerpo, fotos, eventoRecordado);
+        this.init (Id, titulo, cuerpo, fotosRecuerdo, eventoRecordado);
 }
 
 
 public RecuerdoEN(RecuerdoEN recuerdo)
 {
-        this.init (Id, recuerdo.Titulo, recuerdo.Cuerpo, recuerdo.Fotos, recuerdo.EventoRecordado);
+        this.init (Id, recuerdo.Titulo, recuerdo.Cuerpo, recuerdo.FotosRecuerdo, recuerdo.EventoRecordado);
 }
 
 private void init (int id
-                   , string titulo, string cuerpo, System.Collections.Generic.IList<string> fotos, MultitecUAGenNHibernate.EN.MultitecUA.EventoEN eventoRecordado)
+                   , string titulo, string cuerpo, System.Collections.Generic.IList<string> fotosRecuerdo, MultitecUAGenNHibernate.EN.MultitecUA.EventoEN eventoRecordado)
 {
         this.Id = id;
 
@@ -103,7 +103,7 @@ private void init (int id
 
         this.Cuerpo = cuerpo;
 
-        this.Fotos = fotos;
+        this.FotosRecuerdo = fotosRecuerdo;
 
         this.EventoRecordado = eventoRecordado;
 }

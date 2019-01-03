@@ -49,7 +49,7 @@ public void Modify (int p_Evento_OID, string p_nombre, string p_descripcion, Nul
                 eventoEN.FechaFin = p_fechaFin;
                 eventoEN.FechaInicioInscripcion = p_fechaInicioInscripcion;
                 eventoEN.FechaTopeInscripcion = p_fechaTopeInscripcion;
-                eventoEN.Fotos = p_fotos;
+                eventoEN.FotosEvento = p_fotos;
 
 
                 NotificacionEventoCEN notificacionEventoCEN = new NotificacionEventoCEN ();

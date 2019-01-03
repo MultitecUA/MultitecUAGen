@@ -45,7 +45,7 @@ public void Modify (int p_Proyecto_OID, string p_nombre, string p_descripcion, S
                 proyectoEN.Id = p_Proyecto_OID;
                 proyectoEN.Nombre = p_nombre;
                 proyectoEN.Descripcion = p_descripcion;
-                proyectoEN.Fotos = p_fotos;
+                proyectoEN.FotosProyecto = p_fotos;
 
                 NotificacionProyectoCEN notificacionProyectoCEN = new NotificacionProyectoCEN ();
                 int OID_notificacionProyecto = notificacionProyectoCEN.New_ ("Proyecto modificado", "El proyecto " + proyectoEN.Nombre + " ha sido modificado", proyectoEN.Id);

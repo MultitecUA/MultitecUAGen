@@ -18,10 +18,10 @@
 					<property name="Descripcion" type="string"> 
 						<column name="descripcion"  not-null="true"/>
 					</property>
-					<bag name="Fotos" table="fotos"> 
+					<bag name="FotosEvento" table="fotosEvento"> 
 						<key>
 						</key>
-						<element column="Fotos" type="string"/> 
+						<element column="FotosEvento" type="string"/> 
     				</bag>
 					<property name="FechaInicio" type="timestamp"> 
 						<column name="fechaInicio"  not-null="true"/>

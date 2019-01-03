@@ -97,7 +97,7 @@ public void ModifyDefault (EventoEN evento)
                 eventoEN.Descripcion = evento.Descripcion;
 
 
-                eventoEN.Fotos = evento.Fotos;
+                eventoEN.FotosEvento = evento.FotosEvento;
 
 
                 eventoEN.FechaInicio = evento.FechaInicio;
@@ -185,7 +185,7 @@ public void Modify (EventoEN evento)
                 eventoEN.FechaTopeInscripcion = evento.FechaTopeInscripcion;
 
 
-                eventoEN.Fotos = evento.Fotos;
+                eventoEN.FotosEvento = evento.FotosEvento;
 
                 session.Update (eventoEN);
                 SessionCommit ();

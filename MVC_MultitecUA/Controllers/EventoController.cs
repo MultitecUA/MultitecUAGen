@@ -5,6 +5,7 @@ using MultitecUAGenNHibernate.EN.MultitecUA;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -61,6 +62,7 @@ namespace MVC_MultitecUA.Controllers
             SessionInitialize();
             ArrayList listaCatesE = new ArrayList();
             ArrayList listaCatesA = new ArrayList();
+            ArrayList listaFotos = new ArrayList();
             CategoriaProyectoCEN categoriasP = new CategoriaProyectoCEN();
             List<CategoriaProyectoEN> cat = categoriasP.ReadAll(0, -1).ToList();
 
@@ -74,6 +76,12 @@ namespace MVC_MultitecUA.Controllers
                 else
                     listaCatesE.Add(a.Nombre);
             }
+            foreach(string foto in evento.FotosEvento)
+            {
+                listaFotos.Add(foto);
+            }
+
+            ViewData["listaFotosEvento"] = listaFotos;
             ViewData["listaCategoriasAgregar"] = listaCatesA;
             ViewData["listaCategoriasEliminar"] = listaCatesE;
             ViewData["NombreEvento"] = evento.Nombre;
@@ -105,7 +113,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Evento/Create
         [HttpPost]
-        public ActionResult Create(EventoEN evento)
+        public ActionResult Create(EventoEN evento, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -114,70 +122,98 @@ namespace MVC_MultitecUA.Controllers
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
 
-            try{
+            string fileName = "", path = "";
+            //HttpPostedFileBase postedFile = Request.Files["fotoEvento"];
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                file.SaveAs(path);
+                //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
+                //postedFile.SaveAs(path);
+                fileName = "/Imagenes/" + fileName;
+            }
+
+            try
+            {
 
                 EventoCEN eventoCEN = new EventoCEN();
 
-                if(evento.Nombre == null || evento.Descripcion == null || evento.FechaInicio == null || evento.FechaFin == null || evento.FechaInicioInscripcion == null || evento.FechaTopeInscripcion == null){
+                if (evento.Nombre == null || evento.Descripcion == null || evento.FechaInicio == null || evento.FechaFin == null || evento.FechaInicioInscripcion == null || evento.FechaTopeInscripcion == null)
+                {
                     ViewData["eventovacio"] = "vacio";
                     return View();
                 }
-                
-                //VALIDANDO NOMBRE
-                    Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
-                    if (!pattern.IsMatch(evento.Nombre))
-                    {
-                        ViewData["formatonombreevento"] = "mal";
-                        return View();
-                    }
 
-                    if(eventoCEN.ReadNombre(evento.Nombre) != null)
-                    {
-                        ViewData["nombreevento"] = "existe";
-                        return View();
-                    }
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                if (!pattern.IsMatch(evento.Nombre))
+                {
+                    ViewData["formatonombreevento"] = "mal";
+                    return View();
+                }
+
+                if (eventoCEN.ReadNombre(evento.Nombre) != null)
+                {
+                    ViewData["nombreevento"] = "existe";
+                    return View();
+                }
 
                 //VALIDANDO DESCRIPCRION
-                    pattern = new Regex("^.{5,200}$");
-                    if (!pattern.IsMatch(evento.Descripcion))
-                    {
-                        ViewData["formatodescripvento"] = "mal";
-                        return View();
-                    }
+                pattern = new Regex("^.{5,200}$");
+                if (!pattern.IsMatch(evento.Descripcion))
+                {
+                    ViewData["formatodescripvento"] = "mal";
+                    return View();
+                }
 
                 //VALIDANDO FECHAS  
-                    if(evento.FechaInicio > evento.FechaFin)
-                    {
-                        ViewData["FIMayorFF"] = "mal";
-                        return View();
-                    }
-                    if (evento.FechaInicioInscripcion > evento.FechaTopeInscripcion)
-                    {
-                        ViewData["FIIMayorFTI"] = "mal";
-                        return View();
-                    }
-                    if(evento.FechaInicioInscripcion > evento.FechaFin)
-                    {
-                        ViewData["FIIMayorFF"] = "mal";
-                        return View();
-                    }
-                    if(evento.FechaTopeInscripcion > evento.FechaFin)
-                    {
-                        ViewData["FTIMayorFF"] = "mal";
-                        return View();
-                    }
-                
-                int OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, null);
+                if (evento.FechaInicio > evento.FechaFin)
+                {
+                    ViewData["FIMayorFF"] = "mal";
+                    return View();
+                }
+                if (evento.FechaInicioInscripcion > evento.FechaTopeInscripcion)
+                {
+                    ViewData["FIIMayorFTI"] = "mal";
+                    return View();
+                }
+                if (evento.FechaInicioInscripcion > evento.FechaFin)
+                {
+                    ViewData["FIIMayorFF"] = "mal";
+                    return View();
+                }
+                if (evento.FechaTopeInscripcion > evento.FechaFin)
+                {
+                    ViewData["FTIMayorFF"] = "mal";
+                    return View();
+                }
+
+                int OIDEvento = 0;
+
+                if (fileName != "")
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+
+                    OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, fotos);
+                }
+                else
+                {
+                    OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, null);
+                }
+
                 eventoCEN.PublicaEvento(OIDEvento);
                 TempData["eventocreado"] = "si";
                 if (TempData.ContainsKey("eventoeditado"))
                     TempData.Remove("eventoeditado");
 
                 return RedirectToAction("Details/" + OIDEvento);
-                
+
             }
             catch
             {
+                ViewData["error"] = "Ha habido un error al publicar el evento";
                 return View();
             }
         }

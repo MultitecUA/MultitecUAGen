@@ -97,7 +97,7 @@ public void ModifyDefault (RecuerdoEN recuerdo)
                 recuerdoEN.Cuerpo = recuerdo.Cuerpo;
 
 
-                recuerdoEN.Fotos = recuerdo.Fotos;
+                recuerdoEN.FotosRecuerdo = recuerdo.FotosRecuerdo;
 
 
                 session.Update (recuerdoEN);
@@ -165,7 +165,7 @@ public void Modify (RecuerdoEN recuerdo)
                 recuerdoEN.Cuerpo = recuerdo.Cuerpo;
 
 
-                recuerdoEN.Fotos = recuerdo.Fotos;
+                recuerdoEN.FotosRecuerdo = recuerdo.FotosRecuerdo;
 
                 session.Update (recuerdoEN);
                 SessionCommit ();

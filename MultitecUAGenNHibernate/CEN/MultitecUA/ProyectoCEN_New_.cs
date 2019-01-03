@@ -44,7 +44,7 @@ public int New_ (string p_nombre, string p_descripcion, int p_usuarioCreador, Sy
                 usuarioEN.Id = p_usuarioCreador;
         }
 
-        proyectoEN.Fotos = p_fotos;
+        proyectoEN.FotosProyecto = p_fotos;
 
         //Call to ProyectoCAD
 

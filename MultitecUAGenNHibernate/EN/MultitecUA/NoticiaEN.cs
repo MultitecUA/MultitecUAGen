@@ -27,9 +27,9 @@ private string cuerpo;
 
 
 /**
- *	Atributo foto
+ *	Atributo fotoNoticia
  */
-private string foto;
+private string fotoNoticia;
 
 
 
@@ -61,8 +61,8 @@ public virtual string Cuerpo {
 
 
 
-public virtual string Foto {
-        get { return foto; } set { foto = value;  }
+public virtual string FotoNoticia {
+        get { return fotoNoticia; } set { fotoNoticia = value;  }
 }
 
 
@@ -81,20 +81,20 @@ public NoticiaEN()
 
 
 
-public NoticiaEN(int id, string titulo, string cuerpo, string foto, Nullable<DateTime> fecha
+public NoticiaEN(int id, string titulo, string cuerpo, string fotoNoticia, Nullable<DateTime> fecha
                  )
 {
-        this.init (Id, titulo, cuerpo, foto, fecha);
+        this.init (Id, titulo, cuerpo, fotoNoticia, fecha);
 }
 
 
 public NoticiaEN(NoticiaEN noticia)
 {
-        this.init (Id, noticia.Titulo, noticia.Cuerpo, noticia.Foto, noticia.Fecha);
+        this.init (Id, noticia.Titulo, noticia.Cuerpo, noticia.FotoNoticia, noticia.Fecha);
 }
 
 private void init (int id
-                   , string titulo, string cuerpo, string foto, Nullable<DateTime> fecha)
+                   , string titulo, string cuerpo, string fotoNoticia, Nullable<DateTime> fecha)
 {
         this.Id = id;
 
@@ -103,7 +103,7 @@ private void init (int id
 
         this.Cuerpo = cuerpo;
 
-        this.Foto = foto;
+        this.FotoNoticia = fotoNoticia;
 
         this.Fecha = fecha;
 }

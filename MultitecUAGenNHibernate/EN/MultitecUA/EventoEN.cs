@@ -27,9 +27,9 @@ private string descripcion;
 
 
 /**
- *	Atributo fotos
+ *	Atributo fotosEvento
  */
-private System.Collections.Generic.IList<string> fotos;
+private System.Collections.Generic.IList<string> fotosEvento;
 
 
 
@@ -110,8 +110,8 @@ public virtual string Descripcion {
 
 
 
-public virtual System.Collections.Generic.IList<string> Fotos {
-        get { return fotos; } set { fotos = value;  }
+public virtual System.Collections.Generic.IList<string> FotosEvento {
+        get { return fotosEvento; } set { fotosEvento = value;  }
 }
 
 
@@ -176,20 +176,20 @@ public EventoEN()
 
 
 
-public EventoEN(int id, string nombre, string descripcion, System.Collections.Generic.IList<string> fotos, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion
+public EventoEN(int id, string nombre, string descripcion, System.Collections.Generic.IList<string> fotosEvento, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion
                 )
 {
-        this.init (Id, nombre, descripcion, fotos, fechaInicio, fechaFin, fechaInicioInscripcion, proyectosPresentados, recuerdosEvento, categoriasEventos, notificacionGenerada, fechaTopeInscripcion);
+        this.init (Id, nombre, descripcion, fotosEvento, fechaInicio, fechaFin, fechaInicioInscripcion, proyectosPresentados, recuerdosEvento, categoriasEventos, notificacionGenerada, fechaTopeInscripcion);
 }
 
 
 public EventoEN(EventoEN evento)
 {
-        this.init (Id, evento.Nombre, evento.Descripcion, evento.Fotos, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.ProyectosPresentados, evento.RecuerdosEvento, evento.CategoriasEventos, evento.NotificacionGenerada, evento.FechaTopeInscripcion);
+        this.init (Id, evento.Nombre, evento.Descripcion, evento.FotosEvento, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.ProyectosPresentados, evento.RecuerdosEvento, evento.CategoriasEventos, evento.NotificacionGenerada, evento.FechaTopeInscripcion);
 }
 
 private void init (int id
-                   , string nombre, string descripcion, System.Collections.Generic.IList<string> fotos, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion)
+                   , string nombre, string descripcion, System.Collections.Generic.IList<string> fotosEvento, Nullable<DateTime> fechaInicio, Nullable<DateTime> fechaFin, Nullable<DateTime> fechaInicioInscripcion, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN> proyectosPresentados, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.RecuerdoEN> recuerdosEvento, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN> categoriasEventos, System.Collections.Generic.IList<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionEventoEN> notificacionGenerada, Nullable<DateTime> fechaTopeInscripcion)
 {
         this.Id = id;
 
@@ -198,7 +198,7 @@ private void init (int id
 
         this.Descripcion = descripcion;
 
-        this.Fotos = fotos;
+        this.FotosEvento = fotosEvento;
 
         this.FechaInicio = fechaInicio;
 

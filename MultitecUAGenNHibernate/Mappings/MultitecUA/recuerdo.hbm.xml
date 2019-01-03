@@ -18,10 +18,10 @@
 					<property name="Cuerpo" type="string"> 
 						<column name="cuerpo"  not-null="true"/>
 					</property>
-					<bag name="Fotos" table="fotos"> 
+					<bag name="FotosRecuerdo" table="fotosRecuerdo"> 
 						<key>
 						</key>
-						<element column="Fotos" type="string"/> 
+						<element column="FotosRecuerdo" type="string"/> 
     				</bag>
 			
 			

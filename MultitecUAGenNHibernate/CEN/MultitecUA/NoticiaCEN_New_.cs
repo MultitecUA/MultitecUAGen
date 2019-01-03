@@ -33,7 +33,7 @@ public int New_ (string p_titulo, string p_cuerpo, string p_foto)
 
         noticiaEN.Cuerpo = p_cuerpo;
 
-        noticiaEN.Foto = p_foto;
+        noticiaEN.FotoNoticia = p_foto;
 
         noticiaEN.Fecha = DateTime.Now;
 

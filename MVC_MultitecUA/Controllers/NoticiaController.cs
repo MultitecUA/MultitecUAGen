@@ -116,7 +116,7 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                int OID = noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.Foto);
+                int OID = noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.FotoNoticia);
 
                 TempData["noticiacreada"] = "si";
 
@@ -181,7 +181,7 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.Foto);
+                noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.FotoNoticia);
                 TempData["noticiaeditada"] = "si";
 
                 return RedirectToAction("Details/" + id);
