@@ -1,4 +1,5 @@
-﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+﻿using MultitecUAGenNHibernate.CAD.MultitecUA;
+using MultitecUAGenNHibernate.CEN.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using MultitecUAGenNHibernate.Enumerated.MultitecUA;
 using MVC_MultitecUA.Models;
@@ -39,6 +40,21 @@ namespace MVC_MultitecUA.Controllers
             ViewData["numeroPaginas"] = numPags;
 
             int inicio = (int)pag * tamPag;
+
+            ArrayList listaEstados = new ArrayList();
+            listaEstados.Add("");
+            listaEstados.Add("Leido");
+            listaEstados.Add("NoLeido");
+
+            ArrayList listaBandeja = new ArrayList();
+            listaBandeja.Add("");
+            listaBandeja.Add("Activo");
+            listaBandeja.Add("Archivado");
+            listaBandeja.Add("Borrado");
+
+            ViewData["listaEstados"] = listaEstados;
+            ViewData["listaBandejaAutor"] = listaBandeja;
+            ViewData["listaBandejaReceptor"] = listaBandeja;
 
             IList<MensajeEN> listaMensajes = mensajeCEN.ReadAll(inicio, tamPag).ToList();
             IEnumerable<MensajeModel> mensajes = new AssemblerMensajeModel().ConvertListENToModel(listaMensajes).ToList();
@@ -274,6 +290,152 @@ namespace MVC_MultitecUA.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult FiltroAutorReceptor(FormCollection nombres, int? pag)
+        {
+        
+        if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["esAdmin"].ToString() == "false")
+                return View("../NoAdministrador");
+            if (Session["modoAdmin"].ToString() == "false")
+                Session["modoAdmin"] = "true";
+                
+            SessionInitialize();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            MensajeCAD mensajeCAD = new MensajeCAD(session);
+            MensajeCEN mensajeCEN = new MensajeCEN(mensajeCAD);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+
+            ArrayList listaEstados = new ArrayList();
+            listaEstados.Add("");
+            listaEstados.Add("Leido");
+            listaEstados.Add("NoLeido");
+
+            ArrayList listaBandeja = new ArrayList();
+            listaBandeja.Add("");
+            listaBandeja.Add("Activo");
+            listaBandeja.Add("Archivado");
+            listaBandeja.Add("Borrado");
+
+            
+            
+            ViewData["listaEstados"] = listaEstados;
+            ViewData["listaBandejaAutor"] = listaBandeja;
+            ViewData["listaBandejaReceptor"] = listaBandeja;
+
+            
+
+            IList<MensajeEN> mensajesFiltrados = new List<MensajeEN>();
+            IList<MensajeEN> aux = new List<MensajeEN>();
+            mensajesFiltrados = mensajeCEN.ReadAll(0, -1);
+            aux = mensajeCEN.ReadAll(0, -1);
+
+
+            if (nombres["Titulo"] != "")
+            {
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if (mensaje.Titulo != nombres["Titulo"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+            }
+
+            if (nombres["NickAutor"] != "")
+            {
+                foreach(MensajeEN mensaje in aux)
+                {
+                    if (mensaje.UsuarioAutor.Nick != nombres["NickAutor"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+            }
+            if (nombres["NickReceptor"] != "")
+            {
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if (mensaje.UsuarioReceptor.Nick != nombres["NickReceptor"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+
+            }
+            if (nombres["EstadoLectura"] != "")
+            {
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if (mensaje.EstadoLecutra.ToString() != nombres["EstadoLectura"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+
+            }
+            if (nombres["BandejaAutor"] != "")
+            {
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if (mensaje.BandejaAutor.ToString() != nombres["BandejaAutor"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+
+            }
+            if (nombres["BandejaReceptor"] != "")
+            {
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if (mensaje.BandejaReceptor.ToString() != nombres["BandejaReceptor"])
+                        mensajesFiltrados.Remove(mensaje);
+                }
+
+            }
+            
+            int tamPag = 10;
+
+            int numPags = (mensajesFiltrados.Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            /* if (nombres["NickAutor"] != "" && nombres["NickReceptor"] != "")
+             {
+
+                 UsuarioEN usuarioAutor = usuarioCEN.ReadNick(nombres["NickAutor"]);
+                 //UsuarioEN usuarioReceptor = usuarioCEN.ReadNick(nombres["NickReceptor"]);
+
+                 mensajesFiltrados = mensajeCEN.DameMensajesPorAutor(usuarioAutor.Id);
+
+                 foreach(MensajeEN mensaje in mensajesFiltrados)
+                 {
+                     if(mensaje.UsuarioReceptor.Nick != nombres["NickReceptor"])
+                     {
+                         mensajesFiltrados.Remove(mensaje);
+                     }
+
+                 }
+             }else if (nombres["NickAutor"] != "")
+             {
+                 UsuarioEN usuarioAutor = usuarioCEN.ReadNick(nombres["NickAutor"]);
+                 mensajesFiltrados = mensajeCEN.DameMensajesPorAutor(usuarioAutor.Id);
+
+             }else if (nombres["NickReceptor"] != "")
+             {
+                 UsuarioEN usuarioReceptor = usuarioCEN.ReadNick(nombres["NickReceptor"]);
+                 mensajesFiltrados = mensajeCEN.DameMensajesPorReceptor(usuarioReceptor.Id);
+             }
+             else
+                 mensajesFiltrados = mensajeCEN.ReadAll(0, -1);*/
+
+            IEnumerable<MensajeModel> mensajesConvertidos = new AssemblerMensajeModel().ConvertListENToModel(mensajesFiltrados).ToList();
+            SessionClose();
+            return View(mensajesConvertidos);
+
         }
     }
 }

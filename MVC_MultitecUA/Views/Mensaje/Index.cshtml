@@ -10,19 +10,32 @@
 </p>
 <p>
     <h3>Filtros:</h3>
-                                                                <!-- TODO: HARECER FILTROS
-    @using (Html.BeginForm("ForNick", "Usuario"))
+                                                         
+    @using (Html.BeginForm("FiltroAutorReceptor", "Mensaje"))
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
-                <div class="col-md-10">
-                    <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
-                    <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
-                </div>
+				<div class="col-md-10">
+
+					<label for="titulo">Título del mensaje: </label><input class="form-control" type="text" name="titulo" />
+					<label for="nickAutor">Nick del autor: </label><input class="form-control" type="text" name="nickAutor" />
+					<label for="nickReceptor">Nick del receptor: </label><input class="form-control" type="text" name="nickReceptor" />
+					<label for="EstadoLectura">Estado del mensaje: </label>
+					@Html.DropDownList("EstadoLectura", new SelectList((System.Collections.IEnumerable)ViewData["listaEstados"]), new { @class = "form-control" })
+					<label for="BandejaAutor">Bandeja del autor: </label>
+					@Html.DropDownList("BandejaAutor", new SelectList((System.Collections.IEnumerable)ViewData["listaBandejaAutor"]), new { @class = "form-control" })
+					<label for="BandejaReceptor">Bandeja del receptor: </label>
+					@Html.DropDownList("BandejaReceptor", new SelectList((System.Collections.IEnumerable)ViewData["listaBandejaReceptor"]), new { @class = "form-control" })
+
+
+
+
+					<input type="submit" value="Filtrar" class="btn btn-default" />
+				</div>
             </div>
         </div>
-    }-->
+    }
 </p>
 <p>
 	@Html.ActionLink("Nuevo Mensaje", "Create")

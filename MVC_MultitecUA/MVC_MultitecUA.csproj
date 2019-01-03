@@ -319,6 +319,7 @@
     <Content Include="Views\Noticia\VistaUsuario\Noticia.cshtml" />
     <Content Include="Views\Solicitud\FiltroUsuarioProyectoEstado.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\MisProyectos.cshtml" />
+    <Content Include="Views\Mensaje\FiltroAutorReceptor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
