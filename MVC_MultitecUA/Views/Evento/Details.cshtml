@@ -9,11 +9,11 @@
 @{
     if (TempData.ContainsKey("eventocreado"))
     {
-        <h2 class="text-success">Se ha creado el evento: @ViewData["NombreEvento"]</h2>
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el evento: @ViewData["NombreEvento"]</h2>
     }
     else if (TempData.ContainsKey("eventoeditado"))
     {
-        <h2 class="text-success">Se ha editado con exito el evento: @ViewData["NombreEvento"]</h2>
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el evento: @ViewData["NombreEvento"]</h2>
     }
     else
     {

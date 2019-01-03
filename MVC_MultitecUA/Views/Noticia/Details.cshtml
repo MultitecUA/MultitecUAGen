@@ -9,11 +9,11 @@
 @{
     if (TempData.ContainsKey("noticiacreada"))
     {
-        <h2 class="text-danger">Se ha creado la noticia: @ViewData["titulo"]</h2>
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado la noticia: @ViewData["titulo"]</h2>
     }
     else if (TempData.ContainsKey("noticiaeditada"))
     {
-        <h2 class="text-danger">Se ha editado con exito la noticia: @ViewData["titulo"]</h2>
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito la noticia: @ViewData["titulo"]</h2>
     }
     else
     {

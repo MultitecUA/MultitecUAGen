@@ -151,12 +151,13 @@ namespace MVC_MultitecUA.Controllers
             {
                 // TODO: Add insert logic here
                 ServicioCEN cen = new ServicioCEN();
-                cen.New_(serv.Nombre, serv.Descripcion, serv.Estado,null);
-                
-                return RedirectToAction("Index");
+                int id = cen.New_(serv.Nombre, serv.Descripcion, serv.Estado,null);
+                TempData["serviciocreado"] = "si";
+                return Redirect("Details/"+id);
             }
             catch
             {
+                TempData["servicionocreado"] = "si";
                 return View();
             }
         }
@@ -202,11 +203,12 @@ namespace MVC_MultitecUA.Controllers
                 // TODO: Add update logic here
                 ServicioCEN cen = new ServicioCEN();
                 cen.Modify(id, serv.Nombre, serv.Descripcion,serv.Estado,null);
-
-                return RedirectToAction("Index");
+                TempData["servicioeditado"] = "si";
+                return RedirectToAction("Details/" + id);
             }
             catch
             {
+                TempData["servicionoeditado"] = "si";
                 return View();
             }
         }
@@ -244,11 +246,13 @@ namespace MVC_MultitecUA.Controllers
                 ServicioCEN servicioCEN = new ServicioCEN();
                 servicioCEN.Destroy(id);
 
+                TempData["bien"] = "Se a borrado correctamente el servicio " + ser.Nombre;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrio un problema al intentar borrar el servicio";
+                return RedirectToAction("Index");
             }
         }
     }

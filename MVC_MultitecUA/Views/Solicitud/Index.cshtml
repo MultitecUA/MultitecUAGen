@@ -1,32 +1,59 @@
 ﻿@model IEnumerable<MVC_MultitecUA.Models.Solicitud>
 
 @{
-	ViewBag.Title = "Solicitudes";
+    ViewBag.Title = "Solicitudes";
 }
 
 <h2>Solicitudes</h2>
+<br />
 <p class="text-center">
-	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
     <h3>Filtros:</h3>
-    <!-- TODO: HARECER FILTROS
-    @using (Html.BeginForm("ForNick", "Usuario"))
+    @using (Html.BeginForm("FiltroUsuarioProyectoEstado", "Solicitud"))
     {
+
+
+
+
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
+
                 <div class="col-md-10">
-                    <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
-                    <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
+
+
+                    <label for="proyecto">Nombre Proyecto: </label><input class="form-control" type="text" name="proyecto" placeholder="Todos" pattern="^[A-Za-z0-9 ñáéíóú]{2,}$" title="El nombre solo puede contener letras, números y espacios. Mínimo 2 caracteres" />
+                    <label for="usuario">Nick: </label><input class="form-control" type="text" name="usuario" placeholder="Todos" pattern="^[A-Za-z0-9 ñáéíóú]{2,}$" title="El nombre solo puede contener letras, números y espacios. Mínimo 2 caracteres" />
+                    <label for="estado">Estado: </label>
+
+                    @Html.DropDownList("Estado", new SelectList((System.Collections.IEnumerable)ViewData["estados"]), new { @class = "form-control" })
+
+                    <input type="submit" value="Filtrar" class="btn btn-default" />
                 </div>
             </div>
         </div>
-    }-->
+    }
 </p>
 <p>
-	@Html.ActionLink("Nueva Solicitud", "Create")
+    @Html.ActionLink("Nueva Solicitud", "Create")
 </p>
+@{
+    if (TempData["mal"] != null)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        TempData.Remove("mal");
+    }
+    else
+    if (TempData["bien"] != null)
+    {
+        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        TempData.Remove("bien");
+    }
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -49,71 +76,72 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nick_Solicitante)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Modificar estado", "Edit", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nick_Solicitante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Modificar estado", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
 
 @{
-	/* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
-	var siguiente = (int)ViewData["pag"] + 1;
-	var anterior = siguiente - 2;
-	var numPags = (int)ViewData["numeroPaginas"] + 1;
+    /* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+    var siguiente = (int)ViewData["pag"] + 1;
+    var anterior = siguiente - 2;
+    var numPags = (int)ViewData["numeroPaginas"] + 1;
 }
 <p class="text-center">
-	@{
-		if (siguiente > 1)
-		{
-			<label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
-			<span>|</span>
-			<label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
-		}
-		else
-		{
-			<span>Primera</span>
-			<span>|</span>
-			<span>Anterior</span>
-		}
-	}
+    @{
+        if (siguiente > 1)
+        {
+            <label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+        }
+        else
+        {
+            <span>Primera</span>
+            <span>|</span>
+            <span>Anterior</span>
+        }
+    }
 
-	<span>|</span>
-	<label>Página @siguiente de @numPags</label>
-	<span>|</span>
+    <span>|</span>
+    <label>Página @siguiente de @numPags</label>
+    <span>|</span>
 
-	@{
-		if (siguiente < numPags)
-		{
-			<label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
-			<span>|</span>
-			<label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
-		}
-		else
-		{
-			<span>Siguiente</span>
-			<span>|</span>
-			<span>Última</span>
-		}
-	}
+    @{
+        if (siguiente < numPags)
+        {
+            <label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+        }
+        else
+        {
+            <span>Siguiente</span>
+            <span>|</span>
+            <span>Última</span>
+        }
+    }
 </p>

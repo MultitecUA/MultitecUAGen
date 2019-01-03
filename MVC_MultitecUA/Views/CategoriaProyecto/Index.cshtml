@@ -8,22 +8,37 @@
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
-
+<p>
+    @Html.ActionLink("Nueva Categoría de Proyecto", "Create")
+</p>
 
 @{ if (TempData.ContainsKey("CPeditada"))
     {
-        <p class="text-success" style="font-size:1.25em;"><span class="glyphicon glyphicon-ok-sign"></span> Se ha editado la categoria @TempData["CPeditada"].</p>
+        <p class="text-success" ><span class="glyphicon glyphicon-ok-sign"></span> Se ha editado la categoria @TempData["CPeditada"].</p>
         TempData.Remove("CPeditada");
     }
     else if (TempData.ContainsKey("CPcreada"))
     {
-        <p class="text-success" style="font-size:1.25em;"><span class="glyphicon glyphicon-ok-sign"></span> Se ha editado la categoria @TempData["CPcreada"].</p>
+        <p class="text-success"><span class="glyphicon glyphicon-ok-sign"></span> Se ha creado la categoria @TempData["CPcreada"].</p>
         TempData.Remove("CPcreada");
     }
 }
-<p>
-    @Html.ActionLink("Nueva Categoría de Proyecto", "Create")
-</p>
+
+
+@{
+    if (TempData["mal"] != null)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        TempData.Remove("mal");
+    }
+    else
+    if (TempData["bien"] != null)
+    {
+        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        TempData.Remove("bien");
+    }
+}
+
 <table class="table">
     <tr>
         <th>

@@ -317,6 +317,7 @@
     <Content Include="Views\NoAdministrador.cshtml" />
     <Content Include="Views\Home\Index_Administrador.cshtml" />
     <Content Include="Views\Noticia\VistaUsuario\Noticia.cshtml" />
+    <Content Include="Views\Solicitud\FiltroUsuarioProyectoEstado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

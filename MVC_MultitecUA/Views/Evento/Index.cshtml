@@ -14,6 +14,8 @@
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
             <div class="form-group">
                 <div class="col-md-10 form-inline">
                     <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
@@ -27,6 +29,19 @@
 <p>
     @Html.ActionLink("Nuevo Evento", "Create")
 </p>
+@{
+    if (TempData["mal"] != null)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        TempData.Remove("mal");
+    }
+    else
+    if (TempData["bien"] != null)
+    {
+        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        TempData.Remove("bien");
+    }
+}
 <table class="table">
     <tr>
         <th>
@@ -57,35 +72,35 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Proyectos", "ProyectosPorEvento", "Proyecto", new { id = item.Id }, null)
-        </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicioInscripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Proyectos", "ProyectosPorEvento", "Proyecto", new { id = item.Id }, null)
+            </td>
 
-        <td style="text-align: center;">
-            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+            <td style="text-align: center;">
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
     }
 
 </table>

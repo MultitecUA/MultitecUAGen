@@ -4,7 +4,8 @@
     ViewBag.Title = "Filtrar avanzado";
 }
 
-<h2>Eventos filtrados</h2>
+<h2>Eventos filtrados: @ViewData["filtro"]</h2>
+<br />
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
@@ -68,9 +69,9 @@
             @Html.DisplayFor(modelItem => item.FechaTopeInscripcion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

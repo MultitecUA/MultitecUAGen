@@ -187,11 +187,13 @@ namespace MVC_MultitecUA.Controllers
             {
                 CategoriaUsuarioCP categoriaUsuarioCP = new CategoriaUsuarioCP();
                 categoriaUsuarioCP.Destroy(id);
+                TempData["bien"] = "Se a borrado correctamente la categoria " + categoriaUsuarioEN.Nombre;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrio un problema al intentar borrar la categoria";
+                return RedirectToAction("Index");
             }
         }
     }

@@ -12,6 +12,22 @@
 <p>
     @Html.ActionLink("Nueva Noticia", "Create")
 </p>
+
+@{
+    if (TempData["mal"] != null)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        TempData.Remove("mal");
+    }
+    else
+    if (TempData["bien"] != null)
+    {
+        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        TempData.Remove("bien");
+    }
+}
+
+
 <table class="table">
     <tr>
         <th>

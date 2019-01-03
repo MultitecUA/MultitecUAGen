@@ -235,11 +235,13 @@ namespace MVC_MultitecUA.Controllers
             {
                 NoticiaCEN noticiaCEN = new NoticiaCEN();
                 noticiaCEN.Destroy(id);
+                TempData["bien"] = "Se a borrado correctamente la noticia" + noticiaEN.Titulo;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrio un problema al intentar borrar la noticia";
+                return RedirectToAction("Index");
             }
         }
 

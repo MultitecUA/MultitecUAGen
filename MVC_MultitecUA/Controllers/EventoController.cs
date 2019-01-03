@@ -363,11 +363,13 @@ namespace MVC_MultitecUA.Controllers
                 if (TempData.ContainsKey("eventoeditado"))
                     TempData.Remove("eventoeditado");
 
+                TempData["bien"] = "Se a borrado correctamente el evento " + evento.Nombre;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrio un problema al intentar borrar la el evento";
+                return RedirectToAction("Index");
             }
         }
 
@@ -434,6 +436,7 @@ namespace MVC_MultitecUA.Controllers
                 CategoriaProyectoEN categoria = categoriaCEN.ReadNombre(f["Categoria"]);
                 if(categoria != null)
                 {
+                    ViewData["filtro"] = f["Categoria"] + " (Categoria)";
                     int num = categoria.Id;
                     
                     if (f["FechaAnterior"] == "" && f["FechaFinal"] == "")
@@ -444,11 +447,13 @@ namespace MVC_MultitecUA.Controllers
                     {
                         DateTime ff = DateTime.Parse(f["FechaFinal"]);
                         listaEventos = evento.DameEventosFiltrados(num, null, ff);
+                        ViewData["filtro"] = ViewData["filtro"] + " antes del " + f["FechaFinal"];
                     }
                     else if (f["FechaFinal"] == "")
                     {
                         DateTime fa = DateTime.Parse(f["FechaAnterior"]);
                         listaEventos = evento.DameEventosFiltrados(num, fa, null);
+                        ViewData["filtro"] = ViewData["filtro"] + " despues del " + f["FechaAnterior"];
                     }
                     else
                     {
@@ -465,6 +470,7 @@ namespace MVC_MultitecUA.Controllers
                             }
                             ViewData["listacategorias"] = categorias;
                             ViewData["fechamal"] = "si";
+                            ViewData["filtro"] = ViewData["filtro"] + " antes del " + f["FechaAnterior"] + " y despues del " + f["FechaFinal"];
                             return View("PorFiltro");
                         }
                         listaEventos = evento.DameEventosFiltrados(num, fa, ff);

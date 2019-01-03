@@ -151,7 +151,7 @@ namespace MVC_MultitecUA.Controllers
             }
             catch
             {
-                TempData["nocreado"] = "si";
+                TempData["nocreado"] = "Ha habido un error al crear el recuerdo";
                 return View();
             }
         }
@@ -271,7 +271,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Recuerdo/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, RecuerdoEN recuerdo)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -285,11 +285,14 @@ namespace MVC_MultitecUA.Controllers
                 // TODO: Add delete logic here
                 RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
                 recuerdoCEN.Destroy(id);
+
+                TempData["bien"] = "Se a borrado correctamente el recuerdo " + recuerdo.Titulo;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["mal"] = "Ocurrio un problema al intentar borrar el recuerdo";
+                return RedirectToAction("Index");
             }
         }
 

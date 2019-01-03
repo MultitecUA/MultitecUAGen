@@ -4,11 +4,29 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles del Servicio: @ViewData["servicio"]</h2>
 
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Servicios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
+
+@{
+    if (TempData.ContainsKey("serviciocreado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el servicio: @ViewData["servicio"]</h2>
+        TempData.Remove("serviciocreado");
+    }
+    else if (TempData.ContainsKey("servicioeditado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el servicio: @ViewData["servicio"]</h2>
+        TempData.Remove("servicioeditado");
+    }
+    else
+    {
+        <h2>Detalles del Servicio: @ViewData["servicio"]</h2>
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Servicios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+
 
 <div>
     <hr />
