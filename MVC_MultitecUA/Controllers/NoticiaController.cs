@@ -88,6 +88,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Noticia/Create
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(NoticiaEN noticiaEN)
         {
             if (Session["usuario"] == null)
@@ -152,6 +153,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Noticia/Edit/5
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, NoticiaEN noticiaEN)
         {
             if (Session["usuario"] == null)
@@ -239,6 +241,14 @@ namespace MVC_MultitecUA.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Noticia(int id)
+        {
+            NoticiaCEN noticiaCEN = new NoticiaCEN();
+            NoticiaEN noticiaEN = noticiaCEN.ReadOID(id);
+
+            return View("./VistaUsuario/Noticia", noticiaEN);
         }
     }
 }

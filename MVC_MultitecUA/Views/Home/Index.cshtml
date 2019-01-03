@@ -1,8 +1,53 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN>
+
+@{
+	ViewBag.Title = "Index";
 }
 
 <div class="jumbotron" style="text-align:center">
-    <h1>Página Principal</h1>
+    <h1>MultitecUA</h1>
+</div>
+
+<div class="text-center">
+		<h2>Novedades</h2>
+		@{int i = 5; }
+		@using (Html.BeginForm("Index", "Home"))
+		{ 		
+			<p>
+				Mostrando las últimas
+				<select name="numeroNoticias">
+					@for (; i <= 10; ++i)
+					{
+
+						if ((int)ViewData["numeroNoticias"] == i)
+						{
+							<option value="@i" selected>@i</option>
+						}
+						else
+						{
+							<option value="@i">@i</option>
+						}
+					}
+				</select>
+				noticias
+				<input type="submit" value="Mostrar" class="btn btn-default" />
+			</p>
+		}
+	<hr />
+	@foreach (var item in Model)
+	{
+	<div>
+		<a href="../Noticia/Noticia/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">
+			<img src="@Html.DisplayFor(modelItem => item.FotoNoticia)" />
+			<h3>
+				@Html.DisplayFor(modelItem => item.Titulo)
+			</h3>
+		</a>
+		<label>
+			@Html.DisplayFor(modelItem => item.Fecha)
+		</label>
+	</div>
+	<hr />
+	}
 </div>
 

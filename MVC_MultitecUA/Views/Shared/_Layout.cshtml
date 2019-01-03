@@ -27,9 +27,30 @@
                 <ul class="nav navbar-nav">
                     @{ if (Session["usuario"] == null || (Session["usuario"] != null && Session["modoAdmin"].ToString() == "false"))
                         {
-                            <li>@Html.ActionLink("Proyectos", "Index", "")</li>
-                            <li>@Html.ActionLink("Eventos", "Index", "")</li>
-                            <li>@Html.ActionLink("Servicios", "Index", "")</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Proyectos
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>@Html.ActionLink("Mis proyectos", "", "")</li>
+									<li>@Html.ActionLink("Proyectos ropuestos", "", "")</li>
+									<li>@Html.ActionLink("Proyectos en desarrollo", "", "")</li>
+									<li>@Html.ActionLink("Nuevo Proyecto", "", "")</li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Eventos
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>@Html.ActionLink("Mis eventos", "", "")</li>
+									<li>@Html.ActionLink("Próximos eventos", "", "")</li>
+									<li>@Html.ActionLink("Galería de recuerdos", "", "")</li>
+								</ul>
+							</li>
+                            <li>@Html.ActionLink("Servicios", "", "")</li>
                             <li><a href="http://multitecua.ml" target="_blank">Contacto / Acerca de</a></li>
                         }
                     }

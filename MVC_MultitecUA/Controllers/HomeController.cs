@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+using MultitecUAGenNHibernate.EN.MultitecUA;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,8 +14,31 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
                 return View("Index_Administrador");
-            else
-                return View("Index");
+
+            int numeroNoticias = 5;
+
+            ViewData["numeroNoticias"] = numeroNoticias;
+
+            NoticiaCEN noticiaCEN = new NoticiaCEN();
+            IList<NoticiaEN> listaNoticias = noticiaCEN.DameNUltimasNoticias(numeroNoticias);
+
+            return View(listaNoticias);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection f)
+        {
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View("Index_Administrador");
+
+            int numeroNoticias = int.Parse(f["numeroNoticias"]);
+
+            ViewData["numeroNoticias"] = numeroNoticias;
+
+            NoticiaCEN noticiaCEN = new NoticiaCEN();
+            IList<NoticiaEN> listaNoticias = noticiaCEN.DameNUltimasNoticias(numeroNoticias);
+
+            return View(listaNoticias);
         }
 
         public ActionResult Index_Administrador()
