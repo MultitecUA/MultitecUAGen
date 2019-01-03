@@ -229,7 +229,7 @@ namespace MVC_MultitecUA.Controllers
             ViewData["listaCategoriasProyectoEliminar"] = listaCatesE;
 
             ViewData["titulo"] = proyectoEN.Nombre;
-            ViewData["creador"] = proyectoEN.UsuarioCreador.Nombre + " (" + proyectoEN.UsuarioCreador.Nick + ")";
+            ViewData["creador"] = proyectoEN.UsuarioCreador.Nick;
 
             ArrayList listaUsuarios = new ArrayList();
             foreach (UsuarioEN u in proyectoEN.UsuariosModeradores)

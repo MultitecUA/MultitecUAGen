@@ -323,16 +323,23 @@
     <Content Include="Views\Proyecto\VistaUsuario\Detalles.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\ProyectosPresentados.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\Crear.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\FiltrarAv.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\FiltroAvanzado.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\FiltroNombre.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\TodosEventos.cshtml" />
+    <Content Include="Views\Recuerdo\VistaUsuario\CrearRecuerdo.cshtml" />
+    <Content Include="Views\Recuerdo\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Recuerdo\VistaUsuario\Recuerdos.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
-    <Folder Include="Views\Evento\VistaUsuario\" />
     <Folder Include="Views\Mensaje\VistaUsuario\" />
-    <Folder Include="Views\Recuerdo\VistaUsuario\" />
     <Folder Include="Views\Servicio\VistaUsuario\" />
     <Folder Include="Views\Solicitud\VistaUsuario\" />
-    <Folder Include="Views\Usuario\VistaUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

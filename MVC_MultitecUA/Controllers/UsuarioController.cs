@@ -98,6 +98,29 @@ namespace MVC_MultitecUA.Controllers
             return View(usuarioEN);
         }
 
+        // GET: Usuario/Detalles/5
+        public ActionResult Detalles(string nick)
+        {
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(nick);
+
+            ArrayList listaCatesE = new ArrayList();
+            CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
+            List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaUsuarioEN a in cat)
+            {
+                if (usuarioEN.CategoriasUsuarios.Contains(a))
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasEliminar"] = listaCatesE;
+
+            return View("./VistaUsuario/Detalles",usuarioEN);
+        }
+
         // GET: Usuario/Create
         public ActionResult Create()
         {
@@ -167,6 +190,67 @@ namespace MVC_MultitecUA.Controllers
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
                 usuarioCEN.Modify(id, usuarioEN.Nombre, usuarioEN.Password,usuarioEN.Email,usuarioEN.Nick,usuarioEN.Foto);
                 return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Usuario/Modificar/5
+        public ActionResult Modificar()
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            UsuarioCEN usuarioCEN = new UsuarioCEN();
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+            ViewData["usuario"] = usuarioEN.Nick;
+            return View("./VistaUsuario/Modificar",usuarioEN);
+        }
+
+        // POST: Usuario/Modificar/5
+        [HttpPost]
+        public ActionResult Modificar(int id, FormCollection formCollection)
+        {
+
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            try
+            {
+                UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+                UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+                UsuarioEN usuarioEN = usuarioCEN.ReadOID(id);
+
+                if (usuarioCEN.Login(id, formCollection["Password"]) != null)
+                {
+
+                    if (formCollection["newpass"] == "")
+                    {
+                        formCollection["newpass"] = formCollection["Password"];
+                    }
+                    usuarioCEN.Modify(id, formCollection["Nombre"], formCollection["newpass"], formCollection["Email"], formCollection["Nick"], formCollection["Foto"]);
+                    if (formCollection["Nick"].ToString() != Session["usuario"].ToString())
+                        Session["usuario"] = formCollection["Nick"];
+
+                    ArrayList listaCatesE = new ArrayList();
+                    CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
+                    List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
+
+                    
+                    foreach (CategoriaUsuarioEN a in cat)
+                    {
+                        if (usuarioEN.CategoriasUsuarios.Contains(a))
+                        {
+                            listaCatesE.Add(a.Nombre);
+                        }
+                    }
+                    ViewData["listaCategoriasEliminar"] = listaCatesE;
+                    return View("./VistaUsuario/Detalles", usuarioEN);
+                }
+                ViewData["error"] = "La contraseña introducida no es correcta";
+                return View("./VistaUsuario/Modificar", usuarioEN);
             }
             catch
             {

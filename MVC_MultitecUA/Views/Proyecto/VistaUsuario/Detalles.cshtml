@@ -38,7 +38,7 @@
         </dt>
 
         <dd>
-            @ViewData["creador"]
+            @Html.ActionLink(ViewData["creador"].ToString(), "Detalles", "Usuario", new { nick = ViewData["creador"] }, null)
         </dd>
 
         <dt>
@@ -51,7 +51,7 @@
                 @{
                     foreach (var e in (System.Collections.IEnumerable)ViewData["listaModeradores"])
                     {
-                        <li style="font-weight: normal;">@e </li>
+                        <li>@Html.ActionLink(e.ToString(), "Detalles", "Usuario", new { nick = e }, null)</li>
                     }
                 }
             </ul>
@@ -67,7 +67,7 @@
                 @{
                     foreach (var e in (System.Collections.IEnumerable)ViewData["listaParticipantes"])
                     {
-                        <li style="font-weight: normal;">@e </li>
+                <li>@Html.ActionLink(e.ToString(), "Detalles", "Usuario", new { nick = e }, null)</li>
                     }
                 }
             </ul>
