@@ -1,0 +1,86 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles del Usuario: @Model.Nick</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nick)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nick)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol)
+        </dd>
+
+        <dt>Categorías:</dt>
+        <dd>
+            <ul>
+
+                @{
+                    foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"])
+                    {
+                        <li style="font-weight: normal;">@e </li>
+                    }
+                }
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+@if (Session["usuario"] != null)
+{
+    <div>
+        @if (Session["usuario"].ToString() != Model.Nick)
+        {
+            @Html.ActionLink("Mandar mensaje", "", "Mensaje", new { id = Model.Id }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Modificar perfil", "Modificar")
+        }
+    </div>
+}
