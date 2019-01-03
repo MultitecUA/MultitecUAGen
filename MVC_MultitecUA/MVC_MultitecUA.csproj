@@ -320,6 +320,9 @@
     <Content Include="Views\Solicitud\FiltroUsuarioProyectoEstado.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\MisProyectos.cshtml" />
     <Content Include="Views\Mensaje\FiltroAutorReceptor.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\ProyectosPresentados.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

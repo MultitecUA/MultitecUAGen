@@ -82,8 +82,57 @@ namespace MVC_MultitecUA.Controllers
             int OID_usuario = usuarioEN.Id;
             ProyectoCEN proyectoCEN = new ProyectoCEN();
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(OID_usuario);
+            ViewData["titulo"] = "Proyectos en los que participas";
 
             return View("./VistaUsuario/MisProyectos", listaProyectos);
+        }
+
+        // GET: Proyecto/ProyectosPresentados/5
+        public ActionResult ProyectosPresentados(int? pag)
+        {
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+            ArrayList listaEstados = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                listaEstados.Add(a);
+
+            ViewData["listaEstados"] = listaEstados;
+
+            ArrayList listaCategoriasUsuarios = new ArrayList();
+            CategoriaUsuarioCEN categoriaUsuarioCEN = new CategoriaUsuarioCEN();
+
+            foreach (var a in categoriaUsuarioCEN.ReadAll(0, -1))
+                listaCategoriasUsuarios.Add(a.Nombre);
+
+            ViewData["listaCategoriasU"] = listaCategoriasUsuarios;
+
+            ArrayList listaCategoriasProyectos = new ArrayList();
+            CategoriaProyectoCEN categoriaProyectoCEN = new CategoriaProyectoCEN();
+
+            foreach (var a in categoriaProyectoCEN.ReadAll(0, -1))
+                listaCategoriasProyectos.Add(a.Nombre);
+
+            ViewData["listaCategoriasP"] = listaCategoriasProyectos;
+
+            int tamPag = 10;
+
+            int numPags = (proyectoCEN.ReadAll(0, -1).Count - 1) / tamPag;
+
+            if (pag == null || pag < 0)
+                pag = 0;
+            else if (pag >= numPags)
+                pag = numPags;
+
+            ViewData["pag"] = pag;
+
+            ViewData["numeroPaginas"] = numPags;
+
+            int inicio = (int)pag * tamPag;
+
+            IList<ProyectoEN> listaProyectos = proyectoCEN.ReadAll(inicio, tamPag).ToList();
+
+            return View("./VistaUsuario/ProyectosPresentados", listaProyectos);
         }
 
         // GET: Proyecto/Details/5
@@ -142,6 +191,57 @@ namespace MVC_MultitecUA.Controllers
             ViewData["titulo"] = proyectoEN.Nombre;
             ViewData["creador"] = proyectoEN.UsuarioCreador.Nombre + " ("+ proyectoEN.UsuarioCreador.Nick+")";
             return View(proyectoEN);
+        }
+
+        // GET: Proyecto/Details/5
+        public ActionResult Detalles(int id)
+        {
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+
+            ArrayList listaCatesE = new ArrayList();
+
+            CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
+            List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaUsuarioEN a in cat)
+            {
+                if (proyectoEN.CategoriasBuscadas.Contains(a))
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasUsuarioEliminar"] = listaCatesE;
+
+            listaCatesE = new ArrayList();
+
+            CategoriaProyectoCEN categoriasProyectos = new CategoriaProyectoCEN();
+            List<CategoriaProyectoEN> catPro = categoriasProyectos.ReadAll(0, -1).ToList();
+
+            foreach (CategoriaProyectoEN a in catPro)
+            {
+                if (proyectoEN.CategoriasProyectos.Contains(a))
+                {
+                    listaCatesE.Add(a.Nombre);
+                }
+            }
+            ViewData["listaCategoriasProyectoEliminar"] = listaCatesE;
+
+            ViewData["titulo"] = proyectoEN.Nombre;
+            ViewData["creador"] = proyectoEN.UsuarioCreador.Nombre + " (" + proyectoEN.UsuarioCreador.Nick + ")";
+
+            ArrayList listaUsuarios = new ArrayList();
+            foreach (UsuarioEN u in proyectoEN.UsuariosModeradores)
+                listaUsuarios.Add(u.Nick);
+            ViewData["listaModeradores"] = listaUsuarios;
+
+            listaUsuarios = new ArrayList();
+            foreach (UsuarioEN u in proyectoEN.UsuariosParticipantes)
+                listaUsuarios.Add(u.Nick);
+            ViewData["listaParticipantes"] = listaUsuarios;
+
+            return View("./VistaUsuario/Detalles", proyectoEN);
         }
 
         // POST: Proyecto/AgregarCatPro
@@ -300,10 +400,6 @@ namespace MVC_MultitecUA.Controllers
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
                 UsuarioEN usuarioEN = usuarioCEN.ReadNick(formCollection["creador"]);
 
-                string uno = formCollection["Nombre"];
-                string dos = formCollection["Descripcion"];
-                string tres = formCollection["creador"];
-
                 IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(0, -1).ToList();
                 ArrayList listaNicks = new ArrayList();
                 foreach (var e in listaUsuarios)
@@ -345,6 +441,72 @@ namespace MVC_MultitecUA.Controllers
                 TempData["proyectocreado"] = "Se ha creado el proyecto: "+formCollection["Nombre"];
 
                 return RedirectToAction("Details/" + OID);
+            }
+            catch
+            {
+                ViewData["error"] = "Ha ocurrido un error al intentar crear.";
+                return View();
+            }
+        }
+
+        public ActionResult Crear()
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            ProyectoEN proyectoEN = new ProyectoEN();
+            return View("./VistaUsuario/Crear",proyectoEN);
+        }
+
+        // POST: Proyecto/Create
+        [HttpPost]
+        public ActionResult Crear(FormCollection formCollection)
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
+            try
+            {
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+
+                if (formCollection["Nombre"] == "" || formCollection["Descripcion"] == "")
+                {
+                    ViewData["proyectovacio"] = "vacio";
+                    return View();
+                }
+
+                //VALIDANDO NOMBRE
+                Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                if (!pattern.IsMatch(formCollection["Nombre"]))
+                {
+                    ViewData["fomatonombreproyecto"] = "mal";
+                    return View();
+                }
+
+                if (proyectoCEN.ReadNombre(formCollection["Nombre"]) != null)
+                {
+                    ViewData["nombreproyecto"] = "existe";
+                    return View();
+                }
+
+                //VALIDANDO DESCRIPCRION
+                pattern = new Regex("^.{5,200}$");
+                if (!pattern.IsMatch(formCollection["Descripcion"].ToString()))
+                {
+                    ViewData["formatodescripproyecto"] = "mal";
+                    return View();
+                }
+
+                int OID = proyectoCEN.New_(formCollection["Nombre"], formCollection["Descripcion"], usuarioEN.Id, null);
+                TempData["proyectocreado"] = "Se ha creado el proyecto: " + formCollection["Nombre"];
+
+                IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(usuarioEN.Id);
+                ViewData["titulo"] = "Proyectos en los que participas";
+
+                return View("./VistaUsuario/MisProyectos", listaProyectos);
             }
             catch
             {
@@ -508,13 +670,6 @@ namespace MVC_MultitecUA.Controllers
         //GET: Proyecto/ForNombre/5
         public ActionResult ForNombre(ProyectoEN proyectoEN)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -542,19 +697,15 @@ namespace MVC_MultitecUA.Controllers
             ViewData["titulo"] = proyectoEN.Nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorNombre(proyectoEN.Nombre);
-            return View(listaProyectos);
+            if (Session["modoAdmin"]!= null && Session["modoAdmin"].ToString() == "true")
+                return View(listaProyectos);
+            else
+                return View("./VistaUsuario/ProyectosPresentados",listaProyectos);
         }
 
         //GET: Proyecto/ForEstado/5
         public ActionResult ForEstado(ProyectoEN proyectoEN)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -582,19 +733,15 @@ namespace MVC_MultitecUA.Controllers
             ViewData["estado"] = proyectoEN.Estado;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEstado(proyectoEN.Estado);
-            return View(listaProyectos);
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaProyectos);
+            else
+                return View("./VistaUsuario/ProyectosPresentados", listaProyectos);
         }
 
         //GET: Proyecto/ForCategoriaProyecto/5
         public ActionResult ForCategoriaProyecto(FormCollection formCollection)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -627,19 +774,15 @@ namespace MVC_MultitecUA.Controllers
             ViewData["categoria"] = nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoria(id);
-            return View(listaProyectos);
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaProyectos);
+            else
+                return View("./VistaUsuario/ProyectosPresentados", listaProyectos);
         }
 
         //GET: Proyecto/ForCategoriaUsuario/5
         public ActionResult ForCategoriaUsuario(FormCollection formCollection)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             ArrayList listaEstados = new ArrayList();
@@ -671,7 +814,10 @@ namespace MVC_MultitecUA.Controllers
             ViewData["categoria"] = nombre;
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorCategoriaUsuario(id);
-            return View(listaProyectos);
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaProyectos);
+            else
+                return View("./VistaUsuario/ProyectosPresentados", listaProyectos);
         }
 
         // GET: Proyecto/ChangeEstado/5
@@ -923,7 +1069,7 @@ namespace MVC_MultitecUA.Controllers
             {
                 if (proyectoEN.UsuariosModeradores.Contains(a))
                     listaUsuariosEliminar.Add(a.Nick);
-                else
+                else if (proyectoEN.UsuariosParticipantes.Contains(a))
                     listaUsuariosAgregar.Add(a.Nick);
             }
 
