@@ -1,0 +1,146 @@
+﻿@model IEnumerable<MVC_MultitecUA.Models.MensajeModel>
+
+@{
+	ViewBag.Title = "Mis mensajes";
+}
+
+<h2>Mis mensajes</h2>
+
+<p>
+	<h3>Filtros:</h3>
+
+	@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
+	{
+		<div class="form-horizontal">
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				<div class="col-md-10">
+
+					<label for="titulo">Título del mensaje: </label><input class="form-control" type="text" name="titulo" />
+					<label for="EstadoLectura">Bandeja: </label>
+					@Html.DropDownList("Bandeja", new SelectList((System.Collections.IEnumerable)ViewData["Bandejas"]), new { @class = "form-control" })
+					<input type="submit" value="Filtrar" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+	}
+</p>
+@{
+	if (TempData["mal2"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal2"] </p>
+		TempData.Remove("mal2");
+	}
+	else
+	if (TempData["bien2"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
+		TempData.Remove("bien2");
+	}
+}
+
+@{
+	if (TempData["mal"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+	}
+	else
+	{
+		<table class="table">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.NickAutor)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Titulo)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EstadoLectura)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.BandejaReceptor)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Fecha)
+				</th>
+				<th>
+					Acciones
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Titulo)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EstadoLectura)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.BandejaReceptor)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Fecha)
+					</td>
+					<td>
+						@Html.ActionLink("Detalles", "DetalleMensajeRecibido", new { id = item.Id })
+					</td>
+				</tr>
+			}
+
+		</table>
+	}
+}
+<p class="text-center">
+	@{
+
+		if (TempData["mal"] == null)
+		{
+			/* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+			var siguiente = (int)ViewData["pag"] + 1;
+			var anterior = siguiente - 2;
+			var numPags = (int)ViewData["numeroPaginas"] + 1;
+
+			if (siguiente > 1)
+			{
+				<label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+				<span>|</span>
+				<label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+			}
+			else
+			{
+				<span>Primera</span>
+				<span>|</span>
+				<span>Anterior</span>
+			}
+
+
+			<span>|</span>
+			<label>Página @siguiente de @numPags</label>
+			<span>|</span>
+
+
+			if (siguiente < numPags)
+			{
+				<label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+				<span>|</span>
+				<label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+			}
+			else
+			{
+				<span>Siguiente</span>
+				<span>|</span>
+				<span>Última</span>
+			}
+		}
+		else
+		{
+			TempData.Remove("mal");
+		}
+
+	}
+</p>
