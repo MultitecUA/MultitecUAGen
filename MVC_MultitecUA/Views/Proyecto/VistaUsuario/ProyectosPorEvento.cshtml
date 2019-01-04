@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
+
+@{
+    ViewBag.Title = "Proyectos de Evento";
+}
+
+<h2>Proyectos de Evento: @ViewData["evento"]</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            Eventos
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Nombre, "Detalles", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.Estado)
+            </th>
+            <th>
+                @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
+            </th>
+        </tr>
+    }
+
+</table>

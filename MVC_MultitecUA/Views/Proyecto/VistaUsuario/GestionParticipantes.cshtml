@@ -1,0 +1,37 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN
+
+@{
+    ViewBag.Title = "Gestion de Participantes";
+}
+
+<h2>Gestion de Participantes de @ViewData["nombre"]</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+<div>
+    <hr />
+    <div class="dl-horizontal">
+        @using (Html.BeginForm("AgregarParticipante", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Agregar Participante:</label>
+                @Html.DropDownList("Participante", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosAgregar"]), new { @class = "form-control" })
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        }
+
+        @using (Html.BeginForm("EliminarParticipante", "Proyecto"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
+                <label>Eliminar Participante:</label>
+                @Html.DropDownList("Participante", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosEliminar"]), new { @class = "form-control" })
+                <input type="submit" value="Eliminar" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id })
+</p>
