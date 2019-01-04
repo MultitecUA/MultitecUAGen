@@ -76,7 +76,7 @@
     <div>
         @if (Session["usuario"].ToString() != Model.Nick)
         {
-            @Html.ActionLink("Mandar mensaje", "", "Mensaje", new { id = Model.Id }, null)
+            @Html.ActionLink("Mandar mensaje", "Crear", "Mensaje", new { id = Model.Id }, null)
         }
         else
         {

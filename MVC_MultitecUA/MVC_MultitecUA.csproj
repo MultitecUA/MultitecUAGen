@@ -333,11 +333,17 @@
     <Content Include="Views\Recuerdo\VistaUsuario\Recuerdos.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Detalles.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Modificar.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\Crear.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajes.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesEnviados.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesRecibidos.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\DetalleMensajeRecibido.cshtml" />
+    <Content Include="Views\Mensaje\DetalleMensajeEnviado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
-    <Folder Include="Views\Mensaje\VistaUsuario\" />
     <Folder Include="Views\Servicio\VistaUsuario\" />
     <Folder Include="Views\Solicitud\VistaUsuario\" />
   </ItemGroup>

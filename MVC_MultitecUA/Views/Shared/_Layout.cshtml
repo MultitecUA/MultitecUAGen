@@ -85,35 +85,38 @@
                                     @Session["usuario"]
                                     <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    @{if (Session["modoAdmin"].ToString() == "false")
-                                        {
-                                            <li>
-                                                @Html.ActionLink("Modificar perfil", "Modificar", "Usuario")
-                                            </li>
-                                        }
-                                    }
-                                    @{ if (Session["esAdmin"].ToString() == "true")
-                                        {
-                                            if (Session["modoAdmin"].ToString() == "false")
-                                            {
+								<ul class="dropdown-menu">
+									@{if (Session["modoAdmin"].ToString() == "false")
+										{
+											<li>
+												@Html.ActionLink("Modificar perfil", "Modificar", "Usuario")
+											</li>
+											<li>
+												@Html.ActionLink("Mis mensajes", "MisMensajes", "Mensaje")
+											</li>
+										}
+									}
+									@{ if (Session["esAdmin"].ToString() == "true")
+										{
+											if (Session["modoAdmin"].ToString() == "false")
+											{
 
-                                                <li>
-                                                    @Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
-                                                </li>
-                                            }
-                                            else
-                                            {
-                                                <li>
-                                                    @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
-                                                </li>
-                                            }
-                                        }
-                                    }
-                                    <li>
-                                        @Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
-                                    </li>
-                                </ul>
+												<li>
+													@Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
+												</li>
+											}
+											else
+											{
+												<li>
+													@Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
+												</li>
+											}
+										}
+									}
+									<li>
+										@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
+									</li>
+								</ul>
                             </li>
                         </ul>
                     }
