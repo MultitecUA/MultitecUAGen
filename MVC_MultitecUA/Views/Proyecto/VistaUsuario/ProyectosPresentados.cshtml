@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN>
 
 @{
-    ViewBag.Title = "Proyectos";
+    ViewBag.Title = "Todos los Proyectos";
 }
 
-<h2>Proyectos Presentados</h2>
-
+<h2>Listado de todos los Proyectos</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <p>
     <h3>Filtros:</h3>
     @using (Html.BeginForm("ForNombre", "Proyecto"))
@@ -65,7 +67,6 @@
 </p>
 <table class="table">
     <tr>
-    <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
@@ -75,7 +76,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-    </tr>
+        <th>
+            Eventos
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -89,6 +92,9 @@
             </td>
             <th>
                 @Html.DisplayFor(model => item.Estado)
+            </th>
+            <th>
+                @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
             </th>
         </tr>
     }

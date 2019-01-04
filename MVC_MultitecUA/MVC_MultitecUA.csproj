@@ -333,6 +333,13 @@
     <Content Include="Views\Recuerdo\VistaUsuario\Recuerdos.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Detalles.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Modificar.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\CambiarEstado.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\GestionEventos.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\GestionModeradores.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\GestionParticipantes.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\Modificar.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\Borrar.cshtml" />
+    <Content Include="Views\Proyecto\VistaUsuario\ProyectosPorEvento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -201,31 +201,42 @@ namespace MVC_MultitecUA.Controllers
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
 
             ArrayList listaCatesE = new ArrayList();
+            ArrayList listaCatesA = new ArrayList();
 
             CategoriaUsuarioCEN categorias = new CategoriaUsuarioCEN();
             List<CategoriaUsuarioEN> cat = categorias.ReadAll(0, -1).ToList();
 
             foreach (CategoriaUsuarioEN a in cat)
             {
-                if (proyectoEN.CategoriasBuscadas.Contains(a))
+                if (!proyectoEN.CategoriasBuscadas.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                else
                 {
                     listaCatesE.Add(a.Nombre);
                 }
             }
+            ViewData["listaCategoriasUsuarioAgregar"] = listaCatesA;
             ViewData["listaCategoriasUsuarioEliminar"] = listaCatesE;
 
             listaCatesE = new ArrayList();
-
+            listaCatesA = new ArrayList();
             CategoriaProyectoCEN categoriasProyectos = new CategoriaProyectoCEN();
             List<CategoriaProyectoEN> catPro = categoriasProyectos.ReadAll(0, -1).ToList();
 
             foreach (CategoriaProyectoEN a in catPro)
             {
-                if (proyectoEN.CategoriasProyectos.Contains(a))
+                if (!proyectoEN.CategoriasProyectos.Contains(a))
+                {
+                    listaCatesA.Add(a.Nombre);
+                }
+                else
                 {
                     listaCatesE.Add(a.Nombre);
                 }
             }
+            ViewData["listaCategoriasProyectoAgregar"] = listaCatesA;
             ViewData["listaCategoriasProyectoEliminar"] = listaCatesE;
 
             ViewData["titulo"] = proyectoEN.Nombre;
@@ -258,10 +269,9 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
+
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
 
             if (formCollection["CategoriaPro"] != "")
             {
@@ -272,12 +282,14 @@ namespace MVC_MultitecUA.Controllers
 
                 categorias.Add(categoriaEN.Id);
 
-                ProyectoCEN proyectoCEN = new ProyectoCEN();
+                
                 proyectoCEN.AgregaCategoriasProyecto(num, categorias);
-                return RedirectToAction("Details", new { id });
             }
 
-            return RedirectToAction("Details", new { id });
+            if (Session["modoAdmin"].ToString() == "false")
+                return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+            else
+                return RedirectToAction("Details", new { id });
         }
 
         // POST: Proyecto/EliminarCatPro
@@ -286,10 +298,9 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
+
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
 
             if (formCollection["CategoriaPro"] != "")
             {
@@ -300,12 +311,13 @@ namespace MVC_MultitecUA.Controllers
 
                 categorias.Add(categoriaEN.Id);
 
-                ProyectoCEN proyectoCEN = new ProyectoCEN();
-                proyectoCEN.EliminaCategoriasProyecto(num, categorias);
-                return RedirectToAction("Details", new { id });
+                proyectoCEN.EliminaCategoriasProyecto(num, categorias);                
             }
 
-            return RedirectToAction("Details", new { id });
+            if (Session["modoAdmin"].ToString() == "false")
+                return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+            else
+                return RedirectToAction("Details", new { id });
         }
 
         // POST: Proyecto/AgregarCatUsu
@@ -314,12 +326,11 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            if (formCollection["CategoriaUsu"] != "")
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+
+            if (formCollection["CategoriaPro"] != "")
             {
                 int num = id;
                 CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
@@ -328,12 +339,13 @@ namespace MVC_MultitecUA.Controllers
 
                 categorias.Add(categoriaEN.Id);
 
-                ProyectoCEN proyectoCEN = new ProyectoCEN();
                 proyectoCEN.AgregaCategoriasUsuario(num, categorias);
-                return RedirectToAction("Details", new { id });
             }
 
-            return RedirectToAction("Details", new { id });
+            if (Session["modoAdmin"].ToString() == "false")
+                return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+            else
+                return RedirectToAction("Details", new { id });
         }
 
         // POST: Proyecto/EliminarCatUsu
@@ -342,12 +354,11 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            if (formCollection["CategoriaUsu"] != "")
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
+
+            if (formCollection["CategoriaPro"] != "")
             {
                 int num = id;
                 CategoriaUsuarioCEN categoria = new CategoriaUsuarioCEN();
@@ -356,12 +367,13 @@ namespace MVC_MultitecUA.Controllers
 
                 categorias.Add(categoriaEN.Id);
 
-                ProyectoCEN proyectoCEN = new ProyectoCEN();
                 proyectoCEN.EliminaCategoriasUsuario(num, categorias);
-                return RedirectToAction("Details", new { id });
             }
 
-            return RedirectToAction("Details", new { id });
+            if (Session["modoAdmin"].ToString() == "false")
+                return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+            else
+                return RedirectToAction("Details", new { id });
         }
 
         // GET: Proyecto/Create
@@ -466,7 +478,7 @@ namespace MVC_MultitecUA.Controllers
             return View("./VistaUsuario/Crear",proyectoEN);
         }
 
-        // POST: Proyecto/Create
+        // POST: Proyecto/Crear
         [HttpPost]
         public ActionResult Crear(FormCollection formCollection)
         {
@@ -528,14 +540,22 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
-            ViewData["titulo"] = proyectoEN.Nombre;
+
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
+            {
+                ViewData["titulo"] = proyectoEN.Nombre;
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/Modificar", proyectoEN);
+            }
+
             return View(proyectoEN);
         }
 
@@ -545,10 +565,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -586,7 +602,11 @@ namespace MVC_MultitecUA.Controllers
                 proyectoCP.Modify(id, proyectoEN.Nombre, proyectoEN.Descripcion, proyectoEN.FotosProyecto);
 
                 TempData["proyectoeditado"] = "Se ha editado el proyecto: " + proyectoEN.Nombre;
-                return RedirectToAction("Details/" + id);
+                
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+                else
+                    return RedirectToAction("Details/" + id);
             }
             catch
             {
@@ -599,15 +619,24 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
-            ViewData["titulo"] = proyectoEN.Nombre;
+
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
+            {
+                ViewData["titulo"] = proyectoEN.Nombre;
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/Borrar", proyectoEN);
+            }
+
             return View(proyectoEN);
+
         }
 
         // POST: Proyecto/Delete/5
@@ -616,16 +645,15 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
                 ProyectoCP proyectoCP = new ProyectoCP();
                 proyectoCP.Destroy(id);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("MisProyectos");
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -636,13 +664,6 @@ namespace MVC_MultitecUA.Controllers
         // GET: Proyecto/ProyectosPorEvento/5
         public ActionResult ProyectosPorEvento(int id)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             ProyectoCEN proyectoCEN = new ProyectoCEN();
 
             EventoCEN eventoCEN = new EventoCEN();
@@ -651,7 +672,10 @@ namespace MVC_MultitecUA.Controllers
 
             IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosPorEvento(id);
 
-            return View(listaProyectos);
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaProyectos);
+            else
+                return View("./VistaUsuario/ProyectosPorEvento", listaProyectos);
         }
 
         // GET: Proyecto/ProyectosUsuarioPertenece/5
@@ -833,21 +857,28 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoCAD proyectoCAD = new ProyectoCAD(session);
+            ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
 
-            ArrayList listaEstados = new ArrayList();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
 
-            foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
-                listaEstados.Add(a);
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
+            {
+                ArrayList listaEstados = new ArrayList();
 
-            ViewData["istaEstados"] = listaEstados;
-            ViewData["nombre"] = proyectoEN.Nombre;
+                foreach (var a in Enum.GetNames(typeof(EstadoProyectoEnum)))
+                    listaEstados.Add(a);
+
+                ViewData["istaEstados"] = listaEstados;
+                ViewData["nombre"] = proyectoEN.Nombre;
+
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/CambiarEstado",proyectoEN);
+            }      
 
             return View(proyectoEN);
         }
@@ -858,16 +889,16 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
                 ProyectoCEN proyectoCEN = new ProyectoCEN();
                 proyectoCEN.CambiarEstado(id, proyectoEN.Estado);
-                return RedirectToAction("Index");
+
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id = proyectoEN.Id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -880,31 +911,39 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
-            EventoCEN eventoCEN = new EventoCEN();
 
-            ArrayList listaEventosAgregar = new ArrayList();
-            ArrayList listaEventosEliminar = new ArrayList();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
 
-            foreach (var a in eventoCEN.ReadAll(0,-1))
+            EventoCAD eventoCAD = new EventoCAD(session);
+            EventoCEN eventoCEN = new EventoCEN(eventoCAD);
+
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
             {
-                if (proyectoEN.EventosAsociados.Contains(a))
-                    listaEventosEliminar.Add(a.Nombre);
-                else
-                    listaEventosAgregar.Add(a.Nombre);
+                ArrayList listaEventosAgregar = new ArrayList();
+                ArrayList listaEventosEliminar = new ArrayList();
+
+                foreach (var a in eventoCEN.ReadAll(0, -1))
+                {
+                    if (proyectoEN.EventosAsociados.Contains(a))
+                        listaEventosEliminar.Add(a.Nombre);
+                    else
+                        listaEventosAgregar.Add(a.Nombre);
+                }
+
+
+                ViewData["listaEventosAgregar"] = listaEventosAgregar;
+                ViewData["listaEventosEliminar"] = listaEventosEliminar;
+                ViewData["nombre"] = proyectoEN.Nombre;
+
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/GestionEventos", proyectoEN);
             }
-
-
-            ViewData["listaEventosAgregar"] = listaEventosAgregar;
-            ViewData["listaEventosEliminar"] = listaEventosEliminar;
-            ViewData["nombre"] = proyectoEN.Nombre;
 
             return View(proyectoEN);
         }
@@ -915,10 +954,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -929,7 +964,10 @@ namespace MVC_MultitecUA.Controllers
                 eventos.Add(eventoCEN.ReadNombre(formCollection["Evento"]).Id);
 
                 proyectoCP.AgregaEventos(id, eventos);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -943,10 +981,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -957,7 +991,10 @@ namespace MVC_MultitecUA.Controllers
                 eventos.Add(eventoCEN.ReadNombre(formCollection["Evento"]).Id);
 
                 proyectoCP.EliminaEventos(id, eventos);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -970,31 +1007,37 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
-            UsuarioCEN usuarioCEN = new UsuarioCEN();
 
-            ArrayList listaUsuariosAgregar = new ArrayList();
-            ArrayList listaUsuariosEliminar = new ArrayList();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
 
-            foreach (var a in usuarioCEN.ReadAll(0, -1))
+
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
             {
-                if (proyectoEN.UsuariosParticipantes.Contains(a))
-                    listaUsuariosEliminar.Add(a.Nick);
-                else
-                    listaUsuariosAgregar.Add(a.Nick);
+                ArrayList listaUsuariosAgregar = new ArrayList();
+                ArrayList listaUsuariosEliminar = new ArrayList();
+
+                foreach (var a in usuarioCEN.ReadAll(0, -1))
+                {
+                    if (proyectoEN.UsuariosParticipantes.Contains(a))
+                        listaUsuariosEliminar.Add(a.Nick);
+                    else
+                        listaUsuariosAgregar.Add(a.Nick);
+                }
+
+
+                ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
+                ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
+                ViewData["nombre"] = proyectoEN.Nombre;
+
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/GestionParticipantes", proyectoEN);
             }
-
-
-            ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
-            ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
-            ViewData["nombre"] = proyectoEN.Nombre;
 
             return View(proyectoEN);
         }
@@ -1005,10 +1048,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -1019,7 +1058,10 @@ namespace MVC_MultitecUA.Controllers
                 usuarios.Add(usuarioCEN.ReadNick(formCollection["Participante"]).Id);
 
                 proyectoCP.AgregaParticipantes(id, usuarios);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -1033,10 +1075,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -1047,7 +1085,10 @@ namespace MVC_MultitecUA.Controllers
                 usuarios.Add(usuarioCEN.ReadNick(formCollection["Participante"]).Id);
 
                 proyectoCP.EliminaParticipantes(id, usuarios);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -1060,31 +1101,37 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             ProyectoCAD proyectoCAD = new ProyectoCAD(session);
             ProyectoCEN proyectoCEN = new ProyectoCEN(proyectoCAD);
             ProyectoEN proyectoEN = proyectoCEN.ReadOID(id);
-            UsuarioCEN usuarioCEN = new UsuarioCEN();
 
-            ArrayList listaUsuariosAgregar = new ArrayList();
-            ArrayList listaUsuariosEliminar = new ArrayList();
+            UsuarioCAD usuarioCAD = new UsuarioCAD(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioCAD);
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
 
-            foreach (var a in usuarioCEN.ReadAll(0, -1))
+
+            if (proyectoEN.UsuariosModeradores.Contains(usuarioEN) || Session["modoAdmin"].ToString() == "true")
             {
-                if (proyectoEN.UsuariosModeradores.Contains(a))
-                    listaUsuariosEliminar.Add(a.Nick);
-                else if (proyectoEN.UsuariosParticipantes.Contains(a))
-                    listaUsuariosAgregar.Add(a.Nick);
+                ArrayList listaUsuariosAgregar = new ArrayList();
+                ArrayList listaUsuariosEliminar = new ArrayList();
+
+                foreach (var a in usuarioCEN.ReadAll(0, -1))
+                {
+                    if (proyectoEN.UsuariosModeradores.Contains(a))
+                        listaUsuariosEliminar.Add(a.Nick);
+                    else if (proyectoEN.UsuariosParticipantes.Contains(a))
+                        listaUsuariosAgregar.Add(a.Nick);
+                }
+
+
+                ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
+                ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
+                ViewData["nombre"] = proyectoEN.Nombre;
+
+                if (Session["modoAdmin"].ToString() == "false")
+                    return View("./VistaUsuario/GestionModeradores", proyectoEN);
             }
-
-
-            ViewData["listaUsuariosAgregar"] = listaUsuariosAgregar;
-            ViewData["listaUsuariosEliminar"] = listaUsuariosEliminar;
-            ViewData["nombre"] = proyectoEN.Nombre;
 
             return View(proyectoEN);
         }
@@ -1095,10 +1142,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -1109,7 +1152,10 @@ namespace MVC_MultitecUA.Controllers
                 usuarios.Add(usuarioCEN.ReadNick(formCollection["Moderador"]).Id);
 
                 proyectoCP.AgregaModeradores(id, usuarios);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -1123,10 +1169,6 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
             try
             {
@@ -1137,7 +1179,10 @@ namespace MVC_MultitecUA.Controllers
                 usuarios.Add(usuarioCEN.ReadNick(formCollection["Moderador"]).Id);
 
                 proyectoCP.EliminaModeradores(id, usuarios);
-                return RedirectToAction("Index");
+                if (Session["modoAdmin"].ToString() == "false")
+                    return RedirectToAction("Detalles", new { id });
+                else
+                    return RedirectToAction("Index");
             }
             catch
             {
