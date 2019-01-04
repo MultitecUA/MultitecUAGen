@@ -277,11 +277,12 @@ public void AgregaCategorias (int p_Usuario_OID, System.Collections.Generic.ILis
                 foreach (int item in p_categoriasUsuarios_OIDs) {
                         categoriasUsuariosENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN ();
                         categoriasUsuariosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaUsuarioEN), item);
-                    if (!categoriasUsuariosENAux.UsuariosCategorizados.Contains(usuarioEN))
-                        categoriasUsuariosENAux.UsuariosCategorizados.Add(usuarioEN);
+                        if (!usuarioEN.CategoriasUsuarios.Contains(categoriasUsuariosENAux))
+                        {
+                            categoriasUsuariosENAux.UsuariosCategorizados.Add(usuarioEN);
 
-                    if (!usuarioEN.CategoriasUsuarios.Contains(categoriasUsuariosENAux))
-                        usuarioEN.CategoriasUsuarios.Add(categoriasUsuariosENAux);
+                            usuarioEN.CategoriasUsuarios.Add(categoriasUsuariosENAux);
+                        }
                 }
 
 

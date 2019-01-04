@@ -306,11 +306,12 @@ public void AgregaCategorias (int p_Evento_OID, System.Collections.Generic.IList
                 foreach (int item in p_categoriasEventos_OIDs) {
                         categoriasEventosENAux = new MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN ();
                         categoriasEventosENAux = (MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN)session.Load (typeof(MultitecUAGenNHibernate.EN.MultitecUA.CategoriaProyectoEN), item);
-                    if (!categoriasEventosENAux.EventosCategorizados.Contains(eventoEN))
-                        categoriasEventosENAux.EventosCategorizados.Add(eventoEN);
+                        if (!eventoEN.CategoriasEventos.Contains(categoriasEventosENAux))
+                        {
+                            categoriasEventosENAux.EventosCategorizados.Add(eventoEN);
 
-                    if (!eventoEN.CategoriasEventos.Contains(categoriasEventosENAux))
-                        eventoEN.CategoriasEventos.Add(categoriasEventosENAux);
+                            eventoEN.CategoriasEventos.Add(categoriasEventosENAux);
+                        }
                 }
 
 
