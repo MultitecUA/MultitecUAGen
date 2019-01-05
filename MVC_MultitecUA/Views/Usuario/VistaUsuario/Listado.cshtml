@@ -86,7 +86,7 @@
             @Html.DisplayFor(modelItem => item.FechaAlta)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Nick)
+            @Html.ActionLink(item.Nick, "Detalles", new { nick = item.Nick })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Rol)
