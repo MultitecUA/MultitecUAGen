@@ -41,20 +41,22 @@ namespace MVC_MultitecUA.Controllers
 
             int inicio = (int)pag * tamPag;
 
+
             ArrayList listaEstados = new ArrayList();
             listaEstados.Add("");
-            listaEstados.Add("Leido");
-            listaEstados.Add("NoLeido");
 
-            ArrayList listaBandeja = new ArrayList();
+            foreach (var a in Enum.GetNames(typeof(EstadoLecturaEnum)))
+                listaEstados.Add(a);
+
+            /*ArrayList listaBandeja = new ArrayList();
             listaBandeja.Add("");
-            listaBandeja.Add("Activo");
-            listaBandeja.Add("Archivado");
-            listaBandeja.Add("Borrado");
+
+            foreach (var a in Enum.GetNames(typeof(EstadoLecturaEnum)))
+                listaBandeja.Add(a);*/
 
             ViewData["listaEstados"] = listaEstados;
-            ViewData["listaBandejaAutor"] = listaBandeja;
-            ViewData["listaBandejaReceptor"] = listaBandeja;
+            /*ViewData["listaBandejaAutor"] = listaBandeja;
+            ViewData["listaBandejaReceptor"] = listaBandeja;*/
 
             IList<MensajeEN> listaMensajes = mensajeCEN.ReadAll(inicio, tamPag).ToList();
             IEnumerable<MensajeModel> mensajes = new AssemblerMensajeModel().ConvertListENToModel(listaMensajes).ToList();
@@ -216,12 +218,12 @@ namespace MVC_MultitecUA.Controllers
                 try
                 {
                     TempData["bien2"] = "Se ha modificado correctamente el estado del mensaje";
-                    return RedirectToAction("MisMensajes");
+                    return RedirectToAction("DetalleMensajeRecibido", new { id = id });
                 }
                 catch
                 {
                     TempData["mal2"] = "Ocurrió un problema al intentar modificar el mensaje";
-                    return RedirectToAction("MisMensajes");
+                    return RedirectToAction("DetalleMensajeRecibido", new { id = id });
                 }
             }
         }
@@ -248,24 +250,59 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            try
+            var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaAutor);
+            MensajeCEN mensajeCEN = new MensajeCEN();
+            MensajeEN mensaje = mensajeCEN.ReadOID(id);
+            mensajeCEN.CambiarBandejaAutor(id, (BandejaMensajeEnum)bandeja);
+
+
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() != "" && Session["modoAdmin"].ToString() == "true")
             {
-                var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaAutor);
-                MensajeCEN mensajeCEN = new MensajeCEN();
-                mensajeCEN.CambiarBandejaAutor(id, (BandejaMensajeEnum)bandeja);
+                try
+                {
+                    if (cambioBandejaAutor != mensaje.BandejaAutor.ToString())
+                    {
+                        mensajeCEN.CambiarBandejaAutor(id, (BandejaMensajeEnum)bandeja);
+                        TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("Details", new { id = id });
+                    }
+                    else
+                    {
+                        TempData["regular"] = "El mensaje " + id + " ya está en la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("Index");
 
-                TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
-                return RedirectToAction("Details", new { id = id });
+                    }
+                }
+                catch
+                {
+                    TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            else
             {
-                TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
-                return RedirectToAction("Index");
+                try
+                {
+                    if (cambioBandejaAutor != mensaje.BandejaAutor.ToString())
+                    {
+                        mensajeCEN.CambiarBandejaAutor(id, (BandejaMensajeEnum)bandeja);
+                        TempData["bien2"] = "Se ha movido correctamente el mensaje a la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("DetalleMensajeEnviado", new { id = id });
+                    }
+                    else
+                    {
+                        TempData["regular2"] = "El mensaje ya está en la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("DetalleMensajeEnviado", new { id = id });
+
+                    }
+                }
+                catch
+                {
+                    TempData["mal2"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                    return RedirectToAction("MisMensajes");
+                }
+
             }
         }
         // GET: Usuario/Edit/5
@@ -291,24 +328,59 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            try
+            var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaReceptor);
+            MensajeCEN mensajeCEN = new MensajeCEN();
+            MensajeEN mensaje = mensajeCEN.ReadOID(id);
+            mensajeCEN.CambiarBandejaReceptor(id, (BandejaMensajeEnum)bandeja);
+
+
+            if (Session["modoAdmin"] != null && Session["modoAdmin"].ToString() != "" && Session["modoAdmin"].ToString() == "true")
             {
-                var bandeja = Enum.Parse(typeof(BandejaMensajeEnum), cambioBandejaReceptor);
-                MensajeCEN mensajeCEN = new MensajeCEN();
-                mensajeCEN.CambiarBandejaReceptor(id, (BandejaMensajeEnum)bandeja);
+                try
+                {
+                    if (cambioBandejaReceptor != mensaje.BandejaReceptor.ToString())
+                    {
+                        mensajeCEN.CambiarBandejaReceptor(id, (BandejaMensajeEnum)bandeja);
+                        TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("Details", new { id = id });
+                    }
+                    else
+                    {
+                        TempData["regular"] = "El mensaje " + id + " ya está en la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("Index");
 
-                TempData["bien"] = "Se ha movido correctamente el mensaje " + id + " a la bandeja " + (BandejaMensajeEnum)bandeja;
-                return RedirectToAction("Details", new { id = id });
+                    }
+                }
+                catch
+                {
+                    TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            else
             {
-                TempData["mal"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
-                return RedirectToAction("Index");
+                try
+                {
+                    if (cambioBandejaReceptor != mensaje.BandejaReceptor.ToString())
+                    {
+                        mensajeCEN.CambiarBandejaReceptor(id, (BandejaMensajeEnum)bandeja);
+                        TempData["bien2"] = "Se ha movido correctamente el mensaje a la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("DetalleMensajeRecibido", new { id = id });
+                    }
+                    else
+                    {
+                        TempData["regular2"] = "El mensaje ya está en la bandeja " + (BandejaMensajeEnum)bandeja;
+                        return RedirectToAction("DetalleMensajeRecibido", new { id = id });
+
+                    }
+                }
+                catch
+                {
+                    TempData["mal2"] = "Ocurrió un problema al intentar mover el mensaje " + id + " de bandeja";
+                    return RedirectToAction("MisMensajes");
+                }
+
             }
         }
 
@@ -371,20 +443,21 @@ namespace MVC_MultitecUA.Controllers
 
             ArrayList listaEstados = new ArrayList();
             listaEstados.Add("");
-            listaEstados.Add("Leido");
-            listaEstados.Add("NoLeido");
 
-            ArrayList listaBandeja = new ArrayList();
+            foreach (var a in Enum.GetNames(typeof(EstadoLecturaEnum)))
+                listaEstados.Add(a);
+
+            /*ArrayList listaBandeja = new ArrayList();
             listaBandeja.Add("");
             listaBandeja.Add("Activo");
             listaBandeja.Add("Archivado");
-            listaBandeja.Add("Borrado");
+            listaBandeja.Add("Borrado");*/
 
 
 
             ViewData["listaEstados"] = listaEstados;
-            ViewData["listaBandejaAutor"] = listaBandeja;
-            ViewData["listaBandejaReceptor"] = listaBandeja;
+           /* ViewData["listaBandejaAutor"] = listaBandeja;
+            ViewData["listaBandejaReceptor"] = listaBandeja;*/
 
 
 
@@ -481,7 +554,6 @@ namespace MVC_MultitecUA.Controllers
             ViewData["numeroPaginas"] = numPags;
 
             int inicio = (int)pag * tamPag;
-
 
             IEnumerable<MensajeModel> mensajesConvertidos = new AssemblerMensajeModel().ConvertListENToModel(mensajesFiltrados).ToList();
             SessionClose();
@@ -665,6 +737,13 @@ namespace MVC_MultitecUA.Controllers
             var estado = Enum.Parse(typeof(EstadoLecturaEnum), cambioEstado);
             mensajeCEN.CambiarEstado(id, (EstadoLecturaEnum)estado);
 
+            ArrayList listaBandeja = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(BandejaMensajeEnum)))
+                listaBandeja.Add(a);
+
+            ViewData["listaBandeja"] = listaBandeja;
+
             MensajeModel mensaje = new AssemblerMensajeModel().ConvertENToModelUI(mensajeEN);
             return View("./VistaUsuario/DetalleMensajeRecibido",mensaje);
         }
@@ -674,6 +753,13 @@ namespace MVC_MultitecUA.Controllers
 
             MensajeCEN mensajeCEN = new MensajeCEN();
             MensajeEN mensajeEN = mensajeCEN.ReadOID(id);
+
+            ArrayList listaBandeja = new ArrayList();
+
+            foreach (var a in Enum.GetNames(typeof(BandejaMensajeEnum)))
+                listaBandeja.Add(a);
+
+            ViewData["listaBandeja"] = listaBandeja;
 
             MensajeModel mensaje = new AssemblerMensajeModel().ConvertENToModelUI(mensajeEN);
             return View("./VistaUsuario/DetalleMensajeEnviado", mensaje);

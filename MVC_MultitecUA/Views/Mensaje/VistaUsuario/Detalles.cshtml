@@ -5,7 +5,9 @@
 }
 
 <h2>Detalles de Mensaje</h2>
-
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mis mensajes", "MisMensajes")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 @{
 	if (TempData["bien"] != null)
 	{

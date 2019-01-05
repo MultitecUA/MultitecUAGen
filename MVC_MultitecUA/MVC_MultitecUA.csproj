@@ -339,7 +339,7 @@
     <Content Include="Views\Mensaje\VistaUsuario\MisMensajesEnviados.cshtml" />
     <Content Include="Views\Mensaje\VistaUsuario\MisMensajesRecibidos.cshtml" />
     <Content Include="Views\Mensaje\VistaUsuario\DetalleMensajeRecibido.cshtml" />
-    <Content Include="Views\Mensaje\DetalleMensajeEnviado.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\DetalleMensajeEnviado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

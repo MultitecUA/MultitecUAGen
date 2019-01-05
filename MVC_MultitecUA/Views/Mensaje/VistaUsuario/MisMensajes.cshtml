@@ -5,6 +5,9 @@
 }
 
 <h2>Mis mensajes</h2>
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 
 <p>
 	<h3>Filtros:</h3>
@@ -36,6 +39,12 @@
 	{
 		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
 		TempData.Remove("bien2");
+	}
+	else
+	if (TempData["regular2"] != null)
+	{
+		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular2"] </p>
+		TempData.Remove("regular2");
 	}
 }
 
@@ -107,9 +116,9 @@
 
 			if (siguiente > 1)
 			{
-				<label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+				<label>@Html.ActionLink("Primera", "MisMensajes", new { pag = 0 })</label>
 				<span>|</span>
-				<label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+				<label>@Html.ActionLink("Anterior", "MisMensajes", new { pag = anterior })</label>
 			}
 			else
 			{
@@ -126,9 +135,9 @@
 
 			if (siguiente < numPags)
 			{
-				<label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+				<label>@Html.ActionLink("Siguiente", "MisMensajes", new { pag = siguiente })</label>
 				<span>|</span>
-				<label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+				<label>@Html.ActionLink("Última", "MisMensajes", new { pag = numPags - 1 })</label>
 			}
 			else
 			{

@@ -44,6 +44,12 @@
 		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
 		TempData.Remove("bien");
 	}
+	else
+	if (TempData["regular"] != null)
+	{
+		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular"] </p>
+		TempData.Remove("regular");
+	}
 }
 
 <table class="table">
@@ -82,42 +88,42 @@
 
 	@foreach (var item in Model)
 	{
-	<tr>
-		<td>
-			@Html.DisplayFor(modelItem => item.Id)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Titulo)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Cuerpo)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.NickAutor)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.BandejaAutor)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.NickReceptor)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.BandejaReceptor)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.EstadoLectura)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Fecha)
-		</td>
-		<td>
-			@Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-			@Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
-			@Html.ActionLink("Cambiar estado lectura", "Edit", new { id = item.Id }) |
-			@Html.ActionLink("Cambiar bandeja de autor", "EditAutor", new { id = item.Id }) |
-			@Html.ActionLink("Cambiar bandeja de receptor", "EditReceptor", new { id = item.Id })
-		</td>
-	</tr>
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Id)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Titulo)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Cuerpo)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NickAutor)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.BandejaAutor)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NickReceptor)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.BandejaReceptor)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EstadoLectura)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Fecha)
+			</td>
+			<td>
+				@Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+				@Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+				@Html.ActionLink("Cambiar estado lectura", "Edit", new { id = item.Id }) |
+				@Html.ActionLink("Cambiar bandeja de autor", "EditAutor", new { id = item.Id }) |
+				@Html.ActionLink("Cambiar bandeja de receptor", "EditReceptor", new { id = item.Id })
+			</td>
+		</tr>
 	}
 
 </table>

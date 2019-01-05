@@ -6,6 +6,10 @@
 
 <h2>Enviar mensaje</h2>
 
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mis mensajes", "MisMensajes")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
@@ -37,7 +41,7 @@
 }
 
 <div>
-	@Html.ActionLink("Volver a la lista", "Index")
+	@Html.ActionLink("Volver a la lista", "MisMensajes")
 </div>
 
 @section Scripts {
