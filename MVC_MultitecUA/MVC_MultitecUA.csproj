@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensajeController.cs" />
     <Compile Include="Controllers\NoticiaController.cs" />
+    <Compile Include="Controllers\NotificacionUsuarioController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\RecuerdoController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
@@ -333,6 +334,8 @@
     <Content Include="Views\Recuerdo\VistaUsuario\Recuerdos.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Detalles.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Modificar.cshtml" />
+    <Content Include="Views\NotificacionUsuario\MisNotificaciones.cshtml" />
+    <Content Include="Views\NotificacionUsuario\NoLeidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
