@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.NotificacionUsuarioEN>
+@using MultitecUAGenNHibernate.CEN.MultitecUA;
+@using MultitecUAGenNHibernate.EN.MultitecUA;
+
+@{
+	ViewBag.Title = "MisNotificaciones";
+	ViewData["origen"] = "MisNotificaciones";
+}
+
+<h2>Mis Notificaciones</h2>
+
+<p>
+	@Html.ActionLink("Ver no leídas", "NoLeidas")
+</p>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayName("Título")
+		</th>
+		<th>
+			@Html.DisplayName("Mensaje")
+		</th>
+		<th>
+			@Html.DisplayName("Fecha")
+		</th>
+		<th>
+			No leído
+		</th>
+	</tr>
+
+	@{
+		foreach (var item in Model)
+		{
+			NotificacionCEN notificacionCEN = new NotificacionCEN();
+			NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
+
+			<tr>
+				<td>
+					@notificacion.Titulo
+				</td>
+				<td>
+					@notificacion.Mensaje
+				</td>
+				<td>
+					@notificacion.Fecha.ToString()
+				</td>
+				<td>
+					@if ((int)item.Estado == 2) // 1 - Leido	2 - No Leido
+					{
+						@Html.ActionLink("Marcar como leída", "LeerNotificacion", new { OID = item.Id, origen = "MisNotificaciones" })
+					}
+				</td>
+			</tr>
+		}
+	}
+</table>
