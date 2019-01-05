@@ -1,0 +1,134 @@
+﻿@model IEnumerable<MVC_MultitecUA.Models.Solicitud>
+
+@{
+    ViewBag.Title = "Administrar Solicitudes";
+}
+
+<h2>Administrar Solicitudes</h2>
+<br />
+<p class="text-center">
+    <label>@Html.ActionLink("Proyectos Presentados", "ProyectosPresentados", "Proyecto")</label><span> >> </span><label>@Html.ActionLink("Detalle de Proyecto", "Detalles/" + ViewData["proyectoId"], "Proyecto")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+@{
+    if (TempData["mal"] != null)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        TempData.Remove("mal");
+    }
+    else
+    if (TempData["bien"] != null)
+    {
+        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        TempData.Remove("bien");
+    }
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nick_Solicitante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre_Proyecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nick_Solicitante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+            </td>
+            <td>
+                @{
+                    if (item.Estado == "Pendiente")
+                    {
+                        
+                        @Html.ActionLink("Aceptar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Aceptar" }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Rechazar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Rechazar" }, new { @class = "btn btn-default" })
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    }
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles", "DetailsCliente", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) 
+                
+            </td>
+        </tr>
+    }
+
+</table>
+
+@{
+    /* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+    var siguiente = (int)ViewData["pag"] + 1;
+    var anterior = siguiente - 2;
+    var numPags = (int)ViewData["numeroPaginas"] + 1;
+}
+<p class="text-center">
+    @{
+        if (siguiente > 1)
+        {
+            <label>@Html.ActionLink("Primera", "Index", new { pag = 0 })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Anterior", "Index", new { pag = anterior })</label>
+        }
+        else
+        {
+            <span>Primera</span>
+            <span>|</span>
+            <span>Anterior</span>
+        }
+    }
+
+    <span>|</span>
+    <label>Página @siguiente de @numPags</label>
+    <span>|</span>
+
+    @{
+        if (siguiente < numPags)
+        {
+            <label>@Html.ActionLink("Siguiente", "Index", new { pag = siguiente })</label>
+            <span>|</span>
+            <label>@Html.ActionLink("Última", "Index", new { pag = numPags - 1 })</label>
+        }
+        else
+        {
+            <span>Siguiente</span>
+            <span>|</span>
+            <span>Última</span>
+        }
+    }
+</p>
+
+<p>
+    @Html.ActionLink("Volver al detalle", "../Proyecto/Detalles", new { id = ViewData["proyectoId"] })
+</p>

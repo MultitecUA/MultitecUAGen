@@ -174,7 +174,7 @@ namespace MVC_MultitecUA.Controllers
             }
         }
 
-        // GET: Usuario/Edit
+        // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
             if (Session["usuario"] == null)
@@ -191,33 +191,34 @@ namespace MVC_MultitecUA.Controllers
             return View(solicitud);
         }
 
-        // POST: Usuario/Edit
+        // POST: Usuario/Edit/5
+
         public ActionResult CambioEstado(int id, String cambioEstado)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            /*if (Session["esAdmin"].ToString() == "false")
+            if (Session["esAdmin"].ToString() == "false")
                 return View("../NoAdministrador");
             if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";*/
+                Session["modoAdmin"] = "true";
 
             try
             {
                 SolicitudCEN solicitudCEN = new SolicitudCEN();
-                SolicitudEN solicitudEN = solicitudCEN.ReadOID(id);
                 if (cambioEstado == "Aceptar")
                     solicitudCEN.Aceptar(id);
                 else
                     solicitudCEN.Rechazar(id);
 
-                TempData["bien"] = "Se ha modificado correctamente el estado de la solicitud "+id;
+                TempData["bien"] = "Se a modificado correctamente el estado de la solicitud " + id;
 
-                return RedirectToAction("./VistaUsuario/AdministrarSolicitudes", solicitudEN.ProyectoSolicitado.Id);
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id });
             }
             catch
             {
-                TempData["mal"] = "Ocurrió un problema al intentar modificar la solicitud " + id;
-                return RedirectToAction("./VistaUsuario/AdministrarSolicitudes");
+                TempData["mal"] = "Ocurrio un problema al intentar modificar la solicitud " + id;
+                return RedirectToAction("Index");
             }
         }
 

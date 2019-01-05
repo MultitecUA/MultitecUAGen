@@ -1,0 +1,100 @@
+﻿@model MVC_MultitecUA.Models.Solicitud
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Borrar Solicitud (Cliente)</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Detalle de Proyecto", "Detalles/" + Model.IdProyecto, "Proyecto")</label><span> >> </span><label>@Html.ActionLink("Administrar Solicitudes", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto })</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<h3>¿Estás seguro de que deseas borrar esto?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSolicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSolicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nick_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nick_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Proyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Proyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_Proyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Proyecto)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Solicitud"))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Borrar" class="btn btn-default" /> |
+        @Html.ActionLink("Volver a la lista", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto })
+    </div>
+    }
+</div>
