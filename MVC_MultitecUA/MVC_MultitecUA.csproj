@@ -353,12 +353,21 @@
     <Content Include="Views\Usuario\VistaUsuario\ForCategoria.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\ForNick.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\ForRol.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\Crear.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\DetalleMensajeEnviado.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\DetalleMensajeRecibido.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajes.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesEnviados.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesRecibidos.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\AdministrarSolicitudes.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\DeleteCliente.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\DetailsCliente.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\EnviarSolicitud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
-    <Folder Include="Views\Mensaje\VistaUsuario\" />
-    <Folder Include="Views\Solicitud\VistaUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

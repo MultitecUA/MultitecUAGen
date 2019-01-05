@@ -264,7 +264,7 @@ namespace MVC_MultitecUA.Controllers
             listaUsuarios = new ArrayList();
             foreach (UsuarioEN u in proyectoEN.UsuariosParticipantes)
                 listaUsuarios.Add(u.Nick);
-            if (!listaUsuarios.Contains(Session["usuario"]))
+            if (Session["usuario"] != null && !listaUsuarios.Contains(Session["usuario"]))
             {
                 ViewData["noParticpante"] = "true";
             }

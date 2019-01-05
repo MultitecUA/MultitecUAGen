@@ -133,6 +133,9 @@
                                     <li>
                                         @Html.ActionLink("Modificar perfil", "Modificar", "Usuario")
                                     </li>
+                                    <li>
+										@Html.ActionLink("Mis mensajes", "MisMensajes", "Mensaje")
+									</li>
                                 }
                             }
                             @{ if (Session["esAdmin"].ToString() == "true")

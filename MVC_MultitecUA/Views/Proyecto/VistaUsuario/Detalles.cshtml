@@ -156,7 +156,7 @@
     @if (ViewData["esModerador"] != null)
     {
         <p>
-            @Html.ActionLink("Administrar solicitudes", "", "Solicitud", new { id = Model.Id }, null) |
+            @Html.ActionLink("Administrar solicitudes", "AdministrarSolicitudes", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
             @Html.ActionLink("Cambiar estado", "ChangeEstado", new { id = Model.Id }) |
             @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = Model.Id }) |
             @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = Model.Id }) |
@@ -167,8 +167,8 @@
             @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id })
         </p>
     }
-    else if (ViewData["noParticpante"] != null)
+    else if (ViewData["noParticpante"] != null && ViewData["noParticpante"].ToString()=="true")
     {
-        @Html.ActionLink("Enviar solicitud", "", "Solicitud", new { id = Model.Id }, null)
+        @Html.ActionLink("Enviar solicitud", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
     }
     </div>
