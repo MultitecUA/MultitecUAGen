@@ -10,7 +10,7 @@
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","Evento", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -104,6 +104,12 @@
                     <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> La fecha de tope de inscripción no puede ser mayor a la fecha de fin.</p>
                 }
             }
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="file">Foto (si no se indica, se borrará la foto que hubiese anteriormente): </label>
+        <div class="col-md-10">
+            <input class=" text-box single-line" id="file" name="file" type="file" value="" />
         </div>
     </div>
 

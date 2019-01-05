@@ -28,7 +28,6 @@ namespace MVC_MultitecUA.Controllers
             SessionInitialize();
 
             ArrayList listaEstados = new ArrayList();
-
             foreach (var a in Enum.GetNames(typeof(EstadoServicioEnum)))  
                 listaEstados.Add(a);
           
@@ -99,22 +98,35 @@ namespace MVC_MultitecUA.Controllers
             return View(listaServiciosEstados);
         }
 
+
+
+
         // GET: Servicio/Details/5
         public ActionResult Details(int id)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             Servicio serv = null;
             ServicioEN servicioEN = new ServicioCAD(session).ReadOID(id);
             serv = new AssemblerServicio().ConvertENToModelUI(servicioEN);
+
+            ArrayList listaFotos = new ArrayList();
+            foreach (string foto in servicioEN.FotosServicio)
+            {
+                listaFotos.Add(foto);
+            }
+            ViewData["listaFotos"] = listaFotos;
             ViewData["servicio"] = servicioEN.Nombre;
-            return View(serv);
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                return View(serv);
+            }
+            else
+            {
+                return View("./VistaUsuario/Detalles", serv);
+            }
         }
+
+
+
 
         // GET: Servicio/Create
         public ActionResult Create()
@@ -136,9 +148,12 @@ namespace MVC_MultitecUA.Controllers
             return View(serv);
         }
 
+
+
+
         // POST: Servicio/Create
         [HttpPost]
-        public ActionResult Create(Servicio serv)
+        public ActionResult Create(Servicio serv, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -147,11 +162,33 @@ namespace MVC_MultitecUA.Controllers
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
 
+            string fileName = "", path = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                
+                if(!System.IO.File.Exists(path))
+                    file.SaveAs(path);
+                fileName = "/Imagenes/" + fileName;
+            }
+            
             try
             {
-                // TODO: Add insert logic here
+               
                 ServicioCEN cen = new ServicioCEN();
-                int id = cen.New_(serv.Nombre, serv.Descripcion, serv.Estado,null);
+                int id=0;
+                if(fileName == "") {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    id = cen.New_(serv.Nombre, serv.Descripcion, serv.Estado, fotos);
+                }
+                else {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    id = cen.New_(serv.Nombre, serv.Descripcion, serv.Estado, fotos);
+                }
+
                 TempData["serviciocreado"] = "si";
                 return Redirect("Details/"+id);
             }
@@ -161,6 +198,9 @@ namespace MVC_MultitecUA.Controllers
                 return View();
             }
         }
+
+
+
 
         // GET: Servicio/Edit/5
         public ActionResult Edit(int id)
@@ -187,9 +227,11 @@ namespace MVC_MultitecUA.Controllers
             return View(serv);
         }
 
+
+
         // POST: Servicio/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Servicio serv)
+        public ActionResult Edit(int id, Servicio serv, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -198,11 +240,34 @@ namespace MVC_MultitecUA.Controllers
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
 
+            string fileName = "", path = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+
+                if (!System.IO.File.Exists(path))
+                    file.SaveAs(path);
+                fileName = "/Imagenes/" + fileName;
+            }
+
             try
             {
                 // TODO: Add update logic here
                 ServicioCEN cen = new ServicioCEN();
-                cen.Modify(id, serv.Nombre, serv.Descripcion,serv.Estado,null);
+                ServicioEN servicio = cen.ReadOID(id);
+                if(fileName == "")
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    cen.Modify(id, serv.Nombre, serv.Descripcion, serv.Estado, fotos);
+                }
+                else
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    cen.Modify(id, serv.Nombre, serv.Descripcion, serv.Estado, fotos);
+                }
                 TempData["servicioeditado"] = "si";
                 return RedirectToAction("Details/" + id);
             }
@@ -255,5 +320,30 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+
+
+        public ActionResult ServiciosDisponibles()
+        {
+            SessionInitialize();
+            if (Session["esAdmin"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                return View("../Home/Index_Administrador");
+
+            ServicioCAD servicioCAD = new ServicioCAD(session);
+            ServicioCEN servicioCEN = new ServicioCEN(servicioCAD);
+            IList<ServicioEN> listaServiciosEN = servicioCEN.ReadAll(0, -1).ToList();
+            IList<ServicioEN> serviciosDisponibles = new List<ServicioEN>();
+            foreach (ServicioEN serv in listaServiciosEN)
+            {
+                if (serv.Estado == EstadoServicioEnum.Disponible)
+                    serviciosDisponibles.Add(serv);
+            }
+            
+            IEnumerable<Servicio> listaServicios = new AssemblerServicio().ConvertListENToModel(serviciosDisponibles).ToList();
+            
+            return View("./VistaUsuario/ServiciosDisponibles", listaServicios);
+        }
+
+
     }
 }

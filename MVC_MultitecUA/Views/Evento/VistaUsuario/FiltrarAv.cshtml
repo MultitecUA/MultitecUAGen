@@ -29,36 +29,38 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th style="width: 20em;">
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
-        <th>
+        <th style="max-width: 10em;">
             @Html.DisplayNameFor(model => model.Descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaInicio)
+            Fecha de inicio
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaFin)
+            Fecha de fin
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td style="width: 20em;">
-                <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
-        </tr>
+    <tr>
+        <td style="width: 20em;">
+            <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
+        </td>
+        <td>@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, null)</td>
+    </tr>
     }
 
 </table>

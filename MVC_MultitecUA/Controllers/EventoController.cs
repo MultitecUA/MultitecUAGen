@@ -128,6 +128,8 @@ namespace MVC_MultitecUA.Controllers
             {
                 fileName = Path.GetFileName(file.FileName);
                 path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                if (!System.IO.File.Exists(path))
+                    file.SaveAs(path);
                 file.SaveAs(path);
                 //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
                 //postedFile.SaveAs(path);
@@ -195,12 +197,13 @@ namespace MVC_MultitecUA.Controllers
                 {
                     IList<string> fotos = new List<string>();
                     fotos.Add(fileName);
-
                     OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, fotos);
                 }
                 else
                 {
-                    OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, null);
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    OIDEvento = eventoCEN.New_(evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, fotos);
                 }
 
                 eventoCEN.PublicaEvento(OIDEvento);
@@ -241,7 +244,7 @@ namespace MVC_MultitecUA.Controllers
 
         // POST: Evento/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, EventoEN evento)
+        public ActionResult Edit(int id, EventoEN evento, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -249,8 +252,20 @@ namespace MVC_MultitecUA.Controllers
                 return View("../NoAdministrador");
             if (Session["modoAdmin"].ToString() == "false")
                 Session["modoAdmin"] = "true";
-            
-            try{
+
+            string fileName = "", path = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+
+                if (!System.IO.File.Exists(path))
+                    file.SaveAs(path);
+                fileName = "/Imagenes/" + fileName;
+            }
+
+            try
+            {
                 
                 EventoCP eve = new EventoCP();
                 EventoCEN eventoCEN = new EventoCEN();
@@ -304,8 +319,20 @@ namespace MVC_MultitecUA.Controllers
                         ViewData["FTIMayorFF"] = "mal";
                         return View();
                     }
-                    
-                eve.Modify(id, evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, null);
+                  
+                if(fileName == "")
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    eve.Modify(id, evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, fotos);
+                }
+                else
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    eve.Modify(id, evento.Nombre, evento.Descripcion, evento.FechaInicio, evento.FechaFin, evento.FechaInicioInscripcion, evento.FechaTopeInscripcion, fotos);
+                }
+
                 ViewData["NombreEvento"] = evento.Nombre;
                 TempData["eventoeditado"] = "si";
 
@@ -547,21 +574,28 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
             
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
+            ProyectoCEN proyectoCEN = new ProyectoCEN();
+            ProyectoEN proyecto = proyectoCEN.ReadOID(id);
             ViewData["idProyecto"] = id;
+            ViewData["NombreProyecto"] = proyecto.Nombre;
 
-            if (TempData.ContainsKey("eventocreado"))
-                TempData.Remove("eventocreado");
-            if (TempData.ContainsKey("eventoeditado"))
-                TempData.Remove("eventoeditado");
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                if (TempData.ContainsKey("eventocreado"))
+                    TempData.Remove("eventocreado");
+                if (TempData.ContainsKey("eventoeditado"))
+                    TempData.Remove("eventoeditado");
+
+                return View(eventos);
+            }
+            else
+            {
+                return View("./VistaUsuario/EventosPorProyecto", eventos);
+            }
             
-            return View(eventos);
         }
 
   
@@ -639,9 +673,8 @@ namespace MVC_MultitecUA.Controllers
             ViewData["pag"] = pag;
             ViewData["numeroPaginas"] = numPags;
             int inicio = (int)pag * tamPag;
-
-            IList<EventoEN> eventoEN = eventoCEN.ReadAll(inicio, tamPag).ToList();
             
+            IList<EventoEN> eventoEN = eventoCEN.ReadAll(inicio, tamPag).ToList();
             return View("./VistaUsuario/TodosEventos", eventoEN);
         }
 
@@ -656,6 +689,7 @@ namespace MVC_MultitecUA.Controllers
             EventoCAD eventoCAD = new EventoCAD(session);
             EventoCEN eventoCEN = new EventoCEN(eventoCAD);
             EventoEN evento = eventoCEN.ReadOID(id);
+            ArrayList listaFotos = new ArrayList();
 
             if(evento != null)
             {
@@ -669,6 +703,25 @@ namespace MVC_MultitecUA.Controllers
                         categorias.Add(a.Nombre);
 
                 ViewData["CategoriasEvento"] = categorias;
+
+
+                foreach (string foto in evento.FotosEvento)
+                    listaFotos.Add(foto);
+
+                ViewData["listaFotosEvento"] = listaFotos;
+
+
+                int proyectos = evento.ProyectosPresentados.Count();
+                ViewData["proyectos"] = proyectos;
+
+
+                int participantes = 0;
+                foreach (ProyectoEN p in evento.ProyectosPresentados)
+                {
+                    participantes = participantes + p.UsuariosParticipantes.Count();
+                }
+                ViewData["participantes"] = participantes;
+
                 ViewData["idEvento"] = id;
 
                 SessionClose();
@@ -691,10 +744,46 @@ namespace MVC_MultitecUA.Controllers
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> listaEventos = eventoCEN.DameEventosPorNombre(f["nombre"]);
             ViewData["Buscando"] = f["nombre"];
-            ViewData["filtro"] = f["nombre"] + "(Nombre)";
+            ViewData["filtro"] = f["nombre"] + " (Nombre)";
 
             return View("./VistaUsuario/FiltroNombre", listaEventos);
         }
+
+
+
+
+        public ActionResult MisEventos()
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                return View("../Home/Index_Administrador");
+
+            SessionInitialize();
+            EventoCAD eventoCAD = new EventoCAD(session);
+            EventoCEN eventoCEN = new EventoCEN(eventoCAD);
+            IList<EventoEN> eventoEN = eventoCEN.ReadAll(0,-1);
+            IList<EventoEN> mios = new List<EventoEN>();
+            foreach(EventoEN e in eventoEN)
+            {
+                foreach (ProyectoEN p in e.ProyectosPresentados)
+                {
+                    foreach(UsuarioEN u in p.UsuariosParticipantes)
+                    {
+                        if(u.Nick == Session["usuario"].ToString())
+                        {
+                            mios.Add(e);
+                            break;
+                        }
+                    }
+                }
+            }
+            SessionClose();
+
+            return View("./VistaUsuario/MisEventos",mios);
+
+        }
+
 
     }
 }

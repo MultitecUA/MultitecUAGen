@@ -7,7 +7,7 @@
 <h2>Filtrando eventos: @ViewData["filtro"]</h2>
 <br />
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="./TodosEventos">Eventos</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="./TodosEventos">Eventos</a> / <a href="./MisEventos">Mis eventos</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <br />
 
@@ -43,24 +43,26 @@
         <th>
             Fecha de fin
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td style="width: 20em;">
-                <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-            </td>
-            <td style="max-width: 10em;">
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
-        </tr>
+    <tr>
+        <td style="width: 20em;">
+            <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+        </td>
+        <td style="max-width: 10em;">
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
+        </td>
+        <td>@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, null)</td>
+    </tr>
     }
 
 </table>

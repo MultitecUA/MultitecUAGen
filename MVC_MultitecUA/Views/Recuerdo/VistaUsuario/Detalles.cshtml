@@ -19,7 +19,7 @@
         <h2>Detalles del recuerdo @ViewData["recuerdo"] del evento @Html.DisplayFor(model=>model.NombreEvento)</h2>
         <br />
         <p class="text-center">
-            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../porEvento?idEvento=@ViewData["idevento"]">Recuerdos</a></label><span> >> </span><label>@ViewBag.Title</label>
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="/Evento/TodosEventos">Eventos</a></label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Evento: @Html.DisplayFor(model => model.NombreEvento)</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
         </p>
     }
 }
@@ -44,23 +44,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdEvento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdEvento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreEvento)
+            Nombre del evento
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NombreEvento)
         </dd>
+        <dt>
+            Fotos
+        </dt>
+        <dd>
+            @{
+                foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                {
+                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                }
+            }
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Volver al evento", "Detalles", "Evento", new { id = ViewData["idEvento"] }, null)
+    @Html.ActionLink("Volver a la lista de recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["idEvento"] }, null)
 </p>

@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -74,6 +75,13 @@ namespace MVC_MultitecUA.Controllers
             rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
             ViewData["idEvento"] = rec.IdEvento;
             ViewData["recuerdo"] = recuerdoEN.Titulo;
+            ArrayList fotos = new ArrayList();
+            foreach (string foto in recuerdoEN.FotosRecuerdo)
+            {
+                fotos.Add(foto);
+            }
+            ViewData["listaFotos"] = fotos;
+
             if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
             {
                 return View(rec);
@@ -87,19 +95,23 @@ namespace MVC_MultitecUA.Controllers
         // GET: Recuerdo/Create
         public ActionResult Create(int idEvento)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+
             Recuerdo rec = new Recuerdo();
-            ViewData["idevento"] = idEvento;
+            TempData["idEvento"] = idEvento;
+            ViewData["idEvento"] = idEvento;
             EventoCEN eventoCEN = new EventoCEN();
             EventoEN eventoEN = eventoCEN.ReadOID(idEvento);
             ViewData["NombreEvento"] = eventoEN.Nombre;
-           
+
+            if (TempData.ContainsKey("creado"))
+                TempData.Remove("creado");
+            if (TempData.ContainsKey("editado"))
+                TempData.Remove("editado");
+
             if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
             {
-                if (TempData.ContainsKey("creado"))
-                    TempData.Remove("creado");
-                if (TempData.ContainsKey("editado"))
-                    TempData.Remove("editado");
-
                 return View(rec);
             }
             else
@@ -131,40 +143,87 @@ namespace MVC_MultitecUA.Controllers
             return View(recuerdo);
         }
 
+
+
         // POST: Recuerdo/Create/id
         [HttpPost]
-        public ActionResult Create(int idEvento, Recuerdo rec)
+        public ActionResult Create(Recuerdo rec, HttpPostedFileBase file)
         {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
 
             try
             {
                 RecuerdoCEN cen = new RecuerdoCEN();
                 EventoCEN eventoCEN = new EventoCEN();
-                EventoEN evento = eventoCEN.ReadOID(idEvento);
-                int id = cen.New_(rec.Titulo, rec.Cuerpo, idEvento,null);
+                EventoEN evento = eventoCEN.ReadOID(int.Parse(TempData["idEvento"].ToString()));
+                
+                string fileName = "", path = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(file.FileName);
+                    path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                    if (!System.IO.File.Exists(path))
+                        file.SaveAs(path);
+                    file.SaveAs(path);
+                    fileName = "/Imagenes/" + fileName;
+                }
+
+                if (Session["modoAdmin"].ToString() == "false")
+                {
+                    if (rec.Titulo == null || rec.Cuerpo == null)
+                    {
+                        TempData["vaciorecuerdo"] = "No pueden haber campos vacios";
+                        return Redirect("Create?idEvento="+TempData["idEvento"]);
+                    }
+
+                    //VALIDANDO TITULO
+                    Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                    if (!pattern.IsMatch(rec.Titulo))
+                    {
+                        TempData["formatotitulo"] = "mal";
+                        return Redirect("Create?idEvento=" + TempData["idEvento"]);
+                    }
+
+                    //VALIDANDO CUERPO
+                    pattern = new Regex("^.{10,200}$");
+                    if (!pattern.IsMatch(rec.Cuerpo))
+                    {
+                        TempData["formatocuerpo"] = "mal";
+                        return Redirect("Create?idEvento=" + TempData["idEvento"]);
+                    }
+                }
+
+                int id;
+                if (fileName != "")  {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    id = cen.New_(rec.Titulo, rec.Cuerpo, int.Parse(TempData["idEvento"].ToString()), fotos);
+                }
+                else {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    id = cen.New_(rec.Titulo, rec.Cuerpo, int.Parse(TempData["idEvento"].ToString()), fotos);
+                }
+
                 TempData["creado"] = "si";
-
-                if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
-                {
-                    return Redirect("Details/" + id);
-                }
-                else
-                {
-                    return RedirectToAction("Details","Recuerdo", new {id});
-                }
-
+                TempData.Remove("idEvento");
+                return Redirect("Details/" + id);
             }
             catch
             {
                 TempData["nocreado"] = "Ha habido un error al crear el recuerdo";
-                return View();
+                return Redirect("Create?idEvento=" + TempData["idEvento"]);
             }
         }
 
 
+
+
+
         // POST: Recuerdo/Create/id
         [HttpPost]
-        public ActionResult CreateNoId(Recuerdo rec)
+        public ActionResult CreateNoId(Recuerdo rec, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -179,14 +238,39 @@ namespace MVC_MultitecUA.Controllers
                 RecuerdoCEN cen = new RecuerdoCEN();
                 EventoCEN eventoCEN = new EventoCEN();
                 EventoEN evento = eventoCEN.ReadOID(rec.IdEvento);
-                int id = cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, null);
+
+                string fileName = "", path = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(file.FileName);
+                    path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                    if (!System.IO.File.Exists(path))
+                        file.SaveAs(path);
+                    file.SaveAs(path);
+                    fileName = "/Imagenes/" + fileName;
+                }
+                
+                int id;
+                if (fileName == "")
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    id = cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, fotos);
+                }
+                else
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    id = cen.New_(rec.Titulo, rec.Cuerpo, rec.IdEvento, fotos);
+                }
+                
                 TempData["creado"] = "si";
 
                 return Redirect("Details/" + id);
             }
             catch
             {
-                TempData["nocreado"] = "si";
+                TempData["nocreado"] = "No se ha podido crear el recuerdo";
                 return View();
             }
         }
@@ -199,80 +283,140 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
 
-            //Recuerdo rec = null;
             RecuerdoEN recuerdoEN = new RecuerdoCAD(session).ReadOID(id);
             Recuerdo recuerdo = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
-            //rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
+            
             if (TempData.ContainsKey("creado"))
-            {
                 TempData.Remove("creado");
-            }
             if (TempData.ContainsKey("nocreado"))
-            {
                 TempData.Remove("nocreado");
-            }
+
             ViewData["recuerdo"] = recuerdoEN.Titulo;
-            return View(recuerdo);
+
+            if (Session["usuario"] != null && Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                return View(recuerdo);
+            }
+            else
+            {
+                return View("./VistaUsuario/Editar", recuerdo);
+            }
+
         }
+
+
+
+
 
         // POST: Recuerdo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Recuerdo rec)
+        public ActionResult Edit(int id, Recuerdo rec, HttpPostedFileBase file)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
+            
+            string fileName = "", path = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                path = Path.Combine(Server.MapPath("~/Imagenes"), fileName);
+                if (!System.IO.File.Exists(path))
+                    file.SaveAs(path);
+                file.SaveAs(path);
+                fileName = "/Imagenes/" + fileName;
+            }
             
             try
             {
                 // TODO: Add update logic here
                 RecuerdoCEN cen = new RecuerdoCEN();
-                cen.Modify(id, rec.Titulo, rec.Cuerpo, null);
+
+
+                if (Session["modoAdmin"].ToString() == "false")
+                {
+                    if (rec.Titulo == null || rec.Cuerpo == null)
+                    {
+                        TempData["vaciorecuerdo"] = "No pueden haber campos vacios";
+                        return Redirect("../Edit/" + id);
+                    }
+
+                    //VALIDANDO TITULO
+                    Regex pattern = new Regex("^[A-Za-z0-9 áéíóúñç]{4,30}$");
+                    if (!pattern.IsMatch(rec.Titulo))
+                    {
+                        TempData["formatotitulo"] = "mal";
+                        return Redirect("../Edit/" + id);
+                    }
+
+                    //VALIDANDO CUERPO
+                    pattern = new Regex("^.{10,200}$");
+                    if (!pattern.IsMatch(rec.Cuerpo))
+                    {
+                        TempData["formatocuerpo"] = "mal";
+                        return Redirect("../Edit/" + id);
+                    }
+                }
+
+
+                if (fileName == "")
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add("/Imagenes/NoFoto.png");
+                    cen.Modify(id, rec.Titulo, rec.Cuerpo, fotos);
+                }
+                else
+                {
+                    IList<string> fotos = new List<string>();
+                    fotos.Add(fileName);
+                    cen.Modify(id, rec.Titulo, rec.Cuerpo, fotos);
+                }
                 TempData["editado"] = "si";
+
                 return RedirectToAction("Details/"+id);
             }
             catch
             {
-                //En teoría aquí no entra porque la validación ya la hace el modelo o el input
-                return View();
+                ViewData["error"] = "No se se ha podido crear el recuerdo";
+                return Redirect("../Edit/" + id);
             }
         }
+
+
+
+
 
         // GET: Recuerdo/Delete/5
         public ActionResult Delete(int id)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
             
             RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
             RecuerdoEN recuerdoEN = recuerdoCEN.ReadOID(id);
+
             if (TempData.ContainsKey("creado"))
-            {
                 TempData.Remove("creado");
-            }
             if (TempData.ContainsKey("nocreado"))
-            {
                 TempData.Remove("nocreado");
-            }
             if (TempData.ContainsKey("editado"))
-            {
                 TempData.Remove("editado");
-            }
+            
             ViewData["recuerdo"] = recuerdoEN.Titulo;
-            return View(recuerdoEN);
+            Recuerdo recuerdo = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
+            if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+            {
+                return View(recuerdoEN);
+            }
+            else
+            {
+                return View("./VistaUsuario/Borrar", recuerdo);
+            }
         }
+
+
+
+
 
         // POST: Recuerdo/Delete/5
         [HttpPost]
@@ -280,27 +424,45 @@ namespace MVC_MultitecUA.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-            
+
+            RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
+            RecuerdoEN recuerdoEN = recuerdoCEN.ReadOID(id);
+            Recuerdo rec = new AssemblerRecuerdo().ConvertENToModelUI(recuerdoEN);
+            int idE = rec.IdEvento;
+
             try
             {
                 // TODO: Add delete logic here
-                RecuerdoCEN recuerdoCEN = new RecuerdoCEN();
+                
                 recuerdoCEN.Destroy(id);
-
                 TempData["bien"] = "Se a borrado correctamente el recuerdo " + recuerdo.Titulo;
-                return RedirectToAction("Index");
+                if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("porEvento", new { idEvento = idE });
+                }
             }
             catch
             {
                 TempData["mal"] = "Ocurrio un problema al intentar borrar el recuerdo";
-                return RedirectToAction("Index");
+                if (Session["esAdmin"].ToString() == "true" && Session["modoAdmin"].ToString() == "true")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("porEvento", new { idEvento=idE});
+                }
             }
         }
 
+
+
+
+        //Filtro
         public ActionResult porEvento (int idEvento)
         {
            

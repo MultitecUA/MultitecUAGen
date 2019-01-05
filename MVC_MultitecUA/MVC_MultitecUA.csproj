@@ -340,12 +340,17 @@
     <Content Include="Views\Proyecto\VistaUsuario\Modificar.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\Borrar.cshtml" />
     <Content Include="Views\Proyecto\VistaUsuario\ProyectosPorEvento.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\EventosPorProyecto.cshtml" />
+    <Content Include="Views\Evento\VistaUsuario\MisEventos.cshtml" />
+    <Content Include="Views\Recuerdo\VistaUsuario\Borrar.cshtml" />
+    <Content Include="Views\Recuerdo\VistaUsuario\Editar.cshtml" />
+    <Content Include="Views\Servicio\VistaUsuario\Detalles.cshtml" />
+    <Content Include="Views\Servicio\VistaUsuario\ServiciosDisponibles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Mensaje\VistaUsuario\" />
-    <Folder Include="Views\Servicio\VistaUsuario\" />
     <Folder Include="Views\Solicitud\VistaUsuario\" />
   </ItemGroup>
   <ItemGroup>

@@ -30,9 +30,8 @@ namespace MVC_MultitecUA.Models
         [Required(ErrorMessage = "Debe indicar un estado para el servicio")]
         public MultitecUAGenNHibernate.Enumerated.MultitecUA.EstadoServicioEnum Estado { get; set; }
 
-        //[Display(Prompt = "Fotos del servicio", Description = "Descripción del servicio", Name = "Fotos ")]
-        //[Required(ErrorMessage = "Debe indicar una descripción para el servicio")]
-        //public IList<String> Fotos { get; set; }
+        [Display(Prompt = "Fotos del servicio", Description = "Descripción del servicio", Name = "Fotos ")]
+        public IList<String> Fotos { get; set; }
 
 
     }

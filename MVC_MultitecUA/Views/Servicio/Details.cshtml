@@ -61,6 +61,18 @@
         <dd>
             @Html.DisplayFor(model => model.Estado)
         </dd>
+        <dt>
+            Fotos
+        </dt>
+
+        <dd>
+            @{
+                foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                {
+                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                }
+            }
+        </dd>
 
 
     </dl>

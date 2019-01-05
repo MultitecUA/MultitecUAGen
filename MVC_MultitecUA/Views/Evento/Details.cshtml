@@ -91,16 +91,12 @@
         </dt>
 
         <dd>
-            <ul>
-                @{
-                    foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
-                    {
-                        <li style="list-style:none;">
-                            <img src="@foto" alt="Foto del evento" style="max-width:25%;">
-                        </li>
-                    }
+            @{
+                foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
+                {
+                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
                 }
-            </ul>
+            }
         </dd>
 
         <dt>Categorías:</dt>

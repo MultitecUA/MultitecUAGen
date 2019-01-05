@@ -15,6 +15,7 @@ namespace MVC_MultitecUA.Models
             serv.Nombre = en.Nombre;
             serv.Descripcion = en.Descripcion;
             serv.Estado = en.Estado;
+            serv.Fotos = en.FotosServicio;
             
             return serv;
 

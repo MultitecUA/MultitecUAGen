@@ -26,38 +26,42 @@
 
 @Html.ActionLink("Filtro Avanzado", "PorFiltro")
 
-<table class="table">
-    <tr>
-        <th style="width: 20em;">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th style="max-width: 10em;">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            Fecha de inicio
-        </th>
-        <th>
-            Fecha de fin
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td style="width: 20em;">
-                <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-            </td>
-            <td style="max-width: 10em;">
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
+            <th style="width: 20em;">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th style="max-width: 10em;">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                Fecha de inicio
+            </th>
+            <th>
+                Fecha de fin
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 20em;">
+                    <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                </td>
+                <td style="max-width: 10em;">
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new {item.Id},null)</td>
+            </tr>
+        }
+
+    </table>

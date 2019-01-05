@@ -22,7 +22,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Descripción
         </dt>
 
         <dd>
@@ -30,7 +30,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaInicio)
+           Fecha de inicio
         </dt>
 
         <dd>
@@ -38,7 +38,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaFin)
+            Fecha de fin
         </dt>
 
         <dd>
@@ -46,7 +46,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaInicioInscripcion)
+            Fecha de inicio de inscripción
         </dt>
 
         <dd>
@@ -54,11 +54,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaTopeInscripcion)
+            Fecha tope de inscripción
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.FechaTopeInscripcion)
+        </dd>
+        <dt>
+            Fotos
+        </dt>
+        <dd>
+            @{
+                foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
+                {
+                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                }
+            }
         </dd>
         <dt>
             Categorias
@@ -74,12 +85,24 @@
                 }
             </ul>
         </dd>
+        <dt>
+            Nº proyectos presentados:
+        </dt>
+        <dd>
+            @ViewData["proyectos"]
+        </dd>
+        <dt>
+            Participantes:
+        </dt>
+        <dd>
+            @ViewData["participantes"]
+        </dd>
 
     </dl>
 </div>
 
 <div class="form-inline">
-    @Html.ActionLink("Proyectos participantes", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-default" })
     @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
     <!-- Esto quiero cambiarlo a un partialView -->
     @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })

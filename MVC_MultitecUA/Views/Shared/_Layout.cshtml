@@ -44,11 +44,11 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Mis eventos", "", "")</li>
-                                    <li><a href="../Evento/TodosEventos">Todos los eventos</a></li>
+                                    <li>@Html.ActionLink("Mis eventos", "MisEventos", "Evento")</li>
+                                    <li>@Html.ActionLink("Listado de eventos", "TodosEventos", "Evento")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Servicios", "", "")</li>
+                            <li>@Html.ActionLink("Servicios", "ServiciosDisponibles", "Servicio")</li>
                             <li><a href="http://multitecua.ml" target="_blank">Contacto / Acerca de</a></li>
                         }
                     }
