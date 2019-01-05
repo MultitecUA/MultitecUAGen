@@ -333,13 +333,16 @@
     <Content Include="Views\Recuerdo\VistaUsuario\Recuerdos.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Detalles.cshtml" />
     <Content Include="Views\Usuario\VistaUsuario\Modificar.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\EnviarSolicitud.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\AdministrarSolicitudes.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\DetailsCliente.cshtml" />
+    <Content Include="Views\Solicitud\VistaUsuario\DeleteCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Mensaje\VistaUsuario\" />
     <Folder Include="Views\Servicio\VistaUsuario\" />
-    <Folder Include="Views\Solicitud\VistaUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

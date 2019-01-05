@@ -38,6 +38,7 @@
         </dt>
 
         <dd>
+
             @Html.ActionLink(ViewData["creador"].ToString(), "Detalles", "Usuario", new { nick = ViewData["creador"] }, null)
         </dd>
 
@@ -106,10 +107,15 @@
 <div>
     @if (ViewData["esModerador"] != null)
     {
-        @Html.ActionLink("Administrar solicitudes", "", "Solicitud", new { id = Model.Id }, null)
+        @Html.ActionLink("Administrar solicitudes", "AdministrarSolicitudes", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
     }
     else if (ViewData["noParticpante"] != null)
     {
-        @Html.ActionLink("Enviar solicitud", "", "Solicitud", new { id = Model.Id }, null)
+        @Html.ActionLink("Inscribirse", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
     }
 </div>
+
+<p>
+    @Html.ActionLink("Volver a la lista", "./ProyectosPresentados")
+
+</p>
