@@ -19,7 +19,7 @@
         <h2>Detalles del recuerdo @ViewData["recuerdo"] del evento @Html.DisplayFor(model=>model.NombreEvento)</h2>
         <br />
         <p class="text-center">
-            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="/Evento/TodosEventos">Eventos</a></label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Evento: @Html.DisplayFor(model => model.NombreEvento)</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Evento: @Html.DisplayFor(model => model.NombreEvento)</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
         </p>
     }
 }

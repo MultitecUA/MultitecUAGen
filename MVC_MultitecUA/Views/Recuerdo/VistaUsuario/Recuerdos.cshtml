@@ -6,7 +6,7 @@
 
 <h2>Recuerdos del evento: @ViewData["nombreEvento"]</h2>
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../Evento/TodosEventos">Eventos</a></label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
 

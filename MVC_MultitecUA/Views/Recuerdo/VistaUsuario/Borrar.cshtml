@@ -7,7 +7,7 @@
 <h2>Borrar el Recuerdo @Html.DisplayFor(model => model.Titulo) del evento @Html.DisplayFor(model => model.NombreEvento)</h2>
 <br />
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="/Evento/TodosEventos">Eventos</a></label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>Model.IdEvento)">Detalles del evento</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>Model.IdEvento)">Detalles del evento</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
 <h3>¿Estás seguro de que deseas borrar este recuerdo?</h3>

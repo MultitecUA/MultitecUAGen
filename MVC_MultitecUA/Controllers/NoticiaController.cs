@@ -125,9 +125,11 @@ namespace MVC_MultitecUA.Controllers
                 {
                     nombreFoto = Path.GetFileName(fotoNoticia.FileName);
                     path = Path.Combine(Server.MapPath("~/Imagenes"), nombreFoto);
-                    fotoNoticia.SaveAs(path);
-                    //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
-                    //postedFile.SaveAs(path);
+
+                    if (!System.IO.File.Exists(path))
+                    {
+                        fotoNoticia.SaveAs(path);
+                    }
                     nombreFoto = "/Imagenes/" + nombreFoto;
                 }
 
@@ -211,16 +213,13 @@ namespace MVC_MultitecUA.Controllers
                 if (fotoNoticia != null && fotoNoticia.ContentLength > 0)
                 {
                     path = Path.GetFullPath(Server.MapPath("~/" + noticiaEN.FotoNoticia));
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
 
                     nombreFoto = Path.GetFileName(fotoNoticia.FileName);
                     path = Path.Combine(Server.MapPath("~/Imagenes"), nombreFoto);
-                    fotoNoticia.SaveAs(path);
-                    //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
-                    //postedFile.SaveAs(path);
+                    if (!System.IO.File.Exists(path))
+                    {
+                        fotoNoticia.SaveAs(path);
+                    }
                     nombreFoto = "/Imagenes/" + nombreFoto;
                 }
 
@@ -286,10 +285,10 @@ namespace MVC_MultitecUA.Controllers
 
                 string path = Path.GetFullPath(Server.MapPath("~/" + noticiaEN.FotoNoticia));
 
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
+                //while (System.IO.File.Exists(path))
+                //{
+                //    System.IO.File.Delete(path);
+                //}
 
                 noticiaCEN.Destroy(id);
 

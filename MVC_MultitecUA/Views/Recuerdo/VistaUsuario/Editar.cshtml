@@ -7,7 +7,7 @@
 <h2>Editar Recuerdo: @ViewData["recuerdo"]</h2>
 <br />
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="/Evento/TodosEventos">Eventos</a></label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Detalles del evento</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Detalles del evento</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
 @using (Html.BeginForm("Edit", "Recuerdo", FormMethod.Post, new { enctype = "multipart/form-data" }))
