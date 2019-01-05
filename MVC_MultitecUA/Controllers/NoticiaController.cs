@@ -2,10 +2,12 @@
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MVC_MultitecUA.Controllers
 {
@@ -89,7 +91,7 @@ namespace MVC_MultitecUA.Controllers
         // POST: Noticia/Create
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(NoticiaEN noticiaEN)
+        public ActionResult Create(NoticiaEN noticiaEN, HttpPostedFileBase fotoNoticia)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -117,7 +119,28 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                int OID = noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.FotoNoticia);
+                string nombreFoto = "", path = "";
+
+                if (fotoNoticia != null && fotoNoticia.ContentLength > 0)
+                {
+                    nombreFoto = Path.GetFileName(fotoNoticia.FileName);
+                    path = Path.Combine(Server.MapPath("~/Imagenes"), nombreFoto);
+                    fotoNoticia.SaveAs(path);
+                    //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
+                    //postedFile.SaveAs(path);
+                    nombreFoto = "/Imagenes/" + nombreFoto;
+                }
+
+                int OID;
+
+                if (nombreFoto == "")
+                {
+                    OID = noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, null);
+                }
+                else
+                {
+                    OID = noticiaCEN.New_(noticiaEN.Titulo, noticiaEN.Cuerpo, nombreFoto);
+                }
 
                 TempData["noticiacreada"] = "si";
 
@@ -154,7 +177,7 @@ namespace MVC_MultitecUA.Controllers
         // POST: Noticia/Edit/5
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, NoticiaEN noticiaEN)
+        public ActionResult Edit(int id, NoticiaEN noticiaEN, HttpPostedFileBase fotoNoticia)
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -183,12 +206,37 @@ namespace MVC_MultitecUA.Controllers
                     return View();
                 }
 
-                noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.FotoNoticia);
+                string nombreFoto = "", path = "";
+
+                if (fotoNoticia != null && fotoNoticia.ContentLength > 0)
+                {
+                    path = Path.GetFullPath(Server.MapPath("~/" + noticiaEN.FotoNoticia));
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    nombreFoto = Path.GetFileName(fotoNoticia.FileName);
+                    path = Path.Combine(Server.MapPath("~/Imagenes"), nombreFoto);
+                    fotoNoticia.SaveAs(path);
+                    //path = Server.MapPath("~/Imagenes/") + Path.GetFileName(postedFile.FileName);
+                    //postedFile.SaveAs(path);
+                    nombreFoto = "/Imagenes/" + nombreFoto;
+                }
+
+                if (nombreFoto == "")
+                {
+                    noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, noticiaEN.FotoNoticia);
+                }
+                else
+                {
+                    noticiaCEN.Modify(id, noticiaEN.Titulo, noticiaEN.Cuerpo, nombreFoto);
+                }
                 TempData["noticiaeditada"] = "si";
 
                 return RedirectToAction("Details/" + id);
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
@@ -234,7 +282,17 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 NoticiaCEN noticiaCEN = new NoticiaCEN();
+                noticiaEN = noticiaCEN.ReadOID(id);
+
+                string path = Path.GetFullPath(Server.MapPath("~/" + noticiaEN.FotoNoticia));
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
                 noticiaCEN.Destroy(id);
+
                 TempData["bien"] = "Se a borrado correctamente la noticia" + noticiaEN.Titulo;
                 return RedirectToAction("Index");
             }
