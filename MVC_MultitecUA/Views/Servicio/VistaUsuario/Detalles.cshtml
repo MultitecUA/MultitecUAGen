@@ -1,0 +1,48 @@
+﻿@model MVC_MultitecUA.Models.Servicio
+
+@{
+    ViewBag.Title = "Detalles de servicio";
+}
+
+<h2>Detalles del servicio: @Html.DisplayFor(model => model.Nombre)</h2>
+<br />
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../ServiciosDisponibles">Servicios</a></label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Fotos
+        </dt>
+        <dd>
+            @{
+                foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                {
+                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                }
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver a la lista", "ServiciosDisponibles")
+</p>

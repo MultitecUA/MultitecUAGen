@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MVC_MultitecUA.Models.Servicio>
+
+@{
+    ViewBag.Title = "Servicios";
+}
+
+<h2>Servicios</h2>
+<br />
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+
+<table class="table">
+    <tr>
+        <th style="width: 20em;">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td style="width: 20em;">
+            <a href="./Details/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+
+    </tr>
+    }
+
+
+</table>
+
