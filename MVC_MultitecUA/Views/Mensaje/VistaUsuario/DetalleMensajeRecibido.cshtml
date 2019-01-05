@@ -1,0 +1,87 @@
+﻿@model MVC_MultitecUA.Models.MensajeModel
+
+@{
+	ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles de Mensaje</h2>
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mis mensajes", "MisMensajes")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+
+@{
+	if (TempData["bien"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+		TempData.Remove("bien");
+	}
+	else if (TempData["bien2"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
+		TempData.Remove("bien2");
+	}
+	else
+	if (TempData["regular2"] != null)
+	{
+		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular2"] </p>
+		TempData.Remove("regular2");
+	}
+}
+
+<div>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.NickAutor)
+		</dt>
+		<dd>
+			@Html.ActionLink(Model.NickAutor, "Detalles", "Usuario", new { nick = Model.NickAutor }, null)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Titulo)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Titulo)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Cuerpo)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Cuerpo)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.EstadoLectura)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.EstadoLectura)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.BandejaReceptor)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.BandejaReceptor)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Fecha)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Fecha)
+		</dd>
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Responder mensaje", "Crear", "Mensaje", new { id = Model.AutorId }, new { @class = "btn btn-default" })
+	@Html.ActionLink("Marcar como no leído", "CambioEstado", new { id = Model.Id, cambioEstado = "NoLeido" }, new { @class = "btn btn-default" })
+	@Html.ActionLink("Enviar a activos", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Activo" }, new { @class = "btn btn-default" })
+	@Html.ActionLink("Enviar a archivados", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Archivado" }, new { @class = "btn btn-default" })
+	@Html.ActionLink("Enviar a borrados", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Borrado" }, new { @class = "btn btn-default" })
+	@Html.ActionLink("Volver a mis mensajes", "MisMensajes", null, new { @class = "btn btn-default" })
+</p>

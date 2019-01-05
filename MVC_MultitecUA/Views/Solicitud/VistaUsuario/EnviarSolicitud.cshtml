@@ -1,0 +1,67 @@
+﻿@model MultitecUAGenNHibernate.EN.MultitecUA.ProyectoEN
+
+@{
+    ViewBag.Title = "EnviarSolicitud";
+}
+
+<h2>Enviar Solicitud</h2>
+
+<p class="text-center">
+    <label>@Html.ActionLink("Proyectos Presentados", "ProyectosPresentados", "Proyecto")</label><span> >> </span><label>@Html.ActionLink("Detalle de Proyecto", "Detalles/" + Model.Id, "Proyecto")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+
+<div>
+
+    @{
+        if (ViewData["mal"] != null)
+        {
+             <h4>@ViewData["mal"]</h4>
+        }
+        else
+        if (ViewData["Titulo"] != null)
+        {
+            <h4>@ViewData["Titulo"]</h4>
+        }
+        else
+        {
+            <h4>Ya perteneces a este proyecto</h4>
+        }
+    }
+
+
+
+  
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+    @{
+        if (ViewData["esParticpante"] == null)
+        {
+            @Html.ActionLink("Enviar Solicitud", "EnviarSolicitudPost", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
+        }
+
+    }
+</div>
+<p>
+    <!--Html.ActionLink("Volver a la lista", "../Proyecto/Detalles", new { id = Model.Id })-->
+    @Html.ActionLink("Volver", "../Proyecto/Detalles", new { id = Model.Id })
+
+
+</p>
