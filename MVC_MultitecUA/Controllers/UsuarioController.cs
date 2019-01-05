@@ -17,13 +17,6 @@ namespace MVC_MultitecUA.Controllers
         // GET: Usuario
         public ActionResult Index(int? pag)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -58,7 +51,10 @@ namespace MVC_MultitecUA.Controllers
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.ReadAll(inicio, tamPag).ToList();
 
-            return View(listaUsuarios);
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaUsuarios);
+            else
+                return View("./VistaUsuario/Listado", listaUsuarios);
         }
 
         // GET: Usuario/Details/5
@@ -308,13 +304,6 @@ namespace MVC_MultitecUA.Controllers
         //GET: Usuario/ForNick/5
         public ActionResult ForNick(UsuarioEN usuarioEN)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -335,19 +324,16 @@ namespace MVC_MultitecUA.Controllers
 
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorNick(usuarioEN.Nick);
-            return View(listaUsuarios);
+
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaUsuarios);
+            else
+                return View("VistaUsuario/ForNick", listaUsuarios);
         }
 
         //GET: Usuario/ForRol/5
         public ActionResult ForRol(UsuarioEN usuarioEN)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -367,19 +353,15 @@ namespace MVC_MultitecUA.Controllers
             ViewData["rol"] = usuarioEN.Rol;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorRol(usuarioEN.Rol);
-            return View(listaUsuarios);
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaUsuarios);
+            else
+                return View("./VistaUsuario/ForRol", listaUsuarios);
         }
 
         //GET: Usuario/ForCategoria/5
         public ActionResult ForCategoria(FormCollection formCollection)
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            if (Session["esAdmin"].ToString() == "false")
-                return View("../NoAdministrador");
-            if (Session["modoAdmin"].ToString() == "false")
-                Session["modoAdmin"] = "true";
-
             UsuarioCEN usuarioCEN = new UsuarioCEN();
 
             ArrayList listaRoles = new ArrayList();
@@ -403,7 +385,10 @@ namespace MVC_MultitecUA.Controllers
             ViewData["categoria"] = nombre;
 
             IList<UsuarioEN> listaUsuarios = usuarioCEN.DameUsuariosPorCategoria(id);
-            return View(listaUsuarios);
+            if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
+                return View(listaUsuarios);
+            else
+                return View("./VistaUsuario/ForCategoria", listaUsuarios);
         }
 
         // POST: Usuario/AgregarCat

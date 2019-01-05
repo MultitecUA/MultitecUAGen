@@ -349,6 +349,10 @@
     <Content Include="Views\Servicio\VistaUsuario\ServiciosDisponibles.cshtml" />
     <Content Include="Views\NotificacionUsuario\MisNotificaciones.cshtml" />
     <Content Include="Views\NotificacionUsuario\NoLeidas.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\Listado.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\ForCategoria.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\ForNick.cshtml" />
+    <Content Include="Views\Usuario\VistaUsuario\ForRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

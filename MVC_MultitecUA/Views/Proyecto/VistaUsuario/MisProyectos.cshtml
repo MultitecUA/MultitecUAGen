@@ -4,7 +4,7 @@
     ViewBag.Title = ViewData["titulo"];
 }
 
-<h2>Proyectos en los que participas</h2>
+<h2>@ViewData["titulo"]</h2>
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>

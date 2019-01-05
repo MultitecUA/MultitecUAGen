@@ -71,18 +71,28 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // GET: Proyecto/MisProyectos/5
-        public ActionResult MisProyectos()
+        public ActionResult MisProyectos(string nick)
         {
-            if (Session["usuario"] == null)
+            if (Session["usuario"] == null && nick == null)
+            {
                 return RedirectToAction("Login", "Sesion");
+            }
+            IList<ProyectoEN> listaProyectos = new List<ProyectoEN>();
 
             UsuarioCEN usuarioCEN = new UsuarioCEN();
-            UsuarioEN usuarioEN = usuarioCEN.ReadNick(Session["usuario"].ToString());
+            UsuarioEN usuarioEN = usuarioCEN.ReadNick(nick);
 
-            int OID_usuario = usuarioEN.Id;
-            ProyectoCEN proyectoCEN = new ProyectoCEN();
-            IList<ProyectoEN> listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(OID_usuario);
-            ViewData["titulo"] = "Proyectos en los que participas";
+            if (usuarioEN != null)
+            {
+                int OID_usuario = usuarioEN.Id;
+                ProyectoCEN proyectoCEN = new ProyectoCEN();
+
+
+
+                listaProyectos = proyectoCEN.DameProyectosUsuarioPertenece(OID_usuario);
+                
+            }
+            ViewData["titulo"] = "Proyectos en los que participa " + nick;
 
             return View("./VistaUsuario/MisProyectos", listaProyectos);
         }
@@ -651,7 +661,7 @@ namespace MVC_MultitecUA.Controllers
                 ProyectoCP proyectoCP = new ProyectoCP();
                 proyectoCP.Destroy(id);
                 if (Session["modoAdmin"].ToString() == "false")
-                    return RedirectToAction("MisProyectos");
+                    return RedirectToAction("MisProyectos",new { nick = Session["usuario"] });
                 else
                     return RedirectToAction("Index");
             }

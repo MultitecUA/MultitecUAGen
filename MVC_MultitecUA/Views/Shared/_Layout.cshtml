@@ -1,15 +1,15 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../fontello/css/fontello.css">
-	<title>@ViewBag.Title - MultitecUA</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
-	@using MultitecUAGenNHibernate.CEN.MultitecUA;
-	@using MultitecUAGenNHibernate.EN.MultitecUA;
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../fontello/css/fontello.css">
+    <title>@ViewBag.Title - MultitecUA</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @using MultitecUAGenNHibernate.CEN.MultitecUA;
+    @using MultitecUAGenNHibernate.EN.MultitecUA;
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -35,7 +35,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Mis proyectos", "MisProyectos", "Proyecto")</li>
+                                    <li>@Html.ActionLink("Mis proyectos", "MisProyectos", "Proyecto", new { nick = Session["usuario"] }, null)</li>
                                     <li>@Html.ActionLink("Listado de Proyectos", "ProyectosPresentados", "Proyecto")</li>
                                     <li>@Html.ActionLink("Nuevo Proyecto", "Crear", "Proyecto")</li>
                                 </ul>
@@ -50,96 +50,120 @@
                                     <li>@Html.ActionLink("Listado de eventos", "TodosEventos", "Evento")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Servicios", "ServiciosDisponibles", "Servicio")</li>
-                            <li><a href="http://multitecua.ml" target="_blank">Contacto / Acerca de</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Otros
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Miembros", "Index", "Usuario")</li>
+                                    <li>@Html.ActionLink("Servicios", "ServiciosDisponibles", "Servicio")</li>
+                                    <li><a href="http://multitecua.ml" target="_blank">Contacto / Acerca de</a></li>
+                                </ul>
+                            </li>
+
                         }
                     }
                 </ul>
                 @{
-					if (Session["usuario"] != null)
-					{
-						<ul class="nav navbar-nav navbar-right">
-						@{ 
-							if (Session["modoAdmin"].ToString() == "true")
-							{
+                    if (Session["usuario"] != null)
+                    {
+                <ul class="nav navbar-nav navbar-right">
+                    @{
+                        if (Session["modoAdmin"].ToString() == "true")
+                        {
 
-								<li class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-										Administrar
-										<span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
-										<li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-										<li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
-										<li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
-										<li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
-										<li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
-										<li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
-										<li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
-										<li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
-										<li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
-										<li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
-									</ul>
-								</li>
-							}
-						}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Administrar
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                                    <li>@Html.ActionLink("Mensajes", "Index", "Mensaje")</li>
+                                    <li>@Html.ActionLink("Categorías de Usuarios", "Index", "CategoriaUsuario")</li>
+                                    <li>@Html.ActionLink("Proyectos", "Index", "Proyecto")</li>
+                                    <li>@Html.ActionLink("Solicitudes", "Index", "Solicitud")</li>
+                                    <li>@Html.ActionLink("Categorías de Proyectos", "Index", "CategoriaProyecto")</li>
+                                    <li>@Html.ActionLink("Eventos", "Index", "Evento")</li>
+                                    <li>@Html.ActionLink("Recuerdos", "Index", "Recuerdo")</li>
+                                    <li>@Html.ActionLink("Noticias", "Index", "Noticia")</li>
+                                    <li>@Html.ActionLink("Servicios", "Index", "Servicio")</li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    @{
+                        if (Session["modoAdmin"].ToString() == "false")
+                        {
+                            int numeroNotificaciones = 0;
+                            NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+                            UsuarioCEN usuarioCEN = new UsuarioCEN();
 
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-								@Session["usuario"]
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								@{if (Session["modoAdmin"].ToString() == "false")
-									{
-										<li>
-											@Html.ActionLink("Modificar perfil", "Modificar", "Usuario")
-										</li>
-									}
-								}
-								@{ if (Session["esAdmin"].ToString() == "true")
-									{
-										if (Session["modoAdmin"].ToString() == "false")
-										{
+                            int OIDusuario = usuarioCEN.ReadNick(Session["usuario"].ToString()).Id;
 
-											<li>
-												@Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
-											</li>
-										}
-										else
-										{
-											<li>
-												@Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
-											</li>
-										}
-									}
-								}
-								<li>
-									@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
-								</li>
-							</ul>
-						</li>
-						@{
-							int numeroNotificaciones = 0;
-							NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-							UsuarioCEN usuarioCEN = new UsuarioCEN();
+                            IList<NotificacionUsuarioEN> notificaciones = notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDusuario);
 
-							int OIDusuario = usuarioCEN.ReadNick(Session["usuario"].ToString()).Id;
+                            numeroNotificaciones = notificaciones.Count;
 
-							IList<NotificacionUsuarioEN> notificaciones = notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDusuario);
+                            string estilo = "";
 
-							numeroNotificaciones = notificaciones.Count;
-						
-							<li><a href="/NotificacionUsuario/NoLeidas"><span class="glyphicon glyphicon-bell" style="color: #999; font-size:1.15em;"></span> @numeroNotificaciones</a></li>
-	
-						}
-						</ul>
-					}
+                            if ((numeroNotificaciones) == 0)
+                            {
+                                estilo = "color: #999; font-size:1.15em";
+                            }
+                            else
+                            {
+                                estilo = "color:red ; font-size:1.15em";
+                            }
+
+
+                            <li><a href="/NotificacionUsuario/NoLeidas"><span class="glyphicon glyphicon-bell" style=@estilo></span> @numeroNotificaciones</a></li>
+                        }
+
+                    }
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            @Session["usuario"]
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @{if (Session["modoAdmin"].ToString() == "false")
+                                {
+                                    <li>
+                                        @Html.ActionLink("Modificar perfil", "Modificar", "Usuario")
+                                    </li>
+                                }
+                            }
+                            @{ if (Session["esAdmin"].ToString() == "true")
+                                {
+                                    if (Session["modoAdmin"].ToString() == "false")
+                                    {
+
+                                        <li>
+                                            @Html.ActionLink("Entrar al modo Administrador", "Adminin", "Sesion")
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Salir del modo Administrador", "Adminout", "Sesion")
+                                        </li>
+                                    }
+                                }
+                            }
+                            <li>
+                                @Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                    }
 
                 }
                 @{
-					if (Session["usuario"] == null)
-					{
+                    if (Session["usuario"] == null)
+                    {
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 @Html.ActionLink("Iniciar Sesión", "Login", "Sesion")

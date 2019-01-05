@@ -571,10 +571,7 @@ namespace MVC_MultitecUA.Controllers
 
         //GET
         public ActionResult porProyecto(int id)
-        {
-            if (Session["usuario"] == null)
-                return RedirectToAction("Login", "Sesion");
-            
+        {         
             EventoCEN eventoCEN = new EventoCEN();
             IList<EventoEN> eventos = eventoCEN.DameEventosPorProyecto(id);
             ProyectoCEN proyectoCEN = new ProyectoCEN();

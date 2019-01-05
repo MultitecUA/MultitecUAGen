@@ -5,6 +5,9 @@
 }
 
 <h2>Detalles del Usuario: @Model.Nick</h2>
+<p class="text-center">
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Lista de Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
 <div>
     <hr />
     <dl class="dl-horizontal">

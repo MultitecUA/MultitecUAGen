@@ -719,7 +719,7 @@ public void EliminaParticipantes (int p_Proyecto_OID, System.Collections.Generic
                                 if (proyectoEN.UsuariosParticipantes.Contains (usuariosParticipantesENAux)) {
                                         proyectoEN.UsuariosParticipantes.Remove (usuariosParticipantesENAux);
                                         usuariosParticipantesENAux.ProyectosPertenecientes.Remove (proyectoEN);
-                                        if (proyectoEN.UsuariosParticipantes.Contains(usuariosParticipantesENAux))
+                                        if (proyectoEN.UsuariosModeradores.Contains(usuariosParticipantesENAux))
                                         {
                                             UsuarioEN usuariosModeradoresENAux = (MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN)session.Load(typeof(MultitecUAGenNHibernate.EN.MultitecUA.UsuarioEN), item);
                                             proyectoEN.UsuariosModeradores.Remove(usuariosModeradoresENAux);
