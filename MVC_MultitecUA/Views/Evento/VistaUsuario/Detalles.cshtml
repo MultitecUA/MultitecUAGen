@@ -4,113 +4,83 @@
     ViewBag.Title = "Detalles del evento";
 }
 
-<h2>Detalles del Evento: @Html.DisplayFor(model=> model.Nombre)</h2>
+
+
 <br />
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../TodosEventos">Eventos</a></label><span> >> </span><label>@ViewBag.Title</label>
-</p>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+            <h1 class="mt-4" style="margin:0; text-align:center;">Detalles del Evento: @Html.DisplayFor(model => model.Nombre)</h1>
+            <br />
+            <p class="text-center">
+                <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+            </p>
 
-        <dt>
-            Descripción
-        </dt>
+            <hr style="margin-bottom:.75em;" />
+            <p style=" text-align:center; display:flex; justify-content:space-around;">
+                <b>Fecha de inicio: <label style="color:cornflowerblue">@Html.DisplayFor(model => model.FechaInicio)</label></b>
+                <b>Fecha de fin: <label style="color:cornflowerblue">@Html.DisplayFor(model => model.FechaInicio)</label></b>
+            </p>
+            <p style=" text-align:center; display:flex; justify-content:space-around;">
+                <b>Fecha de inicio de inscripción: <label style="color:cornflowerblue">@Html.DisplayFor(model => model.FechaInicioInscripcion)</label></b>
+                <b>Fecha de inicio de inscripción:  <label style="color:cornflowerblue">@Html.DisplayFor(model => model.FechaTopeInscripcion)</label></b>
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
+            <hr style="margin-top:.5em;" />
 
-        <dt>
-           Fecha de inicio
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-
-        <dt>
-            Fecha de fin
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaFin)
-        </dd>
-
-        <dt>
-            Fecha de inicio de inscripción
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaInicioInscripcion)
-        </dd>
-
-        <dt>
-            Fecha tope de inscripción
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaTopeInscripcion)
-        </dd>
-        <dt>
-            Fotos
-        </dt>
-        <dd>
-            @{
-                foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
-                {
-                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
-                }
-            }
-        </dd>
-        <dt>
-            Categorias
-        </dt>
-
-        <dd>
-            <ul>
+            <center>
                 @{
-                    foreach (string categoria in (System.Collections.ArrayList)ViewData["CategoriasEvento"])
+                    foreach (string foto in (System.Collections.IList)ViewData["listaFotosEvento"])
                     {
-                        <li>@categoria</li>
+                        <img src="@foto" alt="Foto del evento" style="max-width:25%;">
                     }
                 }
-            </ul>
-        </dd>
-        <dt>
-            Nº proyectos presentados:
-        </dt>
-        <dd>
-            @ViewData["proyectos"]
-        </dd>
-        <dt>
-            Participantes:
-        </dt>
-        <dd>
-            @ViewData["participantes"]
-        </dd>
+                <br />
+                <br />
+                <p style="text-align:justify; margin: 0 5em; padding:0 3em;">@Html.DisplayFor(model => model.Descripcion)</p>
+            </center>
 
-    </dl>
+            <hr style="margin-bottom:.75em;" />
+            <div style="text-align:center;">
+
+                <b>Categorías:</b> <ul style="text-align:center; display:flex; justify-content: space-around">
+                    @{
+                        foreach (string categoria in (System.Collections.ArrayList)ViewData["CategoriasEvento"])
+                        {
+                            <li style="float:left; list-style-type:none; padding: 0 .25em;">@categoria</li>
+                        }
+                    }
+                </ul>
+            </div>
+            <br />
+            <hr style="margin-top:.5em;" />
+
+            <center>
+                <label>Nº proyectos presentados: </label>&nbsp; @ViewData["proyectos"]
+                <br />
+                <label>Participantes: </label>&nbsp; @ViewData["participantes"]
+                <br />
+                <br />
+            </center>
+
+            <center class="form-inline">
+                @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-default" })
+                &nbsp;
+                @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+                &nbsp;
+                @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+            </center>
+
+            <br />
+
+            <center>
+                @Html.ActionLink("Volver a la lista", "TodosEventos", "Evento")
+            </center>
+
+        </div>
+
+    </div>
+
 </div>
-
-<div class="form-inline">
-    @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
-    <!-- Esto quiero cambiarlo a un partialView -->
-    @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
-    <!-- Html.Partial() -->
-</div>
-
-<br />
-
-<p>
-    @Html.ActionLink("Volver a la lista", "TodosEventos", "Evento")
-</p>

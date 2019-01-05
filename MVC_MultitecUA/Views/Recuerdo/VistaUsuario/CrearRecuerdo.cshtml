@@ -7,7 +7,7 @@
 <h2>Crear recuerdo del evento: @ViewData["NombreEvento"]</h2>
 <br />
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento")</a></label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label><a href="../Recuerdo/porEvento?idEvento=@ViewData["idevento"]">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label><a href="../Recuerdo/porEvento?idEvento=@ViewData["idevento"]">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
 

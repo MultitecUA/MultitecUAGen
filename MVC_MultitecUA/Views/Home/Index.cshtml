@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MultitecUAGenNHibernate.EN.MultitecUA.NoticiaEN>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <div class="jumbotron" style="text-align:center">
@@ -10,44 +10,55 @@
 
 <div class="text-center">
 		<h2>Novedades</h2>
-		@{int i = 5; }
+    <hr />
+		@{int i = 3; }
 		@using (Html.BeginForm("Index", "Home"))
-		{ 		
-			<p>
-				Mostrando las últimas
-				<select name="numeroNoticias">
-					@for (; i <= 10; ++i)
-					{
+        {
+			<p class="form-group form-inline">
+                    Mostrando las últimas
+                    <select name="numeroNoticias" class="form-control">
+                        @for (; i <= 15; i = i + 3)
+                        {
 
-						if ((int)ViewData["numeroNoticias"] == i)
-						{
-							<option value="@i" selected>@i</option>
-						}
-						else
-						{
-							<option value="@i">@i</option>
-						}
-					}
-				</select>
-				noticias
-				<input type="submit" value="Mostrar" class="btn btn-default" />
+                            if ((int)ViewData["numeroNoticias"] == i)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                    noticias
+                    <input type="submit" value="Mostrar" class="btn btn-default" />
+                    
 			</p>
-		}
-	<hr />
-	@foreach (var item in Model)
-	{
-	<div>
-		<a href="../Noticia/Noticia/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">
-			<img src="@Html.DisplayFor(modelItem => item.FotoNoticia)" />
-			<h3>
-				@Html.DisplayFor(modelItem => item.Titulo)
-			</h3>
-		</a>
-		<label>
-			@Html.DisplayFor(modelItem => item.Fecha)
-		</label>
-	</div>
-	<hr />
-	}
+        }
+    <br />
+
+
+
+    <div class="row">
+        @{foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:1em;">
+                    <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999;">
+                        <a href="../Noticia/Noticia/@Html.DisplayFor(modelItem => item.Id)"><img class="card-img-top" style="width:100%;" src="@item.FotoNoticia" alt=""></a>
+                        <div class="card-body" >
+                            <h3 class="card-title" style="margin-top:0; padding-top:.5em;">
+                                <a href="../Noticia/Noticia/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">
+                                     @Html.DisplayFor(modelItem => item.Titulo)
+                                </a>
+                            </h3>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Fecha)</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+
 </div>
 

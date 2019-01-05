@@ -7,62 +7,53 @@
 <h2>Filtrando eventos: @ViewData["filtro"]</h2>
 <br />
 <p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="./TodosEventos">Eventos</a> / <a href="./MisEventos">Mis eventos</a></label><span> >> </span><label>@ViewBag.Title</label>
+    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
+<h3>Filtros:</h3>
+<div class="form-group form-horizontal">
+    @using (Html.BeginForm("FiltroNombre", "Evento"))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10 form-inline">
+                    <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
+                    <input type="submit" value="Buscar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    @Html.ActionLink("Filtro Avanzado", "PorFiltro", null, new { @class = "form-control", style = "width:10em; text-align:center;" })
+</div>
+
+
+
+<br />
 <br />
 
 
-@using (Html.BeginForm("FiltroNombre", "Evento"))
-{
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-10 form-inline">
-                <label for="nick" style="width:5em;">Nombre: </label><input class="form-control" type="text" name="nombre" />
-                <input type="submit" value="Buscar" class="btn btn-default" />
+<div class="row">
+    @{foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-sm-6 portfolio-item" style="margin-bottom:1em; min-height:20em; max-width:20em;">
+                <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999; min-height:20em; width:100%;">
+                    <center class="card-body">
+                        <h3 class="card-title" style="margin-top:0; padding-top:.5em; height:3em;">
+                            @Html.ActionLink(item.Nombre, "Detalles", "Evento", new { id = item.Id }, null)
+                        </h3>
+                        <footer>
+                            <label>Fecha de inicio</label>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.FechaInicio)</p>
+                            <label>Fecha de fin</label>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.FechaFin)</p>
+                            <br />
+                            <button class="btn btn-success" style="border:1px solid black">@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, new { style = "color: black" })</button>
+                        </footer>
+
+                    </center>
+                </div>
             </div>
-        </div>
-    </div>
-}
+        }
 
-
-@Html.ActionLink("Filtro Avanzado", "PorFiltro")
-
-
-<table class="table">
-    <tr>
-        <th style="width: 20em;">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th style="max-width: 10em;">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            Fecha de inicio
-        </th>
-        <th>
-            Fecha de fin
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td style="width: 20em;">
-            <a href="./Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-        </td>
-        <td style="max-width: 10em;">
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, null)</td>
-    </tr>
     }
-
-</table>
+</div>
