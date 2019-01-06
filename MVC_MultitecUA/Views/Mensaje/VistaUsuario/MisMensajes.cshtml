@@ -10,19 +10,16 @@
 </p>
 
 <p>
-	<h3>Filtros:</h3>
 
 	@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
 	{
 		<div class="form-horizontal">
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-			<div class="form-group">
+			<div class="form-group form-inline">
 				<div class="col-md-10">
-
-					<label for="titulo">Título del mensaje: </label><input class="form-control" type="text" name="titulo" />
 					<label for="EstadoLectura">Bandeja: </label>
 					@Html.DropDownList("Bandeja", new SelectList((System.Collections.IEnumerable)ViewData["Bandejas"]), new { @class = "form-control" })
-					<input type="submit" value="Filtrar" class="btn btn-default" />
+					<input type="submit" value="Cambiar" class="btn btn-default" />
 				</div>
 			</div>
 		</div>
@@ -35,13 +32,13 @@
 		TempData.Remove("mal2");
 	}
 	else
-	if (TempData["bien2"] != null)
+if (TempData["bien2"] != null)
 	{
 		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
 		TempData.Remove("bien2");
 	}
 	else
-	if (TempData["regular2"] != null)
+if (TempData["regular2"] != null)
 	{
 		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular2"] </p>
 		TempData.Remove("regular2");
@@ -55,52 +52,88 @@
 	}
 	else
 	{
-		<table class="table">
-			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.NickAutor)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Titulo)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.EstadoLectura)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.BandejaReceptor)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Fecha)
-				</th>
-				<th>
-					Acciones
-				</th>
-			</tr>
-
-			@foreach (var item in Model)
-			{
+		<table class="table table-hover text-center">
+			<thead>
+				<tr style="background-color: gainsboro;">
+					<th class="text-center" style="width:20%">
+						@Html.DisplayNameFor(model => model.Titulo)
+					</th>
+					<th class="text-center" style="width:40%">
+						@Html.DisplayNameFor(model => model.Cuerpo)
+					</th>
+					<th class="text-center" style="width:15%">
+						@Html.DisplayNameFor(model => model.Fecha)
+					</th>
+					<th class="text-center" style="width:10%">
+						@Html.DisplayNameFor(model => model.NickAutor)
+					</th>
+					<th class="text-center" style="width:15%">
+						Acciones
+					</th>
+				</tr>
+				@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
+				{
 				<tr>
-					<td>
-						@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
-					</td>
+					<th class="text-center">
+						<input class="form-control text-center" type="text" name="titulo" placeholder="Título del mensaje" style="margin:auto" />
+					</th>
+					<th class="text-center">
+
+					</th>
+					<th class="text-center">
+
+					</th>
+					<th class="text-center">
+
+					</th>
+					<th class="text-center">
+
+					</th>
+				</tr>
+				}
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					String estiloFila = "";
+
+
+					if (item.EstadoLectura.ToString()=="Leido"){
+
+						estiloFila = "bg-warning";
+
+					}
+
+				<tr class="@estiloFila" onclick="window.location='./DetalleMensajeRecibido?id='+@item.Id" style="cursor:pointer;">
+
 					<td>
 						@Html.DisplayFor(modelItem => item.Titulo)
 					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EstadoLectura)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.BandejaReceptor)
+					<td class="text-center" style="text-overflow: ellipsis; overflow: hidden; max-width:10em; white-space: nowrap;">
+						@item.Cuerpo
 					</td>
 					<td>
 						@Html.DisplayFor(modelItem => item.Fecha)
 					</td>
 					<td>
-						@Html.ActionLink("Detalles", "DetalleMensajeRecibido", new { id = item.Id })
+						@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
+					</td>
+					<td style="display:flex; justify-content:space-evenly;">
+						@if (item.EstadoLectura.ToString() == "Leido")
+						{
+							@Html.ActionLink(" ", "CambioEstado", new { id = item.Id, cambioEstado = "NoLeido" }, new { @class = "glyphicon glyphicon-eye-close", @title = "Marcar como no leído" })
+						}
+						else
+						{
+							@Html.ActionLink(" ", "CambioEstado", new { id = item.Id, cambioEstado = "Leido" }, new { @class = "glyphicon glyphicon-eye-open", @title = "Marcar como leído" })
+						}
+						@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Archivado" }, new { @class = "glyphicon glyphicon-inbox", @title = "Archivar" })
+						@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Borrado" }, new { @class = "glyphicon glyphicon-trash", @title = "Eliminar" })
+
 					</td>
 				</tr>
-			}
-
+	}
+			</tbody>
 		</table>
 	}
 }
