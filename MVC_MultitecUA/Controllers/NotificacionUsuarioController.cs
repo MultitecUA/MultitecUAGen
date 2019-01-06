@@ -1,4 +1,5 @@
 ﻿using MultitecUAGenNHibernate.CEN.MultitecUA;
+using MultitecUAGenNHibernate.CP.MultitecUA;
 using MultitecUAGenNHibernate.EN.MultitecUA;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,10 @@ namespace MVC_MultitecUA.Controllers
             int OIDusuario = usuarioCEN.ReadNick(Session["usuario"].ToString()).Id;
 
             IList<NotificacionUsuarioEN> misNotificaciones = notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDusuario);
+            IList<NotificacionUsuarioEN> noLeidas = notificacionUsuarioCEN.DameNotificacionesNoLeidasPorUsuario(OIDusuario);
 
             ViewData["notificaciones"] = misNotificaciones.Count;
+            ViewData["NoLeidas"] = noLeidas.Count;
 
             return View(misNotificaciones);
         }
@@ -75,6 +78,36 @@ namespace MVC_MultitecUA.Controllers
                 foreach(NotificacionUsuarioEN notificacion in notificaciones)
                 {
                     notificacionUsuarioCEN.LeerNotificacion(notificacion.Id);
+                }
+            }
+
+            return RedirectToAction(origen);
+        }
+
+        public ActionResult BorrarNotificacion(int? OID, string origen) // OID -> 0 = todas, 1 = una
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("Login", "Sesion");
+            if (origen != "MisNotificaciones")
+                return View("../Shared/Error");
+
+            NotificacionUsuarioCP CP = new NotificacionUsuarioCP();
+
+            if (OID != null)
+            {
+                CP.Destroy((int)OID);
+            }
+            else
+            {
+                NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                int OIDusuario = usuarioCEN.ReadNick(Session["usuario"].ToString()).Id;
+
+                IList<NotificacionUsuarioEN> notificaciones = notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDusuario);
+
+                foreach (NotificacionUsuarioEN notificacion in notificaciones)
+                {
+                    CP.Destroy(notificacion.Id);
                 }
             }
 

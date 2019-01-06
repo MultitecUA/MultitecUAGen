@@ -25,7 +25,17 @@
 				@Html.DisplayName("Fecha")
 			</th>
 			<th>
-				@Html.ActionLink("Marcar todas como leídas", "LeerNotificacion", new { origen = "MisNotificaciones" })
+				@if ((int)ViewData["NoLeidas"] > 0)
+				{
+					@Html.ActionLink("Marcar todas como leídas", "LeerNotificacion", new { origen = "MisNotificaciones" })
+				}
+				else
+				{
+					@Html.DisplayName("Marcar todas como leídas")
+				}
+			</th>
+			<th>
+				@Html.ActionLink("Borrar todas", "BorrarNotificacion", new { origen = "MisNotificaciones" })
 			</th>
 		</tr>
 
@@ -88,6 +98,9 @@
 						{
 							@Html.ActionLink("Marcar como leída", "LeerNotificacion", new { OID = item.Id, origen = "MisNotificaciones" })
 						}
+					</td>
+					<td>
+						@Html.ActionLink("Borrar", "BorrarNotificacion", new { OID = item.Id, origen = "MisNotificaciones" })
 					</td>
 				</tr>
 			}
