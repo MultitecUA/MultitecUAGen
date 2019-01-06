@@ -364,6 +364,8 @@
     <Content Include="Views\Solicitud\VistaUsuario\DeleteCliente.cshtml" />
     <Content Include="Views\Solicitud\VistaUsuario\DetailsCliente.cshtml" />
     <Content Include="Views\Solicitud\VistaUsuario\EnviarSolicitud.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesArchivados.cshtml" />
+    <Content Include="Views\Mensaje\VistaUsuario\MisMensajesBorrados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

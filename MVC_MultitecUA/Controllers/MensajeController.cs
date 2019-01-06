@@ -218,12 +218,12 @@ namespace MVC_MultitecUA.Controllers
                 try
                 {
                     TempData["bien2"] = "Se ha modificado correctamente el estado del mensaje";
-                    return RedirectToAction("DetalleMensajeRecibido", new { id = id });
+                    return RedirectToAction("MisMensajes");
                 }
                 catch
                 {
                     TempData["mal2"] = "Ocurrió un problema al intentar modificar el mensaje";
-                    return RedirectToAction("DetalleMensajeRecibido", new { id = id });
+                    return RedirectToAction("MisMensajes");
                 }
             }
         }
@@ -573,6 +573,9 @@ namespace MVC_MultitecUA.Controllers
             ArrayList Bandejas = new ArrayList();
             Bandejas.Add("Recibidos");
             Bandejas.Add("Enviados");
+            Bandejas.Add("Archivados");
+            Bandejas.Add("Papelera");
+
 
             ViewData["Bandejas"] = Bandejas;
 
@@ -587,7 +590,7 @@ namespace MVC_MultitecUA.Controllers
 
                 foreach (MensajeEN mensaje in aux)
                 {
-                    if (mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString())
+                    if (mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString() || mensaje.BandejaReceptor.ToString()!="Activo")
                         mensajesFiltrados.Remove(mensaje);
                 }
 
@@ -641,12 +644,14 @@ namespace MVC_MultitecUA.Controllers
                 vista = "Recibidos";
                 Bandejas.Add("Recibidos");
                 Bandejas.Add("Enviados");
+                Bandejas.Add("Archivados");
+                Bandejas.Add("Papelera");
 
                 ViewData["Bandejas"] = Bandejas;
 
                 foreach (MensajeEN mensaje in aux)
                 {
-                    if (mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString())
+                    if (mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString() || mensaje.BandejaReceptor.ToString()!="Activo")
                         mensajesFiltrados.Remove(mensaje);
                 }
 
@@ -656,7 +661,7 @@ namespace MVC_MultitecUA.Controllers
                     return View("./VistaUsuario/MisMensajes"+vista);
                 }
 
-                if (nombres["titulo"] != "")
+                /*if (nombres["titulo"] != "")
                 {
                     foreach(MensajeEN mensaje in aux)
                     {
@@ -668,7 +673,7 @@ namespace MVC_MultitecUA.Controllers
                         TempData["mal"] = "No se ha encontrado ningún mensaje recibido con ese título.";
                         return View("./VistaUsuario/MisMensajes"+vista);
                     }
-                }
+                }*/
             }
 
             if (nombres["Bandeja"] != "" && nombres["Bandeja"] == "Enviados")
@@ -676,12 +681,14 @@ namespace MVC_MultitecUA.Controllers
                 vista = "Enviados";
                 Bandejas.Add("Enviados");
                 Bandejas.Add("Recibidos");
+                Bandejas.Add("Archivados");
+                Bandejas.Add("Papelera");
 
                 ViewData["Bandejas"] = Bandejas;
 
                 foreach (MensajeEN mensaje in aux)
                 {
-                    if (mensaje.UsuarioAutor.Nick != Session["usuario"].ToString())
+                    if (mensaje.UsuarioAutor.Nick != Session["usuario"].ToString() || mensaje.BandejaAutor.ToString() != "Activo")
                         mensajesFiltrados.Remove(mensaje);
                 }
 
@@ -691,7 +698,7 @@ namespace MVC_MultitecUA.Controllers
                     return View("./VistaUsuario/MisMensajes"+vista);
                 }
 
-                if (nombres["titulo"] != "")
+                /*if (nombres["titulo"] != "")
                 {
                     foreach (MensajeEN mensaje in aux)
                     {
@@ -703,7 +710,89 @@ namespace MVC_MultitecUA.Controllers
                         TempData["mal"] = "No se ha encontrado ningún mensaje enviado con ese título.";
                         return View("./VistaUsuario/MisMensajes"+vista);
                     }
+                }*/
+
+
+            }
+            if (nombres["Bandeja"] != "" && nombres["Bandeja"] == "Archivados")
+            {
+                vista = "Archivados";
+                Bandejas.Add("Archivados");
+                Bandejas.Add("Recibidos");
+                Bandejas.Add("Enviados");
+                Bandejas.Add("Papelera");
+
+                ViewData["Bandejas"] = Bandejas;
+
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if ((mensaje.UsuarioAutor.Nick != Session["usuario"].ToString() && mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString()) ||
+                        (mensaje.UsuarioAutor.Nick == Session["usuario"].ToString() && mensaje.BandejaAutor.ToString() != "Archivado") ||
+                        (mensaje.UsuarioReceptor.Nick == Session["usuario"].ToString() && mensaje.BandejaReceptor.ToString() != "Archivado"))
+                        mensajesFiltrados.Remove(mensaje);
                 }
+
+                if (mensajesFiltrados.Count() == 0)
+                {
+                    TempData["mal"] = "¡No tienes ningún mensaje archivado!";
+                    return View("./VistaUsuario/MisMensajes" + vista);
+                }
+
+                /*if (nombres["titulo"] != "")
+                {
+                    foreach (MensajeEN mensaje in aux)
+                    {
+                        if (mensaje.Titulo != nombres["titulo"])
+                            mensajesFiltrados.Remove(mensaje);
+                    }
+                    if (mensajesFiltrados.Count() == 0)
+                    {
+                        TempData["mal"] = "No se ha encontrado ningún mensaje enviado con ese título.";
+                        return View("./VistaUsuario/MisMensajes"+vista);
+                    }
+                }*/
+
+
+            }
+            if (nombres["Bandeja"] != "" && nombres["Bandeja"] == "Papelera")
+            {
+                vista = "Borrados";
+                Bandejas.Add("Papelera");
+                Bandejas.Add("Recibidos");
+                Bandejas.Add("Enviados");
+                Bandejas.Add("Archivados");
+
+                ViewData["Bandejas"] = Bandejas;
+
+                foreach (MensajeEN mensaje in aux)
+                {
+                    if ((mensaje.UsuarioAutor.Nick != Session["usuario"].ToString() && mensaje.UsuarioReceptor.Nick != Session["usuario"].ToString()) ||
+                        (mensaje.UsuarioAutor.Nick == Session["usuario"].ToString() && mensaje.BandejaAutor.ToString() != "Borrado") ||
+                        (mensaje.UsuarioReceptor.Nick == Session["usuario"].ToString() && mensaje.BandejaReceptor.ToString() != "Borrado"))
+                        mensajesFiltrados.Remove(mensaje);
+                }
+
+                if (mensajesFiltrados.Count() == 0)
+                {
+                    TempData["mal"] = "¡No tienes ningún mensaje en la papelera!";
+                    return View("./VistaUsuario/MisMensajes" + vista);
+                }
+
+                /*if (nombres["titulo"] != "")
+                {
+                    foreach (MensajeEN mensaje in aux)
+                    {
+                        if (mensaje.Titulo != nombres["titulo"])
+                            mensajesFiltrados.Remove(mensaje);
+                    }
+                    if (mensajesFiltrados.Count() == 0)
+                    {
+                        TempData["mal"] = "No se ha encontrado ningún mensaje enviado con ese título.";
+                        return View("./VistaUsuario/MisMensajes"+vista);
+                    }
+                }*/
+
+
             }
 
             int tamPag = 10;

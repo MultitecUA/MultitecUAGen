@@ -1,32 +1,49 @@
 ﻿@model IEnumerable<MVC_MultitecUA.Models.MensajeModel>
 
 @{
-	ViewBag.Title = "Mis mensajes filtrados";
+	ViewBag.Title = "Recibidos";
 }
 
-<h2>Mis mensajes filtrados</h2>
+<h2>Recibidos</h2>
 <p class="text-center">
 	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mis mensajes", "MisMensajes")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 <p>
-	<h3>Filtros:</h3>
 
 	@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
 	{
 		<div class="form-horizontal">
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-			<div class="form-group">
+			<div class="form-group form-inline">
 				<div class="col-md-10">
-
-					<label for="titulo">Título del mensaje: </label><input class="form-control" type="text" name="titulo" />
 					<label for="EstadoLectura">Bandeja: </label>
 					@Html.DropDownList("Bandeja", new SelectList((System.Collections.IEnumerable)ViewData["Bandejas"]), new { @class = "form-control" })
-					<input type="submit" value="Filtrar" class="btn btn-default" />
+					<input type="submit" value="Cambiar" class="btn btn-default" />
 				</div>
 			</div>
 		</div>
 	}
 </p>
+@{
+	if (TempData["mal2"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal2"] </p>
+		TempData.Remove("mal2");
+	}
+	else
+if (TempData["bien2"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
+		TempData.Remove("bien2");
+	}
+	else
+if (TempData["regular2"] != null)
+	{
+		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular2"] </p>
+		TempData.Remove("regular2");
+	}
+}
+
 @{
 	if (TempData["mal"] != null)
 	{
@@ -34,52 +51,89 @@
 	}
 	else
 	{
-		<table class="table">
-			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.NickAutor)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Titulo)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.EstadoLectura)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.BandejaReceptor)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Fecha)
-				</th>
-				<th>
-					Acciones
-				</th>
-			</tr>
+		<table class="table table-hover text-center">
+			<thead>
+				<tr style="background-color: gainsboro;">
+					<th class="text-center" style="width:20%">
+						@Html.DisplayNameFor(model => model.Titulo)
+					</th>
+					<th class="text-center" style="width:40%">
+						@Html.DisplayNameFor(model => model.Cuerpo)
+					</th>
+					<th class="text-center" style="width:15%">
+						@Html.DisplayNameFor(model => model.Fecha)
+					</th>
+					<th class="text-center" style="width:10%">
+						@Html.DisplayNameFor(model => model.NickAutor)
+					</th>
+					<th class="text-center" style="width:15%">
+						Acciones
+					</th>
+				</tr>
+				@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
+				{
+					<tr>
+						<th class="text-center">
+							<input class="form-control text-center" type="text" name="titulo" placeholder="Título del mensaje" style="margin:auto" />
+						</th>
+						<th class="text-center">
 
-			@foreach (var item in Model)
-			{
-			<tr>
-				<td>
-					@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Titulo)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EstadoLectura)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.BandejaReceptor)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Fecha)
-				</td>
-				<td>
-					@Html.ActionLink("Detalles", "DetalleMensajeRecibido", new { id = item.Id })
-				</td>
-			</tr>
-			}
+						</th>
+						<th class="text-center">
 
+						</th>
+						<th class="text-center">
+
+						</th>
+						<th class="text-center">
+
+						</th>
+					</tr>
+				}
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					String estiloFila = "";
+
+
+					if (item.EstadoLectura.ToString() == "Leido")
+					{
+
+						estiloFila = "bg-warning";
+
+					}
+
+					<tr class="@estiloFila" onclick="window.location='./DetalleMensajeRecibido?id='+@item.Id" style="cursor:pointer;">
+
+						<td>
+							@Html.DisplayFor(modelItem => item.Titulo)
+						</td>
+						<td class="text-center" style="text-overflow: ellipsis; overflow: hidden; max-width:10em; white-space: nowrap;">
+							@item.Cuerpo
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Fecha)
+						</td>
+						<td>
+							@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
+						</td>
+						<td style="display:flex; justify-content:space-evenly;">
+							@if (item.EstadoLectura.ToString() == "Leido")
+							{
+								@Html.ActionLink(" ", "CambioEstado", new { id = item.Id, cambioEstado = "NoLeido" }, new { @class = "glyphicon glyphicon-eye-close", @title = "Marcar como no leído" })
+							}
+							else
+							{
+								@Html.ActionLink(" ", "CambioEstado", new { id = item.Id, cambioEstado = "Leido" }, new { @class = "glyphicon glyphicon-eye-open", @title = "Marcar como leído" })
+							}
+							@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Archivado" }, new { @class = "glyphicon glyphicon-inbox", @title = "Archivar" })
+							@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Borrado" }, new { @class = "glyphicon glyphicon-trash", @title = "Eliminar" })
+
+						</td>
+					</tr>
+				}
+			</tbody>
 		</table>
 	}
 }
@@ -95,9 +149,9 @@
 
 			if (siguiente > 1)
 			{
-				<label>@Html.ActionLink("Primera", "FiltroUsuario", new { pag = 0 })</label>
+				<label>@Html.ActionLink("Primera", "MisMensajes", new { pag = 0 })</label>
 				<span>|</span>
-				<label>@Html.ActionLink("Anterior", "FiltroUsuario", new { pag = anterior })</label>
+				<label>@Html.ActionLink("Anterior", "MisMensajes", new { pag = anterior })</label>
 			}
 			else
 			{
@@ -114,9 +168,9 @@
 
 			if (siguiente < numPags)
 			{
-				<label>@Html.ActionLink("Siguiente", "FiltroUsuario", new { pag = siguiente })</label>
+				<label>@Html.ActionLink("Siguiente", "MisMensajes", new { pag = siguiente })</label>
 				<span>|</span>
-				<label>@Html.ActionLink("Última", "FiltroUsuario", new { pag = numPags - 1 })</label>
+				<label>@Html.ActionLink("Última", "MisMensajes", new { pag = numPags - 1 })</label>
 			}
 			else
 			{

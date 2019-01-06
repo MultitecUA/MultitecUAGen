@@ -32,56 +32,26 @@
 <div>
 	<hr />
 	<dl class="dl-horizontal">
+		<dd>
+			@Html.DisplayFor(model => model.Titulo)
+			@Html.DisplayFor(model => model.Fecha)
+		</dd>
+		<br>
 		<dt>
-			@Html.DisplayNameFor(model => model.NickAutor)
+			@Html.Label("Autor: ")
 		</dt>
 		<dd>
 			@Html.ActionLink(Model.NickAutor, "Detalles", "Usuario", new { nick = Model.NickAutor }, null)
 		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.Titulo)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.Titulo)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.Cuerpo)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.Cuerpo)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.EstadoLectura)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.EstadoLectura)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.BandejaReceptor)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.BandejaReceptor)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.Fecha)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.Fecha)
-		</dd>
+		<br>
+			<dd>
+				@Html.DisplayFor(model => model.Cuerpo)
+			</dd>
 	</dl>
 </div>
 <p>
-	@Html.ActionLink("Responder mensaje", "Crear", "Mensaje", new { id = Model.AutorId }, new { @class = "btn btn-default" })
-	@Html.ActionLink("Marcar como no leído", "CambioEstado", new { id = Model.Id, cambioEstado = "NoLeido" }, new { @class = "btn btn-default" })
-	@Html.ActionLink("Enviar a activos", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Activo" }, new { @class = "btn btn-default" })
-	@Html.ActionLink("Enviar a archivados", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Archivado" }, new { @class = "btn btn-default" })
-	@Html.ActionLink("Enviar a borrados", "CambioBandejaReceptor", new { id = Model.Id, cambioBandejaReceptor = "Borrado" }, new { @class = "btn btn-default" })
+	@if(Model.NickAutor.ToString() != Session["usuario"].ToString()){
+		@Html.ActionLink("Responder mensaje", "Crear", "Mensaje", new { id = Model.AutorId }, new { @class = "btn btn-default" })
+	}
 	@Html.ActionLink("Volver a mis mensajes", "MisMensajes", null, new { @class = "btn btn-default" })
 </p>
