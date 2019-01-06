@@ -17,7 +17,7 @@
             <div class="form-horizontal">
                 <label>Agregar Participante:</label>
                 @Html.DropDownList("Participante", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosAgregar"]), new { @class = "form-control" })
-                <input type="submit" value="Agregar" class="btn btn-default" />
+                <input type="submit" value="Agregar" class="btn btn-warning" />
             </div>
         }
 
@@ -27,11 +27,12 @@
             <div class="form-horizontal">
                 <label>Eliminar Participante:</label>
                 @Html.DropDownList("Participante", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosEliminar"]), new { @class = "form-control" })
-                <input type="submit" value="Eliminar" class="btn btn-default" />
+                <input type="submit" value="Eliminar" class="btn btn-danger" />
             </div>
         }
     </div>
 </div>
 <p>
-    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id })
+    <br />
+    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </p>

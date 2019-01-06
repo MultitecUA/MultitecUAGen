@@ -11,30 +11,34 @@
 </p>
 
 
-<table class="table">
-    <tr>
-        <th style="width: 20em;">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        
-    </tr>
+<table class="table table-hover text-center">
+    <thead style="background-color: gainsboro;">
+        <tr>
+            <th style="width: 20em;"  class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td style="width: 20em;">
-            <a href="./Details/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
+        <tbody onclick="window.location='/Servicio/Details?id='+@item.Id" style="cursor:pointer;">
+            <tr>
+                <td style="width: 20em;">
+                    <a href="./Details/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
 
-    </tr>
-    }
+            </tr>
+        </tbody>
+            }
 
 
-</table>
+    </table>
 

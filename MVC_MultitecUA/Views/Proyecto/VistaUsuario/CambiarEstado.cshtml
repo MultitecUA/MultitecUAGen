@@ -28,8 +28,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" /> |
-                @Html.ActionLink("Volver", "Detalles", new { id = Model.Id })
+                @Html.ActionLink("Volver", "Detalles", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+                <input type="submit" value="Guardar" class="btn btn-warning" />
             </div>
         </div>
     </div>

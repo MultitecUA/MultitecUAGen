@@ -8,37 +8,45 @@
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            Eventos
-        </th>
-    </tr>
+<table class="table table-hover text-center">
+    <thead style="background-color: gainsboro;">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                Eventos
+            </th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Nombre, "Detalles", new { id = item.Id })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <th>
-            @Html.DisplayFor(model => item.Estado)
-        </th>
-        <th>
-            @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
-        </th>
-    </tr>
-    }
-</table>
+    <tbody onclick="window.location='/Proyecto/Detalles?id='+@item.Id" style="cursor:pointer;">
+        <tr>
+            <td>
+                @Html.ActionLink(item.Nombre, "Detalles", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.Estado)
+            </th>
+            <th>
+                @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, null)
+            </th>
+        </tr>
+    </tbody>
+            }
+    </table>
+
+<p>
+    @Html.ActionLink("Todos los proyectos", "../Proyecto/ProyectosPresentados", "", new { @class = "btn btn-primary" })
+</p>

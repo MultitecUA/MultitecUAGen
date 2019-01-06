@@ -112,7 +112,7 @@
                 <div class="form-horizontal form-group form-inline">
                     <label>Agregar Categoría de Proyecto:</label>
                     @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoAgregar"]), new { @class = "form-control" })
-                    <input type="submit" value="Agregar" class="btn btn-default" />
+                    <input type="submit" value="Agregar" class="btn btn-warning" />
                 </div>
             }
 
@@ -122,7 +122,7 @@
                 <div class="form-horizontal form-group form-inline">
                     <label>Eliminar Categoría de Proyecto:</label>
                     @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoEliminar"]), new { @class = "form-control" })
-                    <input type="submit" value="Eliminar" class="btn btn-default" />
+                    <input type="submit" value="Eliminar" class="btn btn-danger" />
                 </div>
             }
         </div>
@@ -134,7 +134,7 @@
                 <div class="form-horizontal form-group form-inline">
                     <label>Agregar Categoría de Usuario:</label>
                     @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioAgregar"]), new { @class = "form-control" })
-                    <input type="submit" value="Agregar" class="btn btn-default" />
+                    <input type="submit" value="Agregar" class="btn btn-warning" />
                 </div>
             }
 
@@ -144,7 +144,7 @@
                 <div class="form-horizontal form-group form-inline">
                     <label>Eliminar Categoría de Usuario:</label>
                     @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioEliminar"]), new { @class = "form-control" })
-                    <input type="submit" value="Eliminar" class="btn btn-default" />
+                    <input type="submit" value="Eliminar" class="btn btn-danger" />
                 </div>
             }
         </div>
@@ -155,20 +155,26 @@
 <div>
     @if (ViewData["esModerador"] != null)
     {
+    <p>
+        @Html.ActionLink("Administrar solicitudes", "AdministrarSolicitudes", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-primary" })|
+        @Html.ActionLink("Cambiar estado", "ChangeEstado", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Gestionar Moderadores", "GestionModeradores", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    </p>
         <p>
-            @Html.ActionLink("Administrar solicitudes", "AdministrarSolicitudes", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
-            @Html.ActionLink("Cambiar estado", "ChangeEstado", new { id = Model.Id }) |
-            @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = Model.Id }) |
-            @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = Model.Id }) |
-            @Html.ActionLink("Gestionar Moderadores", "GestionModeradores", new { id = Model.Id })
-        </p>
-        <p>
-            @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id })
+            @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
         </p>
     }
     else if (ViewData["noParticpante"] != null && ViewData["noParticpante"].ToString()=="true")
     {
-        @Html.ActionLink("Enviar solicitud", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Inscribirse", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-primary" })
+        
     }
     </div>
+
+<p>
+    <br />
+    @Html.ActionLink("Todos los proyectos", "../Proyecto/ProyectosPresentados", "", new { @class = "btn btn-primary" })
+</p>

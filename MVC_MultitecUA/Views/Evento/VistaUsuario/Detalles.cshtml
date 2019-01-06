@@ -66,17 +66,17 @@
             </center>
 
             <center class="form-inline">
-                @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { id = ViewData["idEvento"] }, new { @class = "btn btn-primary" })
                 &nbsp;
-                @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-primary" })
                 &nbsp;
-                @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-primary" })
             </center>
 
             <br />
 
             <center>
-                @Html.ActionLink("Volver a la lista", "TodosEventos", "Evento")
+                @Html.ActionLink("Volver a la lista", "TodosEventos", "Evento", new { @class = "btn btn-primary" })
             </center>
 
         </div>

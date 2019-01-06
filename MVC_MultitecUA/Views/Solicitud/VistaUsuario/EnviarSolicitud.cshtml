@@ -15,12 +15,13 @@
     @{
         if (ViewData["mal"] != null)
         {
-             <h4>@ViewData["mal"]</h4>
+            <h3 class="text-danger"><span class="glyphicon"></span> @ViewData["mal"] </h3>
+
         }
         else
         if (ViewData["Titulo"] != null)
         {
-            <h4>@ViewData["Titulo"]</h4>
+            <h3 class="text-success"><span class="glyphicon"></span> @ViewData["Titulo"] </h3>
         }
         else
         {
@@ -30,7 +31,7 @@
 
 
 
-  
+
 
     <hr />
     <dl class="dl-horizontal">
@@ -54,14 +55,13 @@
     @{
         if (ViewData["esParticpante"] == null)
         {
-            @Html.ActionLink("Enviar Solicitud", "EnviarSolicitudPost", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
+            <div class="form-actions no-color" style="padding:0em 7em 0em 7em;">
+                @Html.ActionLink("Enviar Solicitud", "EnviarSolicitudPost", new { proyectoId = Model.Id }, new { @class = "btn btn-warning" , @style = "padding:0.2em 3em 0.2em 3em;" })
+            </div>
         }
 
-    }
+            }
 </div>
-<p>
-    <!--Html.ActionLink("Volver a la lista", "../Proyecto/Detalles", new { id = Model.Id })-->
-    @Html.ActionLink("Volver", "../Proyecto/Detalles", new { id = Model.Id })
-
-
+<p>    
+    @Html.ActionLink("Volver", "../Proyecto/Detalles", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </p>

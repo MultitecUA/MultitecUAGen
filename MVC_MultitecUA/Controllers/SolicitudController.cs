@@ -143,18 +143,29 @@ namespace MVC_MultitecUA.Controllers
 
 
                 bool denegar = false;
-                //No crear usuarios nuevos si ya existe una solicitud aceptada o pendiente
+                //No crear usuarios nuevos si ya existe una solicitud aceptada
+                
                 foreach (SolicitudEN e in solicitudCEN.DameSolicidudesPorUsuarioYProyecto(proyectoEN.Id, usuarioEN.Id) )
                 {
                     if (e.Estado.ToString() == "Pendiente" || e.Estado.ToString() == "Aceptada")
                     {
                         denegar = true;
+                        TempData["mal"] = "El proyecto " + proyectoEN.Nombre + " ya tiene una solicitud Pendiente o Aceptada del usuario " + usuarioEN.Nick;
+                    }
+                }
+                //Denegar si alguno de los proyectos en los que participa ese usuario es el proyecto que esta solicitando participar
+                foreach (UsuarioEN e in usuarioCEN.DameParticipantesProyecto(proyectoEN.Id))
+                {
+                    if (e.Id == usuarioEN.Id)
+                    {
+                        denegar = true;
+                        TempData["mal"] = "El usuario "+ usuarioEN.Nick + " ya participa en el proyecto " + proyectoEN.Nombre;
                     }
                 }
 
                 if (denegar)
                 {
-                    TempData["mal"] = "El proyecto "+proyectoEN.Nombre+" ya tiene una solicitud Pendiente o Aceptada del usuario "+usuarioEN.Nick;
+                    
                     return RedirectToAction("Index");
                 }
                if (!denegar)
@@ -192,7 +203,6 @@ namespace MVC_MultitecUA.Controllers
         }
 
         // POST: Usuario/Edit/5
-
         public ActionResult CambioEstado(int id, String cambioEstado)
         {
             if (Session["usuario"] == null)
@@ -279,8 +289,11 @@ namespace MVC_MultitecUA.Controllers
                     return RedirectToAction("AdministrarSolicitudes", new { proyectoId = solicitudEN.ProyectoSolicitado.Id });
 
                 //Admin
-                if (Session["modoAdmin"].ToString() == "false")
-                    Session["modoAdmin"] = "true";
+                if (Session["esAdmin"].ToString() == "true")
+                {
+                    if (Session["modoAdmin"].ToString() == "false")
+                        Session["modoAdmin"] = "true";
+                }
                 return RedirectToAction("Index");
 
 
@@ -391,6 +404,10 @@ namespace MVC_MultitecUA.Controllers
                 }
                 ViewData["filtro"] = ViewData["filtro"] + filtro["estado"] + " (Estado) ";
             }
+            if (listaSolicitudes.Count <= 0)
+            {
+                TempData["mal"] = "No hay resultados con esos filtros";
+            }
 
             listaSolicitudes = aux;
 
@@ -461,7 +478,7 @@ namespace MVC_MultitecUA.Controllers
             IList <SolicitudEN> solicitudesEN = solicitudCEN.DameSolicitudesPendientesPorProyectoDeUsuario(proyectoEN.Id,usuarioEN.Id);
             if (solicitudesEN.Count >=1)
             {
-                ViewData["titulo"] = "Solicitud enviada a " + proyectoEN.Nombre +", tu solicitud esta pendiente";
+                ViewData["titulo"] = "Su solicitud esta pendiente, recibira una notificacion con la respuesta";
                 ViewData["esParticpante"] = "true";
             }
 
@@ -561,7 +578,7 @@ namespace MVC_MultitecUA.Controllers
                 return RedirectToAction("../Proyecto/ProyectosPresentados");
             }
 
-            
+            ViewData["nombreProyecto"] = proyectoEN.Nombre;
             ViewData["proyectoId"] = proyectoId;
             
 

@@ -2,9 +2,16 @@
 
 @{
     ViewBag.Title = "Administrar Solicitudes";
-}
 
-<h2>Administrar Solicitudes</h2>
+    if (ViewData["nombreProyecto"] != null)
+    {
+        <h2>Administrar Solicitudes de @ViewData["nombreProyecto"]</h2>
+    }
+    else
+    {
+        <h2>Administrar Solicitudes</h2>
+    }
+}
 <br />
 <p class="text-center">
     <label>@Html.ActionLink("Proyectos Presentados", "ProyectosPresentados", "Proyecto")</label><span> >> </span><label>@Html.ActionLink("Detalle de Proyecto", "Detalles/" + ViewData["proyectoId"], "Proyecto")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -13,79 +20,90 @@
 @{
     if (TempData["mal"] != null)
     {
-        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        <h3 class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </h3>
         TempData.Remove("mal");
     }
     else
     if (TempData["bien"] != null)
     {
-        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        <h3 class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </h3>
         TempData.Remove("bien");
     }
 }
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nick_Solicitante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre_Proyecto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            Acciones
-        </th>
-    </tr>
+<table class="table table-hover text-center">
+    <thead style="background-color: gainsboro;">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nick_Solicitante)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre_Proyecto)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th class="text-center">
+                Acciones
+            </th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nick_Solicitante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
-            </td>
-            <td>
-                @{
-                    if (item.Estado == "Pendiente")
-                    {
-                        
-                        @Html.ActionLink("Aceptar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Aceptar" }, new { @class = "btn btn-default" })
-                        @Html.ActionLink("Rechazar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Rechazar" }, new { @class = "btn btn-default" })
+        <tbody onclick="window.location='/Solicitud/DetailsCliente?id='+@item.Id" style="cursor:pointer;">
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nick_Solicitante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @{
+                        if (item.Estado == "Pendiente")
+                        {
+
+                            @Html.ActionLink("Aceptar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Aceptar" }, new { @class = "btn btn-success", @style = "margin: 0em 0.1em 0em 0em" })
+                            @Html.ActionLink("Rechazar", "CambioEstadoCliente", new { id = item.Id, cambioEstado = "Rechazar" }, new { @class = "btn btn-danger", @style = "margin: 0em 0em 0em 0.1em" })
+
+                        }
+                        else
+                        {
+                            String style = "text-success";
+                            if (item.Estado == "Rechazada")
+                            {
+                                style = "text-danger";
+                            }                                                       
+                            @Html.Label(item.Estado, htmlAttributes: new { @class = ""+style+"" })
+
+
+                        }
                     }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    }
+
+                </td>
+                <td>                  
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "text-danger glyphicon glyphicon-trash", @title = "Borrar solicitud", @style = "font-size:150%;  padding:0.2em 0.5em 0.2em 0.5em;" })
+
+                </td>
+            </tr>
+        </tbody>
                 }
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.ActionLink("Detalles", "DetailsCliente", new { id = item.Id }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) 
-                
-            </td>
-        </tr>
-    }
-
-</table>
+    </table>
 
 @{
     /* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
@@ -130,5 +148,5 @@
 </p>
 
 <p>
-    @Html.ActionLink("Volver al detalle", "../Proyecto/Detalles", new { id = ViewData["proyectoId"] })
+    @Html.ActionLink("Volver a proyecto", "../Proyecto/Detalles", new { id = ViewData["proyectoId"] } , new { @class= "btn btn-primary" } )
 </p>
