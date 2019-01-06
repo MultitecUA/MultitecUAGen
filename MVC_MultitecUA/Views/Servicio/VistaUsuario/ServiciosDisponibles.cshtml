@@ -3,38 +3,28 @@
 @{
     ViewBag.Title = "Servicios";
 }
+<div style="overflow:hidden">
+    <h2>Servicios</h2>
+    <br />
+    <p class="text-center">
+        <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
+    </p>
+    <br />
 
-<h2>Servicios</h2>
-<br />
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
+    @{foreach (var item in Model)
+        {
+            <div class="col-lg-12 col-sm-12 portfolio-item" style="margin:1em 0; height:3.5em;">
+                <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999; width:100%; display:flex; padding:0 4em; height:3.5em;">
+                    <h3 class="card-title" style="margin-top:0; padding-top:.5em; min-width:17em;">
+                        @Html.ActionLink(item.Nombre, "Details", "Servicio", new { id = item.Id }, null)
+                    </h3>
+                    <label style=" font-weight:normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 1em 0;" class=" text-truncate">@Html.DisplayFor(modelItem => item.Descripcion)</label>
 
-
-<table class="table">
-    <tr>
-        <th style="width: 20em;">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        
-    </tr>
-
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td style="width: 20em;">
-            <a href="./Details/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Nombre)</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-
-    </tr>
+                </div>
+            </div>
+        }
     }
 
 
-</table>
+</div>
 

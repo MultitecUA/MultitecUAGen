@@ -4,45 +4,43 @@
     ViewBag.Title = "Detalles de servicio";
 }
 
-<h2>Detalles del servicio: @Html.DisplayFor(model => model.Nombre)</h2>
-<br />
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../ServiciosDisponibles">Servicios</a></label><span> >> </span><label>@ViewBag.Title</label>
-</p>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+            <br>
+            <h1 class="mt-4" style="margin:0; text-align:center;">Detalles del servicio: @Html.DisplayFor(model => model.Nombre)</h1>
+            <br />
+            <p class="text-center">
+                <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label><a href="../ServiciosDisponibles">Servicios</a></label><span> >> </span><label>@ViewBag.Title</label>
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
+            <hr style="margin-bottom:.75em;" />
 
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
 
-        <dt>
-            Fotos
-        </dt>
-        <dd>
-            @{
-                foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
-                {
-                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+            <center>
+                <br />
+                @{
+                    foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                    {
+                        <img src="@foto" alt="Foto del evento" style="max-width:30%;">
+                        <br />
+                        <br />
+                    }
                 }
-            }
-        </dd>
+                <p style="text-align:justify;  padding:0 3em;">@Html.DisplayFor(model => model.Descripcion) </p>
+            </center>
 
-    </dl>
+
+            <br />
+            <br />
+            <div>
+                @Html.ActionLink("Volver ", "ServiciosDisponibles",null,new { @class="btn btn-primary"})
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Volver a la lista", "ServiciosDisponibles")
-</p>

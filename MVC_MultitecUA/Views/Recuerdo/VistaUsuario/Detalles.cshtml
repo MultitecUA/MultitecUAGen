@@ -4,66 +4,68 @@
     ViewBag.Title = "Detalles del recuerdo";
 }
 
-@{
-    if (TempData.ContainsKey("creado"))
-    {
-        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el recuerdo: @ViewData["recuerdo"]</h2>
-    }
-    else if (TempData.ContainsKey("editado"))
-    {
-        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el recuerdo: @ViewData["recuerdo"]</h2>
-    }
-    else
-    {
 
-        <h2>Detalles del recuerdo @ViewData["recuerdo"] del evento @Html.DisplayFor(model=>model.NombreEvento)</h2>
-        <br />
-        <p class="text-center">
-            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Evento: @Html.DisplayFor(model => model.NombreEvento)</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
-        </p>
-    }
-}
 
-<div>
 
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cuerpo)
-        </dt>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
 
-        <dd>
-            @Html.DisplayFor(model => model.Cuerpo)
-        </dd>
-
-        <dt>
-            Nombre del evento
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreEvento)
-        </dd>
-        <dt>
-            Fotos
-        </dt>
-        <dd>
+            
             @{
-                foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                if (TempData.ContainsKey("creado"))
                 {
-                    <img src="@foto" alt="Foto del evento" style="max-width:25%;">
+                    <h1 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el recuerdo: @ViewData["recuerdo"]</h1>
+                }
+                else if (TempData.ContainsKey("editado"))
+                {
+                    <h1 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el recuerdo: @ViewData["recuerdo"]</h1>
+                }
+                else
+                {
+
+                    <h1>Detalles del recuerdo @ViewData["recuerdo"] del evento @Html.DisplayFor(model => model.NombreEvento)</h1>
+                    <br />
+                    <p class="text-center">
+                        <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>model.IdEvento)">Evento: @Html.DisplayFor(model => model.NombreEvento)</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+                    </p>
                 }
             }
-        </dd>
 
-    </dl>
+            <hr style="margin-bottom:.75em;" />
+            <p style=" text-align:center;">
+                <b>Evento: <label style="font-weight:normal">@Html.DisplayFor(model => model.NombreEvento)</label></b>
+            </p>
+
+            <hr style="margin-top:.5em;" />
+
+            <center style="display:flex; ">
+                @{
+                    foreach (string foto in (System.Collections.IList)ViewData["listaFotos"])
+                    {
+                        <img src="@foto" alt="Foto del evento" style="max-width:20%;">
+                    }
+                }
+                <br />
+                <br />
+                <p style="text-align:justify; margin: 0 5em; ">@Html.DisplayFor(model => model.Cuerpo)</p>
+            </center>
+
+
+            <br />
+            <br />
+            <hr />
+
+            <div>
+                @Html.ActionLink("Volver ", "porEvento", "Recuerdo", new { idEvento = ViewData["idEvento"] }, new { @class = "btn btn-primary" })
+            </div>
+                
+          
+
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Volver a la lista de recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["idEvento"] }, null)
-</p>

@@ -42,17 +42,17 @@
                 <p style="text-align:justify; margin: 0 5em; padding:0 3em;">@Html.DisplayFor(model => model.Descripcion)</p>
             </center>
 
-            <hr style="margin-bottom:.75em;" />
+            <hr style="margin-bottom:2em;" />
             <div style="text-align:center;">
 
-                <b>Categorías:</b> <ul style="text-align:center; display:flex; justify-content: space-around">
+                <b>Categorías:</b> <label style="text-align:center; margin-right:1.5em;">
                     @{
                         foreach (string categoria in (System.Collections.ArrayList)ViewData["CategoriasEvento"])
                         {
-                            <li style="float:left; list-style-type:none; padding: 0 .25em;">@categoria</li>
+                            <label style="margin: 0 .5em; font-weight:normal; border:1px solid black; padding:.5em; border-radius:.5em; border-color:cornflowerblue">@categoria</label>
                         }
                     }
-                </ul>
+                </label>
             </div>
             <br />
             <hr style="margin-top:.5em;" />
@@ -71,13 +71,14 @@
                 @Html.ActionLink("Crear recuerdo", "Create", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
                 &nbsp;
                 @Html.ActionLink("Ver Recuerdos", "porEvento", "Recuerdo", new { idEvento = ViewData["IdEvento"] }, new { @class = "btn btn-default" })
+                &nbsp;
+                @Html.ActionLink("Volver", "TodosEventos", "Evento", null, new { @class = "btn btn-primary" })
             </center>
 
             <br />
 
-            <center>
-                @Html.ActionLink("Volver a la lista", "TodosEventos", "Evento")
-            </center>
+                
+            
 
         </div>
 

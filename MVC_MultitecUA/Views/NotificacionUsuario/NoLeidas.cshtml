@@ -6,56 +6,98 @@
 	ViewBag.Title = "NoLeidas";
 }
 
-<h2>Notificaciones no leidas</h2>
+<h2 class="text-center">Notificaciones</h2>
+<hr />
+<div style="display:flex;justify-content:space-evenly;">
+	<h5>Notificaciones no leidas</h5>
+	<p class="btn btn-default">
+		@Html.ActionLink("Todas las notificaciones", "MisNotificaciones", null, new { @style = "text-decoration:none;" })
+	</p>
+</div>
 
-<p>
-	@Html.ActionLink("Mis notificaciones", "MisNotificaciones")
-</p>
-
+<hr />
 @if ((int)ViewData["NoLeidas"] > 0)
 {
-	<table class="table">
-		<tr>
-			<th>
-				@Html.DisplayName("Título")
-			</th>
-			<th>
-				@Html.DisplayName("Mensaje")
-			</th>
-			<th>
-				@Html.DisplayName("Fecha")
-			</th>
-			<th>
-				No leída
-			</th>
-		</tr>
+	<table class="table table-hover text-center">
+		<thead>
+			<tr style="background-color: gainsboro;">
+				<th class="text-center" style="vertical-align: middle;">
+					@Html.DisplayName("Título")
+				</th>
+				<th class="text-center" style="vertical-align: middle;">
+					@Html.DisplayName("Mensaje")
+				</th>
+				<th class="text-center" style="vertical-align: middle;">
+					@Html.DisplayName("Fecha")
+				</th>
+				<th class="text-center" style="vertical-align: middle;">
+					@Html.ActionLink("Leer todo", "LeerNotificacion", new { origen = "NoLeidas" }, new { @style = "text-decoration: none;" })
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				foreach (var item in Model)
+				{
+					NotificacionCEN notificacionCEN = new NotificacionCEN();
+					NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
+					string tipo = null;
+					string accion = null;
+					int? OID = null;
 
-		@{
-			foreach (var item in Model)
-			{
-				NotificacionCEN notificacionCEN = new NotificacionCEN();
-				NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
+					switch (notificacion.GetType().Name)
+					{
+						case "NotificacionEventoEN":
+							NotificacionEventoCEN eventoCEN = new NotificacionEventoCEN();
+							OID = eventoCEN.ReadOID(notificacion.Id).EventoGenerador.Id;
+							tipo = "Evento";
+							accion += "Detalles";
+							break;
+						case "NotificacionProyectoEN":
+							NotificacionProyectoCEN proyectoCEN = new NotificacionProyectoCEN();
+							OID = proyectoCEN.ReadOID(notificacion.Id).ProyectoGenerador.Id;
+							tipo = "Proyecto";
+							accion += "Detalles";
+							break;
+						case "NotificacionMensajeEN":
+							NotificacionMensajeCEN mensajeCEN = new NotificacionMensajeCEN();
+							OID = mensajeCEN.ReadOID(notificacion.Id).MensajeGenerador.Id;
+							tipo = "Mensaje";
+							accion += "DetalleMensajeRecibido";
+							break;
+						case "NotificacionSolicitudEN":
+							NotificacionSolicitudCEN solicitudCEN = new NotificacionSolicitudCEN();
+							OID = solicitudCEN.ReadOID(notificacion.Id).SolicitudGeneradora.Id;
+							tipo = "Solicitud";
+							accion += "DetailsCliente";
+							break;
+					}
 
-				<tr>
-					<td>
-						@notificacion.Titulo
-					</td>
-					<td>
-						@notificacion.Mensaje
-					</td>
-					<td>
-						@notificacion.Fecha.ToString()
-					</td>
-					<td>
-						@if ((int)item.Estado == 2) // 1 - Leido	2 - No Leido
-						{
-							@Html.ActionLink("Marcar como leída", "LeerNotificacion", new { OID = item.Id, origen = "NoLeidas" })
-						}
-					</td>
-				</tr>
+					string ruta = "../" + tipo + "/" + accion + "?id=" + OID;
+
+					<tr onclick="window.location = '@ruta'" style="cursor:pointer;">
+						<td>
+							@notificacion.Titulo
+						</td>
+						<td>
+							@notificacion.Mensaje
+						</td>
+						<td>
+							@notificacion.Fecha.ToString()
+						</td>
+						<td>
+							@if ((int)item.Estado == 2) // 1 - Leido	2 - No Leido
+							{
+								@Html.ActionLink(" ", "LeerNotificacion", new { OID = item.Id, origen = "NoLeidas" }, new { @class = "glyphicon glyphicon-eye-open", @title = "Marcar como leída", @style = "text-decoration: none;" })
+							}
+						</td>
+					</tr>
+				}
 			}
-		}
+		</tbody>
 	</table>
-} else {
-	<h3>No quedan notificaciones por leer</h3>
+}
+else
+{
+	<h5 class="text-danger text-center">No hay notificaciones por leer</h5>
 }
