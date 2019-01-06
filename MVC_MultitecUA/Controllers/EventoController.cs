@@ -162,7 +162,7 @@ namespace MVC_MultitecUA.Controllers
                 }
 
                 //VALIDANDO DESCRIPCRION
-                pattern = new Regex("^.{5,200}$");
+                pattern = new Regex("^.{5,2000}$");
                 if (!pattern.IsMatch(evento.Descripcion))
                 {
                     ViewData["formatodescripvento"] = "mal";

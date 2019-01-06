@@ -4,61 +4,52 @@
     ViewBag.Title = "Recuerdos por evento";
 }
 
-<h2>Recuerdos del evento: @ViewData["nombreEvento"]</h2>
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
-</p>
 
+<div style="overflow:hidden">
+    <h2>Recuerdos del evento: @ViewData["nombreEvento"]</h2>
+    <br />
+    <p class="text-center">
+        <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="../Evento/Detalles/@ViewData["idevento"]">Detalles del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
+    </p>
+    <br />
 
-<p>
-    @Html.ActionLink("Crear recuerdo", "Create", new { idEvento = ViewData["idevento"] })
-</p>
+    @Html.ActionLink("Crear recuerdo", "Create", new { idEvento = ViewData["idevento"] }, new { @class = "btn btn-default", style = "margin:0 0 0 1em;" })
+    <br />
+    <br />
 
-@{
-    if (TempData["mal"] != null)
-    {
-        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
-        TempData.Remove("mal");
-    }
-    else
-    if (TempData["bien"] != null)
-    {
-        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
-        TempData.Remove("bien");
-    }
-}
-
-<table class="table">
-    <tr>
-        <th style="width: 20em;">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuerpo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreEvento)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td style="width: 20em;">
-                <a href="./Details/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">@Html.DisplayFor(modelItem => item.Titulo)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cuerpo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreEvento)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    @{
+        if (TempData["mal"] != null)
+        {
+            <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+            TempData.Remove("mal");
+        }
+        else
+        if (TempData["bien"] != null)
+        {
+            <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+            TempData.Remove("bien");
+        }
     }
 
-</table>
+    @{foreach (var item in Model)
+        {
+            <div class="col-lg-12 col-sm-12 portfolio-item" style="margin:1em 0; height:3.5em;">
+                <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999; width:100%; display:flex; padding:0 0 0 4em; height:3.5em;">
+                    <h3 class="card-title col-lg-5" style="margin-top:0; padding-top:.5em;" >
+                        @Html.ActionLink(item.Titulo, "Details", "Recuerdo", new { id = item.Id }, null)
+
+                    </h3>
+                    <label style=" font-weight:normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 1em 0;" class="col-lg-7 text-truncate">@Html.DisplayFor(modelItem => item.Cuerpo)</label>
+                    <div style="display:flex; justify-content:space-around; overflow:hidden" class="col-lg-2">
+                        <a href="/Recuerdo/Edit/@Html.DisplayFor(model=>item.IdEvento)" class="glyphicon glyphicon-edit" title="Editar" style="margin:1em 1.5em 1em 2em; font-size:1.15em;"></a>
+                        <a href="/Recuerdo/Delete/@Html.DisplayFor(model=>item.IdEvento)" class="glyphicon glyphicon-trash" title="Borrar" style="margin:1em 2em 1em 1.5em;  font-size:1.15em; color: red;"></a>
+                    </div>
+                    
+
+                </div>
+            </div>
+        }
+    }
+
+
+</div>
