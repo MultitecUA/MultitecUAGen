@@ -10,42 +10,28 @@
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Eventos", "TodosEventos", "Evento") / @Html.ActionLink("Mis eventos", "MisEventos", "Evento")</label><span> >> </span><label><a href="/Evento/Detalles/@Html.DisplayFor(model=>Model.IdEvento)">Detalles del evento</a></label><span> >> </span><label><a href="../porEvento?idEvento=@Html.DisplayFor(model=>Model.IdEvento)">Recuerdos del evento</a></label><span> >> </span><label>@ViewBag.Title</label>
 </p>
 
-<h3>¿Estás seguro de que deseas borrar este recuerdo?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
+<br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cuerpo)
-        </dt>
+    <h3>¿Estás seguro de que deseas borrar este recuerdo?</h3>
+    <div>
+        <hr />
+        <label> @Html.DisplayNameFor(model => model.Titulo)</label>
+        <p> @Html.DisplayFor(model => model.Titulo)</p>
+        <label> @Html.DisplayNameFor(model => model.Cuerpo)</label>
+        <p> @Html.DisplayFor(model => model.Cuerpo)</p>
+        <label>  Nombre del evento asignado</label>
+        <p> @Html.DisplayFor(model => model.NombreEvento)</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cuerpo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreEvento)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreEvento)
-        </dd>
+        @using (Html.BeginForm(/*"Delete","Recuerdo",new { id = Html.DisplayFor(model=>model.Id)}*/))
+        {
+            @Html.AntiForgeryToken()
 
-    </dl>
+            <div class="form-actions no-color">
+                <input type="submit" value="Borrar" class="btn btn-default" />
+                @Html.ActionLink("Volver", "porEvento", "Recuerdo", new { idEvento = Model.IdEvento }, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
 
-    @using (Html.BeginForm(/*"Delete","Recuerdo",new { id = Html.DisplayFor(model=>model.Id)}*/))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Borrar" class="btn btn-default" /> |
-            @Html.ActionLink("Volver a la lista de recuerdos", "porEvento","Recuerdo",new { idEvento = Model.IdEvento},null)
-        </div>
-    }
-</div>

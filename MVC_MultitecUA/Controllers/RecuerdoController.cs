@@ -186,7 +186,7 @@ namespace MVC_MultitecUA.Controllers
                     }
 
                     //VALIDANDO CUERPO
-                    pattern = new Regex("^.{10,200}$");
+                    pattern = new Regex("^.{10,2000}$");
                     if (!pattern.IsMatch(rec.Cuerpo))
                     {
                         TempData["formatocuerpo"] = "mal";
@@ -350,7 +350,7 @@ namespace MVC_MultitecUA.Controllers
                     }
 
                     //VALIDANDO CUERPO
-                    pattern = new Regex("^.{10,200}$");
+                    pattern = new Regex("^.{10,2000}$");
                     if (!pattern.IsMatch(rec.Cuerpo))
                     {
                         TempData["formatocuerpo"] = "mal";

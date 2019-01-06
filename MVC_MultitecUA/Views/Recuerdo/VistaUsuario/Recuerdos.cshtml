@@ -20,13 +20,13 @@
     @{
         if (TempData["mal"] != null)
         {
-            <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+            <p class="text-danger" style="margin-left:1em;"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
             TempData.Remove("mal");
         }
         else
         if (TempData["bien"] != null)
         {
-            <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+            <p class="text-success" style="margin-left:1em;"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
             TempData.Remove("bien");
         }
     }
@@ -41,8 +41,8 @@
                     </h3>
                     <label style=" font-weight:normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 1em 0;" class="col-lg-7 text-truncate">@Html.DisplayFor(modelItem => item.Cuerpo)</label>
                     <div style="display:flex; justify-content:space-around; overflow:hidden" class="col-lg-2">
-                        <a href="/Recuerdo/Edit/@Html.DisplayFor(model=>item.IdEvento)" class="glyphicon glyphicon-edit" title="Editar" style="margin:1em 1.5em 1em 2em; font-size:1.15em;"></a>
-                        <a href="/Recuerdo/Delete/@Html.DisplayFor(model=>item.IdEvento)" class="glyphicon glyphicon-trash" title="Borrar" style="margin:1em 2em 1em 1.5em;  font-size:1.15em; color: red;"></a>
+                        <a href="/Recuerdo/Edit/@Html.DisplayFor(model=>item.Id)" class="glyphicon glyphicon-edit" title="Editar" style="margin:1em 1.5em 1em 2em; font-size:1.15em;"></a>
+                        <a href="/Recuerdo/Delete/@Html.DisplayFor(model=>item.Id)" class="glyphicon glyphicon-trash" title="Borrar" style="margin:1em 2em 1em 1.5em;  font-size:1.15em; color: red;"></a>
                     </div>
                     
 
