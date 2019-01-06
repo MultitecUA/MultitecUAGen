@@ -1,0 +1,187 @@
+﻿@model IEnumerable<MVC_MultitecUA.Models.MensajeModel>
+
+@{
+	ViewBag.Title = "Archivados";
+}
+
+<h2>Archivados</h2>
+<p class="text-center">
+	<label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Mis mensajes", "MisMensajes")</label><span> >> </span><label>@ViewBag.Title</label>
+</p>
+<p>
+	@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
+	{
+		<div class="form-horizontal">
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group form-inline">
+				<div class="col-md-10">
+					<label for="EstadoLectura">Bandeja: </label>
+					@Html.DropDownList("Bandeja", new SelectList((System.Collections.IEnumerable)ViewData["Bandejas"]), new { @class = "form-control" })
+					<input type="submit" value="Cambiar" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+	}
+</p>
+@{
+	if (TempData["mal2"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal2"] </p>
+		TempData.Remove("mal2");
+	}
+	else
+if (TempData["bien2"] != null)
+	{
+		<p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien2"] </p>
+		TempData.Remove("bien2");
+	}
+	else
+if (TempData["regular2"] != null)
+	{
+		<p class="text-warning"><span class="glyphicon glyphicon-check"></span> @TempData["regular2"] </p>
+		TempData.Remove("regular2");
+	}
+}
+
+@{
+	if (TempData["mal"] != null)
+	{
+		<p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+	}
+	else
+	{
+		<table class="table table-hover text-center">
+			<thead>
+				<tr style="background-color: gainsboro;">
+					<th class="text-center" style="width:20%">
+						@Html.DisplayNameFor(model => model.Titulo)
+					</th>
+					<th class="text-center" style="width:40%">
+						@Html.DisplayNameFor(model => model.Cuerpo)
+					</th>
+					<th class="text-center" style="width:15%">
+						@Html.DisplayNameFor(model => model.Fecha)
+					</th>
+					<th class="text-center" style="width:10%">
+						@Html.DisplayNameFor(model => model.NickAutor)
+					</th>
+					<th class="text-center" style="width:15%">
+						Acciones
+					</th>
+				</tr>
+				@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
+				{
+					<tr>
+						<th class="text-center">
+							<input class="form-control text-center" type="text" name="titulo" placeholder="Título del mensaje" style="margin:auto" />
+						</th>
+						<th class="text-center">
+
+						</th>
+						<th class="text-center">
+
+						</th>
+						<th class="text-center">
+
+						</th>
+						<th class="text-center">
+
+						</th>
+					</tr>
+				}
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					String estiloFila = "";
+
+
+					if (item.EstadoLectura.ToString() == "Leido")
+					{
+
+						estiloFila = "bg-warning";
+
+					}
+
+					<tr class="@estiloFila" onclick="window.location='./DetalleMensajeRecibido?id='+@item.Id" style="cursor:pointer;">
+
+						<td>
+							@Html.DisplayFor(modelItem => item.Titulo)
+						</td>
+						<td class="text-center" style="text-overflow: ellipsis; overflow: hidden; max-width:10em; white-space: nowrap;">
+							@item.Cuerpo
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Fecha)
+						</td>
+						<td>
+							@Html.ActionLink(item.NickAutor, "Detalles", "Usuario", new { nick = item.NickAutor }, null)
+						</td>
+						<td style="display:flex; justify-content:space-evenly;">
+							@if (item.NickReceptor.ToString() == Session["usuario"].ToString())
+							{
+								@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Activo" }, new { @class = "glyphicon glyphicon-envelope", @title = "Activar" })
+								@Html.ActionLink(" ", "CambioBandejaReceptor", new { id = item.Id, cambioBandejaReceptor = "Archivado" }, new { @class = "glyphicon glyphicon-inbox", @title = "Archivar" })
+							}
+							else
+							{
+								@Html.ActionLink(" ", "CambioBandejaAutor", new { id = item.Id, cambioBandejaAutor = "Activo" }, new { @class = "glyphicon glyphicon-envelope", @title = "Activar" })
+								@Html.ActionLink(" ", "CambioBandejaAutor", new { id = item.Id, cambioBandejaAutor = "Archivado" }, new { @class = "glyphicon glyphicon-inbox", @title = "Archivar" })
+
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+}
+<p class="text-center">
+	@{
+
+		if (TempData["mal"] == null)
+		{
+			/* La página que me llega del controlador es una unidad menos de lo que muestro por pantalla (la 0 es la 1) */
+			var siguiente = (int)ViewData["pag"] + 1;
+			var anterior = siguiente - 2;
+			var numPags = (int)ViewData["numeroPaginas"] + 1;
+
+			if (siguiente > 1)
+			{
+				<label>@Html.ActionLink("Primera", "MisMensajes", new { pag = 0 })</label>
+				<span>|</span>
+				<label>@Html.ActionLink("Anterior", "MisMensajes", new { pag = anterior })</label>
+			}
+			else
+			{
+				<span>Primera</span>
+				<span>|</span>
+				<span>Anterior</span>
+			}
+
+
+			<span>|</span>
+			<label>Página @siguiente de @numPags</label>
+			<span>|</span>
+
+
+			if (siguiente < numPags)
+			{
+				<label>@Html.ActionLink("Siguiente", "MisMensajes", new { pag = siguiente })</label>
+				<span>|</span>
+				<label>@Html.ActionLink("Última", "MisMensajes", new { pag = numPags - 1 })</label>
+			}
+			else
+			{
+				<span>Siguiente</span>
+				<span>|</span>
+				<span>Última</span>
+			}
+		}
+		else
+		{
+			TempData.Remove("mal");
+		}
+
+	}
+</p>
