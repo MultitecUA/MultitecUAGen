@@ -30,6 +30,8 @@ namespace MVC_MultitecUA.Controllers
 
             IList<NotificacionUsuarioEN> misNotificaciones = notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDusuario);
 
+            ViewData["notificaciones"] = misNotificaciones.Count;
+
             return View(misNotificaciones);
         }
 
@@ -50,7 +52,7 @@ namespace MVC_MultitecUA.Controllers
             return View(misNotificaciones);
         }
 
-        public ActionResult LeerNotificacion(int OID, string origen)
+        public ActionResult LeerNotificacion(int? OID, string origen) // OID -> 0 = todas, 1 = una
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("Login", "Sesion");
@@ -58,7 +60,23 @@ namespace MVC_MultitecUA.Controllers
                 return View("../Shared/Error");
 
             NotificacionUsuarioCEN notificacionUsuarioCEN = new NotificacionUsuarioCEN();
-            notificacionUsuarioCEN.LeerNotificacion(OID);
+
+            if (OID != null)
+            {
+                notificacionUsuarioCEN.LeerNotificacion((int)OID);
+            }
+            else
+            {
+                UsuarioCEN usuarioCEN = new UsuarioCEN();
+                int OIDusuario = usuarioCEN.ReadNick(Session["usuario"].ToString()).Id;
+
+                IList<NotificacionUsuarioEN> notificaciones = notificacionUsuarioCEN.DameNotificacionesPorUsuario(OIDusuario);
+
+                foreach(NotificacionUsuarioEN notificacion in notificaciones)
+                {
+                    notificacionUsuarioCEN.LeerNotificacion(notificacion.Id);
+                }
+            }
 
             return RedirectToAction(origen);
         }

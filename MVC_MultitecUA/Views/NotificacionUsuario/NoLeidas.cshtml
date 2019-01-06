@@ -26,7 +26,7 @@
 				@Html.DisplayName("Fecha")
 			</th>
 			<th>
-				No leída
+				@Html.ActionLink("Marcar todas como leídas", "LeerNotificacion", new { origen = "NoLeidas" })
 			</th>
 		</tr>
 
@@ -35,10 +35,48 @@
 			{
 				NotificacionCEN notificacionCEN = new NotificacionCEN();
 				NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
+				string tipo = null;
+				string accion = null;
+				int? OID = null;
 
+				switch (notificacion.GetType().Name)
+				{
+					case "NotificacionEventoEN":
+						NotificacionEventoCEN eventoCEN = new NotificacionEventoCEN();
+						OID = eventoCEN.ReadOID(notificacion.Id).EventoGenerador.Id;
+						tipo = "Evento";
+						accion += "Detalles";
+						break;
+					case "NotificacionProyectoEN":
+						NotificacionProyectoCEN proyectoCEN = new NotificacionProyectoCEN();
+						OID = proyectoCEN.ReadOID(notificacion.Id).ProyectoGenerador.Id;
+						tipo = "Proyecto";
+						accion += "Detalles";
+						break;
+					case "NotificacionMensajeEN":
+						NotificacionMensajeCEN mensajeCEN = new NotificacionMensajeCEN();
+						OID = mensajeCEN.ReadOID(notificacion.Id).MensajeGenerador.Id;
+						tipo = "Mensaje";
+						accion += "DetalleMensajeRecibido";
+						break;
+					case "NotificacionSolicitudEN":
+						NotificacionSolicitudCEN solicitudCEN = new NotificacionSolicitudCEN();
+						OID = solicitudCEN.ReadOID(notificacion.Id).SolicitudGeneradora.Id;
+						tipo = "Solicitud";
+						accion += "DetailsCliente";
+						break;
+				}
 				<tr>
 					<td>
-						@notificacion.Titulo
+						@if (tipo != null && accion != null && OID != null)
+						{
+							string ruta = "../" + tipo + "/" + accion;
+							@Html.ActionLink(notificacion.Titulo, ruta, new { id = OID })
+						}
+						else
+						{
+							@notificacion.Titulo;
+						}
 					</td>
 					<td>
 						@notificacion.Mensaje
@@ -57,5 +95,5 @@
 		}
 	</table>
 } else {
-	<h3>No quedan notificaciones por leer</h3>
+	<h4>No hay notificaciones por leer</h4>
 }

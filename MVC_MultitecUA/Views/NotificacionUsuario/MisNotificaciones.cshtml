@@ -4,7 +4,6 @@
 
 @{
 	ViewBag.Title = "MisNotificaciones";
-	ViewData["origen"] = "MisNotificaciones";
 }
 
 <h2>Mis Notificaciones</h2>
@@ -12,46 +11,89 @@
 <p>
 	@Html.ActionLink("Ver no leídas", "NoLeidas")
 </p>
+@if ((int)ViewData["notificaciones"] > 0)
+{
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayName("Título")
+			</th>
+			<th>
+				@Html.DisplayName("Mensaje")
+			</th>
+			<th>
+				@Html.DisplayName("Fecha")
+			</th>
+			<th>
+				@Html.ActionLink("Marcar todas como leídas", "LeerNotificacion", new { origen = "MisNotificaciones" })
+			</th>
+		</tr>
 
-<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayName("Título")
-		</th>
-		<th>
-			@Html.DisplayName("Mensaje")
-		</th>
-		<th>
-			@Html.DisplayName("Fecha")
-		</th>
-		<th>
-			No leído
-		</th>
-	</tr>
+		@{
+			foreach (var item in Model)
+			{
+				NotificacionCEN notificacionCEN = new NotificacionCEN();
+				NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
+				string tipo = null;
+				string accion = null;
+				int? OID = null;
 
-	@{
-		foreach (var item in Model)
-		{
-			NotificacionCEN notificacionCEN = new NotificacionCEN();
-			NotificacionEN notificacion = notificacionCEN.ReadOID(item.NotificacionGenerada.Id);
-
-			<tr>
-				<td>
-					@notificacion.Titulo
-				</td>
-				<td>
-					@notificacion.Mensaje
-				</td>
-				<td>
-					@notificacion.Fecha.ToString()
-				</td>
-				<td>
-					@if ((int)item.Estado == 2) // 1 - Leido	2 - No Leido
-					{
-						@Html.ActionLink("Marcar como leída", "LeerNotificacion", new { OID = item.Id, origen = "MisNotificaciones" })
-					}
-				</td>
-			</tr>
+				switch (notificacion.GetType().Name)
+				{
+					case "NotificacionEventoEN":
+						NotificacionEventoCEN eventoCEN = new NotificacionEventoCEN();
+						OID = eventoCEN.ReadOID(notificacion.Id).EventoGenerador.Id;
+						tipo = "Evento";
+						accion += "Detalles";
+						break;
+					case "NotificacionProyectoEN":
+						NotificacionProyectoCEN proyectoCEN = new NotificacionProyectoCEN();
+						OID = proyectoCEN.ReadOID(notificacion.Id).ProyectoGenerador.Id;
+						tipo = "Proyecto";
+						accion += "Detalles";
+						break;
+					case "NotificacionMensajeEN":
+						NotificacionMensajeCEN mensajeCEN = new NotificacionMensajeCEN();
+						OID = mensajeCEN.ReadOID(notificacion.Id).MensajeGenerador.Id;
+						tipo = "Mensaje";
+						accion += "DetalleMensajeRecibido";
+						break;
+					case "NotificacionSolicitudEN":
+						NotificacionSolicitudCEN solicitudCEN = new NotificacionSolicitudCEN();
+						OID = solicitudCEN.ReadOID(notificacion.Id).SolicitudGeneradora.Id;
+						tipo = "Solicitud";
+						accion += "DetailsCliente";
+						break;
+				}
+				<tr>
+					<td>
+						@if (tipo != null && accion != null && OID != null)
+						{
+							string ruta = "../" + tipo + "/" + accion;
+							@Html.ActionLink(notificacion.Titulo, ruta, new { id = OID })
+						}
+						else
+						{
+							@notificacion.Titulo;
+						}
+					</td>
+					<td>
+						@notificacion.Mensaje
+					</td>
+					<td>
+						@notificacion.Fecha.ToString()
+					</td>
+					<td>
+						@if ((int)item.Estado == 2) // 1 - Leido	2 - No Leido
+						{
+							@Html.ActionLink("Marcar como leída", "LeerNotificacion", new { OID = item.Id, origen = "MisNotificaciones" })
+						}
+					</td>
+				</tr>
+			}
 		}
-	}
-</table>
+	</table>
+			}
+			else {
+				<h4>No tienes notificaciones</h4>
+			}
