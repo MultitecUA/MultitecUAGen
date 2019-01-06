@@ -200,6 +200,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\Hibisco.png" />
+    <Content Include="Imagenes\NoFoto.png" />
+    <Content Include="Imagenes\Patata Kawaii.jpg" />
+    <Content Include="Imagenes\Umbreon.jpg" />
     <Content Include="Multitec.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

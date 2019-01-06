@@ -74,10 +74,11 @@
 
     </dl>
 </div>
-@if (Session["usuario"] != null)
-{
-    <div>
-        @if (Session["usuario"].ToString() != Model.Nick)
+<div>
+    @if (Session["usuario"] != null)
+    {
+
+        if (Session["usuario"].ToString() != Model.Nick)
         {
             @Html.ActionLink("Mandar mensaje", "Crear", "Mensaje", new { id = Model.Id }, null)
         }
@@ -85,5 +86,8 @@
         {
             @Html.ActionLink("Modificar perfil", "Modificar")
         }
-    </div>
-}
+        <span>|</span>
+    }
+
+    @Html.ActionLink("Volver a la lista", "Index")
+</div>

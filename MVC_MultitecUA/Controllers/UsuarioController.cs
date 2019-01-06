@@ -184,6 +184,8 @@ namespace MVC_MultitecUA.Controllers
             try
             {
                 UsuarioCEN usuarioCEN = new UsuarioCEN();
+                if (usuarioEN.Password == null)
+                    usuarioEN.Password = usuarioCEN.ReadOID(id).Password;
                 usuarioCEN.Modify(id, usuarioEN.Nombre, usuarioEN.Password,usuarioEN.Email,usuarioEN.Nick,usuarioEN.Foto);
                 return RedirectToAction("Index");
             }
