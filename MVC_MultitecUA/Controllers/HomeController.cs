@@ -15,7 +15,7 @@ namespace MVC_MultitecUA.Controllers
             if (Session["usuario"] != null && Session["modoAdmin"].ToString() == "true")
                 return View("Index_Administrador");
 
-            int numeroNoticias = 5;
+            int numeroNoticias = 6;
 
             ViewData["numeroNoticias"] = numeroNoticias;
 
