@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="height: 100%;">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -11,8 +11,8 @@
     @using MultitecUAGenNHibernate.CEN.MultitecUA;
     @using MultitecUAGenNHibernate.EN.MultitecUA;
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body style="height: 100%;">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height: 6%;">
         <div class="container">
             <div class="navbar-header">
                 <a href="/">
@@ -177,13 +177,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Portal Web de la <a href="http://multitecua.ml">Asociación de Estudiantes MultitecUA</a> de la Universidad de Alicante</p>
-        </footer>
-    </div>
+	<div class="container body-content" style="min-height: 92%;">
+		@RenderBody()
+	</div>
+	<div class="container body-content" style="text-align: center;">
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - Portal Web de la <a href="http://multitecua.ml">Asociación de Estudiantes MultitecUA</a> de la Universidad de Alicante</p>
+		</footer>
+	</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
