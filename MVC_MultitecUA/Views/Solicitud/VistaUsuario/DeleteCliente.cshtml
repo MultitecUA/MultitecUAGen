@@ -31,14 +31,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdSolicitante)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdSolicitante)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Nick_Solicitante)
         </dt>
 
@@ -63,14 +55,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdProyecto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdProyecto)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Nombre_Proyecto)
         </dt>
 
@@ -92,9 +76,14 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Borrar" class="btn btn-default" /> |
-        @Html.ActionLink("Volver a la lista", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto })
-    </div>
+        
+            @Html.ActionLink("Volver a la lista", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto }, new { @class = "btn btn-primary" }) 
+            <input type="submit" value="Borrar" class="btn btn-danger" style="margin: 0em 3em 0em 3em"/>
+        
+       
+        
+          
     }
 </div>
+
+

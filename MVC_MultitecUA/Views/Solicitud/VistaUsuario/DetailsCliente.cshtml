@@ -12,14 +12,7 @@
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+    <dl class="dl-horizontal">    
 
         <dt>
             @Html.DisplayNameFor(model => model.Estado)
@@ -35,14 +28,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Fecha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdSolicitante)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdSolicitante)
         </dd>
 
         <dt>
@@ -70,14 +55,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdProyecto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdProyecto)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Nombre_Proyecto)
         </dt>
 
@@ -98,5 +75,5 @@
 <p>
  
 
-    @Html.ActionLink("Volver a la lista", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto })
+    @Html.ActionLink("Volver a la lista", "AdministrarSolicitudes", new { proyectoId = Model.IdProyecto }, new { @class = "btn btn-primary" })
     </p>

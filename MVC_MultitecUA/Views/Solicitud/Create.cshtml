@@ -21,7 +21,7 @@
         @Html.LabelFor(model => model.Nick_Solicitante, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            @Html.DropDownList("Nick_Solicitante", new SelectList((System.Collections.IEnumerable)ViewData["ListaNicks"]), new { @class = "form-control" })
+            @Html.DropDownList("Nick_Solicitante", new SelectList((System.Collections.IEnumerable)ViewData["ListaNicks"]), new { @class = "form-control" , @title = "El nombre solo puede contener letras, números. Maximo 90 caracteres" })
             <!--Html.ValidationMessageFor(model => model.Nick_Solicitante.Id, "", new { class = "text-danger" })-->
         </div>
     </div>

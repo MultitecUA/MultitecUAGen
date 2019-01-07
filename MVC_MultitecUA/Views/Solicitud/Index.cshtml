@@ -15,19 +15,15 @@
     {
 
 
-
-
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
 
                 <div class="col-md-10">
 
-
-                    <label for="proyecto">Nombre Proyecto: </label><input class="form-control" type="text" name="proyecto" placeholder="Todos" pattern="^[A-Za-z0-9 ñáéíóú]{2,}$" title="El nombre solo puede contener letras, números y espacios. Mínimo 2 caracteres" />
+                    <label for="proyecto">Nombre Proyecto: </label> <input class="form-control" type="text" name="proyecto" placeholder="Todos" pattern="^[A-Za-z0-9 ñáéíóú]{2,}$" title="El nombre solo puede contener letras, números y espacios. Mínimo 2 caracteres" />
                     <label for="usuario">Nick: </label><input class="form-control" type="text" name="usuario" placeholder="Todos" pattern="^[A-Za-z0-9 ñáéíóú]{2,}$" title="El nombre solo puede contener letras, números y espacios. Mínimo 2 caracteres" />
                     <label for="estado">Estado: </label>
-
                     @Html.DropDownList("Estado", new SelectList((System.Collections.IEnumerable)ViewData["estados"]), new { @class = "form-control" })
 
                     <input type="submit" value="Filtrar" class="btn btn-default" />
@@ -42,43 +38,45 @@
 @{
     if (TempData["mal"] != null)
     {
-        <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </p>
+        <h3 class="text-danger"><span class="glyphicon glyphicon-remove"></span> @TempData["mal"] </h3>
         TempData.Remove("mal");
     }
-    else
-    if (TempData["bien"] != null)
+    else if (TempData["bien"] != null)
     {
-        <p class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </p>
+        <h3 class="text-success"><span class="glyphicon glyphicon-check"></span> @TempData["bien"] </h3>
         TempData.Remove("bien");
     }
 }
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nick_Solicitante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre_Proyecto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            Acciones
-        </th>
-    </tr>
+<table class="table table-hover text-center">
+    <thead style="background-color: gainsboro;">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nick_Solicitante)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre_Proyecto)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th class="text-center">
+                Acciones
+            </th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-        <tr>
+    <tbody onclick="window.location='/Solicitud/Details?id='+@item.Id" style="cursor:pointer;">
+        <tr>        
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
@@ -95,11 +93,12 @@
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
-                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                
                 @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
                 @Html.ActionLink("Modificar estado", "Edit", new { id = item.Id })
             </td>
         </tr>
+    </tbody>
     }
 
 </table>
@@ -144,4 +143,8 @@
             <span>Última</span>
         }
     }
+</p>
+
+<p>
+    @Html.ActionLink("Inicio", "Index", "Home")    
 </p>
