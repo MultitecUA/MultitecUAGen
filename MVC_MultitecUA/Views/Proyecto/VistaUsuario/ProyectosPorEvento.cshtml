@@ -4,11 +4,17 @@
     ViewBag.Title = "Proyectos de Evento";
 }
 
+<br />
 <h2>Proyectos de Evento: @ViewData["evento"]</h2>
+<br />
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
-<table class="table">
+<br />
+
+
+
+<!--<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
@@ -42,4 +48,32 @@
         </tr>
     }
 
-</table>
+</table>-->
+
+
+
+
+<div class="row">
+    @{foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-sm-6 portfolio-item" style="margin-bottom:1em; min-height:15em;">
+                <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999; min-height:15em;">
+
+                    <center class="card-body">
+                        <h3 class="card-title" style="margin-top:0; margin-bottom:.5em; padding-top:.5em;">
+                            <a href="../Proyecto/Detalles/@Html.DisplayFor(modelItem => item.Id)" style="text-decoration: none;">
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </a>
+                        </h3>
+                        <p class="card-text" style="height:5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                        <p class="card-text"><b>Estado: </b>@Html.DisplayFor(modelItem => item.Estado)</p>
+                        @Html.ActionLink("Eventos", "porProyecto", "Evento", new { id = item.Id }, new { @class = "btn btn-success" })
+                        <br />
+                        <br />
+                    </center>
+                </div>
+            </div>
+        }
+
+    }
+</div>

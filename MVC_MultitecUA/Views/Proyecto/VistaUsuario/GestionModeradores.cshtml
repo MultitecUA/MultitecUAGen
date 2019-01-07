@@ -4,10 +4,13 @@
     ViewBag.Title = "Gestion de Moderdadores";
 }
 
+<br />
 <h2>Gestion de Moderdadores de @ViewData["nombre"]</h2>
+<br />
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
+<br />
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -28,24 +31,24 @@
         @using (Html.BeginForm("AgregarModerador", "Proyecto"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Agregar Moderador:</label>
-                @Html.DropDownList("Moderador", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosAgregar"]), new { @class = "form-control" })
-                <input type="submit" value="Agregar" class="btn btn-default" />
+            <div class="form-inline form-group">
+                <label style="min-width:12em;">Agregar Moderador:</label>
+                @Html.DropDownList("Moderador", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosAgregar"]), new { @class = "form-control", style = "min-width:15em;" })
+                <input type="submit" value="Agregar" class="btn btn-default"  style="min-width:8em;"/>
             </div>
         }
 
         @using (Html.BeginForm("EliminarModerador", "Proyecto"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Eliminar Moderador:</label>
-                @Html.DropDownList("Moderador", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosEliminar"]), new { @class = "form-control" })
-                <input type="submit" value="Eliminar" class="btn btn-default" />
+            <div class="form-inline form-group">
+                <label style="min-width:12em;">Eliminar Moderador:</label>
+                @Html.DropDownList("Moderador", new SelectList((System.Collections.IEnumerable)ViewData["listaUsuariosEliminar"]), new { @class = "form-control", style = "min-width:15em;" })
+                <input type="submit" value="Eliminar" class="btn btn-default"  style="min-width:8em;"/>
             </div>
         }
     </div>
 </div>
 <p>
-    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id })
+    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id }, new { @class = "btn btn-default" })
 </p>

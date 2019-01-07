@@ -4,10 +4,13 @@
     ViewBag.Title = "Usuarios filtrados por Rol";
 }
 
+<br />
 <h2>Usuarios filtrados por Rol: @ViewData["rol"]</h2>
+<br />
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Listado de Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
+<br />
 <p>
     <h3>Filtros:</h3>
     @using (Html.BeginForm("ForNick", "Usuario"))
@@ -16,8 +19,8 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="nick">Nick: </label><input class="form-control" type="text" name="nick" />
-                    <input type="submit" value="Filtrar por Nick" class="btn btn-default" />
+                    <label for="nick" style="min-width:8em;">Nick:&nbsp;&nbsp;&nbsp;</label><input class="form-control" type="text" name="nick" />
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Nick" class="btn btn-default" style="min-width:12em;" />
                 </div>
             </div>
         </div>
@@ -29,9 +32,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="rol">Rol: </label>
-                    @Html.DropDownList("rol", new SelectList((System.Collections.IEnumerable)ViewData["listaRoles"]), new { @class = "form-control" })
-                    <input type="submit" value="Filtrar por Rol" class="btn btn-default" />
+                    <label for="rol" style="min-width:8em;">Rol:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.DropDownList("rol", new SelectList((System.Collections.IEnumerable)ViewData["listaRoles"]), new { @class = "form-control", style = "min-width:12em;" })
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Rol" class="btn btn-default" style="min-width:12em;" />
                 </div>
             </div>
         </div>
@@ -43,15 +46,18 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group form-inline">
                 <div class="col-md-10">
-                    <label for="categoria">Categoría: </label>
-                    @Html.DropDownList("categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarios"]), new { @class = "form-control" })
-                    <input type="submit" value="Filtrar por Categoría" class="btn btn-default" />
+                    <label for="categoria" style="min-width:8em;">Categoría:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.DropDownList("categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarios"]), new { @class = "form-control", style = "min-width:12em;" })
+                    &nbsp;&nbsp;<input type="submit" value="Filtrar por Categoría" class="btn btn-default" style="min-width:12em;" />
                 </div>
             </div>
         </div>
     }
 </p>
-<table class="table">
+
+<br />
+
+<!-- <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
@@ -75,26 +81,56 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaAlta)
-        </td>
-        <td>
-            @Html.ActionLink(item.Nick, "Detalles", new { nick = item.Nick })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rol)
-        </td>
-        <td>
-            @Html.ActionLink("Proyectos", "ProyectosUsuarioPertenece", "Proyecto", new { id = item.Id }, null)
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAlta)
+            </td>
+            <td>
+                @Html.ActionLink(item.Nick, "Detalles", new { nick = item.Nick })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+            <td>
+                @Html.ActionLink("Proyectos", "ProyectosUsuarioPertenece", "Proyecto", new { id = item.Id }, null)
+            </td>
+        </tr>
     }
 
-</table>
+</table> -->
+
+
+
+
+<div class="row">
+    @{foreach (var item in Model)
+        {
+            <center class="col-lg-3 col-sm-6 portfolio-item" style="margin-bottom:1em;">
+                <div class="card h-100" style="box-shadow:0px 0px 5px 2px #999;">
+                    <a href="../Usuario/Detalles/@Html.DisplayFor(modelItem => item.Id)"><img class="card-img-top" style="width:50%;" src="@item.Foto" alt="Foto del usuario @Html.DisplayFor(modelItem=>item.Nick)"></a>
+                    <div class="card-body">
+                        <h3 class="card-title" style="margin-top:0; padding-top:.5em;">
+                            @Html.ActionLink(item.Nick, "Detalles", "Usuario")
+                        </h3>
+                        <p class="card-text"><b>Nombre: </b>@Html.DisplayFor(modelItem => item.Nombre)</p>
+                        <p class="card-text"><b>Email: </b>@Html.DisplayFor(modelItem => item.Email)</p>
+                        <hr style="margin:0; padding:0" />
+                        <p style="margin:0; padding:.25em;">@Html.DisplayFor(modelItem => item.Rol)</p>
+                        <hr style="margin:0; padding:0" />
+                        <br />
+                        @Html.ActionLink("Participa en los proyectos", "MisProyectos", "Proyecto", new { nick = item.Nick }, new { style = "color: black", @class = "btn btn-success" })
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </center>
+        }
+
+    }
+</div>

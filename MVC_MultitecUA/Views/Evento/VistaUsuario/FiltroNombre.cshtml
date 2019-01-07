@@ -47,7 +47,7 @@
                             <label>Fecha de fin</label>
                             <p class="card-text">@Html.DisplayFor(modelItem => item.FechaFin)</p>
                             <br />
-                            <button class="btn btn-success" style="border:1px solid black">@Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, new { style = "color: black" })</button>
+                            @Html.ActionLink("Proyectos presentados", "ProyectosPorEvento", "Proyecto", new { item.Id }, new { style = "color: black", @class = "btn btn-success" })
                         </footer>
 
                     </center>

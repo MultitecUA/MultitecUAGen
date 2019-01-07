@@ -4,6 +4,8 @@
     ViewBag.Title = "Detalles";
 }
 
+
+<!--
 <h2>Detalles del Proyecto: @ViewData["titulo"]</h2>
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
@@ -150,7 +152,7 @@
         </div>
     }
 
-    </div>
+</div>
 
 <div>
     @if (ViewData["esModerador"] != null)
@@ -172,4 +174,176 @@
         @Html.ActionLink("Enviar solicitud", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-default" })
     }
     @Html.ActionLink("Volver a la lista", "ProyectosPresentados")
+</div>
+
+-->
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
+
+            <br />
+            <h1 class="mt-4" style="margin:0; text-align:center;">Detalles del Evento: @Html.DisplayFor(model => model.Nombre)</h1>
+            <br />
+            <p class="text-center">
+                <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
+            </p>
+
+            <hr style="margin-bottom:.75em;" />
+            <p style=" text-align:center; display:flex; justify-content:space-around;">
+                <b>By: @Html.ActionLink(ViewData["creador"].ToString(), "Detalles", "Usuario", new { nick = ViewData["creador"] }, null)</b>
+                <b>Estado: <label style="color:cornflowerblue">@Html.DisplayFor(model => model.Estado)</label></b>
+            </p>
+
+            <hr style="margin-top:.5em;" />
+
+            <center>
+                <br />
+                <p style="text-align:justify; margin: 0 5em; padding:0 3em;">@Html.DisplayFor(model => model.Descripcion)</p>
+            </center>
+            <br />
+            <br />
+            <div style="text-align:center;">
+
+                <b>Categorías del proyecto:</b> <label style="text-align:center; margin-right:1.5em;">
+                    @{
+                        foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasProyectoEliminar"])
+                        {
+                            <label style="margin: 0 .5em; font-weight:normal; border:1px solid black; padding:.5em; border-radius:.5em; border-color:cornflowerblue">@e</label>
+                        }
+                    }
+                </label>
+                <br />
+                <br />
+                <b>Usuarios requeridos:</b> <label style="text-align:center; margin-right:1.5em;">
+                    @{
+                        foreach (var e in (System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioEliminar"])
+                        {
+                            <label style="margin: 0 .5em; font-weight:normal; border:1px solid black; padding:.5em; border-radius:.5em; border-color:cornflowerblue">@e</label>
+                        }
+                    }
+                </label>
+            </div>
+            <br />
+            <br />
+            <center style="display:flex; justify-content:space-around">
+                <label>Moderadores: </label>
+                <ul>
+
+                    @{
+                        foreach (var e in (System.Collections.IEnumerable)ViewData["listaModeradores"])
+                        {
+                            <li style="padding-left:0">@Html.ActionLink(e.ToString(), "Detalles", "Usuario", new { nick = e }, null)</li>
+                        }
+                    }
+                </ul>
+                <label>Participantes: </label>
+                <ul>
+
+                    @{
+                        foreach (var e in (System.Collections.IEnumerable)ViewData["listaParticipantes"])
+                        {
+                            <li>@Html.ActionLink(e.ToString(), "Detalles", "Usuario", new { nick = e }, null)</li>
+                        }
+                    }
+                </ul>
+                <br />
+                <br />
+            </center>
+
+            <hr />
+
+
+            <center>
+
+                @if (ViewData["esModerador"] != null)
+                {
+                    <div class="dl-horizontal">
+                        @using (Html.BeginForm("AgregarCatPro", "Proyecto"))
+                        {
+                            @Html.HiddenFor(model => model.Id)
+                        <div class="form-horizontal form-group form-inline">
+                            <label style="min-width:20em;">Agregar Categoría de Proyecto:</label>
+                            @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoAgregar"]), new { @class = "form-control", style = "min-width:10em;" })
+                            &nbsp;<input type="submit" value="Agregar" class="btn btn-default" />
+                        </div>
+                        }
+
+                        @using (Html.BeginForm("EliminarCatPro", "Proyecto"))
+                        {
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="form-horizontal form-group form-inline">
+                                <label style="min-width:20em;">Eliminar Categoría de Proyecto:</label>
+                                @Html.DropDownList("CategoriaPro", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasProyectoEliminar"]), new { @class = "form-control", style = "min-width:10em;" })
+                                &nbsp;<input type="submit" value="Eliminar" class="btn btn-default" />
+                            </div>
+                        }
+                    </div>
+
+                    <div class="dl-horizontal">
+                        @using (Html.BeginForm("AgregarCatUsu", "Proyecto"))
+                        {
+                            @Html.HiddenFor(model => model.Id)
+                        <div class="form-horizontal form-group form-inline">
+                            <label style="min-width:20em;">Agregar Categoría de Usuario:</label>
+                            @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioAgregar"]), new { @class = "form-control", style = "min-width:10em;" })
+                            &nbsp;<input type="submit" value="Agregar" class="btn btn-default" />
+                        </div>
+                        }
+
+                        @using (Html.BeginForm("EliminarCatUsu", "Proyecto"))
+                        {
+                            @Html.HiddenFor(model => model.Id)
+                        <div class="form-horizontal form-group form-inline">
+                            <label style="min-width:20em;">Eliminar Categoría de Usuario:</label>
+                            @Html.DropDownList("CategoriaUsu", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasUsuarioEliminar"]), new { @class = "form-control", style = "min-width:10em;" })
+                            &nbsp;<input type="submit" value="Eliminar" class="btn btn-default" />
+                        </div>
+                        }
+                    </div>
+                }
+
+            </center>
+
+            <br />
+            <center class="form-inline">
+                <div>
+                    @if (ViewData["esModerador"] != null)
+                    {
+                        <p>
+                            @Html.ActionLink("Administrar solicitudes", "AdministrarSolicitudes", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Cambiar estado", "ChangeEstado", new { id = Model.Id }, new { @class = "btn btn-info" }) 
+                            @Html.ActionLink("Gestionar Eventos", "GestionEventos", new { id = Model.Id }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Gestionar Participantes", "GestionParticipantes", new { id = Model.Id }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Gestionar Moderadores", "GestionModeradores", new { id = Model.Id }, new { @class="btn btn-info"})
+                        </p>
+                        <p>
+                            @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) 
+                            @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                        </p>
+                    }
+                    else if (ViewData["noParticpante"] != null && ViewData["noParticpante"].ToString() == "true")
+                    {
+                        @Html.ActionLink("Enviar solicitud", "EnviarSolicitud", "Solicitud", new { proyectoId = Model.Id }, new { @class = "btn btn-info" })
+                    }
+                    @Html.ActionLink("Volver a la lista", "ProyectosPresentados", null, new { @class = "btn btn-default" })
+                </div>
+            </center>
+
+            <br />
+
+
+
+
+        </div>
+
+    </div>
+
 </div>

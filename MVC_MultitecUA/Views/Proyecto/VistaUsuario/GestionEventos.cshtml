@@ -4,34 +4,37 @@
     ViewBag.Title = "Gestion de Eventos";
 }
 
+<br />
 <h2>Gestion de Eventos de @ViewData["nombre"]</h2>
+<br />
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Todos los Proyectos", "ProyectosPresentados")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
+<br />
 <div>
     <hr />
     <div class="dl-horizontal">
         @using (Html.BeginForm("AgregarEvento", "Proyecto"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Participar en Evento:</label>
-                @Html.DropDownList("Evento", new SelectList((System.Collections.IEnumerable)ViewData["listaEventosAgregar"]), new { @class = "form-control" })
-                <input type="submit" value="Agregar" class="btn btn-default" />
+            <div class="form-inline form-group">
+                <label style="min-width:12em;">Participar en Evento:</label>
+                @Html.DropDownList("Evento", new SelectList((System.Collections.IEnumerable)ViewData["listaEventosAgregar"]), new { @class = "form-control", style = "min-width:15em;" })
+                <input type="submit" value="Agregar" class="btn btn-default" style="min-width:8em;" />
             </div>
         }
 
         @using (Html.BeginForm("EliminarEvento", "Proyecto"))
         {
             @Html.HiddenFor(model => model.Id)
-            <div class="form-horizontal">
-                <label>Eliminar Evento:</label>
-                @Html.DropDownList("Evento", new SelectList((System.Collections.IEnumerable)ViewData["listaEventosEliminar"]), new { @class = "form-control" })
-                <input type="submit" value="Eliminar" class="btn btn-default" />
+            <div class="form-inline form-group">
+                <label style="min-width:12em;">Eliminar Evento:</label>
+                @Html.DropDownList("Evento", new SelectList((System.Collections.IEnumerable)ViewData["listaEventosEliminar"]), new { @class = "form-control", style = "min-width:15em;" })
+                <input type="submit" value="Eliminar" class="btn btn-default" style="min-width:8em;" />
             </div>
         }
     </div>
 </div>
 <p>
-    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id })
+    @Html.ActionLink("Volver", "Detalles", new { id = Model.Id }, new { @class = "btn btn-default" })
 </p>

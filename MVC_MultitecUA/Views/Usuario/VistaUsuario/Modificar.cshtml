@@ -10,72 +10,113 @@
 <p class="text-center">
     <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Lista de Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
 </p>
-@if (ViewData.ContainsKey("error"))
-{
-    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["error"]</p>
-}
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Modificar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-            </div>
+    @{ if (ViewData.ContainsKey("CamposVacios"))
+        {
+            <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["CamposVacios"]</p>
+        }
+        else if (ViewData.ContainsKey("error2"))
+        {
+            <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["error2"]</p>
+        }
+        else
+        {
+            <br />
+        }
+    }
+    @if (ViewData.ContainsKey("error"))
+    {
+        <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["error"]</p>
+    }
+
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @{ if (ViewData.ContainsKey("FormatoNombreUsuario"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> Hasta 50 caracteres. Solo letras y espacios.</p>
+                }
+            }
         </div>
+    </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="newpass">Contraseña nueva</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="newpass" name="newpass" type="password" value="" />
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="newpass">Contraseña nueva</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="newpass" name="newpass" type="password" value="" />
+            @{ if (ViewData.ContainsKey("FormatoContrasenaUsuario"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["FormatoContrasenaUsuario"]</p>
+                }
+            }
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Foto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nick, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nick, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nick, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Password" name="Password" type="password" value="" />
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+                <input class=" text-box single-line" id="file" name="file" type="file" value="" />
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @{ if (ViewData.ContainsKey("FormatoEmailUsuario"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["FormatoEmailUsuario"]</p>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nick, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nick, new { htmlAttributes = new { @class = "form-control" } })
+            @{ if (ViewData.ContainsKey("FormatoNickUsuario"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span> @ViewData["FormatoNickUsuario"]</p>
+                }
+                else if (ViewData.ContainsKey("NickExiste"))
+                {
+                    <p class="text-danger" style="margin-left: 1em;"><span class="glyphicon glyphicon-remove"></span>  @ViewData["NickExiste"]</p>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="Password" name="Password" type="password" value="" />
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p style="margin-left:14em; color:red;"><span class="glyphicon glyphicon-info-sign"></span> Si no se adjunta foto, se borrará la foto que hubiese anteriormente</p>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 @section Scripts {

@@ -4,11 +4,30 @@
     ViewBag.Title = "Detalles";
 }
 
-<h2>Detalles del Usuario: @ViewData["usuario"]</h2>
 
-<p class="text-center">
-    <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
-</p>
+
+@{
+    if (TempData.ContainsKey("usuariocreado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha creado el usuario: @Html.DisplayFor(model => model.Nick)</h2>
+        TempData.Remove("usuariocreado");
+    }
+    else if (TempData.ContainsKey("usuarioeditado"))
+    {
+        <h2 class="text-success"><span class="glyphicon glyphicon-check"></span> Se ha editado con exito el usuario: @Html.DisplayFor(model => model.Nick)</h2>
+        TempData.Remove("usuarioeditado");
+    }
+    else
+    {
+        <h2>Detalles del Usuario: @ViewData["usuario"]</h2>
+
+        <p class="text-center">
+            <label>@Html.ActionLink("Inicio", "Index", "Home")</label><span> >> </span><label>@Html.ActionLink("Usuarios", "Index")</label><span> >> </span><label>@ViewBag.Title</label>
+        </p>
+    }
+}
+
+
 
 <div>
     <hr />
@@ -34,7 +53,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Foto)
+            <img src="@Html.DisplayFor(model => model.Foto)" alt="Foto usuario" name="file" style="width:25%;" />
         </dd>
 
         <dt>
@@ -88,21 +107,21 @@
         @using (Html.BeginForm("AgregarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-        <div class="form-horizontal form-group form-inline">
-            <label>Agregar Categoría:&nbsp;&nbsp;</label>
-            @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
-            &nbsp;&nbsp;<input type="submit" value="Agregar" class="btn btn-default" />
-        </div>
+            <div class="form-horizontal form-group form-inline">
+                <label>Agregar Categoría:&nbsp;&nbsp;</label>
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasAgregar"]), new { @class = "form-control" })
+                &nbsp;&nbsp;<input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
         }
 
         @using (Html.BeginForm("EliminarCat", "Usuario"))
         {
             @Html.HiddenFor(model => model.Id)
-        <div class="form-horizontal form-group form-inline">
-            <label>Eliminar Categoría:&nbsp;&nbsp;</label>
-            @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
-            &nbsp;&nbsp;<input type="submit" value="Eliminar" class="btn btn-default" />
-        </div>
+            <div class="form-horizontal form-group form-inline">
+                <label>Eliminar Categoría:&nbsp;&nbsp;</label>
+                @Html.DropDownList("Categoria", new SelectList((System.Collections.IEnumerable)ViewData["listaCategoriasEliminar"]), new { @class = "form-control" })
+                &nbsp;&nbsp;<input type="submit" value="Eliminar" class="btn btn-default" />
+            </div>
         }
     </div>
 </div>
