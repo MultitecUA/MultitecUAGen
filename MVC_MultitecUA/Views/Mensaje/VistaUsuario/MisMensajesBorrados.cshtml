@@ -69,26 +69,6 @@ if (TempData["regular2"] != null)
 						Acciones
 					</th>
 				</tr>
-				@using (Html.BeginForm("FiltroUsuario", "Mensaje"))
-				{
-					<tr>
-						<th class="text-center">
-							<input class="form-control text-center" type="text" name="titulo" placeholder="Título del mensaje" style="margin:auto" />
-						</th>
-						<th class="text-center">
-
-						</th>
-						<th class="text-center">
-
-						</th>
-						<th class="text-center">
-
-						</th>
-						<th class="text-center">
-
-						</th>
-					</tr>
-				}
 			</thead>
 			<tbody>
 				@foreach (var item in Model)
